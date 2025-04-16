@@ -27,7 +27,6 @@ $ npm run start:prod
 ## genera componentes dentro del proyecto
 ```bash
 $ nest generate|g [options] <schematic> [name] [path]
-```
     ┌───────────────┬─────────────┬──────────────────────────────────────────────┐
     │ name          │ alias       │ description                                  │
     │ application   │ application │ Generate a new application workspace         │
@@ -62,3 +61,5 @@ $ nest generate|g [options] <schematic> [name] [path]
   --no-spec                          Disable spec files generation.
   -c, --collection [collectionName]  Schematics collection to use.
   -h, --help                         Output usage information.
+
+```
