@@ -1,0 +1,8 @@
+.image-background{
+    background: linear-gradient(#031617cc, #ffffff),
+    url(../../../../assets/lonely-road.jpg);
+  background-size: cover;
+  display: inline-flex;
+  justify-content: center;
+  background-position:center;
+}

@@ -15,6 +15,8 @@ import { InicioComponent } from './components/landing/inicio/inicio.component';
 import { WhyUsComponent } from './components/landing/why-us/why-us.component';
 import { AboutUsComponent } from './components/landing/about-us/about-us.component';
 import { ContactUsComponent } from './components/landing/contact-us/contact-us.component';
+import { ButtonLinkComponent } from './components/layout/button-link/button-link.component';
+import { ButtonSubmitComponent } from './components/layout/button-submit/button-submit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ContactUsComponent } from './components/landing/contact-us/contact-us.c
     InicioComponent,
     WhyUsComponent,
     AboutUsComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    ButtonLinkComponent,
+    ButtonSubmitComponent
   ],
   imports: [
     BrowserModule,
