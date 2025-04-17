@@ -8,10 +8,24 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { NavbarComponent } from './components/layout/navbar/navbar.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
+import { ErrorComponent } from './components/layout/error/error.component';
+import { InicioComponent } from './components/landing/inicio/inicio.component';
+import { WhyUsComponent } from './components/landing/why-us/why-us.component';
+import { AboutUsComponent } from './components/landing/about-us/about-us.component';
+import { ContactUsComponent } from './components/landing/contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    FooterComponent,
+    ErrorComponent,
+    InicioComponent,
+    WhyUsComponent,
+    AboutUsComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,

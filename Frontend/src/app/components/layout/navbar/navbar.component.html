@@ -1,0 +1,35 @@
+<nav
+  class="flex justify-around gap-5 items-center bg-[#031617] text-white italic montserrat h-36 shadow-[0_10px_60px_23px_#031617] w-full"
+>
+  <img
+    src="https://i.ibb.co/939XznP3/logo.png"
+    alt="logo.png"
+    class="h-10/12 mx-20 cursor-pointer"
+    [routerLink]="['']"
+    routerLinkActive="router-link-active"
+  />
+  <span class="flex justify-center items-center text-xl h-full grow mx-5">
+    <a
+      [routerLink]="['/landing/whyUs']"
+      routerLinkActive="router-link-active"
+      class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
+      >¿Por qué Flex Drive?</a
+    >
+    <a
+      [routerLink]="['/landing/aboutUs']"
+      routerLinkActive="router-link-active"
+      class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
+      >Acerca de nosotros</a
+    >
+    <a
+      [routerLink]="['/landing/contactUs']"
+      routerLinkActive="router-link-active"
+      class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
+      >Contacto</a
+    >
+  </span>
+  <a
+    class="text-xl mx-5 px-5 h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
+    >Iniciar Sesión</a
+  >
+</nav>
