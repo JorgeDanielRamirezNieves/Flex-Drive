@@ -240,6 +240,7 @@
 }
 
 
+
 :host ::ng-deep .p-datepicker-day:not(.p-datepicker-day-selected):not(.p-disabled):hover{
   background-color: #54a8a3;
   color: #ffffff;
@@ -252,7 +253,6 @@
   color: #000000;
   box-shadow: 0 0 15px -5px #00000090;
 }
-
 
 :host ::ng-deep .p-datepicker-month-view{
   display: grid;
@@ -314,4 +314,19 @@
   background-color: #ADF9F6;
   color: #000000;
   box-shadow: 0 0 15px -5px #00000090;
+}
+
+:host ::ng-deep .p-accordionheader{
+  border: 0px;
+  font-size: 30px;
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-accordioncontent-content{
+  border: 0px;
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-accordionpanel:not(.p-accordionpanel-active):not(.p-disabled) > .p-accordionheader:hover{
+  color: #54a8a3;
 }

@@ -1,5 +1,4 @@
 /* config */
-import lara from '@primeng/themes/lara';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
@@ -9,6 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 /* componentes primeng */
 import { DatePickerModule } from 'primeng/datepicker';
 import { SelectModule } from 'primeng/select';
+import { AccordionModule } from 'primeng/accordion';
 
 /* componentes propios */
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +46,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     DatePickerModule,
     SelectModule,
+    AccordionModule,
   ],
   providers: [
       provideHttpClient(withInterceptorsFromDi()),
