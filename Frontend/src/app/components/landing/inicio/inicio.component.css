@@ -1,8 +1,317 @@
-.image-background{
-    background: linear-gradient(#031617cc, #ffffff),
+.image-background {
+  background: linear-gradient(#031617cc, #ffffff),
     url(../../../../assets/lonely-road.jpg);
   background-size: cover;
   display: inline-flex;
   justify-content: center;
-  background-position:center;
+  background-position: center;
+}
+
+@keyframes slideDownIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.enter-animation{
+  animation: slideDownIn 1s ease-in-out; 
+}
+
+:host ::ng-deep .p-select-label{
+  transition: all 0.3s ease-in-out; 
+}
+
+:host ::ng-deep .p-select-label:hover{
+  color: #54a8a3; 
+}
+
+:host ::ng-deep .p-select-list{
+  background-color: #ffffff;
+  
+}
+
+:host ::ng-deep .p-select-list-container{
+  box-shadow: 0 0 15px -5px #00000090;
+  border-radius: 10px;
+}
+
+:host ::ng-deep .p-select-option{
+  padding: 10px;   
+  transition: all 0.3s ease-in-out; 
+}
+
+/* esto no se porque lo toma como hover */
+:host ::ng-deep .p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus{
+  background-color: #54a8a3;
+  color: #ffffff;
+}
+
+
+.p-select {
+  border: 1px solid transparent;
+  border-right: 1px solid #000000;
+  padding: 10px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 15px -5px #00000090;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  width: 30%;
+}
+
+.p-select:hover {
+  border-color: #54a8a3;
+  border-right-color: #000000;
+}
+
+.p-select:focus-within {
+  border-color: #54a8a3;
+  border-right-color: #000000;
+  box-shadow: 0 10px 15px -5px #00000090;
+}
+
+
+:host ::ng-deep .p-datepicker-input {
+  border: 1px solid transparent;
+  padding: 10px;
+  gap: 10px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  box-shadow: 0 10px 15px -5px #00000090;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  width: 50dvw;
+}
+
+:host ::ng-deep .p-datepicker-input:hover {
+  border-color: #54a8a3;
+  box-shadow: 0 10px 15px -5px #00000090;
+  color: #54a8a3;
+}
+
+:host ::ng-deep .p-datepicker-input:focus-within {
+  border-color: #54a8a3;
+  box-shadow: 0 10px 15px -5px #00000090;
+  color: #54a8a3;
+}
+
+:host ::ng-deep .p-datepicker-input-icon-container{
+  color: #000000;
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  right: 10px;
+}
+
+:host ::ng-deep .p-datepicker-input-icon-container:hover{
+  color: #54a8a3;
+}
+
+:host ::ng-deep .p-datepicker-calendar{
+  box-shadow: 0 0 15px -5px #00000090;
+  background-color: #ffffff;
+  border-radius: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-datepicker-header{
+  background-color: #54a8a3;
+  color: #ffffff;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding: 10px;
+}
+
+:host ::ng-deep .p-datepicker-title{
+  justify-content: space-around;
+  flex-grow: 1;
+}
+
+:host ::ng-deep .p-datepicker-prev-button{
+  border-radius: 10px;
+  padding: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-datepicker-next-button{
+  border-radius: 10px;
+  padding: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-datepicker-select-month{
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  padding-inline: 10px;
+  padding-block: 5px;
+}
+
+:host ::ng-deep .p-datepicker-select-year{
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  padding-inline: 10px;
+  padding-block: 5px;
+}
+
+:host ::ng-deep .p-datepicker-prev-button:not(.p-disabled):hover{
+  background-color: #ffffff;
+  color: #54a8a3;
+  box-shadow: 0 0 15px -5px #00000090;
+}
+
+:host ::ng-deep .p-datepicker-next-button:not(.p-disabled):hover{
+  background-color: #ffffff;
+  color: #54a8a3;
+  box-shadow: 0 0 15px -5px #00000090;
+}
+
+:host ::ng-deep .p-datepicker-select-month:not(.p-disabled):hover{
+  background-color: #ffffff;
+  color: #54a8a3;
+  box-shadow: 0 0 15px -5px #00000090;
+}
+
+:host ::ng-deep .p-datepicker-select-year:not(.p-disabled):hover{
+  background-color: #ffffff;
+  color: #54a8a3;
+  box-shadow: 0 0 15px -5px #00000090;
+}
+
+:host ::ng-deep .p-datepicker-day-view{
+  background-color: #ffffff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+:host ::ng-deep .p-datepicker-weekday-cell{
+  background-color: #435755;
+  color: #ffffff;
+  padding: 10px;
+}
+
+:host ::ng-deep .p-datepicker-day{
+  width: fit-content;
+  padding-inline: 10px;
+  padding-block: 5px;
+  margin-block: 5px;
+  transition: all 0.3s ease-in-out;
+  border-radius: calc(infinity*1px);
+}
+
+:host ::ng-deep .p-datepicker-other-month{
+  width: fit-content;
+  background: #43575560;
+}
+
+:host ::ng-deep .p-datepicker-day-selected{
+  background-color: #54a8a3;
+  color: #ffffff;
+  box-shadow: 0 0 15px -5px #00000090;
+}
+
+
+
+:host ::ng-deep .p-datepicker-day-selected-range{
+  background-color: #ADF9F6;
+  color: #ffffff;
+}
+
+
+:host ::ng-deep .p-datepicker-day:not(.p-datepicker-day-selected):not(.p-disabled):hover{
+  background-color: #54a8a3;
+  color: #ffffff;
+  box-shadow: 0 0 15px -5px #00000090;
+}
+
+
+:host ::ng-deep .p-datepicker-today > .p-datepicker-day{
+  background-color: #ADF9F6;
+  color: #000000;
+  box-shadow: 0 0 15px -5px #00000090;
+}
+
+
+:host ::ng-deep .p-datepicker-month-view{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px -5px #00000090;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-datepicker-month{
+  padding-inline: 10px;
+  padding-block: 5px;
+  margin-block: 5px;
+  border-radius:10px ;
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-datepicker-month:not(.p-disabled):not(.p-datepicker-month-selected):hover{
+  background-color: #54a8a3;
+  color: #ffffff;
+  box-shadow: 0 0 15px -5px #00000090;
+}
+
+:host ::ng-deep .p-datepicker-month-selected{
+  background-color: #ADF9F6;
+  color: #000000;
+  box-shadow: 0 0 15px -5px #00000090;
+}
+
+:host ::ng-deep .p-datepicker-year-view{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px -5px #00000090;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-datepicker-year{
+  padding-inline: 10px;
+  padding-block: 5px;
+  margin-block: 5px;
+  border-radius:10px ;
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-datepicker-year:not(.p-disabled):not(.p-datepicker-year-selected):hover{
+  background-color: #54a8a3;
+  color: #ffffff;
+  box-shadow: 0 0 15px -5px #00000090;
+}
+
+:host ::ng-deep .p-datepicker-year-selected{
+  background-color: #ADF9F6;
+  color: #000000;
+  box-shadow: 0 0 15px -5px #00000090;
 }

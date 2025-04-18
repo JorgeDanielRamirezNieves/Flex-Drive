@@ -1,10 +1,16 @@
-import Material from '@primeng/themes/material';
+/* config */
+import lara from '@primeng/themes/lara';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
+/* componentes primeng */
+import { DatePickerModule } from 'primeng/datepicker';
+import { SelectModule } from 'primeng/select';
+
+/* componentes propios */
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -17,6 +23,8 @@ import { AboutUsComponent } from './components/landing/about-us/about-us.compone
 import { ContactUsComponent } from './components/landing/contact-us/contact-us.component';
 import { ButtonLinkComponent } from './components/layout/button-link/button-link.component';
 import { ButtonSubmitComponent } from './components/layout/button-submit/button-submit.component';
+import { CardPequennaComponent } from './components/layout/card-pequenna/card-pequenna.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,11 +37,15 @@ import { ButtonSubmitComponent } from './components/layout/button-submit/button-
     AboutUsComponent,
     ContactUsComponent,
     ButtonLinkComponent,
-    ButtonSubmitComponent
+    ButtonSubmitComponent,
+    CardPequennaComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    DatePickerModule,
+    SelectModule,
   ],
   providers: [
       provideHttpClient(withInterceptorsFromDi()),
@@ -41,7 +53,6 @@ import { ButtonSubmitComponent } from './components/layout/button-submit/button-
       provideAnimationsAsync(),
           providePrimeNG({
             theme: {
-              preset: Material,
               options: {
                   prefix: 'p',
                   darkModeSelector: false,
