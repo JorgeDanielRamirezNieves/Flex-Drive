@@ -1,0 +1,17 @@
+
+main {
+  background: linear-gradient(#ffffffaa, #ffffffaa),
+    url(../../../../assets/why-us-background.jpg);
+  background-size: cover;
+  display: inline-flex;
+  justify-content: center;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.filter {
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+    -webkit-filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+    -moz-filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+    -o-filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+}
