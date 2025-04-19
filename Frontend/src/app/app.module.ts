@@ -9,6 +9,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { DatePickerModule } from 'primeng/datepicker';
 import { SelectModule } from 'primeng/select';
 import { AccordionModule } from 'primeng/accordion';
+import { ButtonModule } from 'primeng/button';
 
 /* componentes propios */
 import { AppRoutingModule } from './app-routing.module';
@@ -21,8 +22,7 @@ import { InicioComponent } from './components/landing/inicio/inicio.component';
 import { WhyUsComponent } from './components/landing/why-us/why-us.component';
 import { AboutUsComponent } from './components/landing/about-us/about-us.component';
 import { ContactUsComponent } from './components/landing/contact-us/contact-us.component';
-import { ButtonLinkComponent } from './components/layout/button-link/button-link.component';
-import { ButtonSubmitComponent } from './components/layout/button-submit/button-submit.component';
+import { ButtonComponent } from './components/layout/button/button.component';
 import { CardPequennaComponent } from './components/layout/card-pequenna/card-pequenna.component';
 import { FormsModule } from '@angular/forms';
 
@@ -36,8 +36,7 @@ import { FormsModule } from '@angular/forms';
     WhyUsComponent,
     AboutUsComponent,
     ContactUsComponent,
-    ButtonLinkComponent,
-    ButtonSubmitComponent,
+    ButtonComponent,
     CardPequennaComponent
   ],
   imports: [
@@ -47,6 +46,7 @@ import { FormsModule } from '@angular/forms';
     DatePickerModule,
     SelectModule,
     AccordionModule,
+    ButtonModule,
   ],
   providers: [
       provideHttpClient(withInterceptorsFromDi()),

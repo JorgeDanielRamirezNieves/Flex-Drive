@@ -1,20 +1,22 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-button-link',
+  selector: 'app-button',
   standalone: false,
-  templateUrl: './button-link.component.html',
-  styleUrl: './button-link.component.css'
+  templateUrl: './button.component.html',
+  styleUrl: './button.component.css',
 })
-export class ButtonLinkComponent {
+export class ButtonComponent {
   @Input() public label: string;
   @Input() public redirecTo: string;
-  constructor(){
+  @Input() public type: string;
+  constructor() {
     this.label = 'Button Link';
     this.redirecTo = 'null';
+    this.type = 'link';
   }
-  
-  public handleNavegate(): void {
+
+  public handleClick(): void {
     // Implement the logic to handle the button click here
     // For example, you can navigate to a different route using Angular Router
     console.log(`Button clicked! Redirecting to ${this.redirecTo}`);

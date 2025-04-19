@@ -8,7 +8,7 @@
   <h3 class="text-3xl w-5/12">
     Con Flex Drive Solicita un vehiculo en menos de 15 minutos
   </h3>
-  <app-button-link label="Empezar aquí" redirecTo="nokas"></app-button-link>
+  <app-button label="Empezar aquí" redirecTo="nokas"></app-button>
 </section>
 <section
   class="h-fit w-full flex flex-col items-center justify-center p-5 gap-10 jura"
@@ -59,11 +59,11 @@
         </ng-template>
       </p-datepicker>
     </span>
-    <app-button-link
+    <app-button
       label="Buscar"
       *ngIf="mostrarBtn"
       class="enter-animation"
-    ></app-button-link>
+    ></app-button>
   </form>
   <div class="grid grid-cols-3 gap-20 w-full h-fit p-20">
     <app-card-pequenna

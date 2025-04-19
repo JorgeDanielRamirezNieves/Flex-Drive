@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "primeicons/primeicons.css";
 
 .montserrat {
     font-family: "Montserrat", sans-serif;
