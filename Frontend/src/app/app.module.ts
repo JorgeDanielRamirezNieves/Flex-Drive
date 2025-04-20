@@ -14,7 +14,10 @@ import { ButtonModule } from 'primeng/button';
 /* componentes propios */
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { ErrorComponent } from './components/layout/error/error.component';
@@ -25,6 +28,10 @@ import { ContactUsComponent } from './components/landing/contact-us/contact-us.c
 import { ButtonComponent } from './components/layout/button/button.component';
 import { CardPequennaComponent } from './components/layout/card-pequenna/card-pequenna.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './components/landing/login/login.component';
+import { ButtonSimpleComponent } from './components/layout/button-simple/button-simple.component';
+import { RegisterComponent } from './components/landing/register/register.component';
+import { InputLabelComponent } from './components/layout/input-label/input-label.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +44,11 @@ import { FormsModule } from '@angular/forms';
     AboutUsComponent,
     ContactUsComponent,
     ButtonComponent,
-    CardPequennaComponent
+    CardPequennaComponent,
+    LoginComponent,
+    ButtonSimpleComponent,
+    RegisterComponent,
+    InputLabelComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,19 +60,19 @@ import { FormsModule } from '@angular/forms';
     ButtonModule,
   ],
   providers: [
-      provideHttpClient(withInterceptorsFromDi()),
-      MessageService,
-      provideAnimationsAsync(),
-          providePrimeNG({
-            theme: {
-              options: {
-                  prefix: 'p',
-                  darkModeSelector: false,
-                  cssLayer: false
-              }
-          }
-          })
-    ],
-  bootstrap: [AppComponent]
+    provideHttpClient(withInterceptorsFromDi()),
+    MessageService,
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        options: {
+          prefix: 'p',
+          darkModeSelector: false,
+          cssLayer: false,
+        },
+      },
+    }),
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

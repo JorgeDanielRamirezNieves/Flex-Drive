@@ -5,24 +5,29 @@ import { AboutUsComponent } from './components/landing/about-us/about-us.compone
 import { WhyUsComponent } from './components/landing/why-us/why-us.component';
 import { ContactUsComponent } from './components/landing/contact-us/contact-us.component';
 import { ErrorComponent } from './components/layout/error/error.component';
+import { LoginComponent } from './components/landing/login/login.component';
+import { RegisterComponent } from './components/landing/register/register.component';
 
 const routes: Routes = [
   {
-    path: 'landing', children: [
-      {path: 'aboutUs', component: AboutUsComponent},
-      {path: 'whyUs', component: WhyUsComponent},
-      {path: 'contactUs', component: ContactUsComponent},
+    path: 'landing',
+    children: [
+      { path: 'aboutUs', component: AboutUsComponent },
+      { path: 'whyUs', component: WhyUsComponent },
+      { path: 'contactUs', component: ContactUsComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
       /* rutas obligatorios */
-      {path: '', component: InicioComponent},
-    ] 
+      { path: '', component: InicioComponent },
+    ],
   },
   /* rutas obligatorios */
-  {path: '', redirectTo: 'landing', pathMatch: 'full'},
-  {path: '**', component: ErrorComponent},
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
+  { path: '**', component: ErrorComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
