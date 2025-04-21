@@ -1,0 +1,26 @@
+<div
+  class="group bg-colum h-full w-16 hover:w-64 transition-all duration-300 rounded px-2 py-4 overflow-hidden bg-[#d9d9d9]"
+>
+  <a
+    *ngFor="let item of menuItems"
+    [routerLink]="item.route"
+    class="flex items-center my-10 no-underline jura font-bold"
+    routerLinkActive="active"
+    [ngClass]="{ 'text-emerald-600': isActive(item.route) }"
+  >
+    <img
+      class="w-10 h-10 flex-shrink-0"
+      [src]="
+        '../../../../assets/icons/' +
+        (isActive(item.route) ? item.iconActive : item.icon)
+      "
+      alt=""
+    />
+    <span
+      class="ml-0 opacity-0 group-hover:opacity-100 group-hover:ml-5 transition-all duration-300 whitespace-nowrap text-black hover:text-emerald-600 hover:scale-110"
+      [ngClass]="{ 'text-emerald-600': isActive(item.route) }"
+    >
+      {{ item.title }}
+    </span>
+  </a>
+</div>

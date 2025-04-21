@@ -28,10 +28,19 @@ import { ContactUsComponent } from './components/landing/contact-us/contact-us.c
 import { ButtonComponent } from './components/layout/button/button.component';
 import { CardPequennaComponent } from './components/layout/card-pequenna/card-pequenna.component';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './components/landing/login/login.component';
+import { LoginComponent } from './components/user-pages/login/login.component';
 import { ButtonSimpleComponent } from './components/layout/button-simple/button-simple.component';
-import { RegisterComponent } from './components/landing/register/register.component';
+import { RegisterComponent } from './components/user-pages/register/register.component';
 import { InputLabelComponent } from './components/layout/input-label/input-label.component';
+import { UserComponent } from './components/user-pages/user/user.component';
+import { EditprofileComponent } from './components/user-pages/editprofile/editprofile.component';
+import { MyvehiclesComponent } from './components/user-pages/myvehicles/myvehicles.component';
+import { RentalvehiclesComponent } from './components/user-pages/rentalvehicles/rentalvehicles.component';
+import { SubscriptionsComponent } from './components/user-pages/subscriptions/subscriptions.component';
+import { ActivechatsComponent } from './components/user-pages/activechats/activechats.component';
+import { ProfilesettingsComponent } from './components/user-pages/profilesettings/profilesettings.component';
+import { MenuColumnComponent } from './components/layout/menu-column/menu-column.component';
+import { SubscriptionsCardComponent } from './components/layout/subscriptions-card/subscriptions-card.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +58,15 @@ import { InputLabelComponent } from './components/layout/input-label/input-label
     ButtonSimpleComponent,
     RegisterComponent,
     InputLabelComponent,
+    UserComponent,
+    EditprofileComponent,
+    MyvehiclesComponent,
+    RentalvehiclesComponent,
+    SubscriptionsComponent,
+    ActivechatsComponent,
+    ProfilesettingsComponent,
+    MenuColumnComponent,
+    SubscriptionsCardComponent,
   ],
   imports: [
     BrowserModule,

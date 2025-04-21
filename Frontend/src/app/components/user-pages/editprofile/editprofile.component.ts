@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-
 @Component({
-  selector: 'app-login',
+  selector: 'app-editprofile',
   standalone: false,
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  templateUrl: './editprofile.component.html',
+  styleUrl: './editprofile.component.css',
 })
-export class LoginComponent {
+export class EditprofileComponent {
+  selectedDocument: string = 'cc';
+
   constructor(private router: Router) {}
 
   onSubmit(form: NgForm): void {

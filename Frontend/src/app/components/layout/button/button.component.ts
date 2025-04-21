@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 export class ButtonComponent {
   @Input() public label: string = 'Button Link';
   @Input() public redirecTo: string = '';
-  @Input() public type: string = 'link';
+  @Input() public type: 'link' | 'button' | 'submit' = 'link';
+  @Input() public icon?: string;
+  @Input() public iconPos: 'left' | 'right' = 'right';
 
   constructor(private router: Router) {}
 

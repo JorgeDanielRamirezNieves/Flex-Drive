@@ -3,15 +3,15 @@
 
   <div class="relative">
     <input
-      [type]="inputType"
+      #input="ngModel"
+      [type]="showPassword ? 'text' : inputType"
       class="montserrat w-full pr-10 py-2 px-3 border border-gray-300 rounded"
       [placeholder]="placeholder"
       [name]="name"
-      ngModel
+      [(ngModel)]="model[modelProperty]"
       required
     />
 
-    <!-- Ícono para mostrar/ocultar contraseña -->
     <i
       *ngIf="type === 'password'"
       class="pi"
@@ -25,5 +25,11 @@
         cursor: pointer;
       "
     ></i>
+  </div>
+  <div
+    class="text-red-500 text-sm mt-1"
+    *ngIf="(submitted || input?.touched) && input?.invalid"
+  >
+    Este campo es obligatorio
   </div>
 </div>
