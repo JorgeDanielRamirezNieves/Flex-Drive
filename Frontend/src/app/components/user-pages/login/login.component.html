@@ -1,0 +1,57 @@
+<app-navbar class="z-20"></app-navbar>
+
+<section class="w-full h-full bg-image">
+  <br />
+  <div class="flex justify-center items-center">
+    <h2 class="text-2xl jura font-bold m-8">Inicia Sesión</h2>
+    <br />
+  </div>
+
+  <div class="flex justify-center">
+    <div
+      class="justify-center flex-col w-[30rem] h-[32rem] rounded-3xl p-15 container-transparent"
+    >
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <app-input-label
+          label="Correo electrónico"
+          placeholder="ejemplo@email.com"
+          type="email"
+          name="email"
+          [(model)]="userData"
+          modelProperty="email"
+          [submitted]="submitted"
+        ></app-input-label>
+
+        <app-input-label
+          label="Contraseña"
+          placeholder="Ingresa tu contraseña"
+          name="password"
+          type="password"
+          [(model)]="userData"
+          modelProperty="password"
+          [submitted]="submitted"
+        ></app-input-label>
+
+        <div class="mt-6">
+          <button
+            type="submit"
+            [disabled]="!loginForm.valid"
+            class="m-auto bg-[#54A8A3] w-fit flex text-white py-2 px-4 rounded border-2 border-transparent hover:bg-transparent hover:cursor-pointer hover:border-2 hover:border-[#54A8A3] hover:text-[#54A8A3] focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out"
+          >
+            Iniciar Sesión
+          </button>
+        </div>
+      </form>
+      <div class="flex justify-center mt-6">
+        <a class="w-auto jura underline" href="">Olvidaste tu contraseña</a>
+      </div>
+      <div class="flex mt-6 content-center justify-center">
+        <h2 class="mx-5 my-2">¿No tienes cuenta?</h2>
+
+        <app-button label="Regístrate" [routerLink]="['/landing/register']">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

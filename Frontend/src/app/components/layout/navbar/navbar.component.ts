@@ -4,8 +4,12 @@ import { Component } from '@angular/core';
   selector: 'app-navbar',
   standalone: false,
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
+  isLoggedIn: boolean = false;
 
+  toggleLogin() {
+    this.isLoggedIn = !this.isLoggedIn;
+  }
 }

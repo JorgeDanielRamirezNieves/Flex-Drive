@@ -1,0 +1,14 @@
+.bg-image {
+  background-image: url(../../../../assets/bg-login.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-transparent {
+  background-color: rgb(255, 255, 255, 0.5);
+}

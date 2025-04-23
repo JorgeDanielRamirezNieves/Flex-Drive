@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+
+<div class="flex">
+  <app-menu-column></app-menu-column>
+  <div class="bg-white w-full">
+    <div class="grid grid-cols-3 gap-15 w-full h-fit p-30">
+      <app-subscriptions-card
+        class="mx-5"
+        *ngFor="let card of cards"
+        [card]="card"
+      ></app-subscriptions-card>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
