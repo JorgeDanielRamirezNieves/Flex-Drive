@@ -13,7 +13,7 @@ export class ButtonComponent {
   @Input() public type: string;
   @Input() public icon: string;
   @Input() public iconPos: 'left' | 'right' | 'top' | 'bottom'; 
-  constructor() {
+  constructor(private router: Router) {
     this.label = 'Button Link';
     this.redirecTo = 'null';
     this.type = 'link';
@@ -21,7 +21,7 @@ export class ButtonComponent {
     this.iconPos = 'left'; 
   }
 
-  constructor(private router: Router) {}
+  
 
   public handleClick(): void {
     if (this.redirecTo) {

@@ -29,7 +29,6 @@ import { ButtonComponent } from './components/layout/button/button.component';
 import { CardPequennaComponent } from './components/layout/card-pequenna/card-pequenna.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/user-pages/login/login.component';
-import { ButtonSimpleComponent } from './components/layout/button-simple/button-simple.component';
 import { RegisterComponent } from './components/user-pages/register/register.component';
 import { InputLabelComponent } from './components/layout/input-label/input-label.component';
 import { UserComponent } from './components/user-pages/user/user.component';
@@ -55,7 +54,6 @@ import { SubscriptionsCardComponent } from './components/layout/subscriptions-ca
     ButtonComponent,
     CardPequennaComponent,
     LoginComponent,
-    ButtonSimpleComponent,
     RegisterComponent,
     InputLabelComponent,
     UserComponent,
