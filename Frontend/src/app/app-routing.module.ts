@@ -14,6 +14,9 @@ import { MyvehiclesComponent } from './components/user-pages/myvehicles/myvehicl
 import { RentalvehiclesComponent } from './components/user-pages/rentalvehicles/rentalvehicles.component';
 import { SubscriptionsComponent } from './components/user-pages/subscriptions/subscriptions.component';
 import { ActivechatsComponent } from './components/user-pages/activechats/activechats.component';
+import { VehiculosLandingComponent } from './components/vehiculo/vehiculos-landing/vehiculos-landing.component';
+import { DetalleVehiculoComponent } from './components/vehiculo/detalle-vehiculo/detalle-vehiculo.component';
+import { BusquedaComponent } from './components/vehiculo/busqueda/busqueda.component';
 
 const routes: Routes = [
   {
@@ -22,17 +25,29 @@ const routes: Routes = [
       { path: 'aboutUs', component: AboutUsComponent },
       { path: 'whyUs', component: WhyUsComponent },
       { path: 'contactUs', component: ContactUsComponent },
+      { path: '', component: InicioComponent },
+    ],
+  },
+  {
+    path: 'user',
+    children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'user', component: UserComponent },
       { path: 'editprofile', component: EditprofileComponent },
       { path: 'myvehicles', component: MyvehiclesComponent },
       { path: 'rentalvehicles', component: RentalvehiclesComponent },
       { path: 'subscriptions', component: SubscriptionsComponent },
       { path: 'activechats', component: ActivechatsComponent },
       { path: 'profilesettings', component: ProfilesettingsComponent },
-      /* rutas obligatorios */
-      { path: '', component: InicioComponent },
+      { path: '', component: UserComponent },
+    ],
+  },
+  {
+    path: 'vehicles',
+    children: [
+      { path: 'start', component: VehiculosLandingComponent },
+      { path: 'detail', component: DetalleVehiculoComponent },
+      { path: 'search', component: BusquedaComponent },
     ],
   },
   /* rutas obligatorios */

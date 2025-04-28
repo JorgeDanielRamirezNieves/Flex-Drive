@@ -10,6 +10,10 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { SelectModule } from 'primeng/select';
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { CarouselModule } from 'primeng/carousel';
+import { RatingModule } from 'primeng/rating';
+import { GalleriaModule } from 'primeng/galleria';
 
 /* componentes propios */
 import { AppRoutingModule } from './app-routing.module';
@@ -40,6 +44,10 @@ import { ActivechatsComponent } from './components/user-pages/activechats/active
 import { ProfilesettingsComponent } from './components/user-pages/profilesettings/profilesettings.component';
 import { MenuColumnComponent } from './components/layout/menu-column/menu-column.component';
 import { SubscriptionsCardComponent } from './components/layout/subscriptions-card/subscriptions-card.component';
+import { VehiculosLandingComponent } from './components/vehiculo/vehiculos-landing/vehiculos-landing.component';
+import { BusquedaComponent } from './components/vehiculo/busqueda/busqueda.component';
+import { VehiculoCardComponent } from './components/vehiculo/vehiculo-card/vehiculo-card.component';
+import { DetalleVehiculoComponent } from './components/vehiculo/detalle-vehiculo/detalle-vehiculo.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +73,10 @@ import { SubscriptionsCardComponent } from './components/layout/subscriptions-ca
     ProfilesettingsComponent,
     MenuColumnComponent,
     SubscriptionsCardComponent,
+    VehiculosLandingComponent,
+    BusquedaComponent,
+    VehiculoCardComponent,
+    DetalleVehiculoComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +86,10 @@ import { SubscriptionsCardComponent } from './components/layout/subscriptions-ca
     SelectModule,
     AccordionModule,
     ButtonModule,
+    InputTextModule,
+    CarouselModule,
+    RatingModule,
+    GalleriaModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

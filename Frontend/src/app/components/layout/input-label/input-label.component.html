@@ -5,7 +5,7 @@
     <input
       #input="ngModel"
       [type]="showPassword ? 'text' : inputType"
-      class="montserrat w-full pr-10 py-2 px-3 border border-gray-300 rounded"
+      class="montserrat w-full pr-10 py-2 px-3 border border-gray-300 rounded outline-2 outline-transparent focus-within:outline-[#54A8A3]  transition duration-300 ease-in-out"
       [placeholder]="placeholder"
       [name]="name"
       [(ngModel)]="model[modelProperty]"

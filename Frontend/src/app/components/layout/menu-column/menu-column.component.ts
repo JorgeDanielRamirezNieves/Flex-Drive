@@ -17,37 +17,37 @@ export class MenuColumnComponent {
   menuItems = [
     {
       title: 'Mi Perfil',
-      route: '/landing/editprofile',
+      route: '/user/editprofile',
       icon: 'edit.png',
       iconActive: 'editSelect.png',
     },
     {
       title: 'Mis Vehículos',
-      route: '/landing/myvehicles',
+      route: '/user/myvehicles',
       icon: 'myvehicles.png',
       iconActive: 'selectedMyVehicles.png',
     },
     {
       title: 'Vehículos Rentados',
-      route: '/landing/rentalvehicles',
+      route: '/user/rentalvehicles',
       icon: 'rentalvehicles.png',
       iconActive: 'selectedRentalvehicles.png',
     },
     {
       title: 'Suscripciones',
-      route: '/landing/subscriptions',
+      route: '/user/subscriptions',
       icon: 'subscriptions.png',
       iconActive: 'subscriptionsSelect.png',
     },
     {
       title: 'Chats Activos',
-      route: '/landing/activechats',
+      route: '/user/activechats',
       icon: 'activechats.png',
       iconActive: 'activechatsSelect.png',
     },
     {
       title: 'Ajustes',
-      route: '/landing/profilesettings',
+      route: '/user/profilesettings',
       icon: 'settings.png',
       iconActive: 'selectedSettings.png',
     },
