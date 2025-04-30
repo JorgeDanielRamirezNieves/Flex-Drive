@@ -1,3 +1,4 @@
+import { CardRentalVehiclesComponent } from './components/layout/card-rental-vehicles/card-rental-vehicles.component';
 /* config */
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -77,6 +78,7 @@ import { DetalleVehiculoComponent } from './components/vehiculo/detalle-vehiculo
     BusquedaComponent,
     VehiculoCardComponent,
     DetalleVehiculoComponent,
+    CardRentalVehiclesComponent,
   ],
   imports: [
     BrowserModule,

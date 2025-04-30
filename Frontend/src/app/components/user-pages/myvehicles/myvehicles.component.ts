@@ -29,4 +29,11 @@ export class MyvehiclesComponent {
       console.log('Formulario inválido');
     }
   }
+
+  showForm: boolean = false;
+
+  // Método que alterna la visibilidad
+  toggleForm(): void {
+    this.showForm = !this.showForm;
+  }
 }

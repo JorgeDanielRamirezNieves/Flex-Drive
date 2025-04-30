@@ -13,19 +13,17 @@ export class ButtonComponent {
   @Input() public type: 'link' | 'button' | 'submit';
   @Input() public icon: string;
   @Input() public iconPos: 'left' | 'right' | 'top' | 'bottom';
-  @Input() public callback: Function; 
+  @Input() public callback: Function;
   constructor(private router: Router) {
     this.label = 'Button Link';
     this.redirecTo = 'null';
     this.type = 'link';
     this.icon = '';
-    this.iconPos = 'left'; 
+    this.iconPos = 'left';
     this.callback = () => {
       console.log('Button clicked!');
     };
   }
-
-  
 
   public handleClick(): void {
     if (this.type === 'link') {
