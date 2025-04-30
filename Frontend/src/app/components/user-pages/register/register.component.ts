@@ -11,7 +11,7 @@ export class RegisterComponent {
   selectedDocument: string = 'cc';
   agreeTerms: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   onSubmit(form: NgForm): void {
     if (form.valid) {

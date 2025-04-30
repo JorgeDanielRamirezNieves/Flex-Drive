@@ -16,6 +16,8 @@ export class InputLabelComponent {
   @Input() type: string = 'text';
   @Input() model: any = {};
   @Input() modelProperty: string = '';
+  @Input() isSelect: boolean = false;
+  @Input() options: { value: any; label: string }[] = [];
 
   @Output() modelChange = new EventEmitter<any>();
   @Output() fileSelected = new EventEmitter<File>();

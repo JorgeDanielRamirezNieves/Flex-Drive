@@ -1,3 +1,122 @@
 <app-navbar></app-navbar>
-<app-menu-column></app-menu-column>
+
+<div class="bg-white flex">
+  <app-menu-column></app-menu-column>
+
+  <div class="flex flex-col w-full">
+    <div class="w-full flex justify-center">
+      <h1 class="jura font-bold text-2xl mt-15">Mis Vehículos</h1>
+    </div>
+    <div class="flex p-20">
+      <div class="w-4xl">
+        <app-card-pequenna> </app-card-pequenna>
+      </div>
+      <div
+        class="jura h-4xl m-10 bg-[#d9d9d9] rounded-lg p-15 w-full gap-2 flex justify-center shadow-md"
+      >
+        <div class="space-y-4 font-bold">
+          <p>Marca: <strong>Suzuki</strong></p>
+          <p>Modelo: <strong>Swift</strong></p>
+          <p>Placa: <strong>XXX ###</strong></p>
+          <p>Cilindraje: <strong>2000</strong></p>
+          <p>Combustible:<strong> Gasolina</strong></p>
+          <p>Color: <strong>Rojo</strong></p>
+        </div>
+        <div class="mx-10 border-l border-[#000]"></div>
+        <div class="space-y-4 font-bold">
+          <p>Año: <strong>2020</strong></p>
+          <p>Capacidad: <strong>4</strong></p>
+          <p>Número de puertas: <strong>4</strong></p>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center">
+      <div
+        class="justify-center flex-col w-[70rem] rounded-3xl p-15 bg-[#d9d9d9] mb-20"
+      >
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+          <div class="flex gap-8">
+            <div class="w-1/2 flex flex-col gap-4">
+              <app-input-label
+                label="Descripción"
+                placeholder="Compacto, eficiente y económico"
+                type="text"
+                name="fullName"
+              ></app-input-label>
+
+              <app-input-label
+                label="Kilometraje"
+                placeholder="100000"
+                type="number"
+                name="email"
+              ></app-input-label>
+
+              <app-input-label
+                label="Accesorios"
+                placeholder="Radio Pantalla"
+                type="text"
+                name="phone"
+              ></app-input-label>
+
+              <app-input-label
+                label="Tipo de vehículo"
+                placeholder="Seleccione un tipo"
+                name="tipoVehiculo"
+                [model]="formData"
+                modelProperty="tipoTerreno"
+                [isSelect]="true"
+                [options]="[
+                  { value: 'mixto', label: 'Mixto' },
+                  { value: 'onroad', label: 'On Road' },
+                  { value: 'offroad', label: 'Off Road' }
+                ]"
+                [submitted]="submitted"
+              ></app-input-label>
+            </div>
+
+            <div class="border-l border-[#000]"></div>
+
+            <div class="w-1/2 flex flex-col gap-4 pl-8">
+              <app-input-label
+                label="Tipo de tracción"
+                placeholder="Seleccione un tipo"
+                name="tipoVehiculo"
+                [model]="formData"
+                modelProperty="traccion"
+                [isSelect]="true"
+                [options]="[
+                  { value: '4x4', label: '4x4' },
+                  { value: '4x2', label: '4x2' }
+                ]"
+                [submitted]="submitted"
+              ></app-input-label>
+              <app-input-label
+                class="my-0"
+                placeholder=""
+                type="file"
+                name="photoCar"
+              ></app-input-label>
+            </div>
+          </div>
+
+          <div class="mt-6 flex flex-col items-center space-y-4">
+            <button
+              type="submit"
+              class="w-[20rem] bg-[#54A8A3] text-white py-2 px-4 rounded border-2 border-transparent hover:bg-transparent hover:cursor-pointer hover:border-[#54A8A3] hover:text-[#54A8A3] focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out"
+            >
+              Guardar Cambios
+            </button>
+            <button
+              type="submit"
+              class="w-[20rem] bg-[#ff4d4d] text-white py-2 px-4 rounded border-2 border-transparent hover:bg-transparent hover:cursor-pointer hover:border-[#54A8A3] hover:text-[#54A8A3] focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out"
+            >
+              Eliminar Vehículo
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <app-footer></app-footer>

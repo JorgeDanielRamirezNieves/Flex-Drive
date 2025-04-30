@@ -1,17 +1,16 @@
 <div class="mb-4">
   <h2 class="jura font-bold mb-2">{{ label }}</h2>
 
-  <div class="relative">
+  <div class="relative" *ngIf="!options?.length; else selectField">
     <input
       #input="ngModel"
       [type]="showPassword ? 'text' : inputType"
-      class="montserrat w-full pr-10 py-2 px-3 border border-gray-300 rounded outline-2 outline-transparent focus-within:outline-[#54A8A3]  transition duration-300 ease-in-out"
+      class="montserrat w-full pr-10 py-2 px-3 border border-gray-300 rounded outline-2 outline-transparent focus-within:outline-[#54A8A3] transition duration-300 ease-in-out"
       [placeholder]="placeholder"
       [name]="name"
       [(ngModel)]="model[modelProperty]"
       required
     />
-
     <i
       *ngIf="type === 'password'"
       class="pi"
@@ -25,11 +24,34 @@
         cursor: pointer;
       "
     ></i>
+    <div
+      class="text-red-500 text-sm mt-1"
+      *ngIf="(submitted || input?.touched) && input?.invalid"
+    >
+      Este campo es obligatorio
+    </div>
   </div>
-  <div
-    class="text-red-500 text-sm mt-1"
-    *ngIf="(submitted || input?.touched) && input?.invalid"
-  >
-    Este campo es obligatorio
-  </div>
+
+  <ng-template #selectField>
+    <div class="relative">
+      <select
+        #input="ngModel"
+        class="montserrat w-full pr-10 py-2 px-3 border bg-white border-gray-300 select-rounded outline-2 outline-transparent focus-within:outline-[#54A8A3] transition duration-300 ease-in-out"
+        [name]="name"
+        [(ngModel)]="model[modelProperty]"
+        required
+      >
+        <option value="" disabled selected>{{ placeholder }}</option>
+        <option *ngFor="let option of options" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <div
+        class="text-red-500 text-sm mt-1"
+        *ngIf="(submitted || input?.touched) && input?.invalid"
+      >
+        Este campo es obligatorio
+      </div>
+    </div>
+  </ng-template>
 </div>
