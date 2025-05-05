@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -13,8 +14,9 @@ export class ButtonComponent {
   @Input() public type: 'link' | 'button' | 'submit';
   @Input() public icon: string;
   @Input() public iconPos: 'left' | 'right' | 'top' | 'bottom';
-  @Input() public callback: Function;
-  constructor(private router: Router) {
+  @Input() public callback: Function; 
+
+  constructor(private router: Router, private messageService: MessageService) {
     this.label = 'Button Link';
     this.redirecTo = 'null';
     this.type = 'link';

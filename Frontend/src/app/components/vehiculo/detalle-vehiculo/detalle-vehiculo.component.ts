@@ -1,4 +1,6 @@
+import { MessageService } from 'primeng/api';
 import { Component, model } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-vehiculo',
@@ -9,10 +11,8 @@ import { Component, model } from '@angular/core';
 export class DetalleVehiculoComponent {
   public images: Object[] = [
     {
-      itemImageSrc:
-        'https://i.ibb.co/VYb1cFjp/b8958791a88f.jpg',
-      thumbnailImageSrc:
-        'https://i.ibb.co/VYb1cFjp/b8958791a88f.jpg',
+      itemImageSrc: 'https://i.ibb.co/VYb1cFjp/b8958791a88f.jpg',
+      thumbnailImageSrc: 'https://i.ibb.co/VYb1cFjp/b8958791a88f.jpg',
       alt: 'Description for Image 1',
       title: 'Title 1',
     },
@@ -57,6 +57,20 @@ export class DetalleVehiculoComponent {
       title: 'Title 6',
     },
   ];
-  constructor() {
+
+  constructor(private messageService: MessageService, private router: Router) {}
+
+  public sendRequest() {
+    /* Aqui va la logica que tengamos con el back */
+    console.log('Se ha enviado la solicitud al propietario del vehiculo');
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Mensaje enviado',
+      detail: 'se envió el mensaje al propietario',
+      life: 5000,
+    });
+    setTimeout(() => {
+      this.router.navigate(["/requests/viewAll"])
+    }, 1000);
   }
 }

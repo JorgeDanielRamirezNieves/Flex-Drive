@@ -15,6 +15,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CarouselModule } from 'primeng/carousel';
 import { RatingModule } from 'primeng/rating';
 import { GalleriaModule } from 'primeng/galleria';
+import { ToastModule } from 'primeng/toast';
+import { DrawerModule } from 'primeng/drawer';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 /* componentes propios */
 import { AppRoutingModule } from './app-routing.module';
@@ -38,8 +41,8 @@ import { RegisterComponent } from './components/user-pages/register/register.com
 import { InputLabelComponent } from './components/layout/input-label/input-label.component';
 import { UserComponent } from './components/user-pages/user/user.component';
 import { EditprofileComponent } from './components/user-pages/editprofile/editprofile.component';
-import { MyvehiclesComponent } from './components/user-pages/myvehicles/myvehicles.component';
-import { RentalvehiclesComponent } from './components/user-pages/rentalvehicles/rentalvehicles.component';
+import { MyvehiclesComponent } from './components/vehiculo/myvehicles/myvehicles.component';
+import { RentalvehiclesComponent } from './components/servicios/rentalvehicles/rentalvehicles.component';
 import { SubscriptionsComponent } from './components/user-pages/subscriptions/subscriptions.component';
 import { ActivechatsComponent } from './components/user-pages/activechats/activechats.component';
 import { ProfilesettingsComponent } from './components/user-pages/profilesettings/profilesettings.component';
@@ -52,6 +55,9 @@ import { DetalleVehiculoComponent } from './components/vehiculo/detalle-vehiculo
 import { CardSettingsComponent } from './components/layout/card-settings/card-settings.component';
 import { ToggleButtonComponent } from './components/layout/toggle-button/toggle-button.component';
 import { ColumnMessageComponent } from './components/layout/column-message/column-message.component';
+import { ViewAllComponent } from './components/requests/view-all/view-all.component';
+import { DetailsComponent } from './components/requests/details/details.component';
+import { SuspenseComponent } from './components/layout/suspense/suspense.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +87,9 @@ import { ColumnMessageComponent } from './components/layout/column-message/colum
     BusquedaComponent,
     VehiculoCardComponent,
     DetalleVehiculoComponent,
+    ViewAllComponent,
+    DetailsComponent,
+    SuspenseComponent,
     CardRentalVehiclesComponent,
     CardSettingsComponent,
     ToggleButtonComponent,
@@ -98,6 +107,9 @@ import { ColumnMessageComponent } from './components/layout/column-message/colum
     CarouselModule,
     RatingModule,
     GalleriaModule,
+    ToastModule,
+    DrawerModule,
+    ProgressSpinnerModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

@@ -1,5 +1,8 @@
 <div
-  class="flex items-center gap-4 bg-[#d9d9d9] rounded-lg shadow-md mx-15 py-4 hover:scale-105 transition-all duration-300 ease-in-out"
+  id="card-rental-vehicles"
+  [routerLink]="['/services/details']"
+  routerLinkActive="router-link-active"
+  class="flex items-center gap-4 bg-[#d9d9d9] rounded-lg shadow-md mx-15 py-4 hover:cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out"
 >
   <div class="w-80 p-4">
     <img
@@ -58,8 +61,27 @@
           <p>Compacto, eficiente y económico</p>
         </div>
       </div>
-      <h3 class="text-xl montserrat"></h3>
-      <h3 class="text-xl montserrat font-bold">$ 120.000 /dia</h3>
+      <div class="flex justify-between jura w-full items-center">
+        <h3 class="text-xl montserrat font-bold">$ 120.000 /dia</h3>
+        <svg
+          id="eye-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-eye-icon lucide-eye"
+        >
+          <path
+            d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+          />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      </div>
     </div>
   </div>
 </div>

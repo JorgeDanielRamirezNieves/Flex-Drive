@@ -1,0 +1,32 @@
+:host ::ng-deep .p-toast-message {
+  border: 1px solid #54a8a3;
+  background: #ffffff;
+  border-radius: 10px;
+  color: #54a8a3;
+  box-shadow: 0 1px 15px -5px #00000090;
+  padding: 10px;
+}
+
+:host ::ng-deep .p-toast-message-icon {
+  color: #54a8a3;
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+:host ::ng-deep .p-toast-summary {
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+:host ::ng-deep .p-toast-close-button {
+  color: #54a8a3;
+  font-size: 1.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-toast-close-button:hover {
+  transform: scale(1.2);
+}

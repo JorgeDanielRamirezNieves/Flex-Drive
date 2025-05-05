@@ -23,15 +23,21 @@ export class MenuColumnComponent {
     },
     {
       title: 'Mis Vehículos',
-      route: '/user/myvehicles',
+      route: '/vehicles/myvehicles',
       icon: 'myvehicles.png',
       iconActive: 'selectedMyVehicles.png',
     },
     {
       title: 'Vehículos Rentados',
-      route: '/user/rentalvehicles',
+      route: '/services/rentalvehicles',
       icon: 'rentalvehicles.png',
       iconActive: 'selectedRentalvehicles.png',
+    },
+    {
+      title: 'Solicitudes',
+      route: '/requests/viewAll',
+      icon: 'requests.png',
+      iconActive: 'requestsSelected.png',
     },
     {
       title: 'Suscripciones',

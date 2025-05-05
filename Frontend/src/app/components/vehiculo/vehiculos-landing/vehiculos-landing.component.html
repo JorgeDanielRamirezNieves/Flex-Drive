@@ -1,136 +1,160 @@
 <app-navbar></app-navbar>
-<section
-  class="flex flex-col items-center justify-center p-5 h-screen w-full image-background jura z-20"
->
-  <span class="w-full flex flex-col items-center justify-center">
-    >
-    <h1 class="text-6xl text-white w-full text-center">Busca Tu vehículo</h1>
-    <form class="flex items-center justify-center gap-2 w-full h-fit p-5">
-      <input type="text" pInputText placeholder="nombre, marca..." />
-      <app-button label="" icon="pi pi-search"></app-button>
-    </form>
-  </span>
-  <p-select [options]="tiposBusqueda" [(ngModel)]="tipoBusquedaSeleccionado">
-  </p-select>
-</section>
-<section
-  class="flex flex-col items-center justify-center w-full h-screen p-5 relative jura"
->
-  <svg
-    width="582"
-    height="618"
-    viewBox="0 0 582 618"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    class="absolute top-0 -left-20 z-10"
+<main class="flex flex-col justify-center items-center">
+  <section
+    class="flex flex-col items-center justify-center p-5 h-[80dvh] w-full image-background jura z-20"
   >
-    <path
-      d="M57.8929 610.264C-52.3722 627.67 -228 610.264 -228 610.264V4.27751C-228 4.27751 -112.868 48.2013 29.3006 4.27751C171.469 -39.6463 522.402 269.18 522.402 269.18C522.402 269.18 656.498 418.937 522.402 542.58C388.306 666.223 357.732 542.58 286.929 542.58C216.126 542.58 150.053 595.715 57.8929 610.264Z"
-      fill="#54A8A3"
-      fill-opacity="0.3"
-    />
-    <path
-      d="M-8 514.5C-83.0327 533.034 -165 394.007 -165 394.007C-165 394.007 -160.304 277.312 -118 222C-60.5079 146.828 12.4263 128.547 107 132C205.614 135.6 309.25 150.978 332 247C348.887 318.276 327.072 383.919 264.5 422C205.139 458.127 149.936 380.04 87 409.5C36.9179 432.944 45.6839 501.239 -8 514.5Z"
-      fill="#54A8A3"
-      fill-opacity="0.3"
-    />
-  </svg>
+    <span class="w-full flex flex-col items-center justify-center">
+      <h1 class="text-6xl text-white w-full text-center mb-10">
+        Busca Tu vehículo
+      </h1>
+      <form
+        class="flex items-center justify-center gap-2 w-5/6 h-fit p-5"
+        #frmBusqueda="ngForm"
+        (submit)="frmBusqueda.form.valid && search(frmBusqueda)"
+      >
+        <input
+          type="text"
+          pInputText
+          placeholder="nombre, marca..."
+          [(ngModel)]="busqueda"
+          required="true"
+          class="w-full h-10 p-2 rounded-md text-black grow"
+          name="busqueda"
+        />
+        <app-button label="" icon="pi pi-search" type="submit"></app-button>
+      </form>
+    </span>
 
-  <span class="flex flex-col justify-center items-center w-full h-full z-20">
-    <h1 class="text-6xl">Más Solicitados</h1>
-    <p-carousel
-      [value]="vehiculos"
-      [numVisible]="3"
-      [numScroll]="3"
-      [circular]="true"
-      class="w-full"
+    <p-select [options]="tiposBusqueda" [(ngModel)]="tipoBusquedaSeleccionado">
+    </p-select>
+  </section>
+  <main class="flex flex-col items-center justify-center w-full h-fit">
+    <section
+      class="flex flex-col items-center justify-center w-full h-screen p-5 relative jura"
     >
-      <ng-template let-product #item>
-        <app-card-pequenna class="m-10"></app-card-pequenna>
-      </ng-template>
-    </p-carousel>
-  </span>
-  <svg
-    width="560"
-    height="565"
-    viewBox="0 0 560 565"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    class="absolute bottom-0 right-0 z-10"
-  >
-    <path
-      d="M515.17 7.25806C617.956 -9.07257 781.67 7.25806 781.67 7.25806V565H17.5C17.5 565 4.56903 483.672 82.1702 447.258C118.584 430.171 154.67 430.258 160.17 378.758C165.67 327.258 119.497 342.247 82.1702 327.258C-10.7848 289.931 -42.8298 186.758 82.1702 70.7581C207.17 -45.2419 235.67 70.7581 301.67 70.7581C367.67 70.7581 429.261 20.9073 515.17 7.25806Z"
-      fill="#54A8A3"
-      fill-opacity="0.3"
-    />
-    <path
-      d="M525.758 127.82C594.504 116.976 704 127.82 704 127.82V505.335C704 505.335 632.22 477.972 543.584 505.335C454.948 532.699 236.157 340.307 236.157 340.307C236.157 340.307 152.554 247.012 236.157 169.985C319.76 92.9583 338.822 169.985 382.964 169.985C427.106 169.985 468.3 136.883 525.758 127.82Z"
-      fill="#54A8A3"
-      fill-opacity="0.3"
-    />
-  </svg>
-</section>
-<section
-  class="flex flex-col items-center justify-center w-full h-screen p-5 relative jura section3"
->
-  <h1>Rutas por visitar</h1>
-  
-</section>
-<section
-  class="flex flex-col items-center justify-center w-full h-screen p-5 relative jura"
->
-  <svg
-    width="451"
-    height="565"
-    viewBox="0 0 451 565"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    class="absolute top-0 -left-20 z-10"
-  >
-    <path
-      d="M-64.5 557.742C-167.285 574.073 -331 557.742 -331 557.742V0H433.17C433.17 0 446.101 81.328 368.5 117.742C332.086 134.829 296 134.742 290.5 186.242C285 237.742 331.173 222.753 368.5 237.742C461.455 275.069 493.5 378.242 368.5 494.242C243.5 610.242 215 494.242 149 494.242C83 494.242 21.4091 544.093 -64.5 557.742Z"
-      fill="#54A8A3"
-      fill-opacity="0.3"
-    />
-    <path
-      d="M-75.0882 428.18C-143.834 439.024 -253.33 428.18 -253.33 428.18V50.6648C-253.33 50.6648 -181.55 78.0283 -92.9143 50.6648C-4.27855 23.3013 214.513 215.693 214.513 215.693C214.513 215.693 298.116 308.988 214.513 386.015C130.91 463.042 111.848 386.015 67.7059 386.015C23.5635 386.015 -17.6301 419.117 -75.0882 428.18Z"
-      fill="#54A8A3"
-      fill-opacity="0.3"
-    />
-  </svg>
+      <svg
+        width="582"
+        height="618"
+        viewBox="0 0 582 618"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="absolute top-0 -left-20 z-10"
+      >
+        <path
+          d="M57.8929 610.264C-52.3722 627.67 -228 610.264 -228 610.264V4.27751C-228 4.27751 -112.868 48.2013 29.3006 4.27751C171.469 -39.6463 522.402 269.18 522.402 269.18C522.402 269.18 656.498 418.937 522.402 542.58C388.306 666.223 357.732 542.58 286.929 542.58C216.126 542.58 150.053 595.715 57.8929 610.264Z"
+          fill="#54A8A3"
+          fill-opacity="0.3"
+        />
+        <path
+          d="M-8 514.5C-83.0327 533.034 -165 394.007 -165 394.007C-165 394.007 -160.304 277.312 -118 222C-60.5079 146.828 12.4263 128.547 107 132C205.614 135.6 309.25 150.978 332 247C348.887 318.276 327.072 383.919 264.5 422C205.139 458.127 149.936 380.04 87 409.5C36.9179 432.944 45.6839 501.239 -8 514.5Z"
+          fill="#54A8A3"
+          fill-opacity="0.3"
+        />
+      </svg>
 
-  <span class="flex flex-col justify-center items-center w-full h-full z-20">
-    <h1 class="text-6xl">Más Solicitados</h1>
-    <p-carousel
-      [value]="vehiculos"
-      [numVisible]="3"
-      [numScroll]="3"
-      [circular]="true"
-      class="w-full"
+      <span
+        class="flex flex-col justify-center items-center w-full h-full z-20"
+      >
+        <h1 class="text-6xl">Más Solicitados</h1>
+        <p-carousel
+          [value]="vehiculos"
+          [numVisible]="3"
+          [numScroll]="3"
+          [circular]="true"
+          class="w-full"
+        >
+          <ng-template let-product #item>
+            <app-card-pequenna class="m-10"></app-card-pequenna>
+          </ng-template>
+        </p-carousel>
+      </span>
+      <svg
+        width="560"
+        height="565"
+        viewBox="0 0 560 565"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="absolute bottom-0 right-0 z-10"
+      >
+        <path
+          d="M515.17 7.25806C617.956 -9.07257 781.67 7.25806 781.67 7.25806V565H17.5C17.5 565 4.56903 483.672 82.1702 447.258C118.584 430.171 154.67 430.258 160.17 378.758C165.67 327.258 119.497 342.247 82.1702 327.258C-10.7848 289.931 -42.8298 186.758 82.1702 70.7581C207.17 -45.2419 235.67 70.7581 301.67 70.7581C367.67 70.7581 429.261 20.9073 515.17 7.25806Z"
+          fill="#54A8A3"
+          fill-opacity="0.3"
+        />
+        <path
+          d="M525.758 127.82C594.504 116.976 704 127.82 704 127.82V505.335C704 505.335 632.22 477.972 543.584 505.335C454.948 532.699 236.157 340.307 236.157 340.307C236.157 340.307 152.554 247.012 236.157 169.985C319.76 92.9583 338.822 169.985 382.964 169.985C427.106 169.985 468.3 136.883 525.758 127.82Z"
+          fill="#54A8A3"
+          fill-opacity="0.3"
+        />
+      </svg>
+    </section>
+    <section
+      class="flex flex-col items-center justify-center w-full h-screen p-5 relative jura section3"
     >
-      <ng-template let-product #item>
-        <app-card-pequenna class="m-10"></app-card-pequenna>
-      </ng-template>
-    </p-carousel>
-  </span>
-  <svg
-    width="640"
-    height="618"
-    viewBox="0 0 640 618"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    class="absolute -bottom-10 right-0 -z-10"
-  >
-    <path
-      d="M524.107 7.73627C634.372 -9.67035 810 7.73627 810 7.73627V613.722C810 613.722 694.868 569.799 552.699 613.722C410.531 657.646 59.5982 348.82 59.5982 348.82C59.5982 348.82 -74.4979 199.063 59.5982 75.4201C193.694 -48.2227 224.268 75.4201 295.071 75.4201C365.874 75.4201 431.947 22.2849 524.107 7.73627Z"
-      fill="#54A8A3"
-      fill-opacity="0.3"
-    />
-    <path
-      d="M590 103.5C665.033 84.9658 747 223.994 747 223.994C747 223.994 742.304 340.688 700 396C642.508 471.172 569.574 489.453 475 486C376.386 482.4 272.75 467.022 250 371C233.113 299.724 254.928 234.081 317.5 196C376.861 159.874 432.064 237.961 495 208.5C545.082 185.057 536.316 116.761 590 103.5Z"
-      fill="#54A8A3"
-      fill-opacity="0.3"
-    />
-  </svg>
-</section>
+      <h1>Rutas por visitar</h1>
+    </section>
+    <section
+      class="flex flex-col items-center justify-center w-full h-screen p-5 relative jura"
+    >
+      <svg
+        width="451"
+        height="565"
+        viewBox="0 0 451 565"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="absolute top-0 -left-20 z-10"
+      >
+        <path
+          d="M-64.5 557.742C-167.285 574.073 -331 557.742 -331 557.742V0H433.17C433.17 0 446.101 81.328 368.5 117.742C332.086 134.829 296 134.742 290.5 186.242C285 237.742 331.173 222.753 368.5 237.742C461.455 275.069 493.5 378.242 368.5 494.242C243.5 610.242 215 494.242 149 494.242C83 494.242 21.4091 544.093 -64.5 557.742Z"
+          fill="#54A8A3"
+          fill-opacity="0.3"
+        />
+        <path
+          d="M-75.0882 428.18C-143.834 439.024 -253.33 428.18 -253.33 428.18V50.6648C-253.33 50.6648 -181.55 78.0283 -92.9143 50.6648C-4.27855 23.3013 214.513 215.693 214.513 215.693C214.513 215.693 298.116 308.988 214.513 386.015C130.91 463.042 111.848 386.015 67.7059 386.015C23.5635 386.015 -17.6301 419.117 -75.0882 428.18Z"
+          fill="#54A8A3"
+          fill-opacity="0.3"
+        />
+      </svg>
+
+      <span
+        class="flex flex-col justify-center items-center w-full h-full z-20"
+      >
+        <h1 class="text-6xl">Más Solicitados</h1>
+        <p-carousel
+          [value]="vehiculos"
+          [numVisible]="3"
+          [numScroll]="3"
+          [circular]="true"
+          class="w-full"
+        >
+          <ng-template let-product #item>
+            <app-card-pequenna class="m-10"></app-card-pequenna>
+          </ng-template>
+        </p-carousel>
+      </span>
+      <svg
+        width="640"
+        height="618"
+        viewBox="0 0 640 618"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="absolute -bottom-10 right-0 -z-10"
+      >
+        <path
+          d="M524.107 7.73627C634.372 -9.67035 810 7.73627 810 7.73627V613.722C810 613.722 694.868 569.799 552.699 613.722C410.531 657.646 59.5982 348.82 59.5982 348.82C59.5982 348.82 -74.4979 199.063 59.5982 75.4201C193.694 -48.2227 224.268 75.4201 295.071 75.4201C365.874 75.4201 431.947 22.2849 524.107 7.73627Z"
+          fill="#54A8A3"
+          fill-opacity="0.3"
+        />
+        <path
+          d="M590 103.5C665.033 84.9658 747 223.994 747 223.994C747 223.994 742.304 340.688 700 396C642.508 471.172 569.574 489.453 475 486C376.386 482.4 272.75 467.022 250 371C233.113 299.724 254.928 234.081 317.5 196C376.861 159.874 432.064 237.961 495 208.5C545.082 185.057 536.316 116.761 590 103.5Z"
+          fill="#54A8A3"
+          fill-opacity="0.3"
+        />
+      </svg>
+    </section>
+  </main>
+  <div *ngIf="searching">
+    <app-suspense></app-suspense>
+  </div>
+</main>
 <app-footer class="z-20"></app-footer>

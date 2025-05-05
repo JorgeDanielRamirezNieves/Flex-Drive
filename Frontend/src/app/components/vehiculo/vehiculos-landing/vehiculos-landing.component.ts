@@ -1,19 +1,24 @@
-import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-vehiculos-landing',
   standalone: false,
   templateUrl: './vehiculos-landing.component.html',
-  styleUrl: './vehiculos-landing.component.css'
+  styleUrl: './vehiculos-landing.component.css',
 })
 export class VehiculosLandingComponent {
   public tiposBusqueda: string[];
   public tipoBusquedaSeleccionado: string;
   public vehiculos: any[];
+  public busqueda: string;
+  public searching: boolean;
 
-
-  constructor() {
-    this.tiposBusqueda =  [
+  constructor(private router: Router) {
+    this.busqueda = '';
+    this.searching = false;
+    this.tiposBusqueda = [
       'Por nombre',
       'Por marca',
       'Por modelo',
@@ -93,8 +98,21 @@ export class VehiculosLandingComponent {
         año: 2016,
         precio: 10000,
         kilometraje: 50000,
-      }
+      },
     ];
     this.tipoBusquedaSeleccionado = this.tiposBusqueda[0];
+  }
+
+  public search(form: NgForm) {
+    this.searching = true;
+    setTimeout(() => {
+      this.searching = false;
+      this.router.navigate(['/vehicles/search'], {
+        queryParams: {
+          tipo: this.tipoBusquedaSeleccionado,
+          busqueda: this.busqueda,
+        },
+      });
+    }, 1000);
   }
 }

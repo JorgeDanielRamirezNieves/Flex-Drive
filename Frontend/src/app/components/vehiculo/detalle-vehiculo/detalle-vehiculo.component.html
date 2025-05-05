@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+<p-toast ></p-toast>
 <section class="flex flex-col justify-center items-center h-fit gap-3 my-10">
   <p-galleria
     [value]="images"
@@ -69,7 +70,7 @@
               class="bg-white mt-15 w-full p-2 rounded-lg resize-none placeholder:text-gray-500"
               placeholder="Enviale un mensaje al propietario..."
             ></textarea>
-            <app-button label="Enviar"></app-button>
+            <app-button label="Enviar" type="button" [callback]="sendRequest"></app-button>
           </p-accordion-content>
         </p-accordion-panel>
       </p-accordion>

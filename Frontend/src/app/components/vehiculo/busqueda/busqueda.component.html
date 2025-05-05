@@ -1,1 +1,136 @@
-<p>busqueda works!</p>
+<app-navbar></app-navbar>
+<main class="flex flex-col justify-center items-center">
+  <section
+    class="flex flex-col items-center justify-center p-5 h-[80dvh] w-full image-background jura z-20"
+  >
+    <span class="w-full flex flex-col items-center justify-center">
+      <h1 class="text-6xl text-white w-full text-center mb-10">
+        Busca Tu vehículo
+      </h1>
+      <form
+        class="flex items-center justify-center gap-2 w-5/6 h-fit p-5"
+        #frmBusqueda="ngForm"
+        (submit)="frmBusqueda.form.valid && search(frmBusqueda)"
+      >
+        <input
+          type="text"
+          pInputText
+          placeholder="nombre, marca..."
+          [(ngModel)]="busqueda"
+          required="true"
+          class="w-full h-10 p-2 rounded-md text-black grow"
+          name="busqueda"
+        />
+        <app-button label="" icon="pi pi-search" type="submit"></app-button>
+      </form>
+    </span>
+    <span
+      class="flex flex-col items-start justify-center gap-2 w-5/6 h-fit p-5"
+    >
+      <p-select
+        [options]="tiposBusqueda"
+        [(ngModel)]="tipoBusquedaSeleccionado"
+      >
+      </p-select>
+      <p-button
+        icon="pi pi-bars"
+        iconPos="left"
+        id="filtro"
+        class="bg-transparent jura text-white"
+        label="Filtros"
+        (click)="changeDrawerVisble()"
+      ></p-button>
+    </span>
+  </section>
+  <section>
+    <app-vehiculo-card></app-vehiculo-card>
+    <app-vehiculo-card></app-vehiculo-card>
+    <app-vehiculo-card></app-vehiculo-card>
+    <app-vehiculo-card></app-vehiculo-card>
+    <app-vehiculo-card></app-vehiculo-card>
+    <app-vehiculo-card></app-vehiculo-card>
+    <app-vehiculo-card></app-vehiculo-card>
+    <app-vehiculo-card></app-vehiculo-card>
+    <app-vehiculo-card></app-vehiculo-card>
+    <p-drawer [(visible)]="drawerVisible" #drawerRef>
+      <ng-template #headless>
+        <div
+          class="flex flex-col items-center justify-center gap-2 w-[50vw] h-fit p-5 bg-[#03161780] text-white"
+        >
+          <p-accordion
+            [value]="[0]"
+            [multiple]="true"
+            id="accordion-filtro"
+            class="w-full border-none"
+          >
+            <p-accordion-panel value="0" class="border-none">
+              <p-accordion-header >Marcas</p-accordion-header>
+              <p-accordion-content>
+                <form
+                  action=""
+                  class="grid grid-cols-3 place-items-center gap-x-5 w-full h-fit p-5"
+                >
+                  @for (marca of marcas; track $index) {
+                    <span class="flex justify-start items-center w-full" >
+                      <!-- From Uiverse.io by KirbGaming -->
+                      <label class="checkbox-container">
+                        <input type="checkbox" name="{{marca.nombre}}" [(ngModel)]="marca.checked" />
+                        <div class="checkmark"></div>
+                      </label>
+                      <p class="text-white jura text-2xl">{{marca.nombre}}</p>
+                      </span>
+                  }
+                </form>
+              </p-accordion-content>
+            </p-accordion-panel>
+            <p-accordion-panel value="1" class="border-none">
+              <p-accordion-header >Modelo</p-accordion-header>
+              <p-accordion-content>
+                <form
+                  action=""
+                  class="grid grid-cols-3 place-items-center gap-x-5 w-full h-fit p-5"
+                >
+                  @for (model of modelos; track $index) {
+                    <span class="flex justify-start items-center w-full" >
+                      <!-- From Uiverse.io by KirbGaming -->
+                      <label class="checkbox-container">
+                        <input type="checkbox" name="{{model.nombre}}" [(ngModel)]="model.checked" />
+                        <div class="checkmark"></div>
+                      </label>
+                      <p class="text-white jura text-2xl">{{model.nombre}}</p>
+                      </span>
+                  }
+                </form>
+              </p-accordion-content>
+            </p-accordion-panel>
+            
+            <p-accordion-panel value="2" class="border-none">
+              <p-accordion-header >Anno</p-accordion-header>
+              <p-accordion-content>
+                <form
+                  action=""
+                  class="grid grid-cols-3 place-items-center gap-x-5 w-full h-fit p-5"
+                >
+                  @for (year of anno; track $index) {
+                    <span class="flex justify-start items-center w-full" >
+                      <!-- From Uiverse.io by KirbGaming -->
+                      <label class="checkbox-container">
+                        <input type="checkbox" name="{{year.nombre}}" [(ngModel)]="year.checked" />
+                        <div class="checkmark"></div>
+                      </label>
+                      <p class="text-white jura text-2xl">{{year.nombre}}</p>
+                      </span>
+                  }
+                </form>
+              </p-accordion-content>
+            </p-accordion-panel>
+          </p-accordion>
+        </div>
+      </ng-template>
+    </p-drawer>
+  </section>
+</main>
+<div *ngIf="searching">
+  <app-suspense></app-suspense>
+</div>
+<app-footer></app-footer>
