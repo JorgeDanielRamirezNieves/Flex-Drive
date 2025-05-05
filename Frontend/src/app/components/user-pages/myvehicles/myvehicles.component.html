@@ -1,13 +1,13 @@
 <app-navbar></app-navbar>
 
-<div class="bg-white flex">
+<div class="bg-white flex w-full">
   <app-menu-column></app-menu-column>
 
-  <div class="flex flex-col w-full space-y-10">
+  <div class="flex flex-col w-[95%] space-y-10">
     <div class="flex justify-center">
       <h1 class="jura font-bold text-2xl mt-15">Mis Vehículos</h1>
     </div>
-    <div class="flex w-full">
+    <div class="flex">
       <div class="w-4xl">
         <div
           class="flex flex-col justify-center items-center gap-4 bg-[#d9d9d9] rounded-lg shadow-md m-10 py-4 hover:scale-105 transition-all duration-300 ease-in-out"
@@ -83,7 +83,7 @@
     </div>
     <div *ngIf="showForm" class="flex justify-center">
       <div
-        class="justify-center flex-col w-[70rem] rounded-3xl p-15 bg-[#d9d9d9] mb-20"
+        class="justify-center flex-col w-[92%] rounded-3xl mx-auto p-15 bg-[#d9d9d9] mb-20"
       >
         <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
           <div class="flex gap-8">
@@ -175,18 +175,18 @@
         <img class="m-5" src="../../../../assets/icons/agregar.png" alt="" />
 
         <button
-          (click)="toggleForm()"
+          (click)="toggleFormC()"
           class="w-auto bg-[#54A8A3] text-white py-2 px-4 rounded hover:bg-[#44918d] transition duration-200"
         >
-          {{ showForm ? "Cancelar" : "Agregar Vehículo" }}
+          {{ showFormC ? "Cancelar" : "Agregar Vehículo" }}
         </button>
       </div>
 
       <div
-        *ngIf="showForm"
-        class="bg-[#d9d9d9] w-[900px] ml-10 p-10 flex flex-col items-center rounded-lg shadow-md"
+        *ngIf="showFormC"
+        class="bg-[#d9d9d9] w-full ml-10 p-10 flex flex-col items-center rounded-lg shadow-md"
       >
-        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <form #loginForm="ngForm" (ngSubmit)="onSubmitP(loginForm)">
           <app-input-label
             label="Placa vehiculo"
             placeholder="XXX ###"
@@ -198,9 +198,37 @@
             type="submit"
             class="w-[20rem] bg-[#54A8A3] text-white py-2 px-4 rounded border-2 border-transparent hover:bg-transparent hover:cursor-pointer hover:border-[#54A8A3] hover:text-[#54A8A3] focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out"
           >
-            Guardar Cambios
+            Crear Vehículo
           </button>
         </form>
+      </div>
+      <div
+        *ngIf="showDialog"
+        class="fixed inset-0 flex items-center justify-center z-50"
+        style="background-color: rgba(211, 211, 211, 0.6)"
+      >
+        <div
+          class="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full text-center"
+        >
+          <img
+            src="../../../../assets/icons/CaraTriste.png"
+            alt=""
+            class="w-1/4 mx-auto my-2"
+          />
+          <h2 class="text-lg my-9 w-[80%] mx-auto">
+            Lo sentimos. Para registrar un vehículo, la cédula #0000000 del
+            usuario registrado debe coincidir con el número de cédula del
+            propietario en la carta del vehículo. Verifica que los datos
+            coincidan correctamente o asegúrate de haber ingresado bien la
+            placa.
+          </h2>
+          <button
+            class="bg-[#54A8A3] text-white px-4 py-2 rounded hover:bg-[#3e807c] transition w-[60%]"
+            (click)="showDialog = false"
+          >
+            Aceptar
+          </button>
+        </div>
       </div>
     </div>
   </div>

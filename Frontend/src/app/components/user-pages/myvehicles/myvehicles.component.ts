@@ -31,9 +31,24 @@ export class MyvehiclesComponent {
   }
 
   showForm: boolean = false;
+  showFormC: boolean = false;
 
-  // Método que alterna la visibilidad
   toggleForm(): void {
     this.showForm = !this.showForm;
+  }
+
+  toggleFormC(): void {
+    this.showFormC = !this.showFormC;
+  }
+
+  showDialog = false;
+
+  onSubmitP(form: NgForm) {
+    if (form.valid) {
+      console.log('Se envió el formulario del vehículo');
+      this.showDialog = true;
+    } else {
+      console.log('Formulario inválido');
+    }
   }
 }

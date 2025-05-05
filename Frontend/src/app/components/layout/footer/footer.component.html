@@ -11,61 +11,20 @@
     />
     <span class="text-xs">
       <a
-        class="my-2 flex gap-5 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
+        *ngFor="let item of footerContactInfo"
+        class="my-2 flex items-center gap-3 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
       >
-        flexdrive&#64;gmail.com
-      </a>
-      <a
-        class="my-2 flex gap-5 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
-      >
-        +57 300 000 0000
-      </a>
-      <a
-        class="my-2 flex gap-5 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
-      >
-        whatsapp
-      </a>
-      <a
-        class="my-2 flex gap-5 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
-      >
-        Colombia
-      </a>
-      <a
-        class="my-2 flex gap-5 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
-      >
-        flexdriveColombia
-      </a>
-      <a
-        class="my-2 flex gap-5 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
-      >
-        flexdriveColombia
+        <img [src]="item.icon" alt="icon" class="w-4 h-4" />
+        {{ item.text }}
       </a>
     </span>
     <span class="text-gray-400 text-xs">
       <a
-        class="my-2 flex gap-5 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
+        *ngFor="let item of footerLinks"
+        [routerLink]="item.link"
+        class="my-2 flex items-center gap-3 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
       >
-        ¿Por qué Flex Drive?
-      </a>
-      <a
-        class="my-2 flex gap-5 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
-      >
-        Acerca de nosotros
-      </a>
-      <a
-        class="my-2 flex gap-5 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
-      >
-        Contacto
-      </a>
-      <a
-        class="my-2 flex gap-5 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
-      >
-        Login
-      </a>
-      <a
-        class="my-2 flex gap-5 cursor-pointer hover:text-[#54A8A3] transition-all duration-200"
-      >
-        Registrarse
+        {{ item.text }}
       </a>
     </span>
   </div>

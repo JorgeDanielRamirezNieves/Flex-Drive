@@ -49,6 +49,9 @@ import { VehiculosLandingComponent } from './components/vehiculo/vehiculos-landi
 import { BusquedaComponent } from './components/vehiculo/busqueda/busqueda.component';
 import { VehiculoCardComponent } from './components/vehiculo/vehiculo-card/vehiculo-card.component';
 import { DetalleVehiculoComponent } from './components/vehiculo/detalle-vehiculo/detalle-vehiculo.component';
+import { CardSettingsComponent } from './components/layout/card-settings/card-settings.component';
+import { ToggleButtonComponent } from './components/layout/toggle-button/toggle-button.component';
+import { ColumnMessageComponent } from './components/layout/column-message/column-message.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,9 @@ import { DetalleVehiculoComponent } from './components/vehiculo/detalle-vehiculo
     VehiculoCardComponent,
     DetalleVehiculoComponent,
     CardRentalVehiclesComponent,
+    CardSettingsComponent,
+    ToggleButtonComponent,
+    ColumnMessageComponent,
   ],
   imports: [
     BrowserModule,
