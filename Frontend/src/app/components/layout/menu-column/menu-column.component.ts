@@ -57,5 +57,11 @@ export class MenuColumnComponent {
       icon: 'settings.png',
       iconActive: 'selectedSettings.png',
     },
+    {
+      title: 'PQRS',
+      route: '/user/pqrs',
+      icon: 'PQRSB.png',
+      iconActive: 'PQRSS.png',
+    },
   ];
 }

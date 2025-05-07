@@ -20,6 +20,7 @@ import { BusquedaComponent } from './components/vehiculo/busqueda/busqueda.compo
 import { ViewAllComponent } from './components/requests/view-all/view-all.component';
 import { DetailsComponent } from './components/requests/details/details.component';
 import { DetailsServiceComponent } from './components/servicios/details-service/details-service.component';
+import { PqrsComponent } from './components/user-pages/pqrs/pqrs.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,7 @@ const routes: Routes = [
       { path: 'subscriptions', component: SubscriptionsComponent },
       { path: 'activechats', component: ActivechatsComponent },
       { path: 'profilesettings', component: ProfilesettingsComponent },
+      { path: 'pqrs', component: PqrsComponent },
       { path: '', component: UserComponent },
     ],
   },

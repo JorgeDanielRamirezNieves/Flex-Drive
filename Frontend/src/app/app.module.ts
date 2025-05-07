@@ -58,6 +58,7 @@ import { ColumnMessageComponent } from './components/layout/column-message/colum
 import { ViewAllComponent } from './components/requests/view-all/view-all.component';
 import { DetailsComponent } from './components/requests/details/details.component';
 import { SuspenseComponent } from './components/layout/suspense/suspense.component';
+import { PqrsComponent } from './components/user-pages/pqrs/pqrs.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { SuspenseComponent } from './components/layout/suspense/suspense.compone
     CardSettingsComponent,
     ToggleButtonComponent,
     ColumnMessageComponent,
+    PqrsComponent,
   ],
   imports: [
     BrowserModule,
