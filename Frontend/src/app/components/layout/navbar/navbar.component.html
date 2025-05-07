@@ -34,7 +34,12 @@
       routerLinkActive="router-link-active"
       >Iniciar Sesión</a
     >
-
+    <a
+      class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
+      [routerLink]="['/admin/admin-pqrs']"
+      routerLinkActive="router-link-active"
+      >ad</a
+    >
     <!-- Quitar esto despues -->
     <ng-container *ngIf="!isLoggedIn; else loggedInOptions">
       <a

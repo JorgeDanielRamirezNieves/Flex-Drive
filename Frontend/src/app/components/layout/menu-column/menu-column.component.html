@@ -2,7 +2,7 @@
   class="group bg-colum h-full w-16 hover:w-64 transition-all duration-300 py-4 overflow-hidden bg-[#d9d9d9] pt-15"
 >
   <a
-    *ngFor="let item of menuItems"
+    *ngFor="let item of visibleMenuItems"
     [routerLink]="item.route"
     class="flex items-center no-underline jura font-bold hover:bg-white px-3 py-5 duration-300"
     routerLinkActive="active"

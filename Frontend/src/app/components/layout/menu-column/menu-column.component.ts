@@ -64,4 +64,20 @@ export class MenuColumnComponent {
       iconActive: 'PQRSS.png',
     },
   ];
+
+  menuItemsAdmin = [
+    {
+      title: 'PQRS',
+      route: '/admin/admin-pqrs',
+      icon: 'advertencia.png',
+      iconActive: 'advertencia-2.png',
+    },
+  ];
+
+  get visibleMenuItems() {
+    const currentUrl = this.router.url;
+    return currentUrl.startsWith('/admin/admin-pqrs')
+      ? this.menuItemsAdmin
+      : this.menuItems;
+  }
 }

@@ -59,6 +59,7 @@ import { ViewAllComponent } from './components/requests/view-all/view-all.compon
 import { DetailsComponent } from './components/requests/details/details.component';
 import { SuspenseComponent } from './components/layout/suspense/suspense.component';
 import { PqrsComponent } from './components/user-pages/pqrs/pqrs.component';
+import { AdminPqrsComponent } from './components/admin/admin-pqrs/admin-pqrs.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { PqrsComponent } from './components/user-pages/pqrs/pqrs.component';
     ToggleButtonComponent,
     ColumnMessageComponent,
     PqrsComponent,
+    AdminPqrsComponent,
   ],
   imports: [
     BrowserModule,

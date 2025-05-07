@@ -21,6 +21,7 @@ import { ViewAllComponent } from './components/requests/view-all/view-all.compon
 import { DetailsComponent } from './components/requests/details/details.component';
 import { DetailsServiceComponent } from './components/servicios/details-service/details-service.component';
 import { PqrsComponent } from './components/user-pages/pqrs/pqrs.component';
+import { AdminPqrsComponent } from './components/admin/admin-pqrs/admin-pqrs.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,10 @@ const routes: Routes = [
       { path: 'rentalvehicles', component: RentalvehiclesComponent },
       { path: 'details', component: DetailsServiceComponent },
     ],
+  },
+  {
+    path: 'admin',
+    children: [{ path: 'admin-pqrs', component: AdminPqrsComponent }],
   },
   /* rutas obligatorios */
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
