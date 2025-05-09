@@ -18,6 +18,8 @@ import { GalleriaModule } from 'primeng/galleria';
 import { ToastModule } from 'primeng/toast';
 import { DrawerModule } from 'primeng/drawer';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TabsModule } from 'primeng/tabs';
+import { InputOtpModule } from 'primeng/inputotp';
 
 /* componentes propios */
 import { AppRoutingModule } from './app-routing.module';
@@ -60,6 +62,7 @@ import { DetailsComponent } from './components/requests/details/details.componen
 import { SuspenseComponent } from './components/layout/suspense/suspense.component';
 import { PqrsComponent } from './components/user-pages/pqrs/pqrs.component';
 import { AdminPqrsComponent } from './components/admin/admin-pqrs/admin-pqrs.component';
+import { DetailsServiceComponent } from './components/servicios/details-service/details-service.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +101,7 @@ import { AdminPqrsComponent } from './components/admin/admin-pqrs/admin-pqrs.com
     ColumnMessageComponent,
     PqrsComponent,
     AdminPqrsComponent,
+    DetailsServiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -114,6 +118,8 @@ import { AdminPqrsComponent } from './components/admin/admin-pqrs/admin-pqrs.com
     ToastModule,
     DrawerModule,
     ProgressSpinnerModule,
+    TabsModule,
+    InputOtpModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

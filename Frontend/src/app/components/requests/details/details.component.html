@@ -12,11 +12,11 @@
         <img class="w-[50%]" src="../../../../assets/icons/camara.png" alt="" />
       </div>
     </div>
-    <ul class="flex flex-col justify-center items-start gap-2 text-2xl jura">
+    <ul class="flex flex-col justify-center items-start gap-2 text-xl jura w-full">
       <li><strong>Nombre:</strong>&nbsp;{{ request.driver }}</li>
       <li><strong>Ciudad:</strong>&nbsp;{{ request.driver }}</li>
       <li><strong>Documento:</strong>&nbsp;{{ request.driver }}</li>
-      <li><strong>Rating:</strong>&nbsp;{{ request.driver }}</li>
+      <li class="w-full flex"><strong>Rating:</strong>&nbsp;<p-rating readonly="true"></p-rating></li>
     </ul>
   </span>
   <span

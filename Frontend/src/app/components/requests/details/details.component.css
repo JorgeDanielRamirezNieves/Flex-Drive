@@ -30,3 +30,22 @@
 :host ::ng-deep .p-toast-close-button:hover {
   transform: scale(1.2);
 }
+
+
+:host ::ng-deep .p-rating {
+  gap: 10px;
+}
+
+:host ::ng-deep .p-rating-icon {
+  width: 20px;
+  color: #435755;
+  transition: all 0.3s ease-in-out;
+}
+
+:host
+  ::ng-deep
+  .p-rating:not(.p-disabled):not(.p-readonly)
+  .p-rating-option:hover
+  .p-rating-icon {
+  color: #54a8a3;
+}
