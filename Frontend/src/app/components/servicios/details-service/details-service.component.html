@@ -23,24 +23,69 @@
           />
         </div>
       </div>
-      <ul
-        class="flex flex-col justify-center items-start gap-10 text-xl jura w-full h-full border-2 border-gray-400 rounded-lg py-10 px-10 bg-[#d9d9d9]"
+      <p-tabs
+        value="0"
+        class="bg-[#d9d9d9] w-full h-fit p-10 rounded-lg border-2 border-gray-400 jura"
       >
-        <li><strong>Nombre:</strong>&nbsp;{{ service.request.user.name }}</li>
-        <li><strong>Ciudad:</strong>&nbsp;{{ service.request.user.city }}</li>
-        <li>
-          <strong>Documento:</strong>&nbsp;{{
-            service.request.user.documentType
-          }}
-          {{ service.request.user.document }}
-        </li>
-        <li class="w-full flex">
-          <strong>Rating:</strong>&nbsp;<p-rating
-            readonly="true"
-            [(ngModel)]="service.request.user.rating"
-          ></p-rating>
-        </li>
-      </ul>
+        <p-tablist>
+          <p-tab value="0">Detalles técnicos</p-tab>
+          <p-tab value="1">Multas</p-tab>
+        </p-tablist>
+        <p-tabpanels>
+          <p-tabpanel value="0">
+            <ul
+              class="flex flex-col justify-center items-start gap-10 text-xl jura w-full h-full py-10 px-10"
+            >
+              <li>
+                <strong>Nombre:</strong>&nbsp;{{ service.request.user.name }}
+              </li>
+              <li>
+                <strong>Ciudad:</strong>&nbsp;{{ service.request.user.city }}
+              </li>
+              <li>
+                <strong>Documento:</strong>&nbsp;{{
+                  service.request.user.documentType
+                }}
+                {{ service.request.user.document }}
+              </li>
+              <li class="w-full flex">
+                <strong>Rating:</strong>&nbsp;<p-rating
+                  readonly="true"
+                  [(ngModel)]="service.request.user.rating"
+                ></p-rating>
+              </li>
+            </ul>
+          </p-tabpanel>
+          <p-tabpanel
+            value="1"
+            class="flex flex-col justify-center items-center p-5"
+          >
+            <table class="w-full">
+              <thead class="bg-[#54A8A3]">
+                <tr class="text-white">
+                  <th class="rounded-tl-lg py-3">Fecha de comparendo</th>
+                  <th>Numero de comparendo</th>
+                  <th>Entidad</th>
+                  <th>Código de Infracción</th>
+                  <th class="rounded-tr-lg">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let multa of service.request.vehicle.multas"
+                  class="text-center text-lg py-3"
+                >
+                  <td>{{ multa.fecha_comparendo }}</td>
+                  <td>{{ multa.no_comparendo }}</td>
+                  <td>{{ multa.entidad }}</td>
+                  <td>{{ multa.codigo_infraccion }}</td>
+                  <td>{{ multa.status }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </p-tabpanel>
+        </p-tabpanels>
+      </p-tabs>
     </section>
     <section class="w-full flex justify-center items-center gap-5 px-10 py-5">
       <div class="flex flex-col justify-center items-center gap-3 mr-5">
@@ -229,7 +274,10 @@
               </li>
             </ul>
           </p-tabpanel>
-          <p-tabpanel value="3" class="flex flex-col justify-center items-center p-5">
+          <p-tabpanel
+            value="3"
+            class="flex flex-col justify-center items-center p-5"
+          >
             <table class="w-full">
               <thead class="bg-[#54A8A3]">
                 <tr class="text-white">
@@ -242,12 +290,10 @@
               </thead>
               <tbody>
                 <tr
-                  *ngFor="
-                    let multa of service.request.vehicle.multas;
-                  "
+                  *ngFor="let multa of service.request.vehicle.multas"
                   class="text-center text-lg py-3"
                 >
-                  <td>{{ multa.fecha_comparendo}}</td>
+                  <td>{{ multa.fecha_comparendo }}</td>
                   <td>{{ multa.no_comparendo }}</td>
                   <td>{{ multa.entidad }}</td>
                   <td>{{ multa.codigo_infraccion }}</td>
