@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+
+<div class="bg-white flex">
+  <app-menu-column></app-menu-column>
+  <div class="w-full pb-20">
+    <div class="flex flex-col w-full space-y-10">
+      <div class="flex justify-center">
+        <h1 class="jura font-bold text-2xl mt-15">Servicios actuales</h1>
+      </div>
+      <app-card-rental-vehicles *ngFor="let item of [].constructor(2)">
+      </app-card-rental-vehicles>
+    </div>
+    <div class="border-[0.5px] border-[#000] my-10"></div>
+    <div class="flex flex-col w-full space-y-10">
+      <div class="flex justify-center">
+        <h1 class="jura font-bold text-2xl mt-15">Vehiculos rentados</h1>
+      </div>
+      <app-card-rental-vehicles
+        *ngFor="let item of [].constructor(2)"
+      ></app-card-rental-vehicles>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

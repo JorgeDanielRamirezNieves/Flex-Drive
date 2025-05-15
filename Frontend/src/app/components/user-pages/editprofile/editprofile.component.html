@@ -1,0 +1,132 @@
+<app-navbar></app-navbar>
+
+<div class="bg-white flex">
+  <app-menu-column></app-menu-column>
+  <div class="w-full">
+    <div class="w-full flex justify-center">
+      <h1 class="jura font-bold text-2xl mt-15">Editar Perfil</h1>
+    </div>
+    <section class="w-[80%] h-auto bg-[#d9d9d9] m-auto my-20 rounded-3xl">
+      <div class="flex justify-center items-center">
+        <h2 class="text-2xl jura font-bold m-8">email&#64;example.com</h2>
+      </div>
+
+      <div class="flex justify-center">
+        <div
+          class="justify-center flex-col w-[70rem] rounded-3xl p-15 container-transparent"
+        >
+          <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+            <div class="flex gap-8">
+              <div class="w-1/2 flex flex-col gap-4">
+                <div class="flex items-end">
+                  <div
+                    class="mb-8 mr-10 w-30 h-30 rounded-full border-2 flex justify-center items-center"
+                  >
+                    <img
+                      class="w-[50%]"
+                      src="../../../../assets/icons/camara.png"
+                      alt=""
+                    />
+                  </div>
+                  <app-input-label
+                    class="w-[65%] my-0"
+                    placeholder=""
+                    type="file"
+                    name="photoUser"
+                  ></app-input-label>
+                </div>
+
+                <app-input-label
+                  label="Número de teléfono"
+                  placeholder="+57 300 123 4567"
+                  type="text"
+                  name="phone"
+                ></app-input-label>
+
+                <h2 class="jura mb-4 font-bold">Documento de identidad</h2>
+                <div class="flex gap-6 items-center">
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="documentType"
+                      value="cc"
+                      [(ngModel)]="selectedDocument"
+                      class="accent-[#54A8A3] mr-5"
+                    />
+                    <span class="jura mr-5">cc</span>
+                  </label>
+
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="radio"
+                      name="documentType"
+                      value="pasaporte"
+                      [(ngModel)]="selectedDocument"
+                      class="accent-[#54A8A3] mr-5"
+                    />
+                    <span class="jura mr-5">Pasaporte</span>
+                  </label>
+                </div>
+
+                <app-input-label
+                  label=""
+                  placeholder="102233445"
+                  type="text"
+                  name="documentNumber"
+                ></app-input-label>
+                <app-input-label
+                  label="Fecha de nacimiento"
+                  type="date"
+                  name="birthdate"
+                ></app-input-label>
+              </div>
+
+              <div class="border-l border-[#000]"></div>
+
+              <div class="w-1/2 flex flex-col gap-4 pl-8">
+                <app-input-label
+                  label="Nombre Completo"
+                  placeholder="Juan Pérez"
+                  type="text"
+                  name="fullName"
+                ></app-input-label>
+
+                <app-input-label
+                  label="Dirección de residencia"
+                  placeholder="Calle 123 #45-67, Bogotá, Col"
+                  type="text"
+                  name="address"
+                ></app-input-label>
+
+                <app-input-label
+                  label="Contraseña"
+                  placeholder="***********"
+                  type="password"
+                  name="password"
+                ></app-input-label>
+
+                <app-input-label
+                  label="Confirmar contraseña"
+                  placeholder="***********"
+                  type="password"
+                  name="passwordVerify"
+                ></app-input-label>
+              </div>
+            </div>
+
+            <div class="mt-6 flex justify-center">
+              <button
+                type="submit"
+                class="w-[20rem] bg-[#54A8A3] text-white py-2 px-4 rounded border-2 border-transparent hover:bg-transparent hover:cursor-pointer hover:border-[#54A8A3] hover:text-[#54A8A3] focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out"
+              >
+                Guardar Cambios
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<app-footer></app-footer>

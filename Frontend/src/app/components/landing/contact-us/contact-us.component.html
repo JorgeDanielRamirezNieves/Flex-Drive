@@ -1,0 +1,128 @@
+<app-navbar></app-navbar>
+<section
+  class="flex flex-col gap-4 items-center justify-center h-screen w-full jura"
+>
+  <h1 class="text-5xl">Contáctenos</h1>
+  <div
+    class="flex gap-4 items-center justify-center w-2/3 h-2/3 rounded-2xl border-1 shadow-2xl shadow-black bg-[#d9d9d9]"
+  >
+    <form
+      action=""
+      class="py-5 px-20 rounded-lg flex flex-col gap-4 w-1/2 h-full"
+    >
+      <label for="nombre" class="font-black">Nombre Completo</label>
+      <input
+        id="nombre"
+        placeholder="e.g Juan Pérez"
+        type="text"
+        class="bg-white px-4 py-2 rounded-xl shadow-xl hover:ring-2 hover:ring-[#ADF9F6] hover:ring-offset-2 focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out placeholder:text-gray-400/70"
+      />
+      <label for="correo">Correo electrónico</label>
+      <input
+        id="correo"
+        type="email"
+        placeholder="e.g example@gmail.com"
+        class="bg-white px-4 py-2 rounded-xl shadow-xl hover:ring-2 hover:ring-[#ADF9F6] hover:ring-offset-2 focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out placeholder:text-gray-400/70"
+      />
+      <label for="telefono">Número de teléfono</label>
+      <input
+        id="telefono"
+        type="number"
+        placeholder="e.g 300 123 4657"
+        class="bg-white px-4 py-2 rounded-xl shadow-xl hover:ring-2 hover:ring-[#ADF9F6] hover:ring-offset-2 focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out placeholder:text-gray-400/70"
+      />
+      <label for="mensaje">Tu mensaje</label>
+      <textarea
+        id="mensaje"
+        name="mensaje"
+        class="bg-white px-4 py-2 rounded-xl shadow-xl hover:ring-2 hover:ring-[#ADF9F6] hover:ring-offset-2 focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out resize-none h-fit"
+      ></textarea>
+      <app-button label="Enviar"></app-button>
+    </form>
+    <hr class="h-5/6 border-1 border-black" />
+    <div class="w-1/2 flex flex-col gap-4 items-center justify-center">
+      <h1 class="font-extrabold text-4xl">Escríbenos</h1>
+      <h3 class="text-xl montserrat italic">
+        Te atenderemos con el mayor de los gustos
+      </h3>
+      <h1 class="font-bold text-3xl">Nuestros horarios</h1>
+      <ul
+        class="flex flex-col gap-4 items-center justify-center w-full h-full px-5"
+      >
+        <li
+          class="text-xl montserrat italic flex justify-start items-center gap-2 border-b-2 border-black/70 w-full pb-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-calendar-icon lucide-calendar"
+          >
+            <path d="M8 2v4" />
+            <path d="M16 2v4" />
+            <rect width="18" height="18" x="3" y="4" rx="2" />
+            <path d="M3 10h18" />
+          </svg>
+          Horario 1
+        </li>
+        <li
+          class="text-xl montserrat italic flex justify-start items-center gap-2 border-b-2 border-black/70 w-full pb-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-calendar-icon lucide-calendar"
+          >
+            <path d="M8 2v4" />
+            <path d="M16 2v4" />
+            <rect width="18" height="18" x="3" y="4" rx="2" />
+            <path d="M3 10h18" />
+          </svg>
+          Horario 2
+        </li>
+
+        <li
+          class="text-xl montserrat italic flex justify-start items-center gap-2 border-b-2 border-black/70 w-full pb-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-calendar-x2-icon lucide-calendar-x-2"
+          >
+            <path d="M8 2v4" />
+            <path d="M16 2v4" />
+            <path
+              d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"
+            />
+            <path d="M3 10h18" />
+            <path d="m17 22 5-5" />
+            <path d="m17 17 5 5" />
+          </svg>
+          Horario no disponible
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

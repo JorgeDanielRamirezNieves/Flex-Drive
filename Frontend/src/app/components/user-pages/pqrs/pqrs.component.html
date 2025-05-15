@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+
+<div class="bg-white flex">
+  <app-menu-column></app-menu-column>
+  <div class="flex justify-center w-full flex-col items-center">
+    <div class="flex justify-center">
+      <h2 class="text-2xl jura font-bold m-8">PQRS</h2>
+    </div>
+    <div
+      class="justify-center flex-col w-[70rem] rounded-3xl p-15 bg-[#d9d9d9] mb-20"
+    >
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <app-input-label
+          label="Tipo de PQRS"
+          placeholder="Seleccione un tipo de PQRS"
+          name="tipoDePeticion"
+          [model]="formData"
+          modelProperty="tipoDePeticion"
+          [isSelect]="true"
+          [options]="[
+            { value: 'peticion', label: 'Petición' },
+            { value: 'queja', label: 'Queja' },
+            { value: 'reclamo', label: 'Reclamo' },
+            { value: 'Solicitud', label: 'Solicitud' }
+          ]"
+          [submitted]="submitted"
+        ></app-input-label>
+
+        <app-input-label
+          label="Código de servicio"
+          placeholder="1232412"
+          type="number"
+          name="codService"
+        ></app-input-label>
+
+        <span class="jura"> Mensaje de reporte </span>
+
+        <textarea
+          name="mensaje"
+          id=""
+          rows="5"
+          class="bg-white w-full mt-5 p-2 rounded-lg resize-none placeholder:text-gray-500"
+          placeholder="Enviale un mensaje con tu PQRS..."
+        ></textarea>
+
+        <div class="mt-6 flex flex-col items-center space-y-4">
+          <button
+            type="submit"
+            class="w-[20rem] bg-[#54A8A3] text-white py-2 px-4 rounded border-2 border-transparent hover:bg-transparent hover:cursor-pointer hover:border-[#54A8A3] hover:text-[#54A8A3] focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out"
+          >
+            GEnviar Mensaje
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

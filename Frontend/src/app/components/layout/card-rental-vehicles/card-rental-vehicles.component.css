@@ -1,0 +1,8 @@
+#card-rental-vehicles #eye-icon{
+    display: none;
+    transition: all 0.3s ease-in-out;
+}
+
+#card-rental-vehicles:hover #eye-icon{
+    display: block;
+}

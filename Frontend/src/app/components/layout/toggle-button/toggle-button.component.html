@@ -1,0 +1,19 @@
+<div class="toggle-container" (click)="toggle()">
+  <div class="toggle-button" [class.active]="value">
+    <ng-container [ngSwitch]="toggleType">
+      <ng-container *ngSwitchCase="'icon'">
+        <img *ngIf="value" [src]="icons[0]" class="icon-img" alt="icon-off" />
+        <img *ngIf="!value" [src]="icons[1]" class="icon-img" alt="icon-on" />
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'text'">
+        <span class="label" *ngIf="value">{{ labels[0] }}</span>
+        <span class="label" *ngIf="!value">{{ labels[1] }}</span>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'simple'">
+        <span class="simple-toggle"></span>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

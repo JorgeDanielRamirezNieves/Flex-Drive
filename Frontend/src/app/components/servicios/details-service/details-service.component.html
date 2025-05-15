@@ -1,0 +1,440 @@
+<app-navbar></app-navbar>
+<main class="flex h-fit">
+  <app-menu-column></app-menu-column>
+  <h1 class="absolute w-full text-center mt-25 text-6xl jura">
+    Detalle del servicio
+  </h1>
+  <div
+    class="flex flex-col justify-center items-center w-full h-fit mt-50 gap-6"
+  >
+    <section class="w-full flex justify-center items-center gap-5 px-10 py-5">
+      <div class="flex flex-col justify-center items-center gap-3 mr-5">
+        <h2 class="text-3xl jura text-center">
+          Tipo de user
+          <!-- dependera de como este logueado el usuario -->
+        </h2>
+        <div
+          class="m-auto w-[200px] h-[200px] rounded-full border-2 flex justify-center items-center"
+        >
+          <img
+            class="w-[50%]"
+            src="../../../../assets/icons/camara.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <p-tabs
+        value="0"
+        class="bg-[#d9d9d9] w-full h-fit p-10 rounded-lg border-2 border-gray-400 jura"
+      >
+        <p-tablist>
+          <p-tab value="0">Detalles técnicos</p-tab>
+          <p-tab value="1">Multas</p-tab>
+        </p-tablist>
+        <p-tabpanels>
+          <p-tabpanel value="0">
+            <ul
+              class="flex flex-col justify-center items-start gap-10 text-xl jura w-full h-full py-10 px-10"
+            >
+              <li>
+                <strong>Nombre:</strong>&nbsp;{{ service.request.user.name }}
+              </li>
+              <li>
+                <strong>Ciudad:</strong>&nbsp;{{ service.request.user.city }}
+              </li>
+              <li>
+                <strong>Documento:</strong>&nbsp;{{
+                  service.request.user.documentType
+                }}
+                {{ service.request.user.document }}
+              </li>
+              <li class="w-full flex">
+                <strong>Rating:</strong>&nbsp;<p-rating
+                  readonly="true"
+                  [(ngModel)]="service.request.user.rating"
+                ></p-rating>
+              </li>
+            </ul>
+          </p-tabpanel>
+          <p-tabpanel
+            value="1"
+            class="flex flex-col justify-center items-center p-5"
+          >
+            <table class="w-full">
+              <thead class="bg-[#54A8A3]">
+                <tr class="text-white">
+                  <th class="rounded-tl-lg py-3">Fecha de comparendo</th>
+                  <th>Numero de comparendo</th>
+                  <th>Entidad</th>
+                  <th>Código de Infracción</th>
+                  <th class="rounded-tr-lg">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let multa of service.request.vehicle.multas"
+                  class="text-center text-lg py-3"
+                >
+                  <td>{{ multa.fecha_comparendo }}</td>
+                  <td>{{ multa.no_comparendo }}</td>
+                  <td>{{ multa.entidad }}</td>
+                  <td>{{ multa.codigo_infraccion }}</td>
+                  <td>{{ multa.status }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </p-tabpanel>
+        </p-tabpanels>
+      </p-tabs>
+    </section>
+    <section class="w-full flex justify-center items-center gap-5 px-10 py-5">
+      <div class="flex flex-col justify-center items-center gap-3 mr-5">
+        <h2 class="text-3xl jura text-center">Vehículo rentado</h2>
+        <p-galleria
+          [value]="service.request.vehicle.images"
+          [containerStyle]="{ 'max-width': '200px' }"
+          [numVisible]="5"
+        >
+          <ng-template #item let-item>
+            <img [src]="item.itemImageSrc" style="width: 100%" />
+          </ng-template>
+          <ng-template #thumbnail let-item>
+            <img [src]="item.thumbnailImageSrc" />
+          </ng-template>
+        </p-galleria>
+      </div>
+      <p-tabs
+        value="0"
+        class="bg-[#d9d9d9] w-full h-fit p-10 rounded-lg border-2 border-gray-400 jura"
+      >
+        <p-tablist>
+          <p-tab value="0">Detalles técnicos</p-tab>
+          <p-tab value="1">SOAT</p-tab>
+          <p-tab value="2">Tecnomecanica</p-tab>
+          <p-tab value="3">Multas</p-tab>
+        </p-tablist>
+        <p-tabpanels>
+          <p-tabpanel value="0">
+            <div class="grid grid-cols-2 place-content-cente mt-7">
+              <ul
+                class="flex flex-col justify-center items-start gap-2 text-xl jura w-full py-5 px-10 border-r-2 border-black"
+              >
+                <li>
+                  <strong>Marca:</strong>&nbsp;{{
+                    service.request.vehicle.detalles.marca
+                  }}
+                </li>
+                <li>
+                  <strong>Modelo:</strong>&nbsp;{{
+                    service.request.vehicle.detalles.modelo
+                  }}
+                </li>
+                <li>
+                  <strong>Año:</strong>&nbsp;{{
+                    service.request.vehicle.detalles.year
+                  }}
+                </li>
+                <li>
+                  <strong>Cilindraje:</strong>&nbsp;{{
+                    service.request.vehicle.detalles.cilindraje
+                  }}
+                </li>
+                <li>
+                  <strong>Combustible:</strong>&nbsp;{{
+                    service.request.vehicle.detalles.combustible
+                  }}
+                </li>
+                <li>
+                  <strong>Color:</strong>&nbsp;{{
+                    service.request.vehicle.color
+                  }}
+                </li>
+              </ul>
+              <ul
+                class="flex flex-col justify-center items-start gap-2 text-xl jura w-full py-5 px-10"
+              >
+                <li>
+                  <strong>Capacidad:</strong>&nbsp;{{
+                    service.request.vehicle.capacidad
+                  }}
+                </li>
+                <li>
+                  <strong>Puertas:</strong>&nbsp;{{
+                    service.request.vehicle.puertas
+                  }}
+                </li>
+                <li>
+                  <strong>capacidad de carga (kg):</strong>&nbsp;{{
+                    service.request.vehicle.carga
+                  }}
+                </li>
+                <li>
+                  <strong>Trasmisión:</strong>&nbsp;{{
+                    service.request.vehicle.detalles.transmision
+                  }}
+                </li>
+                <li>
+                  <strong>Rating</strong>&nbsp;<p-rating
+                    readonly="true"
+                    [(ngModel)]="service.request.vehicle.rating"
+                  ></p-rating>
+                </li>
+              </ul>
+              <p-accordion
+                class="w-full col-span-2 mt-5"
+                id="accordion-accesorios"
+              >
+                <p-accordion-panel value="0">
+                  <p-accordion-header
+                    ><strong>Accesorios</strong></p-accordion-header
+                  >
+                  <p-accordion-content>
+                    <ul
+                      class="grid grid-cols-3 place-items-center gap-5 list-disc"
+                    >
+                      <li
+                        *ngFor="let item of service.request.vehicle.accesorios"
+                      >
+                        {{ item }}
+                      </li>
+                    </ul>
+                  </p-accordion-content>
+                </p-accordion-panel>
+              </p-accordion>
+            </div>
+          </p-tabpanel>
+          <p-tabpanel value="1">
+            <ul
+              class="flex flex-col justify-center items-start gap-2 text-xl jura w-full py-5 px-10"
+            >
+              <li>
+                <strong>Fecha de inicio:</strong>&nbsp;{{
+                  service.request.vehicle.soat.fecha_inicio
+                }}
+              </li>
+              <li>
+                <strong>Fecha de fin:</strong>&nbsp;{{
+                  service.request.vehicle.soat.fecha_fin
+                }}
+              </li>
+              <li>
+                <strong>Fecha de expedición:</strong>&nbsp;{{
+                  service.request.vehicle.soat.fecha_expedicion
+                }}
+              </li>
+              <li>
+                <strong>Entidad:</strong>&nbsp;{{
+                  service.request.vehicle.soat.entidad
+                }}
+              </li>
+              <li class="flex items-center gap-2">
+                <strong>Status:</strong>&nbsp; @if
+                (service.request.vehicle.soat.status === 'active'){
+                <p class="text-lime-500">
+                  {{ service.request.vehicle.soat.status }}
+                </p>
+                } @else {
+                <p class="text-red-600">
+                  {{ service.request.vehicle.soat.status }}
+                </p>
+                }
+              </li>
+            </ul>
+          </p-tabpanel>
+          <p-tabpanel value="2">
+            <ul
+              class="flex flex-col justify-center items-start gap-2 text-xl jura w-full py-5 px-10"
+            >
+              <li>
+                <strong>Fecha de vigencia:</strong>&nbsp;{{
+                  service.request.vehicle.tecnomecanica.fecha_vigencia
+                }}
+              </li>
+              <li>
+                <strong>Fecha de expedición:</strong>&nbsp;{{
+                  service.request.vehicle.tecnomecanica.fecha_expedicion
+                }}
+              </li>
+              <li>
+                <strong>CDA:</strong>&nbsp;{{
+                  service.request.vehicle.tecnomecanica.cda
+                }}
+              </li>
+              <li class="flex items-center gap-2">
+                <strong>Status:</strong>&nbsp; @if
+                (service.request.vehicle.soat.status === 'active'){
+                <p class="text-lime-500">
+                  {{ service.request.vehicle.soat.status }}
+                </p>
+                } @else {
+                <p class="text-red-600">
+                  {{ service.request.vehicle.soat.status }}
+                </p>
+                }
+              </li>
+            </ul>
+          </p-tabpanel>
+          <p-tabpanel
+            value="3"
+            class="flex flex-col justify-center items-center p-5"
+          >
+            <table class="w-full">
+              <thead class="bg-[#54A8A3]">
+                <tr class="text-white">
+                  <th class="rounded-tl-lg py-3">Fecha de comparendo</th>
+                  <th>Numero de comparendo</th>
+                  <th>Entidad</th>
+                  <th>Código de Infracción</th>
+                  <th class="rounded-tr-lg">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let multa of service.request.vehicle.multas"
+                  class="text-center text-lg py-3"
+                >
+                  <td>{{ multa.fecha_comparendo }}</td>
+                  <td>{{ multa.no_comparendo }}</td>
+                  <td>{{ multa.entidad }}</td>
+                  <td>{{ multa.codigo_infraccion }}</td>
+                  <td>{{ multa.status }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </p-tabpanel>
+        </p-tabpanels>
+      </p-tabs>
+    </section>
+    <section
+      class="bg-[#d9d9d9] w-4/5 h-fit p-10 rounded-lg border-2 border-gray-400 jura grid grid-cols-2 place-items-center"
+      *ngIf="service.status === 'for_take'"
+    >
+      <div class="flex flex-col justify-center items-center gap-4">
+        <h1 class="text-4xl">Preparatorios para el viaje</h1>
+        <p class="text-center">
+          Para empezar el viaje, tienes que llegar a la ciudad y dirección del
+          propietario, revisa el vehículo con la información mostrada
+          anteriormente. Si algo no tiene relación con la información mostrada
+          en la pagina no dudes en preguntar al propietario o directamente
+          utiliza el servicio de peticiones de la pagina. Una vez verifique el
+          estado del vehículo, pon el código generado en el aplicativo del
+          propietario para poder empezar tu vieja.
+        </p>
+      </div>
+      <form
+        action=""
+        class="flex flex-col justify-center items-center gap-4"
+        *ngIf="service.request.user.rol === 'user'; else codigoOTP"
+      >
+        <label for="" class="text-2xl px-5 text-center"
+          >Ingresa el código generado por el propietario</label
+        >
+        <p-inputotp [(ngModel)]="codOTP" [length]="6" name="codOTP" />
+        <app-button label="Verificar" type="submit"></app-button>
+      </form>
+    </section>
+    <section
+      class="bg-[#d9d9d9] w-4/5 h-fit p-10 rounded-lg border-2 border-gray-400 jura grid grid-cols-2 place-items-center"
+      *ngIf="service.status === 'for_receive'"
+    >
+      <div class="flex flex-col justify-center items-center gap-4">
+        <h1 class="text-4xl">Finalización del viaje</h1>
+        <p class="text-center">
+          Para finalizar el viaje, tienes que llegar a la ciudad y dirección del
+          propietario, revisa el vehículo con la información mostrada
+          anteriormente. Si algo no tiene relación con la información mostrada
+          en la pagina no dudes en preguntar al propietario o directamente
+          utiliza el servicio de peticiones de la pagina. Una vez verifique el
+          estado del vehículo, pon el código generado en el aplicativo del
+          propietario para poder finalizar.
+        </p>
+      </div>
+      <form
+        action=""
+        class="flex flex-col justify-center items-center gap-4"
+        *ngIf="service.request.user.rol === 'user'; else codigoOTP"
+      >
+        <label for="" class="text-2xl px-5 text-center"
+          >Ingresa el código generado por el propietario</label
+        >
+        <p-inputotp [(ngModel)]="codOTP" [length]="6" name="codOTP" />
+        <app-button label="Verificar" type="submit"></app-button>
+      </form>
+    </section>
+    <section class="w-full flex justify-center items-center gap-5 px-10 py-5">
+      <span class="flex flex-col justify-center items-center gap-3 grow">
+        <h2 class="text-4xl jura">Fecha de salida</h2>
+        <p-datepicker
+          placeholder="Fecha de salida"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          inline="true"
+          disabled="true"
+          inputId="icondisplay"
+          [(ngModel)]="service.request.pickupDate"
+        ></p-datepicker>
+      </span>
+      <span class="flex flex-col justify-center items-center gap-3 grow">
+        <h2 class="text-4xl jura">Fecha de entrega</h2>
+        <p-datepicker
+          placeholder="Fecha de salida"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          inline="true"
+          disabled="true"
+          inputId="icondisplay"
+          [(ngModel)]="service.request.returnDate"
+        ></p-datepicker>
+      </span>
+    </section>
+    <span class="flex justify-center items-center gap-3 w-full px-10 py-5">
+      <app-button
+        label="Descargar Contrato"
+        icon="pi pi-cloud-download"
+        type="button"
+        iconPos="right"
+      ></app-button>
+      <app-button
+        *ngIf="service.status !== 'for_take'"
+        label="Ir al chat"
+        icon="pi pi-arrow-right"
+        type="link"
+        iconPos="right"
+        redirecTo="/user/activechats"
+      ></app-button>
+      <app-button
+        *ngIf="service.status === 'on_travel'"
+        label="Finalizar servicio"
+        icon="pi pi-check"
+        type="button"
+        iconPos="right"
+      ></app-button>
+      <app-button
+        *ngIf="service.status !== 'for_take'"
+        label="Reportar problema"
+        icon="pi pi-exclamation-triangle"
+        type="link"
+        iconPos="right"
+        redirecTo="/user/pqrs"
+      ></app-button>
+    </span>
+  </div>
+</main>
+<ng-template #codigoOTP>
+  <div class="flex flex-col justify-center items-center gap-4">
+    <h1 class="text-4xl">Código OTP</h1>
+    <p class="text-center">
+      Este código es único y solo puede ser utilizado una vez.
+    </p>
+    <span class="flex justify-center items-center gap-3">
+      <p-inputotp
+        [(ngModel)]="codOTPgenerated"
+        class="grow"
+        [length]="6"
+        name="codOTP"
+      />
+      <p class="text-3xl">{{ remainingTime }}</p>
+    </span>
+  </div>
+</ng-template>
+<app-footer></app-footer>

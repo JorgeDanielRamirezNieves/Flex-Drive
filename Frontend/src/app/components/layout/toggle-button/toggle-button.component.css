@@ -1,0 +1,39 @@
+.toggle-container {
+  width: 60px;
+  height: 30px;
+  background-color: #ffff;
+  border-radius: 20px;
+  padding: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+
+  .toggle-button {
+    background-color: #3ca6a6;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 10px;
+
+    &.active {
+      transform: translateX(30px);
+    }
+  }
+
+  .icon,
+  .label {
+    pointer-events: none;
+  }
+  .icon-img {
+    width: 18px;
+    height: 18px;
+  }
+}

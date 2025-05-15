@@ -1,0 +1,155 @@
+<app-navbar></app-navbar>
+<section
+  class="h-[80vh] w-full flex flex-col items-start justify-center p-5 gap-10 image-background jura"
+>
+  <h1 class="text-5xl w-1/2 text-white">
+    Renta tu carro de manera versátil y flexible
+  </h1>
+  <h3 class="text-3xl w-5/12">
+    Con Flex Drive Solicita un vehiculo en menos de 15 minutos
+  </h3>
+  <app-button
+    label="Empezar aquí"
+    redirecTo="/vehicles/start"
+    icon="pi pi-arrow-right"
+    iconPos="right"
+  ></app-button>
+</section>
+<section
+  class="h-fit w-full flex flex-col items-center justify-center p-5 gap-10 jura"
+>
+  <form
+    action=""
+    #frmBuscarInicial
+    class="flex flex-col items-center justify-center w-full p-5 montserrat gap-5"
+  >
+    <span class="flex justify-center items-center w-full">
+      <p-select
+        [options]="ciudades"
+        [(ngModel)]="ciudadSeleccionada"
+        required="true"
+        placeholder="Selecciona una ciudad"
+        name="ciudad"
+        (onChange)="checkStatus()"
+      ></p-select>
+      <p-datepicker
+        [(ngModel)]="fechasSeleccionadas"
+        [selectionMode]="'range'"
+        [readonlyInput]="true"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        inputId="templatedisplay"
+        name="fechasDeViaje"
+        (onSelect)="checkStatus()"
+        placeholder="DD/MM/YYYY - DD/MM/YYYY"
+        ><ng-template #inputicon let-clickCallBack="clickCallBack">
+          <svg
+            (click)="clickCallBack()"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-calendar-icon lucide-calendar"
+          >
+            <path d="M8 2v4" />
+            <path d="M16 2v4" />
+            <rect width="18" height="18" x="3" y="4" rx="2" />
+            <path d="M3 10h18" />
+          </svg>
+        </ng-template>
+      </p-datepicker>
+    </span>
+    <app-button
+      label="Buscar"
+      redirecTo="/vehicles/search"
+      *ngIf="mostrarBtn"
+      class="enter-animation"
+    ></app-button>
+  </form>
+  <div class="grid grid-cols-3 gap-20 w-full h-fit p-20">
+    <app-card-pequenna
+      *ngFor="let item of [].constructor(6)"
+    ></app-card-pequenna>
+  </div>
+</section>
+<section
+  class="h-[80vh] w-full flex items-center justify-between py-5 gap-10 bg-[#031617] overflow-hidden"
+>
+  <span
+    class="flex flex-col items-start justify-center w-1/3 p-5 ml-10 gap-10 text-white"
+  >
+    <h1 class="text-7xl font-bold jura">Flex Drive</h1>
+    <h3 class="text-5xl montserrat">Tu movilidad, tu elección</h3>
+  </span>
+  <img
+    src="../../../../assets/carro.png"
+    alt="carro.png"
+    class="-scale-x-150 scale-y-150"
+  />
+</section>
+<section
+  class="h-fit w-full flex flex-col items-center justify-center p-5 jura"
+>
+  <h1 class="text-6xl my-2">Preguntas frecuentes</h1>
+  <p-accordion
+    class="flex flex-col items-center justify-center w-full p-5 gap-5"
+  >
+    <p-accordion-panel
+      class="bg-[#031617] text-white p-3 rounded-2xl transition-all duration-200 hover:scale-105 hover:bg-[#032021]"
+      value="{{ i }}"
+      *ngFor="let item of [].constructor(4); let i = index"
+    >
+      <p-accordion-header class="flex items-center justify-between">
+        Pregunta {{ i + 1 }}
+        <ng-template #toggleicon let-active="active">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            *ngIf="!active"
+            class="lucide lucide-plus-icon lucide-plus"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            *ngIf="active"
+            class="lucide lucide-minus-icon lucide-minus"
+          >
+            <path d="M5 12h14" />
+          </svg>
+        </ng-template>
+      </p-accordion-header>
+      <p-accordion-content class="">
+        Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus
+        ex sapien vitae pellentesque sem placerat. In id cursus mi pretium
+        tellus duis convallis. Tempus leo eu aenean sed diam urna tempor.
+        Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis
+        massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper
+        vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra
+        inceptos himenaeos.
+      </p-accordion-content>
+    </p-accordion-panel>
+  </p-accordion>
+</section>
+<app-footer></app-footer>

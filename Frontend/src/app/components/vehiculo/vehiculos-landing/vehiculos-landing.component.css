@@ -1,0 +1,136 @@
+.image-background {
+  background: linear-gradient(#031617dd, #031617dd),
+    url(../../../../assets/section1-landingVehicles.jpg);
+  background-size: cover;
+  display: inline-flex;
+  justify-content: center;
+  background-position: center;
+}
+
+.section3 {
+  background: linear-gradient(#031617dd, #031617dd),
+    url(../../../../assets/section-3-landingVehicles.jpg);
+  background-size: cover;
+  display: inline-flex;
+  justify-content: center;
+  background-position: center;
+}
+
+:host ::ng-deep #filtro .p-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  gap: 10px;
+  font-size: 40px;
+}
+
+:host ::ng-deep .p-inputtext {
+  width: 60%;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  font-size: 16px;
+  background-color: #d9d9d9;
+  transition: all 0.3s ease;
+  border-width: 3px;
+  border-color: #d9d9d9;
+}
+
+:host ::ng-deep .p-inputtext:hover {
+  background-color: #ffffff;
+}
+
+:host ::ng-deep .p-inputtext:focus-within {
+  border-color: #54a8a3;
+}
+
+:host ::ng-deep .p-select-label {
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-select-label:hover {
+  color: #54a8a3;
+}
+
+:host ::ng-deep .p-select-list {
+  background-color: #ffffff;
+}
+
+:host ::ng-deep .p-select-list-container {
+  box-shadow: 0 0 15px -5px #00000090;
+  border-radius: 10px;
+}
+
+:host ::ng-deep .p-select-option {
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* esto no se porque lo toma como hover */
+:host
+  ::ng-deep
+  .p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus {
+  background-color: #54a8a3;
+  color: #ffffff;
+}
+
+.p-select {
+  background-color: #ffffff;
+  padding: 10px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 15px -5px #00000090;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  width: 30%;
+}
+
+.p-select:hover {
+  border-color: #54a8a3;
+  border-right-color: #000000;
+}
+
+.p-select:focus-within {
+  border-color: #54a8a3;
+  border-right-color: #000000;
+  box-shadow: 0 10px 15px -5px #00000090;
+}
+
+:host ::ng-deep .p-carousel-prev-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  background-color: #54a8a3;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+
+  transition: all 0.3s ease;  
+}
+
+:host ::ng-deep .p-carousel-prev-button:hover {
+  cursor: pointer;
+  background-color: #3b7f7a;
+}
+
+:host ::ng-deep .p-carousel-next-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  background-color: #54a8a3;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+
+  transition: all 0.3s ease;  
+}
+
+:host ::ng-deep .p-carousel-next-button:hover {
+  cursor: pointer;
+  background-color: #3b7f7a;
+}

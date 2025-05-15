@@ -1,0 +1,129 @@
+.loader {
+  animation: rotate 1s infinite;
+  height: 50px;
+  width: 50px;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  display: block;
+  height: 20px;
+  width: 20px;
+}
+.loader:before {
+  animation: box1 1s infinite;
+  background-color: #435755;
+  box-shadow: 30px 0 0 #54a8a3;
+  margin-bottom: 10px;
+}
+.loader:after {
+  animation: box2 1s infinite;
+  background-color: #54a8a3;
+  box-shadow: 30px 0 0 #435755;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(360deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(720deg) scale(0.8);
+  }
+}
+
+@keyframes box1 {
+  0% {
+    box-shadow: 30px 0 0 #54a8a3;
+  }
+  50% {
+    box-shadow: 0 0 0 #54a8a3;
+    margin-bottom: 0;
+    transform: translate(15px, 15px);
+  }
+  100% {
+    box-shadow: 30px 0 0 #54a8a3;
+    margin-bottom: 10px;
+  }
+}
+
+@keyframes box2 {
+  0% {
+    box-shadow: 30px 0 0 #435755;
+  }
+  50% {
+    box-shadow: 0 0 0 #435755;
+    margin-top: -20px;
+    transform: translate(15px, 15px);
+  }
+  100% {
+    box-shadow: 30px 0 0 #435755;
+    margin-top: 0;
+  }
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: fit-content;
+  background-color: #435755;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px; 
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -50%;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+.p-accordion {
+  border: 0;
+}
+.p-accordionpanel {
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.p-accordionpanel:not(.p-accordionpanel-active):not(.p-disabled) > .p-accordionheader:hover{
+  background-color: #435755;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+.p-accordionheader {
+  border: 0;
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 2px solid #435755;
+  font-size: 2rem;
+  font-family: "Jura", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.p-accordioncontent {
+  width: 100%;
+  border: 0;
+}
+:host ::ng-deep .p-accordioncontent-content {
+  border-style: none;
+  border-width: 0;
+}

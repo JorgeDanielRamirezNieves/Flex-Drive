@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+
+<div class="bg-white flex">
+  <app-menu-column></app-menu-column>
+  <div class="w-full p-20">
+    <app-card-settings
+      class="mx-5"
+      *ngFor="let card of cards"
+      [card]="card"
+    ></app-card-settings>
+  </div>
+</div>
+
+<app-footer></app-footer>

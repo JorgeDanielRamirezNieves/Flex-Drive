@@ -1,2 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+@import "primeicons/primeicons.css";
+
+.montserrat {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+}
+
+.jura {
+    font-family: "Jura", sans-serif;
+    font-optical-sizing: auto;
+}
+

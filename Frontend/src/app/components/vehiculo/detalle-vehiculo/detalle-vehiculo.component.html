@@ -1,0 +1,110 @@
+<app-navbar></app-navbar>
+<p-toast ></p-toast>
+<section class="flex flex-col justify-center items-center h-fit gap-3 my-10">
+  <p-galleria
+    [value]="images"
+    [containerStyle]="{ 'max-width': '600px' }"
+    [numVisible]="5"
+  >
+    <ng-template #item let-item>
+      <img [src]="item.itemImageSrc" style="width: 100%" />
+    </ng-template>
+    <ng-template #thumbnail let-item>
+      <img [src]="item.thumbnailImageSrc" />
+    </ng-template>
+  </p-galleria>
+  <h1 class="jura text-3xl font-semibold">Nombre del vehículo</h1>
+  <p-rating></p-rating>
+  <div
+    class="grid grid-cols-2 divide-black divide-x-1 py-10 jura bg-[#d9d9d9] mx-20 rounded-2xl border-1 shadow-md shadow-black"
+  >
+    <div class="flex flex-col justify-center items-start px-20 gap-5">
+      <span class="flex flex-col justify-center items-start">
+        <h2 class="font-bold text-2xl">Precio</h2>
+        <p class="text-lg">$ 120.000/dia</p>
+      </span>
+      <span class="flex flex-col justify-center items-start">
+        <h2 class="font-bold text-2xl">Propietario</h2>
+        <p class="text-lg">Pepe Javier Alvarado</p>
+      </span>
+      <span class="flex flex-col justify-center items-start">
+        <h2 class="font-bold text-2xl">Descripción</h2>
+        <p class="text-lg">
+          Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque
+          faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi
+          pretium tellus duis convallis. Tempus leo eu aenean sed diam urna
+          tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.
+          Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut
+          hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent
+          per conubia nostra inceptos himenaeos.
+        </p>
+      </span>
+      <span class="flex flex-col justify-center items-start">
+        <h2 class="font-bold text-2xl">Disponibilidad</h2>
+        <p class="text-lg">Solo fin de semanas</p>
+      </span>
+      <p-accordion class="w-full" id="accordion-solicitud">
+        <p-accordion-panel value="0" class="rounded-b-lg w-full">
+          <p-accordion-header class="w-full"
+            ><app-button label="Solicitar" type="button"></app-button
+          ></p-accordion-header>
+          <p-accordion-content class="flex flex-col justify-center items-start gap-5 w-full">
+            <p-datepicker
+              placeholder="Fecha de salida"
+              class="absolute placeholder:text-gray-500"
+              [iconDisplay]="'input'"
+              [showIcon]="true"
+              inputId="icondisplay"
+            ></p-datepicker>
+            <p-datepicker
+              placeholder="Fecha de entrega"
+              [iconDisplay]="'input'"
+              [showIcon]="true"
+              inputId="icondisplay"
+              class="absolute left-1/4 placeholder:text-gray-500"
+            ></p-datepicker>
+            <textarea
+              name="mensaje"
+              id=""
+              rows="5"
+              class="bg-white mt-15 w-full p-2 rounded-lg resize-none placeholder:text-gray-500"
+              placeholder="Enviale un mensaje al propietario..."
+            ></textarea>
+            <app-button label="Enviar" type="button" [callback]="sendRequest"></app-button>
+          </p-accordion-content>
+        </p-accordion-panel>
+      </p-accordion>
+    </div>
+    <div class="flex flex-col justify-center items-start px-20 gap-5">
+      <p class="text-lg"><strong>Marca: </strong>marca</p>
+      <p class="text-lg"><strong>Modelo: </strong>modelo</p>
+      <p class="text-lg"><strong>Año: </strong>2015</p>
+      <p class="text-lg"><strong>Trasmisión: </strong>Automática</p>
+      <p class="text-lg"><strong>Combustible: </strong>Corriente</p>
+      <p class="text-lg"><strong>Kilometraje: </strong>20.158</p>
+      <p class="text-lg"><strong>Motor: </strong>V8</p>
+      <p class="text-lg"><strong>Placa terminada en: </strong>#</p>
+      <p class="text-lg"><strong>SOAT: </strong>Fecha_vigencia</p>
+      <p class="text-lg"><strong>Tipos de ruta: </strong>Campestre, Ciudad</p>
+      <p-accordion class="w-full" id="accordion-accesorios">
+        <p-accordion-panel value="0">
+          <p-accordion-header><strong>Accesorios</strong></p-accordion-header>
+          <p-accordion-content>
+            <ul class="grid grid-cols-3 place-items-center gap-5">
+              <li>Accesorio 1</li>
+              <li>Accesorio 2</li>
+              <li>Accesorio 3</li>
+              <li>Accesorio 4</li>
+              <li>Accesorio 5</li>
+              <li>Accesorio 6</li>
+              <li>Accesorio 7</li>
+              <li>Accesorio 8</li>
+              <li>Accesorio 9</li>
+            </ul>
+          </p-accordion-content>
+        </p-accordion-panel>
+      </p-accordion>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

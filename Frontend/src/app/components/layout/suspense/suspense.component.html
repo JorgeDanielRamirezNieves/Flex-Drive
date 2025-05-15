@@ -1,0 +1,13 @@
+<p-drawer
+  #drawerRef
+  [visible]="true"
+  styleClass="flex justify-center items-center w-screen"
+  position="full"
+>
+  <ng-template #headless>
+    <div class="flex justify-center items-center h-[40px]">
+      <span class="loader"></span>
+    </div>
+    <h1 class="text-6xl jura text-white">Cargando</h1>
+  </ng-template>
+</p-drawer>
