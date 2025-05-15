@@ -69,10 +69,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Frontend:build:production"
+              "buildTarget": "Frontend:build:production",
+              "port": 8092
             },
             "development": {
-              "buildTarget": "Frontend:build:development"
+              "buildTarget": "Frontend:build:development",
+              "port": 8093
             }
           },
           "defaultConfiguration": "development"
@@ -102,5 +104,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "37c93186-4059-4dcf-9871-0df3a0a5c394"
   }
 }
