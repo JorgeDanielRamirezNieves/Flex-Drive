@@ -12,6 +12,8 @@ import { User } from 'src/user/models/user';
 import { Tecnomecanic } from './tecnomecanic';
 import { TecnicalDetails } from './tecnical-details';
 import { Soat } from './soat';
+import { Price } from 'src/prices/models/price';
+import { Request } from 'src/requests/models/request';
 
 export interface Imagesvehicle {
   itemImageSrc: string;
@@ -117,6 +119,12 @@ export class Vehicle {
   
   @OneToMany(() => Soat, (objSoat: Soat) => objSoat.idVehicle)
   public soatVehicle?: Soat[];
+  
+  @OneToMany(() => Price, (objPrice: Price) => objPrice.idVehicle)
+  public pricesVehicle?: Price[];
+  
+  @OneToMany(() => Request, (objRequests: Request) => objRequests.idVehicle)
+  public requestVehicle?: Request[];
   
   @OneToOne(() => TecnicalDetails, (objtechnicalDetails: TecnicalDetails) => objtechnicalDetails.idVehicle)
   public detailsVehicle?: TecnicalDetails;

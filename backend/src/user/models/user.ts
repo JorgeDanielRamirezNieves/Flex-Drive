@@ -10,6 +10,10 @@ import { Role } from './role';
 import { TypeDocument } from './type-document';
 import { Vehicle } from 'src/vehicle/models/vehicle';
 import { Fines } from './fines';
+import { Reports } from 'src/reports/models/reports';
+import { Request } from 'src/requests/models/request';
+import { Message } from 'src/chat/models/message';
+import { Notification } from 'src/notifications/models/notification';
 
 @Entity({ schema: 'public', name: 'user' })
 export class User {
@@ -98,6 +102,24 @@ export class User {
   
   @OneToMany(() => Fines, (objfine: Fines) => objfine.idUser)
   public userFines?: Fines[];
+  
+  @OneToMany(() => Reports, (objReport: Reports) => objReport.idUser)
+  public userReports?: Reports[];
+  
+  @OneToMany(() => Reports, (objReport: Reports) => objReport.idAdmin)
+  public adminReports?: Reports[];
+  
+  @OneToMany(() => Request, (objRequests: Request) => objRequests.idClient)
+  public userRequests?: Request[];
+  
+  @OneToMany(() => Message, (objMessege: Message) => objMessege.idSender)
+  public userMessageSender?: Message[];
+  
+  @OneToMany(() => Message, (objMessege: Message) => objMessege.idReceiver)
+  public userMessageReceiver?: Message[];
+  
+  @OneToMany(() => Notification, (objNotification: Notification) => objNotification.idUser)
+  public userNotifications?: Notification[];
   
   constructor(
     noDocument: string,
