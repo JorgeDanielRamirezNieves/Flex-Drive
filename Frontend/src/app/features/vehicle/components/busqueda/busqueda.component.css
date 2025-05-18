@@ -1,0 +1,208 @@
+:host ::ng-deep .p-drawer {
+  background: #031617;
+  color: #ffffff;
+  border: 1px solid #031617;
+}
+
+.image-background {
+  background: linear-gradient(#031617dd, #031617dd),
+    url(../../../../../assets/section1-landingVehicles.jpg);
+  background-size: cover;
+  display: inline-flex;
+  justify-content: center;
+  background-position: center;
+}
+
+:host ::ng-deep #filtro .p-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  gap: 10px;
+  font-size: 40px;
+}
+
+:host ::ng-deep .p-inputtext {
+  width: 60%;
+  height: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  font-size: 16px;
+  background-color: #d9d9d9;
+  transition: all 0.3s ease;
+  border-width: 3px;
+  border-color: #d9d9d9;
+}
+
+:host ::ng-deep .p-inputtext:hover {
+  background-color: #ffffff;
+}
+
+:host ::ng-deep .p-inputtext:focus-within {
+  border-color: #54a8a3;
+}
+
+:host ::ng-deep .p-select-label {
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-select-label:hover {
+  color: #54a8a3;
+}
+
+:host ::ng-deep .p-select-list {
+  background-color: #ffffff;
+}
+
+:host ::ng-deep .p-select-list-container {
+  box-shadow: 0 0 15px -5px #00000090;
+  border-radius: 10px;
+}
+
+:host ::ng-deep .p-select-option {
+  padding: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* esto no se porque lo toma como hover */
+:host
+  ::ng-deep
+  .p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus {
+  background-color: #54a8a3;
+  color: #ffffff;
+}
+
+.p-select {
+  background-color: #ffffff;
+  padding: 10px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 15px -5px #00000090;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  width: 30%;
+}
+
+.p-select:hover {
+  border-color: #54a8a3;
+  border-right-color: #000000;
+}
+
+.p-select:focus-within {
+  border-color: #54a8a3;
+  border-right-color: #000000;
+  box-shadow: 0 10px 15px -5px #00000090;
+}
+
+#accordion-filtro .p-accordion {
+  border: 0;
+}
+#accordion-filtro .p-accordionpanel {
+  border: 0;
+}
+#accordion-filtro .p-accordionheader {
+  border: 0;
+  border-bottom: 2px solid #ffffff;
+  font-size: 2rem;
+  font-family: "Jura", sans-serif;
+  font-optical-sizing: auto;
+}
+
+#accordion-filtro .p-accordioncontent {
+  border: 0;
+}
+:host ::ng-deep #accordion-filtro .p-accordion > .p-accordionpanel  .p-accordioncontent > .p-accordioncontent-content {
+  border-style: none;
+  border-width: 0;
+}
+
+/* Container styling */
+.checkbox-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 1em;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Hide default checkbox */
+.checkbox-container input {
+  display: none;
+}
+
+/* Scoped custom properties */
+.checkbox-container {
+  --checkmark-size: 1rem;
+  --border-color: #435755;
+  --checked-bg-color: #54a8a3;
+  --checked-border-color: #54a8a3;
+  --checkmark-color: white;
+  --focus-outline-color: #adf9f6;
+}
+
+/* Checkmark styling */
+.checkmark {
+  width: var(--checkmark-size);
+  height: var(--checkmark-size);
+  border: 2px solid var(--border-color);
+  border-radius: 0.25em;
+  background-color: transparent;
+  position: relative;
+  margin-right: 0.5em;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Checked state */
+.checkbox-container input:checked + .checkmark {
+  background-color: var(--checked-bg-color);
+  border-color: var(--checked-border-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Checkmark icon */
+.checkmark::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.3rem;
+  height: 0.3em;
+  background-color: transparent;
+  border-radius: 0.1em;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.checkbox-container input:checked + .checkmark::after {
+  background-color: var(--checkmark-color);
+  transform: scale(1);
+  animation: checkmark-fade-in 0.3s ease forwards;
+}
+
+/* Hover and Focus */
+.checkmark:hover {
+  border-color: var(--checked-bg-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.checkbox-container input:focus + .checkmark {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--focus-outline-color);
+}
+
+/* Checkmark animation */
+@keyframes checkmark-fade-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
