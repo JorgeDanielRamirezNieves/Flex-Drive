@@ -3,6 +3,10 @@
 - supabase-js
 - typeorm
 - @nestjs/typeorm
+- typeorm-name-strategies
+- @nest_js/swagger
+- jsonwebtoken
+- bycript
 
 
 # Setup de ambiente de backend 
