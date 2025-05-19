@@ -204,7 +204,7 @@ export class Vehicle {
     description: 'Vehicle rating',
     example: 4.5,
   })
-  @Column({ name: 'rating', type: 'int', nullable: false })
+  @Column({ name: 'rating', type: 'numeric', nullable: false})
   public rating: number;
 
   @ApiProperty({

@@ -10,13 +10,16 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('auth')
     .addTag('chat')
+    .addTag('message')
     .addTag('contract')
     .addTag('notification')
     .addTag('reports')
     .addTag('requests')
     .addTag('services-rent')
     .addTag('user')
+    .addTag('preferences')
     .addTag('vehicle')
+    .addTag('prices')
     .addTag('type-sale')
     .addTag('role')
     .addTag('type-document')
@@ -30,8 +33,8 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/documentation', app, documentFactory);
   const port = Number(process.env.SERVER_PORT);
-  app.enableCors({origins: process.env.CORS_ORIGIN});
-  await app.listen(port, ()=>{
+  app.enableCors({ origins: process.env.CORS_ORIGIN });
+  await app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
   });
 }
