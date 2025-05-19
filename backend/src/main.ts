@@ -14,7 +14,7 @@ async function bootstrap() {
     .addTag('notification')
     .addTag('reports')
     .addTag('requests')
-    .addTag('services')
+    .addTag('services-rent')
     .addTag('user')
     .addTag('vehicle')
     .addTag('type-sale')
@@ -24,6 +24,8 @@ async function bootstrap() {
     .addTag('type-notifications')
     .addTag('type-contract')
     .addTag('type-contract-legal')
+    .addTag('fines')
+    .addTag('runt')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/documentation', app, documentFactory);

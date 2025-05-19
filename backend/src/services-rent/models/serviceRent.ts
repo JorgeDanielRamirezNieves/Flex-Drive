@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Request } from 'src/requests/models/request';
 import {
   Column,
@@ -7,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 @Entity({ schema: 'public', name: 'services' })
-export class Service {
+export class ServiceRent {
   @PrimaryGeneratedColumn('uuid')
   public uuid: string;
 
@@ -17,6 +18,12 @@ export class Service {
     enum: ['for_take', 'on_travel', 'reported', 'for_recive', 'finished'],
     nullable: false,
   })
+  @ApiProperty({
+    description: 'Status of the service',
+    example: 'for_take',
+    type: String,
+    enum: ['for_take', 'on_travel', 'reported', 'for_recive', 'finished'],
+  })
   public status:
     | 'for_take'
     | 'on_travel'
@@ -25,12 +32,27 @@ export class Service {
     | 'finished';
 
   @Column({ name: 'created_at', type: 'date', nullable: false })
+  @ApiProperty({
+    description: 'Date of creation of the service',
+    example: '2023-10-01',
+    type: Date,
+  })
   public createdAt: Date;
 
   @Column({ name: 'updated_at', type: 'date', nullable: true })
+  @ApiProperty({
+    description: 'Date of update of the service',
+    example: '2023-10-01',
+    type: Date,
+  })
   public updatedAt: Date;
 
   @Column({ name: 'id_request', type: 'date', nullable: false })
+  @ApiProperty({
+    description: 'UUID of the request',
+    example: '123e4567-e89b-12d3-a456-426614174000',
+    type: String,
+  })
   public idRequest: string;
 
   @OneToOne(() => Request, (objRequests) => objRequests.uuid)

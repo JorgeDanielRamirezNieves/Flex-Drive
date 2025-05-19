@@ -8,18 +8,32 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Message } from './message';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({ schema: 'public', name: 'chat' })
 export class Chat {
   @PrimaryGeneratedColumn('uuid')
   public uuid: string;
 
+  @ApiProperty({
+    description: 'Date of creation of the chat',
+    type: Date,
+    example: '2023-10-01',
+  })
   @Column({ name: 'created_at', type: 'date', nullable: false })
   public createdAt: Date;
 
+  @ApiProperty({
+    description: 'ID of the request associated with the chat',
+    type: String,
+  })
   @Column({ name: 'id_request', type: 'varchar', nullable: false })
   public idrequest: string;
 
+  @ApiProperty({
+    description: 'Status of the chat',
+    type: Boolean,
+  })
   @Column({ name: 'status', type: 'bool', nullable: false })
   public status: boolean;
 

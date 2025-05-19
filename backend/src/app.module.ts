@@ -8,29 +8,29 @@ import { VehicleModule } from './vehicle/vehicle.module';
 import { RequestsModule } from './requests/requests.module';
 import { ChatModule } from './chat/chat.module';
 import { ReportsModule } from './reports/reports.module';
-import { ServicesModule } from './services/services.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { ContractModule } from './contract/contract.module';
 import { ConfigModule } from '@nestjs/config';
 import { PricesModule } from './prices/prices.module';
+import { ServicesRentModule } from './services-rent/services-rent.module';
 
 @Module({
   imports: [
     ConectionModule,
     AuthModule,
     UserModule,
+    PricesModule,
     VehicleModule,
     RequestsModule,
     ChatModule,
     ReportsModule,
-    ServicesModule,
+    ServicesRentModule,
     NotificationsModule,
     ContractModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
     }),
-    PricesModule
   ],
   controllers: [AppController],
   providers: [AppService],

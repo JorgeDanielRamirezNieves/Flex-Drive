@@ -1,3 +1,4 @@
+import { ServiceRent } from './../../services-rent/models/serviceRent';
 import { Global, Module } from '@nestjs/common';
 import { Chat } from 'src/chat/models/chat';
 import { Message } from 'src/chat/models/message';
@@ -10,7 +11,6 @@ import { Price } from 'src/prices/models/price';
 import { Reports } from 'src/reports/models/reports';
 import { TypeReport } from 'src/reports/models/type-report';
 import { Request } from 'src/requests/models/request';
-import { Service } from 'src/services/models/service';
 import { Fines } from 'src/user/models/fines';
 import { Preferences } from 'src/user/models/preferences';
 import { Role } from 'src/user/models/role';
@@ -46,6 +46,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
               TypeDocument,
               Role,
               User,
+              Price,
               Vehicle,
               TypeSale,
               Tecnomecanic,
@@ -55,13 +56,12 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
               Preferences,
               Reports,
               TypeReport,
-              Price,
               Request,
               Chat,
               Message,
               Notification,
               TypeNotification,
-              Service,
+              ServiceRent,
               Contract,
               TypeContract,  
               TypeContractLegal,

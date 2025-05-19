@@ -7,12 +7,18 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { TypeReport } from './type-report';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({ schema: 'public', name: 'reports' })
 export class Reports {
   @PrimaryGeneratedColumn('uuid')
   public uuid: string;
 
+  @ApiProperty({
+    description: 'Title of the report',
+    example: 'Report Title',
+    type: String,
+  })
   @Column({ name: 'description', type: 'text', nullable: false })
   public description: string;
 
@@ -23,23 +29,60 @@ export class Reports {
     default: 'pending',
     nullable: false,
   })
+  @ApiProperty({
+    description: 'Status of the report',
+    example: 'pending',
+    type: String,
+    enum: ['pending', 'in_progress', 'on_hold', 'resolve'],
+  })
   public status: 'pending' | 'in_progress' | 'on_hold' | 'resolve';
 
+  @ApiProperty({
+    description: 'Date of creation of the report',
+    example: '2023-10-01',
+    type: Date,
+  })
   @Column({ name: 'created_at', type: 'date', nullable: false })
   public createdAt: Date;
 
+  @ApiProperty({
+    description: 'Date of update of the report',
+    example: '2023-10-01',
+    type: Date,
+  })
   @Column({ name: 'updated_at', type: 'date', nullable: true })
   public updatedAt: Date;
 
+  @ApiProperty({
+    description: 'Date of resolution of the report',
+    example: '2023-10-01',
+    type: Date,
+  })
   @Column({ name: 'resolved_at', type: 'date', nullable: false })
   public resolvedAt: Date;
 
+  @ApiProperty({
+    description: 'ID of the user who created the report',
+    example: '1234567890',
+    type: String,
+  })
   @Column({ name: 'id_user', type: 'varchar', nullable: false })
   public idUser: string;
 
+  @ApiProperty({
+    description: 'ID of the admin who resolved the report',
+    example: '1234567890',
+    type: String,
+  })
   @Column({ name: 'id_admin', type: 'varchar', nullable: true })
   public idAdmin: string;
 
+  @ApiProperty({
+    description: 'Priority of the report',
+    example: '0',
+    enum: ['0', '1', '2', '3'],
+    type: String,
+  })
   @Column({
     name: 'priority',
     type: 'enum',
@@ -49,6 +92,11 @@ export class Reports {
   })
   public priority: '0' | '1' | '2' | '3';
 
+  @ApiProperty({
+    description: 'ID of the type of report',
+    example: '1234567890',
+    type: String,
+  })
   @Column({ name: 'id_type_report', type: 'varchar', nullable: false })
   public idTypeReport: string;
 
@@ -58,23 +106,43 @@ export class Reports {
     { onUpdate: 'CASCADE', onDelete: 'RESTRICT' },
   )
   @JoinColumn([{ name: 'id_type_report', referencedColumnName: 'uuid' }])
-  public typeReportReport?: TypeReport;
-  
-  @ManyToOne(
-    () => User,
-    (objUser: User) => objUser.userReports,
-    { onUpdate: 'CASCADE', onDelete: 'RESTRICT' },
-  )
+  public typeReport?: TypeReport;
+
+  @ManyToOne(() => User, (objUser: User) => objUser.userReports, {
+    onUpdate: 'CASCADE',
+    onDelete: 'RESTRICT',
+  })
   @JoinColumn([{ name: 'id_user', referencedColumnName: 'uuid' }])
   public reportsUsers?: User;
-  
-  @ManyToOne(
-    () => User,
-    (objUser: User) => objUser.adminReports,
-    { onUpdate: 'CASCADE', onDelete: 'RESTRICT' },
-  )
+
+  @ManyToOne(() => User, (objUser: User) => objUser.adminReports, {
+    onUpdate: 'CASCADE',
+    onDelete: 'RESTRICT',
+  })
   @JoinColumn([{ name: 'id_admin', referencedColumnName: 'uuid' }])
   public reportsAdmin?: User;
-  
-  
+
+  constructor(
+    uuid: string,
+    description: string,
+    status: 'pending' | 'in_progress' | 'on_hold' | 'resolve',
+    createdAt: Date,
+    updatedAt: Date,
+    resolvedAt: Date,
+    idUser: string,
+    idAdmin: string,
+    priority: '0' | '1' | '2' | '3',
+    idTypeReport: string,
+  ) {
+    this.uuid = uuid;
+    this.description = description;
+    this.status = status;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.resolvedAt = resolvedAt;
+    this.idUser = idUser;
+    this.idAdmin = idAdmin;
+    this.priority = priority;
+    this.idTypeReport = idTypeReport;
+  }
 }
