@@ -2,11 +2,11 @@
   class="flex flex-col justify-center items-center gap-4 bg-[#d9d9d9] rounded-lg shadow-md m-10 py-4 px-5 hover:scale-105 transition-all duration-300 ease-in-out"
 >
   <img
-    src="../../../../assets/carro.png"
+    [src]="Vehicle.image[0].itemImageSrc"
     alt="carro.png"
     class="w-1/2 h-1/2 mx-auto"
   />
-  <h2 class="text-2xl jura font-bold">Suzuki Swift</h2>
+  <h2 class="text-2xl jura font-bold text-center">{{Vehicle.detailsVehicle?.brand}} {{Vehicle.detailsVehicle?.model}}</h2>
   <div class="flex justify-between items-center gap-10 ">
     <span class="flex justify-center items-center gap-2">
       <img
@@ -14,7 +14,7 @@
         alt="passanger.png"
         class="w-1/2 h-1/2"
       />
-      <p>#</p>
+      <p>{{Vehicle.capacity}}</p>
     </span>
     <span class="flex justify-center items-center gap-2">
       <img
@@ -22,7 +22,7 @@
         alt="passanger.png"
         class="w-1/2 h-1/2"
       />
-      <p>#</p>
+      <p>{{Vehicle.detailsVehicle?.loadCapacity}}</p>
     </span>
     <span class="flex justify-center items-center gap-2">
       <img
@@ -30,7 +30,7 @@
         alt="passanger.png"
         class="w-1/2 h-1/2"
       />
-      <p>#</p>
+      <p>{{Vehicle.doors}}</p>
     </span>
     <span class="flex justify-center items-center gap-2">
       <img
@@ -38,15 +38,21 @@
         alt="passanger.png"
         class="w-1/2 h-1/2"
       />
-      <p>#</p>
+      <p>{{Vehicle.plate[Vehicle.plate.length-1]}}</p>
     </span>
   </div>
-  <h3 class="text-xl montserrat">Compacto, eficiente y económico</h3>
-  <h3 class="text-xl montserrat font-bold">$ 120.000 /dia</h3>
+  <h3 class="text-xl text-center montserrat">{{Vehicle.contitions}}</h3>
+  <h3 class="text-xl montserrat font-bold">
+    @if (Vehicle.typeSaleVehicle?.name == 'exclusive') {
+      ${{price?.price| currency: 'COP' }}
+    } @else {
+      ${{price?.price| currency: 'COP' }}/{{Vehicle.typeSaleVehicle?.name}}
+    }
+  </h3>
   <app-button
     label="Ver más"
     icon="pi pi-arrow-right"
     iconPos="right"
-    redirecTo="/vehicles/detail"
+    redirecTo="/vehicles/detail/{{Vehicle.uuid}}"
   ></app-button>
 </div>

@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   { path: 'myvehicles', component: MyvehiclesComponent },
   { path: 'search', component: BusquedaComponent },
-  { path: 'detail', component: DetalleVehiculoComponent },
+  { path: 'detail/:uuid', component: DetalleVehiculoComponent },
   { path: '', redirectTo: 'start', pathMatch: 'full' },
 ];
 

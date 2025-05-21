@@ -71,9 +71,10 @@
       class="enter-animation"
     ></app-button>
   </form>
-  <div class="grid grid-cols-3 gap-20 w-full h-fit p-20">
+  <div class="grid grid-cols-3 gap-20 w-full p-20">
     <app-card-pequenna
-      *ngFor="let item of [].constructor(6)"
+      *ngFor="let item of vehicles"
+      [Vehicle]="item"
     ></app-card-pequenna>
   </div>
 </section>

@@ -57,14 +57,14 @@
       >
         <h1 class="text-6xl">Más Solicitados</h1>
         <p-carousel
-          [value]="vehiculos"
+          [value]="vehicles"
           [numVisible]="3"
           [numScroll]="3"
           [circular]="true"
           class="w-full"
         >
-          <ng-template let-product #item>
-            <app-card-pequenna class="m-10"></app-card-pequenna>
+          <ng-template let-vehicle #item>
+            <app-card-pequenna class="m-10" [Vehicle]="vehicle"></app-card-pequenna>
           </ng-template>
         </p-carousel>
       </span>
@@ -121,14 +121,14 @@
       >
         <h1 class="text-6xl">Más Solicitados</h1>
         <p-carousel
-          [value]="vehiculos"
+          [value]="vehicles"
           [numVisible]="3"
           [numScroll]="3"
           [circular]="true"
           class="w-full"
         >
           <ng-template let-product #item>
-            <app-card-pequenna class="m-10"></app-card-pequenna>
+            <app-card-pequenna class="m-10" [Vehicle]="product"></app-card-pequenna>
           </ng-template>
         </p-carousel>
       </span>

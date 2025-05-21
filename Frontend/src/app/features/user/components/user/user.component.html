@@ -9,21 +9,20 @@
     >
       <div class="w-[35%]">
         <div
-          class="m-auto w-40 h-40 rounded-full border-2 flex justify-center items-center"
+          class="m-auto w-40 h-40 flex justify-center items-center"
         >
           <img
-            class="w-[50%]"
-            src="../../../../assets/icons/camara.png"
+            [src]="user?.image"
             alt=""
           />
         </div>
       </div>
       <div class="w-[65%]">
         <div class="">
-          <h2 class="text-2xl jura font-bold">Juan Perez</h2>
-          <h2 class="montserrat font-bold">email&#64;example.com</h2>
-          <h3 class="montserrat">320 2342 2343</h3>
-          <h3 class="montserrat">Tunja</h3>
+          <h2 class="text-2xl jura font-bold">{{user?.firstName}} {{user?.lastName}}</h2>
+          <h2 class="montserrat font-bold">{{user?.email}}</h2>
+          <h3 class="montserrat">{{user?.phone}}</h3>
+          <h3 class="montserrat">{{user?.city}}, {{user?.country}}</h3>
         </div>
       </div>
     </div>
@@ -31,7 +30,13 @@
       <h2 class="montserrat font-bold">Vehiculos</h2>
     </div>
     <div class="grid grid-cols-2 gap-20 w-full h-fit p-20">
-      <app-card-pequenna></app-card-pequenna>
+      @if (vehicles && vehicles.length > 0) {
+        <app-card-pequenna *ngFor="let vehicle of vehicles" [Vehicle]="vehicle"></app-card-pequenna>
+      } @else {
+        <div class="flex justify-center items-center w-full h-80 bg-[#d9d9d9] mx-auto mt-20 rounded-3xl col-span-2">
+          <h2 class="text-2xl jura font-bold">No tienes vehiculos registrados</h2>
+        </div>
+      }
     </div>
   </div>
 </div>

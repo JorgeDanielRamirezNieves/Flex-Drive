@@ -17,6 +17,15 @@ export class ChatService {
   public async getChatsByUUID(uuid: string): Promise<Chat | null> {
     return this.ChatRepository.findOne({ where: { uuid: uuid } });
   }
+  
+  public async getChatsByuserUUID(useruuid: string): Promise<Chat[] | null> {
+    return this.ChatRepository
+    .createQueryBuilder('c')
+    .innerJoin('requests', 'r', 'r.uuid = c.id_request')
+    .innerJoin('user', 'u', 'u.uuid = r.id_client')
+    .where('u.uuid = :useruuid', { useruuid })
+    .getMany();
+  }
 
   public async createChat(objChat: Chat): Promise<Chat | HttpException> {
     return this.ChatRepository.save(objChat)

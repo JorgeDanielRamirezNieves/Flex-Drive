@@ -59,7 +59,7 @@ export class MenuColumnComponent {
     },
     {
       title: 'PQRS',
-      route: '/user/pqrs',
+      route: '/reports',
       icon: 'PQRSB.png',
       iconActive: 'PQRSS.png',
     },

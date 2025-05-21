@@ -38,6 +38,24 @@ export class ChatController {
       return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
     }
   }
+  
+  @Get('findByUserUUID/:uuidUser')
+  @ApiParam({
+    name: 'uuidUser',
+    description: 'UUID of the User',
+    required: true,
+    type: String,
+  })
+  private findByUserUUID(@Param('uuidUser') UserUUID: any): any {
+    const uuidUser = UserUUID;
+    console.log('uuidUser', uuidUser);
+    
+    if (uuidUser && uuidUser.length > 0) {
+      return this.ChatService.getChatsByuserUUID(uuidUser);
+    } else {
+      return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
+    }
+  }
 
   @Post('add')
   @ApiBody({

@@ -57,7 +57,7 @@ export class ServiceRent {
 
   @OneToOne(() => Request, (objRequests) => objRequests.uuid)
   @JoinColumn({ name: 'id_request', referencedColumnName: 'uuid' })
-  public request: Request;
+  public request?: Request;
 
   constructor(
     uuid: string,

@@ -188,7 +188,7 @@ export class Vehicle {
       },
     ],
   })
-  @Column({ name: 'images', type: 'jsonb', nullable: false })
+  @Column({ name: 'image', type: 'jsonb', nullable: false })
   public image: Imagesvehicle[]; 
 
   @ApiProperty({

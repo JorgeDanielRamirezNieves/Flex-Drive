@@ -28,6 +28,22 @@ export class PreferencesController {
             return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
         }
     }
+    
+    @Get('findByUser/:uuidUser')
+    @ApiParam({
+        name: 'uuidUser',
+        description: "UUID of the user",
+        required: true,
+        type: String,
+    })
+    private findOnePreferencesByUser(@Param('uuidUser') uuidUser: any): any {
+        const uuidPreferences = uuidUser;
+        if (uuidPreferences && uuidPreferences.length > 0) {
+            return this.PreferencesService.getPreferencesByUserUUID(uuidPreferences);
+        } else {
+            return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 
     @Post('add')
     @ApiBody({

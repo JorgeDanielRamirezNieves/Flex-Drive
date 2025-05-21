@@ -27,7 +27,7 @@ export class Chat {
     description: 'ID of the request associated with the chat',
     type: String,
   })
-  @Column({ name: 'id_request', type: 'varchar', nullable: false })
+  @Column({ name: 'id_request', type: 'varchar', nullable: false, unique: true })
   public idrequest: string;
 
   @ApiProperty({

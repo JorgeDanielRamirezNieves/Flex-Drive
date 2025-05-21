@@ -13,6 +13,7 @@ import { ContractModule } from './contract/contract.module';
 import { ConfigModule } from '@nestjs/config';
 import { PricesModule } from './prices/prices.module';
 import { ServicesRentModule } from './services-rent/services-rent.module';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ServicesRentModule } from './services-rent/services-rent.module';
     ServicesRentModule,
     NotificationsModule,
     ContractModule,
+    HttpModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,

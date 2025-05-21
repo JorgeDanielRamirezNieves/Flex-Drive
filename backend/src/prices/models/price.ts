@@ -19,7 +19,7 @@ export class Price {
     description: 'Price of the vehicle',
     example: 150000
   })
-  public precio: number;
+  public price: number;
 
   @Column({ name: 'start_date', type: 'date', nullable: false })
   @ApiProperty({
@@ -55,13 +55,13 @@ export class Price {
 
   constructor(
     uuid: string,
-    precio: number,
+    price: number,
     startDate: Date,
     endDate: Date,
     idVehicle: string,
   ) {
     this.uuid = uuid;
-    this.precio = precio;
+    this.price = price;
     this.startDate = startDate;
     this.endDate = endDate;
     this.idVehicle = idVehicle;

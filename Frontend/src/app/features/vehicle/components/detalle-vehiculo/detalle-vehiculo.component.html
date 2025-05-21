@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
-<p-toast ></p-toast>
+<p-toast></p-toast>
 <section class="flex flex-col justify-center items-center h-fit gap-3 my-10">
   <p-galleria
-    [value]="images"
+    [value]="vehicle.image"
     [containerStyle]="{ 'max-width': '600px' }"
     [numVisible]="5"
   >
@@ -13,42 +13,53 @@
       <img [src]="item.thumbnailImageSrc" />
     </ng-template>
   </p-galleria>
-  <h1 class="jura text-3xl font-semibold">Nombre del vehículo</h1>
-  <p-rating></p-rating>
+  <h1 class="jura text-3xl font-semibold">
+    {{ vehicle.detailsVehicle?.brand }} {{ vehicle.detailsVehicle?.model }}
+  </h1>
+  <p-rating
+    [(ngModel)]="vehicle.rating"
+    [stars]="5"
+    [style]="{ width: '10rem' }"
+    [disabled]="true"
+  ></p-rating>
   <div
     class="grid grid-cols-2 divide-black divide-x-1 py-10 jura bg-[#d9d9d9] mx-20 rounded-2xl border-1 shadow-md shadow-black"
   >
     <div class="flex flex-col justify-center items-start px-20 gap-5">
       <span class="flex flex-col justify-center items-start">
         <h2 class="font-bold text-2xl">Precio</h2>
-        <p class="text-lg">$ 120.000/dia</p>
+        <p class="text-lg">
+          @if (vehicle.typeSaleVehicle?.name == 'exclusive') { $ {{
+            price?.price | currency : "COP"
+          }}
+          } @else { $ {{ price?.price | currency : "COP" }}/{{
+            vehicle.typeSaleVehicle?.name
+          }}
+          }
+        </p>
       </span>
       <span class="flex flex-col justify-center items-start">
         <h2 class="font-bold text-2xl">Propietario</h2>
-        <p class="text-lg">Pepe Javier Alvarado</p>
+        <p class="text-lg">{{vehicle.ownerVehicle?.firstName}} {{vehicle.ownerVehicle?.lastName}}</p>
       </span>
       <span class="flex flex-col justify-center items-start">
         <h2 class="font-bold text-2xl">Descripción</h2>
         <p class="text-lg">
-          Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque
-          faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi
-          pretium tellus duis convallis. Tempus leo eu aenean sed diam urna
-          tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas.
-          Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut
-          hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent
-          per conubia nostra inceptos himenaeos.
+          {{ vehicle.description }}
         </p>
       </span>
       <span class="flex flex-col justify-center items-start">
         <h2 class="font-bold text-2xl">Disponibilidad</h2>
-        <p class="text-lg">Solo fin de semanas</p>
+        <p class="text-lg">{{vehicle.availability}}</p>
       </span>
       <p-accordion class="w-full" id="accordion-solicitud">
         <p-accordion-panel value="0" class="rounded-b-lg w-full">
           <p-accordion-header class="w-full"
             ><app-button label="Solicitar" type="button"></app-button
           ></p-accordion-header>
-          <p-accordion-content class="flex flex-col justify-center items-start gap-5 w-full">
+          <p-accordion-content
+            class="flex flex-col justify-center items-start gap-5 w-full"
+          >
             <p-datepicker
               placeholder="Fecha de salida"
               class="absolute placeholder:text-gray-500"
@@ -70,36 +81,32 @@
               class="bg-white mt-15 w-full p-2 rounded-lg resize-none placeholder:text-gray-500"
               placeholder="Enviale un mensaje al propietario..."
             ></textarea>
-            <app-button label="Enviar" type="button" [callback]="sendRequest"></app-button>
+            <app-button
+              label="Enviar"
+              type="button"
+              [callback]="sendRequest"
+            ></app-button>
           </p-accordion-content>
         </p-accordion-panel>
       </p-accordion>
     </div>
     <div class="flex flex-col justify-center items-start px-20 gap-5">
-      <p class="text-lg"><strong>Marca: </strong>marca</p>
-      <p class="text-lg"><strong>Modelo: </strong>modelo</p>
-      <p class="text-lg"><strong>Año: </strong>2015</p>
-      <p class="text-lg"><strong>Trasmisión: </strong>Automática</p>
-      <p class="text-lg"><strong>Combustible: </strong>Corriente</p>
-      <p class="text-lg"><strong>Kilometraje: </strong>20.158</p>
-      <p class="text-lg"><strong>Motor: </strong>V8</p>
-      <p class="text-lg"><strong>Placa terminada en: </strong>#</p>
-      <p class="text-lg"><strong>SOAT: </strong>Fecha_vigencia</p>
-      <p class="text-lg"><strong>Tipos de ruta: </strong>Campestre, Ciudad</p>
+      <p class="text-lg"><strong>Marca: </strong>{{vehicle.detailsVehicle?.brand}}</p>
+      <p class="text-lg"><strong>Modelo: </strong>{{vehicle.detailsVehicle?.model}}</p>
+      <p class="text-lg"><strong>Año: </strong>{{vehicle.detailsVehicle?.year}}</p>
+      <p class="text-lg"><strong>Peso: </strong>{{vehicle.detailsVehicle?.weight}}</p>
+      <p class="text-lg"><strong>Combustible: </strong>{{vehicle.detailsVehicle?.fuelType}}</p>
+      <p class="text-lg"><strong>Kilometraje: </strong>{{vehicle.mileage}}</p>
+      <p class="text-lg"><strong>Tipo: </strong>{{vehicle.type}}</p>
+      <p class="text-lg"><strong>Placa terminada en: </strong>{{vehicle.plate[vehicle.plate.length-1]}}</p>
+      <p class="text-lg"><strong>SOAT: </strong>{{soat?.status}}</p>
+      <p class="text-lg"><strong>RTM (Revisión tecnomecanica): </strong>{{tecnomecanic?.status}}</p>
       <p-accordion class="w-full" id="accordion-accesorios">
         <p-accordion-panel value="0">
           <p-accordion-header><strong>Accesorios</strong></p-accordion-header>
           <p-accordion-content>
             <ul class="grid grid-cols-3 place-items-center gap-5">
-              <li>Accesorio 1</li>
-              <li>Accesorio 2</li>
-              <li>Accesorio 3</li>
-              <li>Accesorio 4</li>
-              <li>Accesorio 5</li>
-              <li>Accesorio 6</li>
-              <li>Accesorio 7</li>
-              <li>Accesorio 8</li>
-              <li>Accesorio 9</li>
+              <li *ngFor="let item of vehicle.accesories">{{item}}</li>
             </ul>
           </p-accordion-content>
         </p-accordion-panel>

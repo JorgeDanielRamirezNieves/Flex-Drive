@@ -8,7 +8,7 @@
     </div>
     <section class="w-[80%] h-auto bg-[#d9d9d9] m-auto my-20 rounded-3xl">
       <div class="flex justify-center items-center">
-        <h2 class="text-2xl jura font-bold m-8">email&#64;example.com</h2>
+        <h2 class="text-2xl jura font-bold m-8">{{user?.email}}</h2>
       </div>
 
       <div class="flex justify-center">
@@ -20,11 +20,10 @@
               <div class="w-1/2 flex flex-col gap-4">
                 <div class="flex items-end">
                   <div
-                    class="mb-8 mr-10 w-30 h-30 rounded-full border-2 flex justify-center items-center"
+                    class="mb-8 mr-10 w-30 h-30 flex justify-center items-center"
                   >
                     <img
-                      class="w-[50%]"
-                      src="../../../../assets/icons/camara.png"
+                      [src]="user?.image"
                       alt=""
                     />
                   </div>
@@ -41,43 +40,38 @@
                   placeholder="+57 300 123 4567"
                   type="text"
                   name="phone"
+                  [model]="user"
+                  modelProperty="phone"
                 ></app-input-label>
 
                 <h2 class="jura mb-4 font-bold">Documento de identidad</h2>
-                <div class="flex gap-6 items-center">
+                <div class="flex gap-6 items-center" *ngFor="let type of typesDocument">
                   <label class="flex items-center gap-2 cursor-pointer">
                     <input
                       type="radio"
                       name="documentType"
-                      value="cc"
+                      value="{{ type.uuid }}"
                       [(ngModel)]="selectedDocument"
                       class="accent-[#54A8A3] mr-5"
                     />
-                    <span class="jura mr-5">cc</span>
-                  </label>
-
-                  <label class="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="documentType"
-                      value="pasaporte"
-                      [(ngModel)]="selectedDocument"
-                      class="accent-[#54A8A3] mr-5"
-                    />
-                    <span class="jura mr-5">Pasaporte</span>
+                    <span class="jura mr-5">{{type.name}}</span>
                   </label>
                 </div>
-
                 <app-input-label
                   label=""
                   placeholder="102233445"
                   type="text"
                   name="documentNumber"
+                  [model]="user"
+                  modelProperty="noDocument"
                 ></app-input-label>
+
                 <app-input-label
                   label="Fecha de nacimiento"
                   type="date"
                   name="birthdate"
+                  [model]="user"
+                  modelProperty="birthday"
                 ></app-input-label>
               </div>
 
@@ -85,10 +79,21 @@
 
               <div class="w-1/2 flex flex-col gap-4 pl-8">
                 <app-input-label
-                  label="Nombre Completo"
+                  label="Nombres"
                   placeholder="Juan Pérez"
                   type="text"
-                  name="fullName"
+                  name="firstName"
+                  [model]="user"
+                  modelProperty="firstName"
+                ></app-input-label>
+                
+                <app-input-label
+                  label="Apellidos"
+                  placeholder="Juan Pérez"
+                  type="text"
+                  name="lastName"
+                  [model]="user"
+                  modelProperty="lastName"
                 ></app-input-label>
 
                 <app-input-label
@@ -96,6 +101,8 @@
                   placeholder="Calle 123 #45-67, Bogotá, Col"
                   type="text"
                   name="address"
+                  [model]="user"
+                  modelProperty="address"
                 ></app-input-label>
 
                 <app-input-label

@@ -18,6 +18,10 @@ export class PreferencesService {
     public async getPreferencesByUUID(uuid: string): Promise<Preferences | null> {
         return this.PreferencesRepository.findOne({ where: { uuid: uuid } });
     }
+    
+    public async getPreferencesByUserUUID(uuidUser: string): Promise<Preferences | null> {
+        return this.PreferencesRepository.findOne({ where: { idUser: uuidUser } });
+    }
 
     public async createPreferences(
         objPreferences: Preferences,

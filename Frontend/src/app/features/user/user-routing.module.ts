@@ -23,7 +23,6 @@ const routes: Routes = [
       import('../chat/chat.module').then((m) => m.ChatModule),
   },
   { path: 'profilesettings', component: ProfilesettingsComponent },
-  { path: 'pqrs', component: PqrsComponent },
   { path: '', component: UserComponent },
 ];
 
