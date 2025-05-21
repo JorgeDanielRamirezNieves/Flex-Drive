@@ -126,6 +126,15 @@ export class User {
     example: "mrDoe@doe.doe"
   })
   public email: string;
+  
+  @Column({ name: 'password', type: 'varchar', nullable: false, default: '$2b$10$9cTz2rBvVA8db4GjI8wQqOUX7ErYgnvrOSQrdcbTy4sOEIbiS3wiu' })
+  @ApiProperty({
+    description: "password of the user",
+    name: 'email',
+    required: true,
+    example: "12412412"
+  })
+  public password: string;
 
   @Column({
     name: 'status',
