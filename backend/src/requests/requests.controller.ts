@@ -28,6 +28,38 @@ export class RequestsController {
             return new HttpException('UUID invalid', HttpStatus.NOT_ACCEPTABLE);
         }
     }
+    
+    @Get('findbyUser/:uuidClient')
+    @ApiParam({
+        name: 'uuidClient',
+        description: 'UUID of the Client',
+        required: true,
+        type: String,
+    })
+    private findOneRequestByClient(@Param('uuidClient') uuid: any): any {
+        const uuidRequest = uuid;
+        if (uuidRequest && uuidRequest.length > 0) {
+            return this.RequestService.getRequestByClientUUID(uuidRequest);
+        } else {
+            return new HttpException('UUID invalid', HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @Get('findbyOwner/:uuidOwner')
+    @ApiParam({
+        name: 'uuidOwner',
+        description: 'UUID of the Owner',
+        required: true,
+        type: String,
+    })
+    private findOneRequestByOwner(@Param('uuidOwner') uuid: any): any {
+        const uuidRequest = uuid;
+        if (uuidRequest && uuidRequest.length > 0) {
+            return this.RequestService.getRequestByOwnerUUID(uuidRequest);
+        } else {
+            return new HttpException('UUID invalid', HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 
     @Post('add')
     @ApiBody({

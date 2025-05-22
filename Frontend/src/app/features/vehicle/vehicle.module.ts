@@ -1,4 +1,4 @@
-import { VehiculoCardComponent } from './components/vehiculo-card/vehiculo-card.component';
+import { VehiculoCardComponent } from '../../shared/components/vehiculo-card/vehiculo-card.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BusquedaComponent } from './components/busqueda/busqueda.component';
@@ -15,7 +15,6 @@ import { VehicleRoutingModule } from './vehicle-routing.module';
     BusquedaComponent,
     DetalleVehiculoComponent,
     MyvehiclesComponent,
-    VehiculoCardComponent,
     VehiculosLandingComponent
   ],
   imports: [

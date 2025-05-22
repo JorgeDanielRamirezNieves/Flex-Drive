@@ -53,7 +53,7 @@
         <p class="text-lg">{{vehicle.availability}}</p>
       </span>
       <p-accordion class="w-full" id="accordion-solicitud">
-        <p-accordion-panel value="0" class="rounded-b-lg w-full">
+        <p-accordion-panel value="0" class="rounded-b-lg w-full" [disabled]="isOwner">
           <p-accordion-header class="w-full"
             ><app-button label="Solicitar" type="button"></app-button
           ></p-accordion-header>

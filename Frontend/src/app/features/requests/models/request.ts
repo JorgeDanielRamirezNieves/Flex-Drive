@@ -1,3 +1,6 @@
+import { User } from "../../user/models/user";
+import { Vehicle } from "../../vehicle/models/vehicle";
+
 export class Request {
   public uuid: string;
   public sendDate: Date;
@@ -7,9 +10,9 @@ export class Request {
   public description: string;
   public idClient: string;
   public idVehicle: string;
-  public status: 'approved' | 'negotiating' | 'rejected';
-  public requestUser?: string;
-  public requestVehicle?: string;
+  public status: 'pending' | 'approved' | 'negotiating' | 'rejected';
+  public requestUser?: User;
+  public requestVehicle?: Vehicle;
   constructor(
     uuid: string,
     sendDate: Date,
