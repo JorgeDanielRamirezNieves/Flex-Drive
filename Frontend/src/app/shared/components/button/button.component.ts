@@ -14,7 +14,8 @@ export class ButtonComponent {
   @Input() public type: 'link' | 'button' | 'submit';
   @Input() public icon: string;
   @Input() public iconPos: 'left' | 'right' | 'top' | 'bottom';
-  @Input() public callback: Function; 
+  @Input() public callback: Function;
+  @Input() public disabled: boolean; 
 
   constructor(private router: Router, private messageService: MessageService) {
     this.label = 'Button Link';
@@ -25,6 +26,7 @@ export class ButtonComponent {
     this.callback = () => {
       console.log('Button clicked!');
     };
+    this.disabled = false;  
   }
 
   public handleClick(): void {

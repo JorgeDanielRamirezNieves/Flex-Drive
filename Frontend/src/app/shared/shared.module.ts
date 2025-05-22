@@ -12,6 +12,7 @@ import { ToggleButtonComponent } from './components/toggle-button/toggle-button.
 import { FormsModule } from '@angular/forms';
 import { PrimengModule } from './primeng/primeng.module';
 import {RouterModule } from '@angular/router';
+import { VehiculoCardComponent } from './components/vehiculo-card/vehiculo-card.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {RouterModule } from '@angular/router';
     MenuColumnComponent,
     SuspenseComponent,
     ToggleButtonComponent,
+    VehiculoCardComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import {RouterModule } from '@angular/router';
     MenuColumnComponent,
     SuspenseComponent,
     ToggleButtonComponent,
+    VehiculoCardComponent,
     PrimengModule,
     FormsModule,
   ],

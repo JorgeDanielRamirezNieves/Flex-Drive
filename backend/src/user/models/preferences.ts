@@ -26,6 +26,13 @@ export interface paramters {    //Each parameter is an array, because the user c
   price: number[];
   brand: string[];
   model: string[];
+  rating: number[];         // PROPOSAL: rating: { min: number; max: number };
+  insurance: boolean;       // PROPOSAL: (yes, no);
+  fuelType: string[];       // PROPOSAL: (petrol, diesel, electric, hybrid);
+
+  /* SCALABILITY PROPOSALS:
+  MÉTODOS DE PAGO ACEPTADOS (STRING ARRAY)
+  */
 }
 
 @Entity({ schema: 'public', name: 'preferences' })
