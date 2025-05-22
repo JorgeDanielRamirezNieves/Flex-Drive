@@ -80,17 +80,17 @@ export class Request {
   @Column({
     name: 'status',
     type: 'enum',
-    enum: ['approved', 'negotiating', 'rejected'],
+    enum: ['pending', 'approved', 'negotiating', 'rejected'],
     nullable: false,
   })
   @ApiProperty({
     name: 'status',
     description: 'Status of the request',
     required: true,
-    enum: ['approved', 'negotiating', 'rejected'],
+    enum: ['pending', 'approved', 'negotiating', 'rejected'],
     example: 'negotiating',
   })
-  public status: 'approved' | 'negotiating' | 'rejected';
+  public status:'pending' | 'approved' | 'negotiating' | 'rejected';
 
   @ManyToOne(() => User, (objUser: User) => objUser.userRequests, {
     onUpdate: 'CASCADE',
@@ -104,7 +104,7 @@ export class Request {
     onDelete: 'RESTRICT',
   })
   @JoinColumn([{ name: 'id_vehicle', referencedColumnName: 'uuid' }])
-  public requestvehicle?: User;
+  public requestVehicle?: Vehicle;
 
 
 }

@@ -2,40 +2,140 @@
 <app-suspense *ngIf="loadingService"></app-suspense>
 <div class="w-full flex flex-col justify-center items-center">
   <span
-    class="flex justify-start items-center gap-10 border-2 border-gray-400 rounded-lg py-5 px-10 bg-[#d9d9d9] w-full mb-5"
+    class="flex flex-col justify-start items-center gap-10 border-2 border-gray-400 rounded-lg py-5 px-10 bg-[#d9d9d9] w-full mb-5"
   >
-    <div class="flex flex-col justify-center items-center gap-3 h-full">
-      <h2 class="text-3xl jura">Solicitante</h2>
-      <div
-        class="m-auto w-30 h-30 rounded-full border-2 flex justify-center items-center"
-      >
-        <img class="w-[50%]" src="../../../../assets/icons/camara.png" alt="" />
-      </div>
+    <div
+      class="text-3xl jura border-b-2 border-gray-400 w-full pb-5 flex justify-between items-center gap-5"
+    >
+      <p>{{ isOwner ? "Solicitante" : "Propietario" }}</p>
+      <p class="text-xl">{{ request?.status }}</p>
     </div>
-    <ul class="flex flex-col justify-center items-start gap-2 text-xl jura w-full">
-      <li><strong>Nombre:</strong>&nbsp;{{ request.driver }}</li>
-      <li><strong>Ciudad:</strong>&nbsp;{{ request.driver }}</li>
-      <li><strong>Documento:</strong>&nbsp;{{ request.driver }}</li>
-      <li class="w-full flex"><strong>Rating:</strong>&nbsp;<p-rating readonly="true"></p-rating></li>
-    </ul>
+    <span class="flex justify-start items-center gap-10 w-full">
+      <div class="flex flex-col justify-center items-center gap-3 h-full">
+        <div
+          class="m-auto w-30 h-30 rounded-full flex justify-center items-center"
+        >
+          <img
+            src="{{
+              isOwner
+                ? request?.requestUser?.image
+                : request?.requestVehicle?.ownerVehicle?.image
+            }}"
+            alt=""
+          />
+        </div>
+      </div>
+      <ul
+        class="flex flex-col justify-center items-start gap-2 text-xl jura w-full"
+      >
+        <li>
+          <strong>Nombre:</strong>&nbsp;
+          {{
+            isOwner
+              ? request?.requestUser?.firstName +
+                " " +
+                request?.requestUser?.lastName
+              : request?.requestVehicle?.ownerVehicle?.firstName +
+                " " +
+                request?.requestVehicle?.ownerVehicle?.lastName
+          }}
+        </li>
+        <li>
+          <strong>Ciudad:</strong>&nbsp;
+          {{
+            isOwner
+              ? request?.requestUser?.city
+              : request?.requestVehicle?.ownerVehicle?.city
+          }}
+        </li>
+        <li>
+          <strong>Documento:</strong>&nbsp;
+          {{
+            isOwner
+              ? request?.requestUser?.typeDocumentUser?.name
+              : request?.requestVehicle?.ownerVehicle?.typeDocumentUser?.name
+          }}
+          &nbsp;
+          {{
+            isOwner
+              ? request?.requestUser?.noDocument
+              : request?.requestVehicle?.ownerVehicle?.noDocument
+          }}
+        </li>
+        <li class="w-full flex">
+          <strong>Rating:</strong>&nbsp;<p-rating
+            readonly="true"
+            [ngModel]="
+              isOwner
+                ? request?.requestUser?.rating
+                : request?.requestVehicle?.ownerVehicle?.rating
+            "
+          ></p-rating>
+        </li>
+      </ul>
+    </span>
   </span>
+  <app-vehiculo-card
+    [vehicle]="request?.requestVehicle"
+    labelButton="Ver"
+    class="w-full"
+  ></app-vehiculo-card>
   <span
     class="flex justify-start items-center gap-10 border-2 border-gray-400 rounded-lg py-5 px-10 bg-[#d9d9d9] w-full jura"
-    >
+  >
     <div class="flex flex-col justify-center items-center gap-3 h-full w-1/2">
       <h1 class="text-3xl font-bold">Descripción</h1>
-      <p>{{ request.description }}</p>
+      <p>{{ request?.description }}</p>
     </div>
     <div class="flex flex-col justify-center items-center gap-3 h-full w-1/2">
       <ul class="flex flex-col justify-center items-start gap-2 text-2xl">
-        <li><strong>Fecha de salida:</strong>&nbsp;{{ request.pickupDate }}</li>
-        <li><strong>Fecha de entrega:</strong>&nbsp;{{ request.returnDate }}</li>
+        <li>
+          <strong>Fecha de salida:</strong>&nbsp;{{
+            request?.deliveryDate?.toString()
+          }}
+        </li>
+        <li>
+          <strong>Fecha de entrega:</strong>&nbsp;{{
+            request?.returnDate?.toString()
+          }}
+        </li>
       </ul>
     </div>
   </span>
-  <span class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura">
-    <app-button label="Aceptar" type="button" [callback]="createService"></app-button>
-    <app-button label="Negociar" type="link" redirecTo="/user/activechats"></app-button>
-    <app-button label="Negar" type="button" ></app-button>
+  <span
+    class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura"
+    *ngIf="request?.status === 'pending'"
+  >
+    <app-button
+      label="Aceptar"
+      type="button"
+      [callback]="createService"
+    ></app-button>
+    <app-button
+      label="Negociar"
+      type="link"
+      redirecTo="/user/activechats"
+    ></app-button>
+    <app-button label="Negar" type="button" [disabled]="true"></app-button>
+  </span>
+  <span
+    class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura"
+    *ngIf="request?.status === 'approved'"
+  >
+    <app-button
+      label="Ir al Servicio"
+      type="link"
+      redirecTo="/services/details"
+    ></app-button>
+  </span>
+  <span
+    class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura"
+    *ngIf="request?.status === 'negotiating'"
+  >
+    <app-button
+      label="Ir al chat"
+      type="link"
+      redirecTo="/user/activechats"
+    ></app-button>
   </span>
 </div>

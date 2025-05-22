@@ -23,6 +23,8 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
   public suscribeVehicles: Subscription;
   public tmp: any;
   public complete: boolean;
+  public userUUID: string;
+  public isOwner: boolean;
 
   constructor(
     private messageService: MessageService,
@@ -31,6 +33,8 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
     private vehicleService: VehicleService
   ) {
     this.suscribeVehicles = this.tmp;
+    this.userUUID = localStorage.getItem('userUUID') || '';
+    this.isOwner = false;
     this.vehicle = new Vehicle(
       '',
       '',
@@ -53,6 +57,7 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
       '',
       ''
     );
+
 
     this.complete = false;
   }
@@ -87,6 +92,9 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
       .pipe(
         map((res: any) => {
           this.vehicle = res;
+          if (this.vehicle.idOwner === this.userUUID) {
+            this.isOwner = true;
+          }
           this.price = this.vehicle.prices?.reduce((prev, current) => {
             return new Date(prev.endDate) > new Date(current.endDate)
               ? prev
