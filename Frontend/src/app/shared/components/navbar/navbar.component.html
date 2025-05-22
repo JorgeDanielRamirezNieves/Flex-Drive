@@ -29,45 +29,39 @@
     >
 
     <a
-      class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
+      *ngIf="!isLoggedIn"
+      class="..."
       [routerLink]="['/user/login']"
       routerLinkActive="router-link-active"
       >Iniciar Sesión</a
     >
     <a
+      *ngIf="rol === 'admin'"
       class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
       [routerLink]="['/reports/admin-pqrs']"
       routerLinkActive="router-link-active"
-      >ad</a
+      >Administrador</a
     >
-    <!-- Quitar esto despues -->
-    <ng-container *ngIf="!isLoggedIn; else loggedInOptions">
+    <button
+      *ngIf="rol === 'user'"
+      class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
+    >
       <a
-        class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
-        (click)="toggleLogin()"
-        >Simular login</a
+        [routerLink]="['/user']"
+        class="w-full h-full flex flex-col justify-center items-center"
       >
-    </ng-container>
+        <span><i class="pi pi-user text-2xl"></i></span>
+      </a>
+    </button>
 
-    <ng-template #loggedInOptions>
+    <ng-container *ngIf="rol">
       <button
-        class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
-      >
-        <a
-          [routerLink]="['/user']"
-          class="w-full h-full flex flex-col justify-center items-center"
-        >
-          <span><i class="pi pi-user text-2xl"></i></span>
-        </a>
-      </button>
-
-      <button
-        (click)="toggleLogin()"
+        (click)="logout()"
         class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
       >
         Cerrar sesión
       </button>
-    </ng-template>
+    </ng-container>
 
     <!--  -->
   </span>

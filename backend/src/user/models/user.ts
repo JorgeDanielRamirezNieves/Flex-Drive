@@ -123,16 +123,21 @@ export class User {
     description: "User's email (for communication purposes)",
     name: 'email',
     required: true,
-    example: "mrDoe@doe.doe"
+    example: 'mrDoe@doe.doe',
   })
   public email: string;
-  
-  @Column({ name: 'password', type: 'varchar', nullable: false, default: '$2b$10$9cTz2rBvVA8db4GjI8wQqOUX7ErYgnvrOSQrdcbTy4sOEIbiS3wiu' })
+
+  @Column({
+    name: 'password',
+    type: 'varchar',
+    nullable: false,
+    default: '$2b$10$9cTz2rBvVA8db4GjI8wQqOUX7ErYgnvrOSQrdcbTy4sOEIbiS3wiu',
+  })
   @ApiProperty({
-    description: "password of the user",
+    description: 'password of the user',
     name: 'email',
     required: true,
-    example: "12412412"
+    example: '12412412',
   })
   public password: string;
 
@@ -233,7 +238,10 @@ export class User {
   @OneToMany(() => Message, (objMessege: Message) => objMessege.idReceiver)
   public userMessageReceiver?: Message[];
 
-  @OneToMany(() => Notification, (objNotification: Notification) => objNotification.idUser)
+  @OneToMany(
+    () => Notification,
+    (objNotification: Notification) => objNotification.idUser,
+  )
   public userNotifications?: Notification[];
 
   constructor(
@@ -252,7 +260,7 @@ export class User {
     image: string,
     idRole: string,
     idTypeDocument: string,
-    uuid?: string
+    uuid?: string,
   ) {
     this.noDocument = noDocument;
     this.firstName = firstName;

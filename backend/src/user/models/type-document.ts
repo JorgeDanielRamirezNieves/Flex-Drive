@@ -8,9 +8,9 @@ export class TypeDocument {
   public uuid: string;
 
   @ApiProperty({
-      description: 'Name of the type document',
-      name: 'name',
-      required: true,
+    description: 'Name of the type document',
+    name: 'name',
+    required: true,
   })
   @Column({ name: 'name', type: 'varchar', length: 50, nullable: false })
   public name: string;

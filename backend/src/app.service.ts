@@ -24,24 +24,27 @@ export class AppService {
     params.append('key', apikey || '');
     const url = `https://api.imgbb.com/1/upload`;
     const response = await lastValueFrom(
-        this.httpService.post("https://api.imgbb.com/1/upload", params, )
-      );
+      this.httpService.post('https://api.imgbb.com/1/upload', params),
+    );
 
     if (!response.data.success) {
-        throw new HttpException('Failed to upload image to ImgBB', HttpStatus.BAD_REQUEST);
-      }
+      throw new HttpException(
+        'Failed to upload image to ImgBB',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
 
-      // Verificar si la respuesta fue exitosa
+    // Verificar si la respuesta fue exitosa
     if (response.data && response.data.data) {
       const res = {
         success: true,
         data: {
           url: response.data.data.url,
           delete_url: response.data.data.delete_url,
-          display_url: response.data.data.display_url
-        }
+          display_url: response.data.data.display_url,
+        },
       };
-      console.info("Imagen cargada")
+      console.info('Imagen cargada');
       return res;
     } else {
       throw new Error('Respuesta inesperada de ImgBB');

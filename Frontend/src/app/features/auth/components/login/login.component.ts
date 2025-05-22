@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +11,12 @@ import { NgForm } from '@angular/forms';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  userData: any = {
+  userData = {
     password: '',
     email: '',
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   submitted = false;
 
@@ -22,10 +24,26 @@ export class LoginComponent {
     this.submitted = true;
 
     if (form.valid) {
-      console.log(this.userData);
-      this.router.navigate(['/landing']);
-    } else {
-      console.log('Formulario inválido');
+      this.authService
+        .login(this.userData.email, this.userData.password)
+        .subscribe({
+          next: (respuesta) => {
+            if (respuesta.status === 200) {
+              this.router.navigate(['/landing']);
+              console.log(respuesta.response.tokenApp);
+            }
+            if (respuesta.status === 406) {
+              alert(`Contraseña Incorrecta`);
+            }
+            if (respuesta.status === 409) {
+              alert(`El ususario no se encuentra registrado`);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            alert(`Error: ${err.message}`);
+            console.error('Detalles del error:', err);
+          },
+        });
     }
   }
 }

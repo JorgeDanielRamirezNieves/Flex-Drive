@@ -1,3 +1,4 @@
+import { Login } from 'src/auth/models/login';
 import { ServiceRent } from './../../services-rent/models/serviceRent';
 import { Global, Module } from '@nestjs/common';
 import { Chat } from 'src/chat/models/chat';
@@ -41,7 +42,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
             ssl: {
               rejectUnauthorized: false, // Necesario para las conexiones SSL a Supabase
             },
-            namingStrategy: new SnakeNamingStrategy(), //
+            namingStrategy: new SnakeNamingStrategy(),
             entities: [
               TypeDocument,
               Role,
@@ -63,8 +64,9 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
               TypeNotification,
               ServiceRent,
               Contract,
-              TypeContract,  
+              TypeContract,
               TypeContractLegal,
+              Login,
             ], //Aquí van todas las entidades
           });
           await poolConexion.initialize();

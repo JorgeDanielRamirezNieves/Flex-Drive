@@ -5,7 +5,9 @@ import { AboutUsComponent } from './features/landing/about-us/about-us.component
 import { WhyUsComponent } from './features/landing/why-us/why-us.component';
 import { ContactUsComponent } from './features/landing/contact-us/contact-us.component';
 import { ErrorComponent } from './shared/components/error/error.component';
-
+import { authGuard } from './features/auth/guards/auth.guard';
+import { LoginComponent } from './features/auth/components/login/login.component';
+import { authenticatedGuard } from './features/auth/guards/authenticated.guard';
 
 const routes: Routes = [
   {
@@ -18,24 +20,43 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'user/login',
+    component: LoginComponent,
+    canActivate: [authenticatedGuard],
+  },
+  {
     path: 'user',
-    loadChildren: () => import('./features/user/user.module').then(m => m.UserModule)
+    loadChildren: () =>
+      import('./features/user/user.module').then((m) => m.UserModule),
+    canActivate: [authGuard],
   },
   {
     path: 'vehicles',
-    loadChildren: () => import('./features/vehicle/vehicle.module').then(m => m.VehicleModule)
+    loadChildren: () =>
+      import('./features/vehicle/vehicle.module').then((m) => m.VehicleModule),
+    canActivate: [authGuard],
   },
   {
     path: 'requests',
-    loadChildren: () => import('./features/requests/requests.module').then(m => m.RequestsModule)
+    loadChildren: () =>
+      import('./features/requests/requests.module').then(
+        (m) => m.RequestsModule
+      ),
+    canActivate: [authGuard],
   },
   {
     path: 'services',
-    loadChildren: () => import('./features/services-rent/services-rent.module').then(m => m.ServicesRentModule)
+    loadChildren: () =>
+      import('./features/services-rent/services-rent.module').then(
+        (m) => m.ServicesRentModule
+      ),
+    canActivate: [authGuard],
   },
   {
     path: 'reports',
-    loadChildren: () => import('./features/reports/reports.module').then(m => m.ReportsModule)
+    loadChildren: () =>
+      import('./features/reports/reports.module').then((m) => m.ReportsModule),
+    canActivate: [authGuard],
   },
   /* rutas obligatorios */
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
