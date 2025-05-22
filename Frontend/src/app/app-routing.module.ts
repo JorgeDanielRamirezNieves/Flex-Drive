@@ -8,6 +8,7 @@ import { ErrorComponent } from './shared/components/error/error.component';
 import { authGuard } from './features/auth/guards/auth.guard';
 import { LoginComponent } from './features/auth/components/login/login.component';
 import { authenticatedGuard } from './features/auth/guards/authenticated.guard';
+import { RegisterComponent } from './features/user/components/register/register.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,11 @@ const routes: Routes = [
   {
     path: 'user/login',
     component: LoginComponent,
+    canActivate: [authenticatedGuard],
+  },
+  {
+    path: 'user/register',
+    component: RegisterComponent,
     canActivate: [authenticatedGuard],
   },
   {
