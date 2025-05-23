@@ -21,11 +21,12 @@ export class Fines {
   })
   public noFine: string;
 
-  @Column({ name: 'status', type: 'bool', nullable: false })
+  @Column({ name: 'status', type: 'varchar', nullable: true })
   @ApiProperty({
     description: 'Status of the fine',
-    example: true,
-    type: Boolean,
+    example: 'Pendiente',
+    type: String,
+    default: ''
   })
   public status: boolean;
 
@@ -72,12 +73,6 @@ export class Fines {
     length: 50,
     nullable: false,
   })
-  @ApiProperty({
-    description: 'Resolution number of the fine',
-    example: 'RES123456',
-    type: String,
-  })
-  public noResolution: string;
 
   @Column({ name: 'id_user', type: 'varchar', nullable: false })
   @ApiProperty({
@@ -112,7 +107,6 @@ export class Fines {
     this.infractionCode = infractionCode;
     this.infractionDescription = infractionDescription;
     this.entitie = entitie;
-    this.noResolution = noResolution;
     this.idUser = idUser;
   }
 }

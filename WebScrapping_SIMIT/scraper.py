@@ -49,29 +49,41 @@ def obtener_multas_por_cedula(cedula):
     time.sleep(6)
 
     multas = []
+
     try:
-        select_element = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.ID, "pageLengthSelect"))
-        )
-        Select(select_element).select_by_value("15")
-        time.sleep(2)
+        try:
+            select_element = WebDriverWait(driver, 5).until(
+                EC.presence_of_element_located((By.ID, "pageLengthSelect"))
+            )
+            select = Select(select_element)
+            values_disponibles = [opt.get_attribute("value") for opt in select.options]
+            if "15" in values_disponibles:
+                select.select_by_value("15")
+                time.sleep(2)
+        except:
+            pass
 
         WebDriverWait(driver, 15).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, "tr.page-row"))
         )
 
         filas = driver.find_elements(By.CSS_SELECTOR, "tr.page-row")
-        for fila in filas:
-            multa = {
-                "numero_comparendo": fila.find_element(By.CSS_SELECTOR, "td[data-label='Tipo'] a").text.strip(),
-                "fecha_comparendo": fila.find_element(By.CSS_SELECTOR, "td[data-label='Tipo'] span.fs-13").text.replace("Fecha imposición:", "").strip(),
-                "estado": fila.find_element(By.CSS_SELECTOR, "td[data-label='Estado']").text.strip().split("\n")[0],
-                "entidad": fila.find_element(By.CSS_SELECTOR, "td[data-label='Secretaría']").text.strip(),
-                "codigo_infraccion": fila.find_element(By.CSS_SELECTOR, "td[data-label='Infracción'] label span").text.strip(),
-                "descripcion_infraccion": fila.find_element(By.CSS_SELECTOR, "td[data-label='Infracción'] span.popover-infraccion").get_attribute("data-content").strip(),
-                "id_documento": cedula
-            }
-            multas.append(multa)
+        for fila in filas[:10]:
+            try:
+                multa = {
+                    "numero_comparendo": fila.find_element(By.CSS_SELECTOR, "td[data-label='Tipo'] a").text.strip(),
+                    "fecha_comparendo": fila.find_element(By.CSS_SELECTOR, "td[data-label='Tipo'] span.fs-13").text.strip().split(":")[-1].strip(),
+                    "estado": fila.find_element(By.CSS_SELECTOR, "td[data-label='Estado']").text.strip().split("\n")[0],
+                    "entidad": fila.find_element(By.CSS_SELECTOR, "td[data-label='Secretaría']").text.strip(),
+                    "codigo_infraccion": fila.find_element(By.CSS_SELECTOR, "td[data-label='Infracción'] label span").text.strip(),
+                    "descripcion_infraccion": fila.find_element(By.CSS_SELECTOR, "td[data-label='Infracción'] span.popover-infraccion").get_attribute("data-content").strip(),
+                    "id_documento": cedula
+                }
+
+                multas.append(multa)
+            except:
+                continue
+
     except:
         pass
 

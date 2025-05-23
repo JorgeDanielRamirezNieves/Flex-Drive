@@ -12,7 +12,7 @@ def consultar_multas():
         return jsonify({"error": "Falta el parámetro 'cedula'"}), 400
 
     multas = obtener_multas_por_cedula(cedula)
-    return jsonify({"cedula": cedula, "multas": multas}), 200
+    return jsonify({"multas": multas}), 200
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
