@@ -5,6 +5,7 @@ import { catchError, finalize, map, Subscription } from 'rxjs';
 import { VehicleService } from '../../services/vehicle.service';
 import { Vehicle } from '../../models/vehicle';
 import { observatorAny } from '../../../../core/tipo-any';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-myvehicles',
@@ -16,6 +17,7 @@ export class MyvehiclesComponent implements OnDestroy, OnInit {
   private suscribe: Subscription;
   public tmp: any;
   public userUUID: string;
+  public token: any;
   public vehicles: Vehicle[] | undefined;
   public complete: boolean = false;
 
@@ -28,7 +30,8 @@ export class MyvehiclesComponent implements OnDestroy, OnInit {
 
   constructor(private router: Router, private vehicleService: VehicleService) {
     this.suscribe = this.tmp;
-    this.userUUID = localStorage.getItem('userUUID') || '';
+    this.token = jwtDecode(localStorage.getItem('authToken') || '');
+    this.userUUID = this.token.uuid;
   }
 
   ngOnInit(): void {

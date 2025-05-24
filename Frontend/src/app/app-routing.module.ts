@@ -40,7 +40,6 @@ const routes: Routes = [
     path: 'vehicles',
     loadChildren: () =>
       import('./features/vehicle/vehicle.module').then((m) => m.VehicleModule),
-    canActivate: [authGuard],
   },
   {
     path: 'requests',

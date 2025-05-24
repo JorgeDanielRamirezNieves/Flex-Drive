@@ -20,7 +20,6 @@ export class NavbarComponent {
     console.log('Rol recibido desde el servicio:', roleObj);
 
     this.rol = this.authService.getUserRole();
-    console.log('Rol extraído:', this.rol);
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updateLoginStatus();

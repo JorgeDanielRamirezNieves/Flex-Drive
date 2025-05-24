@@ -5,15 +5,20 @@ import { VehiculosLandingComponent } from './components/vehiculos-landing/vehicu
 import { MyvehiclesComponent } from './components/myvehicles/myvehicles.component';
 import { BusquedaComponent } from './components/busqueda/busqueda.component';
 import { DetalleVehiculoComponent } from './components/detalle-vehiculo/detalle-vehiculo.component';
+import { authGuard } from '../auth/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'start',
     component: VehiculosLandingComponent,
   },
-  { path: 'myvehicles', component: MyvehiclesComponent },
+  { path: 'myvehicles', component: MyvehiclesComponent, 
+    canActivate: [authGuard],
+   },
   { path: 'search', component: BusquedaComponent },
-  { path: 'detail/:uuid', component: DetalleVehiculoComponent },
+  { path: 'detail/:uuid', component: DetalleVehiculoComponent , 
+    canActivate: [authGuard],
+  },
   { path: '', redirectTo: 'start', pathMatch: 'full' },
 ];
 

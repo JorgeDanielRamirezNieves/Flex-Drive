@@ -1,3 +1,4 @@
+import { jwtDecode } from 'jwt-decode';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { catchError, finalize, map, Subscription } from 'rxjs';
@@ -15,15 +16,17 @@ import { VehicleService } from '../../../vehicle/services/vehicle.service';
 export class UserComponent implements OnInit, OnDestroy {
   private suscribe: Subscription;
   public tmp: any;
-  public userUUID: string;
+  public token: any;
   public role: string;
+  public userUUID: string;
   public user: User | undefined;
   public vehicles: Vehicle[] | undefined;
   public complete: boolean = false;
   constructor(private userService: UserService, private vehicleService: VehicleService) {
     this.suscribe = this.tmp;
-    this.userUUID = localStorage.getItem('userUUID') || '';
-    this.role = localStorage.getItem('role') || '';
+    this.token = jwtDecode(localStorage.getItem('authToken') || '');
+    this.role = this.token.rolUser.name;
+    this.userUUID = this.token.uuid;
   }
 
   ngOnDestroy(): void {

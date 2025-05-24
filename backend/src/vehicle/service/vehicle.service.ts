@@ -30,8 +30,6 @@ export class VehicleService {
         'typeSaleVehicle',
         'ownerVehicle',
         'prices',
-        'TecnomecanicVehicle',
-        'soatVehicle',
         'detailsVehicle',
       ],
     });
@@ -43,9 +41,9 @@ export class VehicleService {
       relations: [
         'typeSaleVehicle',
         'ownerVehicle',
-        'TecnomecanicVehicle',
-        'soatVehicle',
         'prices',
+        'soatVehicle',
+        'TecnomecanicVehicle',
         'detailsVehicle',
       ],  
     });
@@ -56,8 +54,6 @@ export class VehicleService {
       relations: [
         'typeSaleVehicle',
         'ownerVehicle',
-        'TecnomecanicVehicle',
-        'soatVehicle',
         'prices',
         'detailsVehicle',
       ],
@@ -65,21 +61,16 @@ export class VehicleService {
     });
   }
   public async getVehiclesMostRequest(limit: number): Promise<Vehicle[] | null> {
-    const vehicles = await this.VehicleRepository
+    return await this.VehicleRepository
     .createQueryBuilder('v')
-    .select('v.*')
+    .leftJoinAndSelect('v.typeSaleVehicle', 'ts')
+    .leftJoinAndSelect('v.detailsVehicle', 'd')
+    .leftJoinAndSelect('v.prices', 'p')
     .leftJoin('requests', 'r', 'r.idVehicle = v.uuid')
     .groupBy('v.uuid') 
     .orderBy('COUNT(r.uuid)', 'DESC')
     .limit(limit)
-    .getRawMany();
-    return Promise.all(vehicles.map(async (vehicle) => {
-      vehicle.prices = await this.PricesRepository.find({  where: { vehicle: { uuid: vehicle.uuid } } });
-      vehicle.soatVehicle = await this.SoatRepository.find({ where: { vehicleSoat: { uuid: vehicle.uuid } } });
-      vehicle.TecnomecanicVehicle = await this.TecnomecanicRepository.find({ where: { vehicleTecnomecnic: { uuid: vehicle.uuid } } });
-      vehicle.detailsVehicle = await this.TecnicalDetailsRepository.findOne({ where: { vehicle: { uuid: vehicle.uuid } } }) || undefined;
-      return vehicle;
-    }));
+    .getMany();
   }
 
   public async getVehiclesByUser(uuid: string): Promise<Vehicle[] | null> {
@@ -88,8 +79,6 @@ export class VehicleService {
       relations: [
         'typeSaleVehicle',
         'ownerVehicle',
-        'TecnomecanicVehicle',
-        'soatVehicle',
         'prices',
         'detailsVehicle',
       ],

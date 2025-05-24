@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap, BehaviorSubject } from 'rxjs';
 import { LoginResponse } from '../models/login';
 import { Router } from '@angular/router';
+import { URL_AUTH } from '../../../core/domains';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +34,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http
-      .post<LoginResponse>('http://localhost:3450/auth/login', {
+      .post<LoginResponse>(URL_AUTH + 'login', {
         email,
         password,
       })
@@ -43,12 +44,10 @@ export class AuthService {
           const role = respuesta.response?.rolUser;
 
           if (token) {
-            console.log('Token guardado:', token);
             this.setToken(token);
           }
 
           if (role) {
-            console.log('Rol guardado en localStorage:', role);
             this.setUserRole(role);
           }
         })
@@ -79,7 +78,6 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem('role');
-    localStorage.removeItem('userUUID');
     this.roleSubject.next(null);
     this.router.navigate(['/user/login']);
   }

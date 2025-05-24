@@ -30,6 +30,8 @@ export class ButtonComponent {
   }
 
   public handleClick(): void {
+    console.log('Button clicked!');
+
     if (this.type === 'link') {
       this.router.navigate([this.redirecTo]);
     }

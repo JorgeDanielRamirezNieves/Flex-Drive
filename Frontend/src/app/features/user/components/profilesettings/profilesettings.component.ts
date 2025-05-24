@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { observatorAny } from '../../../../core/tipo-any';
 import { PreferencesService } from '../../services/preferences.service';
 import { Preferences } from '../../models/preferences';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-profilesettings',
@@ -16,13 +17,15 @@ export class ProfilesettingsComponent implements OnInit, OnDestroy {
   public role: string;
   public subcription: Subscription;
   public tmp: any;
+  public token: any;
   public preferences: Preferences | undefined;
   public complete: boolean = false;
   public cards: any[];
 
   constructor(private preferencesService: PreferencesService) {
-    this.userUUID = localStorage.getItem('userUUID') || '';
-    this.role = localStorage.getItem('role') || '';
+    this.token = jwtDecode(localStorage.getItem('authToken') || '');
+    this.role = this.token.rolUser.name;
+    this.userUUID = this.token.uuid;
     this.subcription = this.tmp;
     this.cards = [
       {

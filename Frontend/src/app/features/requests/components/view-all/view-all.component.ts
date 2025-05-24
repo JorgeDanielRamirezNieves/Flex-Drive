@@ -3,6 +3,7 @@ import { Request } from '../../models/request';
 import { RequestsService } from '../../services/requests.service';
 import { catchError, finalize, map, Subscription } from 'rxjs';
 import { observatorAny } from '../../../../core/tipo-any';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-view-all',
@@ -19,12 +20,14 @@ export class ViewAllComponent {
   public loadingRequests: boolean;
   public userUUID: string;
   public role: string;
+  public token: any;
 
   constructor(private requestService: RequestsService) {
     this.loadingRequests = true;
     this.suscribe = this.tmp;
-    this.userUUID = localStorage.getItem('userUUID') || '';
-    this.role = localStorage.getItem('role') || '';
+    this.token = jwtDecode(localStorage.getItem('authToken') || '');
+    this.role = this.token.rolUser.name;
+    this.userUUID = this.token.uuid;
   }
 
   ngOnInit(): void {
@@ -55,7 +58,7 @@ export class ViewAllComponent {
       )
       .subscribe(observatorAny);
   }
-  
+
   private getRequestsByOwner() {
     this.suscribe = this.requestService
       .getByOwner(this.userUUID)
