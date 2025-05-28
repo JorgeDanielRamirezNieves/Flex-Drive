@@ -78,6 +78,14 @@ export class Notification {
   })
   @Column({ name: 'id_user', type: 'varchar', nullable: false })
   public idUser: string;
+  
+  @ApiProperty({
+    description: 'UUID of the related object (e.g., chat, service, etc.)',
+    type: String,
+    example: 'chat UUID',
+  })
+  @Column({ name: 'id_related', type: 'varchar', nullable: true })
+  public idRelated: string;
 
   @ManyToOne(() => User, (objUser: User) => objUser.userNotifications, {
     onUpdate: 'CASCADE',

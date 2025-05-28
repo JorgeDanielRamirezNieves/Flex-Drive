@@ -1,53 +1,40 @@
-import { HttpService } from '@nestjs/axios';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { lastValueFrom } from 'rxjs';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  constructor(private httpService: HttpService) {}
+  private readonly apiKey: string;
+  private readonly baseUrl: string;
+  constructor() {
+    this.apiKey = process.env.API_KEY_IMGBB || '';
+    this.baseUrl = 'https://api.imgbb.com/1/upload?expiration=600&key=' + this.apiKey;
+  }
 
   getHello(): string {
     return 'Hello World!';
   }
 
-  public async uploadImage(file: Express.Multer.File): Promise<{
-    success: boolean;
-    data: {
-      url: string;
-      delete_url: string;
-      display_url: string;
-    };
-  }> {
-    const apikey = process.env.API_KEY_IMGBB;
-    const params = new URLSearchParams();
-    params.append('image', file.buffer.toString('base64'));
-    params.append('key', apikey || '');
-    const url = `https://api.imgbb.com/1/upload`;
-    const response = await lastValueFrom(
-      this.httpService.post('https://api.imgbb.com/1/upload', params),
-    );
-
-    if (!response.data.success) {
-      throw new HttpException(
-        'Failed to upload image to ImgBB',
-        HttpStatus.BAD_REQUEST,
-      );
+  public async uploadImage(file: Express.Multer.File): Promise<any> {
+    if (!this.apiKey) {
+      throw new BadRequestException('API Key de ImgBB no configurada');
     }
 
-    // Verificar si la respuesta fue exitosa
-    if (response.data && response.data.data) {
-      const res = {
-        success: true,
-        data: {
-          url: response.data.data.url,
-          delete_url: response.data.data.delete_url,
-          display_url: response.data.data.display_url,
-        },
-      };
-      console.info('Imagen cargada');
-      return res;
-    } else {
-      throw new Error('Respuesta inesperada de ImgBB');
+    const formData = new FormData();
+    formData.append('image', file.buffer.toString('base64'));
+    try {
+      const response = await fetch(this.baseUrl, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new BadRequestException(`Error de ImgBB: ${data.error?.message || 'Error desconocido'}`);
+      }
+
+      return data.data;
+    } catch (error) {
+      throw new BadRequestException(`Error al subir imagen: ${error.message}`);
     }
   }
 }

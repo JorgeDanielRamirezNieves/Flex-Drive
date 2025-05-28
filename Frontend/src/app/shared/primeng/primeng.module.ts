@@ -15,6 +15,11 @@ import { TabsModule } from 'primeng/tabs';
 import { InputOtpModule } from 'primeng/inputotp';
 import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
+import { PopoverModule } from 'primeng/popover';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 
@@ -34,7 +39,12 @@ import { providePrimeNG } from 'primeng/config';
     DrawerModule,
     ProgressSpinnerModule,
     TabsModule,
-    InputOtpModule
+    InputOtpModule,
+    PopoverModule,
+    FileUploadModule,
+    ProgressBarModule,
+    AutoCompleteModule,
+    TooltipModule
   ],
     providers: [
       MessageService,
@@ -62,7 +72,12 @@ import { providePrimeNG } from 'primeng/config';
       DrawerModule,
       ProgressSpinnerModule,
       TabsModule,
-      InputOtpModule
+      InputOtpModule,
+      PopoverModule,
+      FileUploadModule,
+      ProgressBarModule,
+      AutoCompleteModule,
+      TooltipModule
     ],
 })
 export class PrimengModule { }

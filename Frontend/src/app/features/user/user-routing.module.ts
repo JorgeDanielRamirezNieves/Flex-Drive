@@ -11,18 +11,23 @@ import { UserComponent } from './components/user/user.component';
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: () =>
-      import('../auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('../auth/auth.module').then((m) => m.AuthModule),
   },
   { path: 'register', component: RegisterComponent },
   { path: 'editprofile', component: EditprofileComponent },
   { path: 'subscriptions', component: SubscriptionsComponent },
   {
     path: 'activechats',
-    loadChildren: () =>
-      import('../chat/chat.module').then((m) => m.ChatModule),
+    loadChildren: () => import('../chat/chat.module').then((m) => m.ChatModule),
   },
   { path: 'profilesettings', component: ProfilesettingsComponent },
+  {
+    path: 'preferences',
+    loadChildren: () =>
+      import('../preferences/preferences.module').then(
+        (m) => m.PreferencesModule
+      ),
+  },
   { path: '', component: UserComponent },
 ];
 

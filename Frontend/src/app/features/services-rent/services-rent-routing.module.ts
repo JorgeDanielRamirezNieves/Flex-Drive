@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'viewAll',
     component: ViewAllComponent,
   },
-  { path: 'details', component: DetailsServiceComponent },
+  { path: 'details/:uuid', component: DetailsServiceComponent },
   { path: '', redirectTo: 'viewAll', pathMatch: 'full' },
 ]
 

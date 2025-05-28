@@ -1,7 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../features/auth/services/auth.service';
 import { NavigationEnd, Router } from '@angular/router';
-import { Subscription, interval } from 'rxjs';
+import { NotificationsService } from '../../../features/notifications/services/notifications.service';
+import { Notification } from '../../../features/notifications/models/notification';
+import { catchError, finalize, interval, map, Subscription } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+import { observatorAny } from '../../../core/tipo-any';
 
 @Component({
   selector: 'app-navbar',
@@ -9,18 +13,40 @@ import { Subscription, interval } from 'rxjs';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit, OnDestroy {
-  isLoggedIn = false;
-  rol: string | null = null;
+export class NavbarComponent implements OnInit {
+  public isLoggedIn: boolean;
+  public rol: string | null;
+  public visible: boolean;
+  public notifications: Notification[];
+  public subcription: Subscription;
+  public tmp: any;
+  public userUUID: string;
+  public token: any;
+  public complete: boolean;
+  private roleSub: Subscription | null = null;
+  private tokenCheckSub: Subscription | null = null;
 
-  private roleSub?: Subscription;
-  private tokenCheckSub?: Subscription;
-
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private notificationService: NotificationsService
+  ) {
+    this.isLoggedIn = false;
+    this.rol = null;
+    this.visible = false;
+    this.notifications = [];
+    this.subcription = this.tmp;
+    if (this.authService.isAuthenticated()) {
+      this.token = jwtDecode(localStorage.getItem('authToken') || '');
+      this.userUUID = this.token.uuid;
+    }
+    this.userUUID = '';
+    this.complete = false;
+  }
 
   ngOnInit(): void {
     this.updateLoginStatus();
-    this.rol = this.authService.getUserRole();
+    const roleObj = this.authService.getUserRole();
 
     this.roleSub = this.authService.role$.subscribe((role) => {
       this.rol = role;
@@ -38,6 +64,30 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.logout();
       }
     });
+    if (this.authService.isAuthenticated()) {
+      this.getNotifications();
+    }
+  }
+
+  private getNotifications() {
+    this.subcription = this.notificationService
+      .getNotificationsByUser(this.userUUID)
+      .pipe(
+        map((res: any) => {
+          this.notifications = res;
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        }),
+        finalize(() => {
+          this.complete = true;
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  toggle() {
+    this.visible = !this.visible;
   }
 
   updateLoginStatus(): void {

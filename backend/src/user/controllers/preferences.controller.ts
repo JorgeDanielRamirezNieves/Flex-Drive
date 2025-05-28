@@ -52,6 +52,7 @@ export class PreferencesController {
     })
     private addPreferences(@Req() request: any): any {
         const objPreferences: Preferences = request.body;
+        console.log('objPreferences', objPreferences);
         if (objPreferences) {
             return this.PreferencesService.createPreferences(objPreferences);
         } else {

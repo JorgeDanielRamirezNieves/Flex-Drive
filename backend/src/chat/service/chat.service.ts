@@ -17,14 +17,16 @@ export class ChatService {
   public async getChatsByUUID(uuid: string): Promise<Chat | null> {
     return this.ChatRepository.findOne({ where: { uuid: uuid } });
   }
-  
+
   public async getChatsByuserUUID(useruuid: string): Promise<Chat[] | null> {
-    return this.ChatRepository
-    .createQueryBuilder('c')
-    .innerJoin('requests', 'r', 'r.uuid = c.id_request')
-    .innerJoin('user', 'u', 'u.uuid = r.id_client')
-    .where('u.uuid = :useruuid', { useruuid })
-    .getMany();
+    return this.ChatRepository.createQueryBuilder('c')
+      .leftJoinAndSelect('c.request', 'r')
+      .leftJoinAndSelect('c.chatMessage', 'm')
+      .leftJoinAndSelect('r.requestVehicle', 'v') // Asumiendo que tienes la relación configurada
+      .leftJoinAndSelect('v.ownerVehicle', 'owner')
+      .leftJoinAndSelect('r.requestUser', 'u') // Asumiendo que tienes la relación configurada
+      .where('m.idSender = :useruuid', { useruuid: useruuid })
+      .getMany();
   }
 
   public async createChat(objChat: Chat): Promise<Chat | HttpException> {

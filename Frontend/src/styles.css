@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
 
+
 .montserrat {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
@@ -10,4 +11,3 @@
     font-family: "Jura", sans-serif;
     font-optical-sizing: auto;
 }
-

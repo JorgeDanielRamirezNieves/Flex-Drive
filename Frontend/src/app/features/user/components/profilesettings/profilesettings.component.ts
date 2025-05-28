@@ -2,8 +2,8 @@ import { catchError, finalize, map, Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { observatorAny } from '../../../../core/tipo-any';
-import { PreferencesService } from '../../services/preferences.service';
-import { Preferences } from '../../models/preferences';
+import { PreferencesService } from '../../../preferences/services/preferences.service';
+import { Preferences } from '../../../preferences/models/preferences';
 import { jwtDecode } from 'jwt-decode';
 
 @Component({
@@ -45,7 +45,11 @@ export class ProfilesettingsComponent implements OnInit, OnDestroy {
         description:
           'Lorem ipsum dolor sit amet consectetur adipiscing elit. Amet consectetur a',
         imageS: '../../../../assets/icons/correo.png',
-        toggle: { type: 'text', labels: ['Si', 'No'], value: this.preferences?.configurations.mails },
+        toggle: {
+          type: 'text',
+          labels: ['Si', 'No'],
+          value: this.preferences?.configurations.mails,
+        },
       },
       {
         title: 'Tema',
@@ -67,14 +71,22 @@ export class ProfilesettingsComponent implements OnInit, OnDestroy {
         description:
           'Lorem ipsum dolor sit amet consectetur adipiscing elit. Amet consectetur a',
         imageS: '../../../../assets/icons/idioma.png',
-        toggle: { type: 'text', labels: ['Esp', 'Eng'], value: this.preferences?.configurations.language },
+        toggle: {
+          type: 'text',
+          labels: ['Esp', 'Eng'],
+          value: this.preferences?.configurations.language,
+        },
       },
       {
         title: 'Eliminar chats',
         description:
           'Lorem ipsum dolor sit amet consectetur adipiscing elit. Amet consectetur a',
         imageS: '../../../../assets/icons/mensaje.png',
-        toggle: { type: 'text', labels: ['Si', 'No'], value: this.preferences?.configurations.deleteChats },
+        toggle: {
+          type: 'text',
+          labels: ['Si', 'No'],
+          value: this.preferences?.configurations.deleteChats,
+        },
       },
     ];
   }

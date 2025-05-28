@@ -3,7 +3,7 @@ import { DataSource, DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { User } from '../models/user';
 import { Fines } from '../models/fines';
 import axios from 'axios';
-
+import * as bcrypt from 'bcryptjs'
 @Injectable()
 export class UserService {
   public UserRepository: Repository<User>;
@@ -37,48 +37,74 @@ export class UserService {
   }
 
   public async createUser(objUser: User): Promise<User | HttpException> {
-  try {
-    const savedUser = await this.UserRepository.save(objUser);
+    try {
+      /* const Backgrounds = await fetch(
+        'http://localhost:5001/antecedentes',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+          nombres: objUser.firstName + ' ' + objUser.lastName,
+          documento: objUser.noDocument,
+          tipoDocumento: objUser.typeDocumentUser?.name,
+        }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      ).then((response) => response.json());
 
-    const response = await axios.post(
-      'http://127.0.0.1:5000/api/multas',
-      {
+      console.log('Respuesta de la API de antecedentes:', Backgrounds);
+      if (Backgrounds.data.error) {
+        throw new Error(Backgrounds.data.error);
+      }
+
+      if (Backgrounds.data.mensaje_antecedentes == 'El ciudadano no presenta antecedentes') {
+        objUser.status = 'active';
+      } else {
+        objUser.status = 'under_review';
+      }     */  
+      
+      console.log('Creando usuario:', objUser);
+      const hashedPassword = await bcrypt.hash(objUser.password, 10);
+      objUser.password = hashedPassword;
+      
+      const savedUser = await this.UserRepository.save(objUser);
+/* 
+      const response = await axios.post('http://127.0.0.1:5000/api/multas', {
         cedula: objUser.noDocument,
-      },
-    );
-    console.log('Respuesta de la API de multas:', response.data);
-
-    const fines = response.data.multas;
-
-    if (Array.isArray(fines)) {
-      const finesToSave = fines.map((fine) => {
-      const [day, month, year] = fine.fecha_comparendo.split('/');
-      const newDate = new Date(`${year}-${month}-${day}`);
-
-      return this.FinesRepository.create({
-        noFine: fine.numero_comparendo,
-        status: fine.estado,
-        fineDate: newDate,
-        infractionCode: fine.codigo_infraccion,
-        infractionDescription: fine.descripcion_infraccion,
-        entitie: fine.entidad,
-        idUser: savedUser.uuid,
       });
-    });
+      console.log('Respuesta de la API de multas:', response.data);
 
+      const fines = response.data.multas;
 
-      await this.FinesRepository.save(finesToSave);
+      if (Array.isArray(fines)) {
+        const finesToSave = fines.map((fine) => {
+          const [day, month, year] = fine.fecha_comparendo.split('/');
+          const newDate = new Date(`${year}-${month}-${day}`);
+
+          return this.FinesRepository.create({
+            noFine: fine.numero_comparendo,
+            status: fine.estado,
+            fineDate: newDate,
+            infractionCode: fine.codigo_infraccion,
+            infractionDescription: fine.descripcion_infraccion,
+            entitie: fine.entidad,
+            idUser: savedUser.uuid,
+          });
+        });
+
+        await this.FinesRepository.save(finesToSave);
+      } */
+
+      return savedUser;
+    } catch (error) {
+      console.error('Error creating user or saving fines:', error);
+      return new HttpException(
+        `Error creating User or fetching fines: ${error.message}`,
+        500,
+      );
     }
-
-    return savedUser;
-  } catch (error) {
-    console.error('Error creating user or saving fines:', error);
-    return new HttpException(
-      `Error creating User or fetching fines: ${error.message}`,
-      500,
-    );
   }
-}
 
   public async updateUser(
     uuid: string,

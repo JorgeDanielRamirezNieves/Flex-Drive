@@ -43,7 +43,7 @@ export class LoginComponent {
             alert(`Error: ${err.message}`);
             console.error('Detalles del error:', err);
           },
-        });
+        })
     }
   }
 }

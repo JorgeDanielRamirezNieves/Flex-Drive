@@ -1,28 +1,31 @@
 <div
   id="card-rental-vehicles"
-  [routerLink]="['/services/details']"
+  [routerLink]="['/services/details/', service?.uuid]"
   routerLinkActive="router-link-active"
   class="flex items-center gap-4 bg-[#d9d9d9] rounded-lg shadow-md mx-15 py-4 hover:cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out"
 >
   <div class="w-80 p-4">
-    <img
-      src="../../../../assets/carro.png"
-      alt="carro.png"
-      class="w-auto mx-auto"
-    />
+    <img [src]="image?.itemImageSrc" alt="carro.png" class="w-auto mx-auto" />
   </div>
   <div class="w-full mx-10 space-y-4">
     <div class="flex justify-between jura w-full">
-      <p>5 Marzo 2025</p>
-      <p>En viaje</p>
+      <p>{{ service?.createdAt }}</p>
+      <p>{{ service?.status?.replaceAll("_", " ")?.toLowerCase() }}</p>
     </div>
     <div class="border-[0.5px] border-[#000]"></div>
     <div>
       <div class="justify-between jura w-full flex">
-        <h2 class="text-2xl jura font-bold">Suzuki Swift</h2>
-        <p class="font-bold">Arrendatario</p>
+        <h2 class="text-2xl jura font-bold">
+          {{ service?.request?.requestVehicle?.detailsVehicle?.brand }}&nbsp;{{
+            service?.request?.requestVehicle?.detailsVehicle?.model
+          }}
+        </h2>
+        <p class="font-bold">
+          {{ service?.request?.requestVehicle?.ownerVehicle?.firstName }}
+          {{ service?.request?.requestVehicle?.ownerVehicle?.lastName }}
+        </p>
       </div>
-      <div class="justify-between jura w-full flex my-5">
+      <div class="justify-between jura w-full flex gap-5 my-5">
         <div class="flex justify-between items-center gap-10">
           <span class="flex justify-center items-center gap-2">
             <img
@@ -30,7 +33,7 @@
               alt="passanger.png"
               class="w-1/4"
             />
-            <p>#</p>
+            <p>{{ service?.request?.requestVehicle?.capacity }}</p>
           </span>
           <span class="flex justify-center items-center gap-2">
             <img
@@ -38,7 +41,11 @@
               alt="passanger.png"
               class="w-1/3"
             />
-            <p>#</p>
+            <p>
+              {{
+                service?.request?.requestVehicle?.detailsVehicle?.loadCapacity
+              }}
+            </p>
           </span>
           <span class="flex justify-center items-center gap-2">
             <img
@@ -46,7 +53,7 @@
               alt="passanger.png"
               class="w-1/3"
             />
-            <p>#</p>
+            <p>{{ service?.request?.requestVehicle?.doors }}</p>
           </span>
           <span class="flex justify-center items-center gap-2">
             <img
@@ -54,15 +61,17 @@
               alt="passanger.png"
               class="w-1/2"
             />
-            <p>#</p>
+            <p>{{ service?.request?.requestVehicle?.plate?.slice(-1) }}</p>
           </span>
         </div>
-        <div>
-          <p>Compacto, eficiente y económico</p>
-        </div>
+        <p class="text-center w-1/2">{{ service?.request?.requestVehicle?.availability }}</p>
       </div>
       <div class="flex justify-between jura w-full items-center">
-        <h3 class="text-xl montserrat font-bold">$ 120.000 /dia</h3>
+        <h3 class="text-xl montserrat font-bold">
+          $ {{ price | currency : "COP" }}/{{
+            service?.request?.requestVehicle?.typeSaleVehicle?.name
+          }}
+        </h3>
         <svg
           id="eye-icon"
           xmlns="http://www.w3.org/2000/svg"

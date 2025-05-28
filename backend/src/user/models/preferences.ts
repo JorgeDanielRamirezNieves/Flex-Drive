@@ -16,7 +16,7 @@ export interface configurations {
   deleteChats: boolean;
 }
 
-export interface paramters {    //Each parameter is an array, because the user can select multiple options
+export interface Parameters {    //Each parameter is an array, because the user can select multiple options
   class:string[];
   color:string[];
   mileage:number[];         // PROPOSAL: mileage: { min: number; max: number };
@@ -79,16 +79,16 @@ export class Preferences {
       model: ['Corolla', 'Civic'],
     },
   })
-  public paramters: paramters;
+  public parameters: Parameters;
 
   @OneToOne(() => User, (objUser) => objUser.uuid)
   @JoinColumn({ name: 'id_user', referencedColumnName: 'uuid' })
   public User: User;
 
-  constructor(uuid: string, idUser:string, configuration: configurations, paramters:paramters){
+  constructor(uuid: string, idUser:string, configuration: configurations, paramters:Parameters){
     this.uuid = uuid;
     this.idUser = idUser;
     this.configurations = configuration;
-    this.paramters = paramters
+    this.parameters = paramters
   } 
 }

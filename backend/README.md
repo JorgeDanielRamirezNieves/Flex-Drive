@@ -7,6 +7,9 @@
 - @nest_js/swagger
 - jsonwebtoken
 - bycript
+- @nestjs/axios
+- axios
+- form-data
 
 
 # Setup de ambiente de backend 

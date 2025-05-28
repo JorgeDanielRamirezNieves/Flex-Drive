@@ -8,7 +8,6 @@ export class Fine {
   public infractionCode: string;
   public infractionDescription: string;
   public entitie: string;
-  public noResolution: string;
   public idUser: string;
   public finesUser?: User;
 
@@ -20,7 +19,6 @@ export class Fine {
     infractionCode: string,
     infractionDescription: string,
     entitie: string,
-    noResolution: string,
     idUser: string
   ) {
     this.uuid = uuid;
@@ -30,7 +28,6 @@ export class Fine {
     this.infractionCode = infractionCode;
     this.infractionDescription = infractionDescription;
     this.entitie = entitie;
-    this.noResolution = noResolution;
     this.idUser = idUser;
   }
 }

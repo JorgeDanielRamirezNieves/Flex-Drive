@@ -10,15 +10,19 @@
     <section class="w-full flex justify-center items-center gap-5 px-10 py-5">
       <div class="flex flex-col justify-center items-center gap-3 mr-5">
         <h2 class="text-3xl jura text-center">
-          Tipo de user
-          <!-- dependera de como este logueado el usuario -->
+          {{
+            isOwner ? "Solicitante del servicio" : "Propietario del vehículo"
+          }}
         </h2>
         <div
-          class="m-auto w-[200px] h-[200px] rounded-full border-2 flex justify-center items-center"
+          class="m-auto w-[200px] h-[200px] flex justify-center items-center"
         >
           <img
-            class="w-[50%]"
-            src="../../../../assets/icons/camara.png"
+            [src]="
+              isOwner
+                ? service?.request?.requestUser?.image
+                : service?.request?.requestVehicle?.ownerVehicle?.image
+            "
             alt=""
           />
         </div>
@@ -28,7 +32,7 @@
         class="bg-[#d9d9d9] w-full h-fit p-10 rounded-lg border-2 border-gray-400 jura"
       >
         <p-tablist>
-          <p-tab value="0">Detalles técnicos</p-tab>
+          <p-tab value="0">Detalles de la persona</p-tab>
           <p-tab value="1">Multas</p-tab>
         </p-tablist>
         <p-tabpanels>
@@ -37,21 +41,52 @@
               class="flex flex-col justify-center items-start gap-10 text-xl jura w-full h-full py-10 px-10"
             >
               <li>
-                <strong>Nombre:</strong>&nbsp;{{ service.request.user.name }}
-              </li>
-              <li>
-                <strong>Ciudad:</strong>&nbsp;{{ service.request.user.city }}
-              </li>
-              <li>
-                <strong>Documento:</strong>&nbsp;{{
-                  service.request.user.documentType
+                <strong>Nombre:</strong>&nbsp;
+                {{
+                  isOwner
+                    ? service?.request?.requestUser?.firstName +
+                      " " +
+                      service?.request?.requestUser?.lastName
+                    : service?.request?.requestVehicle?.ownerVehicle
+                        ?.firstName +
+                      " " +
+                      service?.request?.requestVehicle?.ownerVehicle?.lastName
                 }}
-                {{ service.request.user.document }}
+              </li>
+              <li>
+                <strong>Lugar de residencia:</strong>&nbsp;
+                {{
+                  isOwner
+                    ? service?.request?.requestUser?.city +
+                      " ," +
+                      service?.request?.requestUser?.country
+                    : service?.request?.requestVehicle?.ownerVehicle?.city +
+                      " ," +
+                      service?.request?.requestVehicle?.ownerVehicle?.country
+                }}
+              </li>
+
+              <li>
+                <strong>Documento:</strong>&nbsp;
+                {{
+                  isOwner
+                    ? service?.request?.requestUser?.typeDocumentUser?.name +
+                      " " +
+                      service?.request?.requestUser?.noDocument
+                    : service?.request?.requestVehicle?.ownerVehicle
+                        ?.typeDocumentUser?.name +
+                      " " +
+                      service?.request?.requestVehicle?.ownerVehicle?.noDocument
+                }}
               </li>
               <li class="w-full flex">
                 <strong>Rating:</strong>&nbsp;<p-rating
                   readonly="true"
-                  [(ngModel)]="service.request.user.rating"
+                  [ngModel]="
+                    isOwner
+                      ? service?.request?.requestUser?.rating
+                      : service?.request?.requestVehicle?.ownerVehicle?.rating
+                  "
                 ></p-rating>
               </li>
             </ul>
@@ -67,20 +102,41 @@
                   <th>Numero de comparendo</th>
                   <th>Entidad</th>
                   <th>Código de Infracción</th>
+                  <th>Descripción de Infracción</th>
                   <th class="rounded-tr-lg">Estado</th>
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let multa of service.request.vehicle.multas"
-                  class="text-center text-lg py-3"
-                >
-                  <td>{{ multa.fecha_comparendo }}</td>
-                  <td>{{ multa.no_comparendo }}</td>
-                  <td>{{ multa.entidad }}</td>
-                  <td>{{ multa.codigo_infraccion }}</td>
-                  <td>{{ multa.status }}</td>
-                </tr>
+                <ng-container *ngIf="isOwner">
+                  <tr
+                    *ngFor="
+                      let fine of service?.request?.requestUser?.userFines
+                    "
+                    class="text-center text-lg py-3"
+                  >
+                    <td>{{ fine.fineDate.toString() }}</td>
+                    <td>{{ fine.noFine }}</td>
+                    <td>{{ fine.entitie }}</td>
+                    <td>{{ fine.infractionCode }}</td>
+                    <td>{{ fine.infractionDescription }}</td>
+                    <td>{{ fine.status }}</td>
+                  </tr>
+                </ng-container>
+                <ng-container *ngIf="!isOwner">
+                  <tr
+                    *ngFor="
+                      let fine of service?.request?.requestVehicle?.ownerVehicle?.userFines
+                    "
+                    class="text-center text-lg py-3"
+                  >
+                    <td>{{ fine.fineDate.toString() }}</td>
+                    <td>{{ fine.noFine }}</td>
+                    <td>{{ fine.entitie }}</td>
+                    <td>{{ fine.infractionCode }}</td>
+                    <td>{{ fine.infractionDescription }}</td>
+                    <td>{{ fine.status }}</td>
+                  </tr>
+                </ng-container>
               </tbody>
             </table>
           </p-tabpanel>
@@ -91,7 +147,7 @@
       <div class="flex flex-col justify-center items-center gap-3 mr-5">
         <h2 class="text-3xl jura text-center">Vehículo rentado</h2>
         <p-galleria
-          [value]="service.request.vehicle.images"
+          [value]="service?.request?.requestVehicle?.image"
           [containerStyle]="{ 'max-width': '200px' }"
           [numVisible]="5"
         >
@@ -111,7 +167,6 @@
           <p-tab value="0">Detalles técnicos</p-tab>
           <p-tab value="1">SOAT</p-tab>
           <p-tab value="2">Tecnomecanica</p-tab>
-          <p-tab value="3">Multas</p-tab>
         </p-tablist>
         <p-tabpanels>
           <p-tabpanel value="0">
@@ -121,32 +176,33 @@
               >
                 <li>
                   <strong>Marca:</strong>&nbsp;{{
-                    service.request.vehicle.detalles.marca
+                    service?.request?.requestVehicle?.detailsVehicle?.brand
                   }}
                 </li>
                 <li>
                   <strong>Modelo:</strong>&nbsp;{{
-                    service.request.vehicle.detalles.modelo
+                    service?.request?.requestVehicle?.detailsVehicle?.model
                   }}
                 </li>
                 <li>
                   <strong>Año:</strong>&nbsp;{{
-                    service.request.vehicle.detalles.year
+                    service?.request?.requestVehicle?.detailsVehicle?.year
                   }}
                 </li>
                 <li>
                   <strong>Cilindraje:</strong>&nbsp;{{
-                    service.request.vehicle.detalles.cilindraje
+                    service?.request?.requestVehicle?.detailsVehicle
+                      ?.cylinderCapacity
                   }}
                 </li>
                 <li>
                   <strong>Combustible:</strong>&nbsp;{{
-                    service.request.vehicle.detalles.combustible
+                    service?.request?.requestVehicle?.detailsVehicle?.fuelType
                   }}
                 </li>
                 <li>
                   <strong>Color:</strong>&nbsp;{{
-                    service.request.vehicle.color
+                    service?.request?.requestVehicle?.color
                   }}
                 </li>
               </ul>
@@ -155,28 +211,29 @@
               >
                 <li>
                   <strong>Capacidad:</strong>&nbsp;{{
-                    service.request.vehicle.capacidad
+                    service?.request?.requestVehicle?.capacity
                   }}
                 </li>
                 <li>
                   <strong>Puertas:</strong>&nbsp;{{
-                    service.request.vehicle.puertas
+                    service?.request?.requestVehicle?.doors
                   }}
                 </li>
                 <li>
                   <strong>capacidad de carga (kg):</strong>&nbsp;{{
-                    service.request.vehicle.carga
+                    service?.request?.requestVehicle?.detailsVehicle
+                      ?.loadCapacity
                   }}
                 </li>
                 <li>
-                  <strong>Trasmisión:</strong>&nbsp;{{
-                    service.request.vehicle.detalles.transmision
+                  <strong>Peso:</strong>&nbsp;{{
+                    service?.request?.requestVehicle?.detailsVehicle?.weight
                   }}
                 </li>
                 <li>
                   <strong>Rating</strong>&nbsp;<p-rating
                     readonly="true"
-                    [(ngModel)]="service.request.vehicle.rating"
+                    [ngModel]="service?.request?.requestVehicle?.rating"
                   ></p-rating>
                 </li>
               </ul>
@@ -193,7 +250,10 @@
                       class="grid grid-cols-3 place-items-center gap-5 list-disc"
                     >
                       <li
-                        *ngFor="let item of service.request.vehicle.accesorios"
+                        *ngFor="
+                          let item of service?.request?.requestVehicle
+                            ?.accesories
+                        "
                       >
                         {{ item }}
                       </li>
@@ -209,34 +269,25 @@
             >
               <li>
                 <strong>Fecha de inicio:</strong>&nbsp;{{
-                  service.request.vehicle.soat.fecha_inicio
+                  soat?.startDate?.toString()
                 }}
               </li>
               <li>
                 <strong>Fecha de fin:</strong>&nbsp;{{
-                  service.request.vehicle.soat.fecha_fin
+                  soat?.finishDate?.toString()
                 }}
               </li>
               <li>
                 <strong>Fecha de expedición:</strong>&nbsp;{{
-                  service.request.vehicle.soat.fecha_expedicion
+                  soat?.expeditionDate?.toString()
                 }}
               </li>
-              <li>
-                <strong>Entidad:</strong>&nbsp;{{
-                  service.request.vehicle.soat.entidad
-                }}
-              </li>
+              <li><strong>Entidad:</strong>&nbsp;{{ soat?.entitie }}</li>
               <li class="flex items-center gap-2">
-                <strong>Status:</strong>&nbsp; @if
-                (service.request.vehicle.soat.status === 'active'){
-                <p class="text-lime-500">
-                  {{ service.request.vehicle.soat.status }}
-                </p>
+                <strong>Status:</strong>&nbsp; @if (soat?.status){
+                <p class="text-lime-500">Activo</p>
                 } @else {
-                <p class="text-red-600">
-                  {{ service.request.vehicle.soat.status }}
-                </p>
+                <p class="text-red-600">Inactivo</p>
                 }
               </li>
             </ul>
@@ -246,68 +297,31 @@
               class="flex flex-col justify-center items-start gap-2 text-xl jura w-full py-5 px-10"
             >
               <li>
-                <strong>Fecha de vigencia:</strong>&nbsp;{{
-                  service.request.vehicle.tecnomecanica.fecha_vigencia
-                }}
-              </li>
-              <li>
                 <strong>Fecha de expedición:</strong>&nbsp;{{
-                  service.request.vehicle.tecnomecanica.fecha_expedicion
+                  tecnomecanic?.expeditionDate
                 }}
               </li>
               <li>
-                <strong>CDA:</strong>&nbsp;{{
-                  service.request.vehicle.tecnomecanica.cda
+                <strong>Fecha de expiración:</strong>&nbsp;{{
+                  tecnomecanic?.expirationDate
                 }}
               </li>
+              <li><strong>CDA:</strong>&nbsp;{{ tecnomecanic?.entitie }}</li>
               <li class="flex items-center gap-2">
-                <strong>Status:</strong>&nbsp; @if
-                (service.request.vehicle.soat.status === 'active'){
-                <p class="text-lime-500">
-                  {{ service.request.vehicle.soat.status }}
-                </p>
+                <strong>Status:</strong>&nbsp; @if (tecnomecanic?.status) {
+                <p class="text-lime-500">Active</p>
                 } @else {
-                <p class="text-red-600">
-                  {{ service.request.vehicle.soat.status }}
-                </p>
+                <p class="text-red-600">Inactive</p>
                 }
               </li>
             </ul>
-          </p-tabpanel>
-          <p-tabpanel
-            value="3"
-            class="flex flex-col justify-center items-center p-5"
-          >
-            <table class="w-full">
-              <thead class="bg-[#54A8A3]">
-                <tr class="text-white">
-                  <th class="rounded-tl-lg py-3">Fecha de comparendo</th>
-                  <th>Numero de comparendo</th>
-                  <th>Entidad</th>
-                  <th>Código de Infracción</th>
-                  <th class="rounded-tr-lg">Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  *ngFor="let multa of service.request.vehicle.multas"
-                  class="text-center text-lg py-3"
-                >
-                  <td>{{ multa.fecha_comparendo }}</td>
-                  <td>{{ multa.no_comparendo }}</td>
-                  <td>{{ multa.entidad }}</td>
-                  <td>{{ multa.codigo_infraccion }}</td>
-                  <td>{{ multa.status }}</td>
-                </tr>
-              </tbody>
-            </table>
           </p-tabpanel>
         </p-tabpanels>
       </p-tabs>
     </section>
     <section
       class="bg-[#d9d9d9] w-4/5 h-fit p-10 rounded-lg border-2 border-gray-400 jura grid grid-cols-2 place-items-center"
-      *ngIf="service.status === 'for_take'"
+      *ngIf="service?.status === 'for_take'"
     >
       <div class="flex flex-col justify-center items-center gap-4">
         <h1 class="text-4xl">Preparatorios para el viaje</h1>
@@ -324,7 +338,7 @@
       <form
         action=""
         class="flex flex-col justify-center items-center gap-4"
-        *ngIf="service.request.user.rol === 'user'; else codigoOTP"
+        *ngIf="isOwner; else codigoOTP"
       >
         <label for="" class="text-2xl px-5 text-center"
           >Ingresa el código generado por el propietario</label
@@ -335,7 +349,7 @@
     </section>
     <section
       class="bg-[#d9d9d9] w-4/5 h-fit p-10 rounded-lg border-2 border-gray-400 jura grid grid-cols-2 place-items-center"
-      *ngIf="service.status === 'for_receive'"
+      *ngIf="service?.status === 'for_recive'"
     >
       <div class="flex flex-col justify-center items-center gap-4">
         <h1 class="text-4xl">Finalización del viaje</h1>
@@ -352,7 +366,7 @@
       <form
         action=""
         class="flex flex-col justify-center items-center gap-4"
-        *ngIf="service.request.user.rol === 'user'; else codigoOTP"
+        *ngIf="isOwner; else codigoOTP"
       >
         <label for="" class="text-2xl px-5 text-center"
           >Ingresa el código generado por el propietario</label
@@ -371,7 +385,7 @@
           inline="true"
           disabled="true"
           inputId="icondisplay"
-          [(ngModel)]="service.request.pickupDate"
+          [(ngModel)]="deliveryDate"
         ></p-datepicker>
       </span>
       <span class="flex flex-col justify-center items-center gap-3 grow">
@@ -383,7 +397,7 @@
           inline="true"
           disabled="true"
           inputId="icondisplay"
-          [(ngModel)]="service.request.returnDate"
+          [(ngModel)]="returnDate"
         ></p-datepicker>
       </span>
     </section>
@@ -395,7 +409,7 @@
         iconPos="right"
       ></app-button>
       <app-button
-        *ngIf="service.status !== 'for_take'"
+        *ngIf="service?.status !== 'for_take'"
         label="Ir al chat"
         icon="pi pi-arrow-right"
         type="link"
@@ -403,14 +417,14 @@
         redirecTo="/user/activechats"
       ></app-button>
       <app-button
-        *ngIf="service.status === 'on_travel'"
+        *ngIf="service?.status === 'on_travel'"
         label="Finalizar servicio"
         icon="pi pi-check"
         type="button"
         iconPos="right"
       ></app-button>
       <app-button
-        *ngIf="service.status !== 'for_take'"
+        *ngIf="service?.status !== 'for_take'"
         label="Reportar problema"
         icon="pi pi-exclamation-triangle"
         type="link"

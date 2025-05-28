@@ -1,0 +1,172 @@
+:host ::ng-deep .p-fileupload-header{
+    border-width: 0;
+}
+
+:host ::ng-deep .p-button-icon{
+    font-size: x-large;
+}
+
+:host ::ng-deep .p-toast-message{
+  border: 1px solid #54a8a3;
+  background: #ffffff;
+  border-radius: 10px;
+  color: #54a8a3;
+  box-shadow: 0 1px 15px -5px #00000090;
+  padding: 10px;
+}
+
+:host ::ng-deep .p-toast-message-icon {
+  color: #54a8a3;
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+:host ::ng-deep .p-toast-summary {
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+:host ::ng-deep .p-toast-close-button {
+  color: #54a8a3;
+  font-size: 1.5rem;
+  transition: all 0.3s ease-in-out;
+} 
+
+:host ::ng-deep .p-toast-close-button:hover {
+  transform: scale(1.2);
+} 
+
+
+:host ::ng-deep .p-fileupload-header {
+    background: #54a8a3;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    gap: 10px;
+}
+
+:host ::ng-deep .p-fileupload-choose-button {
+    background: #ffffff;
+    color: #54a8a3;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-fileupload-upload-button {
+    background: #ffffff;
+    color: #54a8a3;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-fileupload-cancel-button {
+    background: #ffffff;
+    color: #54a8a3;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-button:not(:disabled):hover {
+    scale: 1.05;
+    background: #ffffff;
+    color: #54a8a3;
+}
+
+
+:host ::ng-deep .p-fileupload-file{
+    background: #ffffff;
+    color: #54a8a3;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #54a8a3;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px;
+}
+
+:host ::ng-deep .p-progressbar {
+    background: #54a8a3;
+    border-radius: 10px;
+    height: 2px;
+}
+
+:host ::ng-deep .p-select-label{
+  transition: all 0.3s ease-in-out; 
+}
+
+:host ::ng-deep .p-select-label:hover{
+  color: #54a8a3; 
+}
+
+:host ::ng-deep .p-select-list{
+  background-color: #ffffff;
+  
+}
+
+:host ::ng-deep .p-select-list-container{
+  box-shadow: 0 0 15px -5px #00000090;
+  border-radius: 10px;
+}
+
+:host ::ng-deep .p-select-option{
+  padding: 10px;   
+  transition: all 0.3s ease-in-out; 
+}
+
+/* esto no se porque lo toma como hover */
+:host ::ng-deep .p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus{
+  background-color: #54a8a3;
+  color: #ffffff;
+}
+
+
+.p-select {
+  background: #ffffff;
+  border: 1px solid transparent;
+  padding: 10px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 15px -5px #00000090;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  margin-top: 16px;
+}
+
+.p-select:hover {
+  border-color: #54a8a3;
+  border-right-color: #000000;
+}
+
+.p-select:focus-within {
+  border-color: #54a8a3;
+  border-right-color: #000000;
+  box-shadow: 0 10px 15px -5px #00000090;
+}
+
+.country-name {
+  font-size: 1.2rem;
+  color: #54a8a3;
+  font-weight: 600;
+  font-family: "Noto Color Emoji", sans-serif;
+} 

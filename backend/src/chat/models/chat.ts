@@ -41,7 +41,7 @@ export class Chat {
   @JoinColumn({ name: 'id_request', referencedColumnName: 'uuid' })
   public request: Request;
 
-  @OneToMany(() => Message, (objMessege: Message) => objMessege.idChat)
+  @OneToMany(() => Message, (objMessege: Message) => objMessege.messageChat)
   public chatMessage?: Message[];
 
   constructor(

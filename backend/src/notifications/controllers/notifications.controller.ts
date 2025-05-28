@@ -39,6 +39,30 @@ export class NotificationsController {
     }
   }
 
+  @Get('findByUser/:uuid')
+  @ApiParam({
+    name: 'uuid',
+    description: 'UUID of the User',
+    required: true,
+    type: String,
+  })
+  private async findNotificationsByUser(@Param('uuid') uuid: any) {
+    const uuidUser = uuid;
+    if (uuidUser && uuidUser.length > 0) {
+      const notifications =
+        await this.NotificationService.getNotificationsOfUser(uuidUser);
+      return (
+        notifications?.filter(
+          (notification) =>
+            notification.typeNotification?.name !== 'email' &&
+            notification.typeNotification?.name !== 'sms'
+        ) || []
+      );
+    } else {
+      return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
+    }
+  }
+
   @Post('add')
   @ApiBody({
     description: 'Object Notification',

@@ -220,7 +220,7 @@ export class User {
   @OneToMany(() => Vehicle, (objVehicle: Vehicle) => objVehicle.idOwner)
   public userVehicles?: Vehicle[];
 
-  @OneToMany(() => Fines, (objfine: Fines) => objfine.idUser)
+  @OneToMany(() => Fines, (objfine: Fines) => objfine.finesUser)
   public userFines?: Fines[];
 
   @OneToMany(() => Reports, (objReport: Reports) => objReport.idUser)

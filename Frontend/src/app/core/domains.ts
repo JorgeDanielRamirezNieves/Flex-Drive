@@ -1,4 +1,7 @@
 export const URL_BASE = 'http://localhost:3450/'; // CAMBIAR ANTES DE HACER EL DEPLOY
+export const URL_COUNTRY_STATE = 'https://api.countrystatecity.in/v1/'
+
+export const URL_IMAGES = URL_BASE + 'upload';
 
 export const URL_AUTH = URL_BASE + 'auth/';
 export const URL_CHAT = URL_BASE + 'chat/';
@@ -13,7 +16,7 @@ export const URL_TECNOMECHANIC = URL_BASE + 'runt/tecnomechanic/';
 export const URL_TECHNICAL_DETAILS = URL_BASE + 'runt/technical-details/';
 export const URL_SOAT = URL_BASE + 'runt/soats/';
 export const URL_ROLE = URL_BASE + 'role/';
-export const URL_SERVICE_RENT = URL_BASE + 'service-rent/';
+export const URL_SERVICE_RENT = URL_BASE + 'services-rent/';
 export const URL_PREFERENCE = URL_BASE + 'preferences/';
 export const URL_NOTIFICATIONS = URL_BASE + 'notifications/';
 export const URL_CONTRACT = URL_BASE + 'contract/';

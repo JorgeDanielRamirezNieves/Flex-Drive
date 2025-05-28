@@ -1,0 +1,306 @@
+<main
+  class="flex flex-col justify-center items-center gap-4 jura py-10 background"
+>
+<p-toast></p-toast>
+  <app-button
+    label="Volver"
+    icon="pi pi-arrow-left"
+    iconPos="left"
+    type="link"
+    redirecTo="/user/"
+    class="absolute top-5 right-5"
+  ></app-button>
+  <h1 class="text-5xl py-10">Cambio de preferencias</h1>
+  <form
+    action=""
+    class="grid grid-cols-2 place-items-center gap-4 h-fit w-8/10 bg-[#F5F5F590] p-4 rounded-lg shadow-md backdrop-blur-xs"
+    #preferencesForm="ngForm"
+  >
+    <!-- clase -->
+    <span class="flex flex-col justify-center items-start gap-2 w-full p-5">
+      <label for="classVehicle" class="text-xl">Clase de vehículo</label>
+      <p-autocomplete
+        inputId="classVehicle"
+        [(ngModel)]="classVehicle"
+        [suggestions]="filteredClassVehicle"
+        (completeMethod)="filterClass($event)"
+        class="w-full"
+        multiple
+        [dropdown]="true"
+        name="classVehicle"
+      >
+        <ng-template let-classVehicle #item>
+          <div class="flex items-center gap-2">
+            <div>{{ classVehicle.name }}</div>
+          </div>
+        </ng-template>
+      </p-autocomplete>
+    </span>
+    <!-- color -->
+    <span class="flex flex-col justify-center items-start gap-2 w-full p-5">
+      <label for="colorVehicle" class="text-xl">Color de vehículo</label>
+      <p-autocomplete
+        inputId="colorVehicle"
+        [(ngModel)]="colorVehicle"
+        [suggestions]="filteredColorsVehicle"
+        (completeMethod)="filterColor($event)"
+        class="w-full"
+        multiple
+        [dropdown]="true"
+        name="classVehicle"
+      >
+        <ng-template let-classVehicle #item>
+          <div class="flex items-center gap-2">
+            <div>{{ classVehicle.name }}</div>
+          </div>
+        </ng-template>
+      </p-autocomplete>
+    </span>
+    <!-- Capacidad -->
+    <span class="flex flex-col justify-center items-start gap-2 w-full p-5">
+      <label for="capacityVehicle" class="text-xl"
+        >Capacidad del vehículo</label
+      >
+      <input
+        #input="ngModel"
+        type="number"
+        [pTooltip]="tooltipContent"
+        [tooltipOptions]="tooltipOptions"
+        autoHide="false"
+        class="montserrat w-full pr-10 py-2.5 px-3 border-2 border-[#54A8A3] rounded-[0.5rem] bg-white outline-2 outline-transparent focus-within:outline-transparent transition duration-300 ease-in-out shadow-[2px_4px_10px_0px_#000000bf]"
+        [placeholder]=""
+        name="capacityVehicle"
+        [(ngModel)]="capacityVehicle"
+        required
+      />
+      <ng-template #tooltipContent>
+        <p
+          class="flex items-center p-2 text-lg text-[#435755] border-2 border-[#435755] bg-white rounded-2xl"
+        >
+          Capacidad minima que buscas en un vehículo.
+        </p>
+      </ng-template>
+    </span>
+    <!-- Kilometraje -->
+    <span class="flex flex-col justify-center items-start gap-2 w-full p-5">
+      <label for="capacityVehicle" class="text-xl"
+        >Kilometraje del vehículo</label
+      >
+      <input
+        #input="ngModel"
+        type="number"
+        [pTooltip]="tooltipMileage"
+        [tooltipOptions]="tooltipOptions"
+        autoHide="false"
+        class="montserrat w-full pr-10 py-2.5 px-3 border-2 border-[#54A8A3] rounded-[0.5rem] bg-white outline-2 outline-transparent focus-within:outline-transparent transition duration-300 ease-in-out shadow-[2px_4px_10px_0px_#000000bf]"
+        [placeholder]=""
+        name="mileageVehicle"
+        [(ngModel)]="mileageVehicle"
+        required
+      />
+      <ng-template #tooltipMileage>
+        <p
+          class="flex items-center p-2 text-lg text-[#435755] border-2 border-[#435755] bg-white rounded-2xl"
+        >
+          Kilometraje máximo que buscas en un vehículo.
+        </p>
+      </ng-template>
+    </span>
+    <!-- marca -->
+    <span class="flex flex-col justify-center items-start gap-2 w-full p-5">
+      <label for="brandVehicle" class="text-xl">Marca de vehículo</label>
+      <p-autocomplete
+        inputId="brandVehicle"
+        [(ngModel)]="brandVehicle"
+        [suggestions]="filteredBrandVehicle"
+        (completeMethod)="filterBrand($event)"
+        class="w-full"
+        multiple
+        [dropdown]="true"
+        name="classVehicle"
+      >
+        <ng-template let-brand #item>
+          <div class="flex items-center gap-2">
+            <div>{{ brand.name }}</div>
+          </div>
+        </ng-template>
+      </p-autocomplete>
+    </span>
+    <!-- modelo -->
+    <span class="flex flex-col justify-center items-start gap-2 w-full p-5">
+      <label for="modelVehicle" class="text-xl">Modelo del vehículo</label>
+      <p-autocomplete
+        inputId="modelVehicle"
+        [(ngModel)]="modelVehicle"
+        [suggestions]="filteredModelVehicle"
+        (completeMethod)="filterModel($event)"
+        class="w-full"
+        multiple
+        [dropdown]="true"
+        name="modelVehicle"
+      >
+        <ng-template let-model #item>
+          <div class="flex items-center gap-2">
+            <div>{{ model.name }}</div>
+          </div>
+        </ng-template>
+      </p-autocomplete>
+    </span>
+    <!-- rating -->
+    <span class="flex flex-col justify-center items-start gap-2 w-full p-5">
+      <label for="capacityVehicle" class="text-xl">Rating del vehículo</label>
+      <input
+        #input="ngModel"
+        type="number"
+        [pTooltip]="tooltipRating"
+        [tooltipOptions]="tooltipOptions"
+        autoHide="false"
+        class="montserrat w-full pr-10 py-2.5 px-3 border-2 border-[#54A8A3] rounded-[0.5rem] bg-white outline-2 outline-transparent focus-within:outline-transparent transition duration-300 ease-in-out shadow-[2px_4px_10px_0px_#000000bf]"
+        [placeholder]=""
+        name="ratingVehicle"
+        [(ngModel)]="rating"
+        required
+      />
+      <ng-template #tooltipRating>
+        <p
+          class="flex items-center p-2 text-lg text-[#435755] border-2 border-[#435755] bg-white rounded-2xl"
+        >
+          Rating que te gustaría encontrar en un vehículo.
+        </p>
+      </ng-template>
+    </span>
+    <!-- precio -->
+    <span class="flex flex-col justify-center items-start gap-2 w-full p-5">
+      <label for="capacityVehicle" class="text-xl">Precio del vehículo</label>
+      <input
+        #input="ngModel"
+        type="number"
+        [pTooltip]="tooltipPrice"
+        [tooltipOptions]="tooltipOptions"
+        autoHide="false"
+        class="montserrat w-full pr-10 py-2.5 px-3 border-2 border-[#54A8A3] rounded-[0.5rem] bg-white outline-2 outline-transparent focus-within:outline-transparent transition duration-300 ease-in-out shadow-[2px_4px_10px_0px_#000000bf]"
+        [placeholder]=""
+        name="priceVehicle"
+        [(ngModel)]="price"
+        required
+      />
+      <ng-template #tooltipPrice>
+        <p
+          class="flex items-center p-2 text-lg text-[#435755] border-2 border-[#435755] bg-white rounded-2xl"
+        >
+          Precio máximo que te gustaría ver en un vehículo.
+        </p>
+      </ng-template>
+    </span>
+    <!-- anno -->
+    <span class="flex flex-col justify-center items-start gap-2 w-full p-5">
+      <label for="yearVehicle" class="text-xl">Año del vehículo</label>
+      <p-autocomplete
+        inputId="yearVehicle"
+        [(ngModel)]="yearVehicle"
+        [suggestions]="filteredYearsVehicle"
+        (completeMethod)="filterYear($event)"
+        class="w-full"
+        multiple
+        [dropdown]="true"
+        name="classVehicle"
+      >
+        <ng-template let-year #item>
+          <div class="flex items-center gap-2">
+            <div>{{ year.name }}</div>
+          </div>
+        </ng-template>
+      </p-autocomplete>
+    </span>
+    <!-- combustible -->
+    <span class="flex flex-col justify-center items-start gap-2 w-full p-5">
+      <label for="fuelType" class="text-xl"
+        >Tipo de combustible del vehículo</label
+      >
+      <p-autocomplete
+        inputId="fuelType"
+        [(ngModel)]="fuelTypeVehicle"
+        [suggestions]="filteredFuelTypeVehicle"
+        (completeMethod)="filterFuelType($event)"
+        class="w-full"
+        multiple
+        [dropdown]="true"
+        name="modelVehicle"
+      >
+        <ng-template let-fuelType #item>
+          <div class="flex items-center gap-2">
+            <div>{{ fuelType.name }}</div>
+          </div>
+        </ng-template>
+      </p-autocomplete>
+    </span>
+    <!-- accesorios -->
+    <section class="col-span-2 w-full">
+      <div class="flex justify-center items-center gap-2 w-full px-5">
+        <span class="flex flex-col justify-center items-start gap-2 w-full">
+          <label for="fuelType" class="text-xl">Accesorios</label>
+          <input
+            type="text"
+            class="montserrat pr-10 py-2.5 px-3 border-2 w-full border-[#54A8A3] rounded-[0.5rem] bg-white outline-2 outline-transparent focus-within:outline-transparent transition duration-300 ease-in-out shadow-[2px_4px_10px_0px_#000000bf]"
+            placeholder="Escribe los accesorios que te gustaría ver"
+            name="accessories"
+            [(ngModel)]="accessorieVehicle"
+            required
+          />
+        </span>
+        <app-button
+          label="Añadir"
+          type="button"
+          icon="pi pi-plus"
+          iconPos="right"
+          (click)="addAccessory()"
+          class="mt-10 w-fit"
+        ></app-button>
+      </div>
+      <div
+        class="flex flex-col justify-center items-start gap-2 w-full p-5"
+        *ngIf="accessoriesVehicle.length > 0; else noAccesories"
+      >
+        <label for="accessories" class="text-xl">Accesorios añadidos</label>
+        <div class="flex flex-wrap gap-2">
+          <span *ngFor="let accessory of accessoriesVehicle; let i = index">
+            <p
+              class="bg-[#54A8A3] text-white px-3 py-1 rounded-lg flex items-center gap-2"
+            >
+              {{ accessory }}
+              <i
+                class="pi pi-times cursor-pointer"
+                (click)="removeAccessory(accessory)"
+              ></i>
+            </p>
+          </span>
+        </div>
+      </div>
+      <ng-template #noAccesories>
+        <div class="flex flex-col justify-center items-start gap-2 w-full p-5">
+          <label for="accessories" class="text-xl">Accesorios añadidos</label>
+          <p class="text-gray-500">No hay accesorios añadidos.</p>
+        </div>
+      </ng-template>
+    </section>
+    <!-- aseguradora boolean -->
+    <span class="flex justify-center items-center gap-3 w-full">
+      <label class="checkbox-container">
+        <input type="checkbox" name="insurance" [(ngModel)]="insurance" />
+        <div class="checkmark"></div>
+      </label>
+      <p class="jura text-2xl">¿Deseas que tenga aseguradora ya paga?</p>
+      <p class="text-gray-600">{{ insurance ? "Si" : "No" }}</p>
+    </span>
+
+    <div class="mt-6 flex justify-center col-span-2">
+      <button
+        type="submit"
+        (click)="savePreferences()"
+        class="bg-[#54A8A3] w-fit flex text-white py-2 px-4 rounded border-2 border-transparent hover:bg-transparent hover:cursor-pointer hover:border-2 hover:border-[#54A8A3] hover:text-[#54A8A3] focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out jura"
+      >
+        <span>Guardar</span>
+      </button>
+    </div>
+  </form>
+</main>

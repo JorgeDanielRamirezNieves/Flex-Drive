@@ -28,6 +28,21 @@ export class ServicesRentController {
           return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
         }
       }
+      @Get('findByClient/:uuid')
+      @ApiParam({
+        name: 'uuid',
+        description: 'UUID of the client',
+        required: true,
+        type: String,
+      })
+      private findByClientServiceRent(@Param('uuid') uuid: any): any {
+        const uuidClient = uuid;
+        if (uuidClient && uuidClient.length > 0) {
+          return this.ServiceRentService.getServiceRentsByUUIIDClient(uuidClient);
+        } else {
+          return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
+        }
+      }
     
       @Post('add')
       @ApiBody({

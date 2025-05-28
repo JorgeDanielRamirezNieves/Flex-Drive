@@ -67,7 +67,7 @@ export class VehicleService {
     .leftJoinAndSelect('v.detailsVehicle', 'd')
     .leftJoinAndSelect('v.prices', 'p')
     .leftJoin('requests', 'r', 'r.idVehicle = v.uuid')
-    .groupBy('v.uuid') 
+    .groupBy('v.uuid, ts.uuid, d.id_details, p.uuid') 
     .orderBy('COUNT(r.uuid)', 'DESC')
     .limit(limit)
     .getMany();

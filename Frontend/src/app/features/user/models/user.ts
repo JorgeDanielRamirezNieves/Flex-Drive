@@ -7,7 +7,7 @@ import { Message } from '../../chat/models/message';
 import { Notification } from '../../notifications/models/notification';
 
 export class User {
-  public uuid: string;
+  public uuid?: string;
   public noDocument: string;
   public firstName: string;
   public lastName: string;
@@ -16,9 +16,10 @@ export class User {
   public city: string;
   public country: string;
   public createdAt: Date;
-  public updatedAt: Date;
+  public updatedAt: Date | null;
   public birthday: Date;
   public email: string;
+  public password: string;
   public status: 'active' | 'inactive' | 'under_review';
   public rating: number;
   public image: string;
@@ -44,15 +45,15 @@ export class User {
         city: string,
         country: string,
         createdAt: Date,
-        updatedAt: Date,
+        updatedAt: Date | null,
         birthday: Date,
         email: string,
+        password: string,
         status: 'active' | 'inactive' | 'under_review',
         rating: number,
         image: string,
         idRole: string,
         idTypeDocument: string,
-        uuid?: string
     ) {
         this.noDocument = noDocument;
         this.firstName = firstName;
@@ -65,11 +66,11 @@ export class User {
         this.updatedAt = updatedAt;
         this.birthday = birthday;
         this.email = email;
+        this.password = password;
         this.status = status;
         this.rating = rating;
         this.image = image;
         this.idRole = idRole;
         this.idTypeDocument = idTypeDocument;
-        this.uuid = uuid || '';
     }
 }

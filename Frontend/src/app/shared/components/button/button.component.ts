@@ -23,19 +23,17 @@ export class ButtonComponent {
     this.type = 'link';
     this.icon = '';
     this.iconPos = 'left';
-    this.callback = () => {
-      console.log('Button clicked!');
-    };
+    this.callback = () => {};
     this.disabled = false;  
   }
 
   public handleClick(): void {
-    console.log('Button clicked!');
-
+    
     if (this.type === 'link') {
       this.router.navigate([this.redirecTo]);
     }
-    if (this.type === 'button' || this.type === 'submit') {
+    if (this.type === 'button') {
+      console.log('Button clicked!');
       this.callback();
     }
   }

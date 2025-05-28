@@ -34,6 +34,20 @@ export class NotificationsService {
       },
     });
   }
+  
+  public async getNotificationsOfUser(
+    uuid: string,
+  ): Promise<Notification[] | null> {
+    return this.NotificationRepository.find({
+      where: { idUser: uuid },
+      relations: ['typeNotification'],
+      select: {
+        typeNotification: {
+          name: true,
+        },
+      },
+    });
+  }
 
   public async createNotification(
     objNotification: Notification,

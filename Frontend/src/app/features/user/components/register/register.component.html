@@ -1,22 +1,33 @@
 <app-navbar class="z-20"></app-navbar>
-
+<p-toast></p-toast>
 <section class="w-full h-full bg-white">
   <div class="flex justify-center items-center">
-    <h2 class="text-2xl jura font-bold m-8">Nuevo Usuario</h2>
+    <h2 class="text-3xl jura font-bold m-8">Nuevo Usuario</h2>
   </div>
 
   <div class="flex justify-center">
     <div
       class="justify-center flex-col w-[70rem] rounded-3xl p-15 bg-[#d9d9d9]"
     >
-      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-        <div class="flex gap-8">
-          <div class="w-1/2 flex flex-col gap-4">
+      <form #RegisterForm="ngForm">
+        <div class="grid grid-cols-2 p-8">
+          <div class="w-full flex flex-col gap-4 px-10 border-r-2">
             <app-input-label
-              label="Nombre Completo"
-              placeholder="Juan Pérez"
+              label="Nombres"
+              placeholder="Juan Andres"
               type="text"
-              name="fullName"
+              name="firstName"
+              [model]="user"
+              modelProperty="firstName"
+            ></app-input-label>
+
+            <app-input-label
+              label="Apellidos"
+              placeholder="Gómez Rodríguez"
+              type="text"
+              name="lastName"
+              [model]="user"
+              modelProperty="lastName"
             ></app-input-label>
 
             <app-input-label
@@ -24,37 +35,56 @@
               placeholder="ejemplo@email.com"
               type="email"
               name="email"
+              [model]="user"
+              modelProperty="email"
             ></app-input-label>
 
-            <app-input-label
-              label="Número de teléfono"
-              placeholder="+57 300 123 4567"
-              type="text"
-              name="phone"
-            ></app-input-label>
+            <span class="flex justify-center items-center gap-4 w-full">
+              <app-input-label
+                class="grow"
+                label="Número de teléfono"
+                placeholder="300 123 4567"
+                type="text"
+                name="phone"
+                [model]="user"
+                modelProperty="phone"
+              ></app-input-label>
+              <p-select
+                [options]="prefixes"
+                [(ngModel)]="prefix"
+                optionLabel="name"
+                name="prefix"
+                placeholder="+57"
+              >
+                <ng-template #selectedItem let-selectedOption>
+                  <div class="flex items-center gap-2" *ngIf="selectedOption">
+                    <p class="country-name">{{ selectedOption.name }}</p>
+                    <p>{{ selectedOption.value }}</p>
+                  </div>
+                </ng-template>
+                <ng-template let-country #item>
+                  <div class="flex items-center gap-2">
+                    <p class="country-name">{{ country.name }}</p>
+                    <p>{{ country.value }}</p>
+                  </div>
+                </ng-template>
+              </p-select>
+            </span>
 
             <h2 class="jura mb-4 font-bold">Documento de identidad</h2>
-            <div class="flex gap-6 items-center">
+            <div
+              class="flex gap-6 items-center"
+              *ngFor="let type of typesDocument"
+            >
               <label class="flex items-center gap-2 cursor-pointer">
                 <input
                   type="radio"
                   name="documentType"
-                  value="cc"
+                  value="{{ type.uuid }}"
                   [(ngModel)]="selectedDocument"
                   class="accent-[#54A8A3] mr-5"
                 />
-                <span class="jura mr-5">cc</span>
-              </label>
-
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  name="documentType"
-                  value="pasaporte"
-                  [(ngModel)]="selectedDocument"
-                  class="accent-[#54A8A3] mr-5"
-                />
-                <span class="jura mr-5">Pasaporte</span>
+                <span class="jura mr-5">{{ type.name }}</span>
               </label>
             </div>
 
@@ -63,23 +93,63 @@
               placeholder="102233445"
               type="text"
               name="documentNumber"
+              [model]="user"
+              modelProperty="noDocument"
             ></app-input-label>
           </div>
 
-          <div class="border-l border-[#000]"></div>
-
-          <div class="w-1/2 flex flex-col gap-4 pl-8">
+          <div class="w-full flex flex-col gap-4 px-10">
             <app-input-label
               label="Fecha de nacimiento"
               type="date"
               name="birthdate"
+              [model]="user"
+              modelProperty="birthday"
             ></app-input-label>
 
             <app-input-label
               label="Dirección de residencia"
-              placeholder="Calle 123 #45-67, Bogotá, Col"
+              placeholder="Calle 123 #45-67"
               type="text"
               name="address"
+              [model]="user"
+              modelProperty="address"
+            ></app-input-label>
+
+            <span
+              class="flex flex-col justify-center items-start gap-3 py-2 mb-4 w-full"
+            >
+              <label for="" class="jura font-bold">País de residencia</label>
+              <p-select
+                [options]="countries"
+                [(ngModel)]="country"
+                optionLabel="name"
+                placeholder="Selecciona tu país de residencia"
+                class="w-full jura"
+                name="country"
+              >
+                <ng-template #selectedItem let-selectedOption>
+                  <div class="flex items-center gap-2" *ngIf="selectedOption">
+                    <p class="country-name">{{ selectedOption.emoji }}</p>
+                    <p>{{ selectedOption.name }}</p>
+                  </div>
+                </ng-template>
+                <ng-template let-country #item>
+                  <div class="flex items-center gap-2">
+                    <p class="country-name">{{ country.emoji }}</p>
+                    <p>{{ country.name }}</p>
+                  </div>
+                </ng-template>
+              </p-select>
+            </span>
+
+            <app-input-label
+              label="Ciudad"
+              placeholder="Bogotá D.C."
+              type="text"
+              name="city"
+              [model]="user"
+              modelProperty="city"
             ></app-input-label>
 
             <app-input-label
@@ -87,6 +157,8 @@
               placeholder="***********"
               type="password"
               name="password"
+              [model]="password"
+              modelProperty="value"
             ></app-input-label>
 
             <app-input-label
@@ -94,34 +166,70 @@
               placeholder="***********"
               type="password"
               name="passwordVerify"
+              [model]="password"
+              modelProperty="confirm"
             ></app-input-label>
-
-            <label class="flex items-center gap-2 cursor-pointer mt-2">
-              <input
-                type="checkbox"
-                name="agree"
-                [(ngModel)]="agreeTerms"
-                class="accent-[#54A8A3]"
-              />
-              <span class="jura"
-                >Acepto
-                <a class="underline font-bold">Términos y condiciones</a></span
-              >
-            </label>
           </div>
+
+          <div
+            class="my-5 col-span-2 p-4 rounded-lg flex flex-col items-center justify-center gap-4 w-full"
+          >
+            <label for="image" class="w-full text-2xl jura"
+              >Ingresa una imagen de usuario</label
+            >
+            <p-fileupload
+              id="image"
+              name="image"
+              (onSelect)="onUpload($event)"
+              [multiple]="false"
+              accept="image/*"
+              maxFileSize="1000000"
+              mode="advanced"
+              required="true"
+              class="w-full"
+            >
+              <ng-template #empty>
+                <div
+                  class="flex flex-col items-center justify-center h-full text-8xl py-5 border-2 border-t-0 border-dashed border-[#54A8A3] rounded-lg rounded-t-none bg-white/50"
+                >
+                  <i class="pi pi-image text-6xl text-gray-400"></i>
+                  <p class="text-gray-500 text-lg">
+                    Arrastra y suelta una imagen aquí o haz clic para
+                    seleccionar
+                  </p>
+                </div>
+              </ng-template>
+            </p-fileupload>
+          </div>
+
+          <label class="flex items-center gap-2 cursor-pointer mt-2 col-span-2">
+            <input
+              type="checkbox"
+              name="agree"
+              [(ngModel)]="agreeTerms"
+              class="accent-[#54A8A3]"
+            />
+            <span class="jura"
+              >Acepto
+              <a class="underline font-bold">Términos y condiciones</a></span
+            >
+          </label>
         </div>
 
         <div class="mt-6 flex justify-center">
           <button
             type="submit"
-            class="w-[20rem] bg-[#54A8A3] text-white py-2 px-4 rounded border-2 border-transparent hover:bg-transparent hover:cursor-pointer hover:border-[#54A8A3] hover:text-[#54A8A3] focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out"
+            (click)="onSubmit(RegisterForm)"
+            class="bg-[#54A8A3] w-fit flex text-white py-2 px-4 rounded border-2 border-transparent hover:bg-transparent hover:cursor-pointer hover:border-2 hover:border-[#54A8A3] hover:text-[#54A8A3] focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out jura"
           >
-            Registrar
+            <span>Registrar</span>
           </button>
         </div>
       </form>
     </div>
   </div>
 </section>
-<br />
+<div *ngIf="isRegistering">
+  <app-suspense></app-suspense>
+</div>
 <app-footer></app-footer>

@@ -30,7 +30,7 @@
 
     <a
       *ngIf="!isLoggedIn"
-      class="..."
+      class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
       [routerLink]="['/user/login']"
       routerLinkActive="router-link-active"
       >Iniciar Sesión</a
@@ -53,6 +53,112 @@
         <span><i class="pi pi-user text-2xl"></i></span>
       </a>
     </button>
+    <button
+      *ngIf="rol"
+      (click)="toggle()"
+      class="w-full h-full flex flex-col justify-center items-center cursor-pointer transition-all duration-200 hover:text-[#54A8A3] hover:bg-[#031920]"
+    >
+      <i class="pi pi-bell text-2xl"></i>
+    </button>
+    <p-drawer
+      header="Right Drawer"
+      [(visible)]="visible"
+      position="right"
+      [style]="{ width: '30rem' }"
+    >
+      <ng-template #headless>
+        <div
+          class="bg-[#031617] text-white h-full flex flex-col justify-start items-center"
+        >
+          <h3 class="text-3xl jura p-5">Notificaciones recientes</h3>
+          <ul class="list-none p-0 m-0">
+            <ng-container
+              *ngFor="let notification of notifications"
+              [ngSwitch]="notification.typeNotification?.name"
+            >
+              <li
+                class="p-5 flex items-center text-4xl gap-5 montserrat hover:bg-[#031920] transition-all duration-200 w-full border-b border-[#54A8A3]"
+                *ngSwitchCase="'push-service'"
+              >
+                <i class="pi pi-file-check mr-2"></i>
+                <span class="flex flex-col justify-center items-center">
+                  <p class="w-full text-xl font-bold">
+                    {{
+                      notification.typeNotification?.name?.replaceAll(
+                        "push-",
+                        ""
+                      )
+                    }}
+                  </p>
+                  <p class="text-lg">{{ notification.description }}</p>
+                  <span
+                    class="text-sm flex justify-between items-center text-gray-400 w-full"
+                  >
+                    {{ notification.sendDate | date : "short" }}
+                    <i class="pi pi-eye" *ngIf="notification.sendDate"></i>
+                    <i
+                      class="pi pi-circle-on"
+                      *ngIf="!notification.sendDate"
+                    ></i>
+                  </span>
+                </span>
+              </li>
+              <li
+                class="p-5 flex items-center text-4xl gap-5 montserrat hover:bg-[#031920] transition-all duration-200 w-full border-b border-[#54A8A3]"
+                *ngSwitchCase="'push-chat'"
+              >
+                <i class="pi pi-comments mr-2"></i>
+                <span class="flex flex-col justify-center items-center">
+                  <p class="w-full text-xl font-bold">
+                    {{
+                      notification.typeNotification?.name?.replaceAll(
+                        "push-",
+                        ""
+                      )
+                    }}
+                  </p>
+                  <p class="text-lg">{{ notification.description }}</p>
+                  <span
+                    class="text-sm flex justify-between items-center text-gray-400 w-full"
+                  >
+                    {{ notification.sendDate | date : "short" }}
+                    <i class="pi pi-eye" *ngIf="notification.sendDate"></i>
+                    <i
+                      class="pi pi-circle-on"
+                      *ngIf="!notification.sendDate"
+                    ></i>
+                  </span>
+                </span>
+              </li>
+              <li
+                class="p-5 flex items-center text-4xl gap-5 montserrat hover:bg-[#031920] transition-all duration-200 w-full border-b border-[#54A8A3]"
+                *ngSwitchCase="'push-vehicle'"
+              >
+                <i class="pi pi-car mr-2"></i>
+                <span class="flex flex-col justify-center items-center">
+                  <p class="w-full text-xl font-bold">
+                    {{
+                      notification.typeNotification?.name?.replaceAll(
+                        "push-",
+                        ""
+                      )
+                    }}
+                  </p>
+                  <p class="text-lg">{{ notification.description }}</p>
+                  <span
+                    class="text-sm flex justify-between items-center text-gray-400 w-full"
+                  >
+                    {{ notification.sendDate | date : "short" }}
+                    <i class="pi pi-eye" *ngIf="notification.status"></i>
+                    <i class="pi pi-circle-on" *ngIf="!notification.status"></i>
+                  </span>
+                </span>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </ng-template>
+    </p-drawer>
 
     <ng-container *ngIf="rol">
       <button
@@ -62,7 +168,5 @@
         Cerrar sesión
       </button>
     </ng-container>
-
-    <!--  -->
   </span>
 </nav>
