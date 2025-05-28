@@ -15,13 +15,16 @@ export class ReportsService {
     return this.http.get<any[]>(`${this.baseUrl}/findAll`);
   }
   postReport(
-    typePQRS: string,
+    idTypeReport: string,
     description: string,
-    idService: string
+    idService: string,
+    idUser: string
   ): Observable<Report> {
     return this.http.post<Report>(`${this.baseUrl}/add`, {
-      typePQRS,
+      idTypeReport,
       description,
+      idService,
+      idUser,
     });
   }
 }
