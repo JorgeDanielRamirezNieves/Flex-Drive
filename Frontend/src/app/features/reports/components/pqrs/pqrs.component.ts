@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ReportsService } from '../../services/reports.service';
 
 @Component({
   selector: 'app-pqrs',
@@ -10,21 +11,33 @@ import { NgForm } from '@angular/forms';
 })
 export class PqrsComponent {
   formData: any = {
-    tipoDePeticion: '',
+    typePQRS: '',
+    description: '',
+    idService: '',
   };
-  constructor(private router: Router) {}
+  constructor(private router: Router, private reportsService: ReportsService) {}
 
   submitted: boolean = false;
 
   onSubmit(form: NgForm): void {
     this.submitted = true;
-
-    if (form.valid) {
-      console.log('Formulario válido. Redirigiendo...');
-      console.log(this.formData);
-      this.router.navigate(['/user']);
-    } else {
-      console.log('Formulario inválido');
-    }
+    this.reportsService
+      .postReport(
+        this.formData.typePQRS,
+        this.formData.description,
+        this.formData.idService
+      )
+      .subscribe({
+        next: (respuesta) => {
+          if (respuesta) {
+            this.router.navigate(['/landing']);
+            console.log('id_typepqrs', this.formData.typePQRS);
+            console.log('description', this.formData.description);
+            console.log('id_service', this.formData.idService);
+          } else {
+            console.log('faltan datos');
+          }
+        },
+      });
   }
 }

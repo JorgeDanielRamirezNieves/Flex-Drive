@@ -7,7 +7,6 @@ export class TypeReport {
   @PrimaryGeneratedColumn('uuid')
   public uuid: string;
 
-    
   @Column({ name: 'name', type: 'varchar', nullable: false })
   @ApiProperty({
     description: 'Name of the type report',

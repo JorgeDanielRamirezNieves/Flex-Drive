@@ -15,13 +15,23 @@
           placeholder="Seleccione un tipo de PQRS"
           name="tipoDePeticion"
           [model]="formData"
-          modelProperty="tipoDePeticion"
+          modelProperty="typePQRS"
           [isSelect]="true"
           [options]="[
-            { value: 'peticion', label: 'Petición' },
-            { value: 'queja', label: 'Queja' },
-            { value: 'reclamo', label: 'Reclamo' },
-            { value: 'Solicitud', label: 'Solicitud' }
+            {
+              value: 'd26a7cac-554c-4828-a8ee-a3fb71ead312',
+              label: 'Petición'
+            },
+            { value: 'ccc363e3-5510-43ec-9651-ba8315f87d5a', label: 'Queja' },
+            { value: '5a10182f-7056-4285-a01e-956610e9021e', label: 'Reclamo' },
+            {
+              value: '4f7c93dc-8320-4d1f-8931-96dc8e7c3f06',
+              label: 'Solicitud'
+            },
+            {
+              value: 'd07dcae8-4e4b-4620-8478-9bea31db8fe6',
+              label: 'Contacto'
+            }
           ]"
           [submitted]="submitted"
         ></app-input-label>
@@ -29,8 +39,10 @@
         <app-input-label
           label="Código de servicio"
           placeholder="1232412"
-          type="number"
-          name="codService"
+          type="text"
+          name="idService"
+          [model]="formData"
+          modelProperty="idService"
         ></app-input-label>
 
         <span class="jura"> Mensaje de reporte </span>
@@ -41,6 +53,9 @@
           rows="5"
           class="bg-white w-full mt-5 p-2 rounded-lg resize-none placeholder:text-gray-500"
           placeholder="Enviale un mensaje con tu PQRS..."
+          modelProperty="description"
+          name="description"
+          [(ngModel)]="formData.description"
         ></textarea>
 
         <div class="mt-6 flex flex-col items-center space-y-4">
@@ -48,7 +63,7 @@
             type="submit"
             class="w-[20rem] bg-[#54A8A3] text-white py-2 px-4 rounded border-2 border-transparent hover:bg-transparent hover:cursor-pointer hover:border-[#54A8A3] hover:text-[#54A8A3] focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out"
           >
-            GEnviar Mensaje
+            Enviar Mensaje
           </button>
         </div>
       </form>

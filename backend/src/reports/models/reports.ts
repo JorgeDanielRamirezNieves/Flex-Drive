@@ -4,10 +4,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { TypeReport } from './type-report';
 import { ApiProperty } from '@nestjs/swagger';
+import { ServiceRent } from 'src/services-rent/models/serviceRent';
 
 @Entity({ schema: 'public', name: 'reports' })
 export class Reports {
@@ -42,7 +44,12 @@ export class Reports {
     example: '2023-10-01',
     type: Date,
   })
-  @Column({ name: 'created_at', type: 'date', nullable: false })
+  @Column({
+    name: 'created_at',
+    type: 'date',
+    default: () => 'CURRENT_TIMESTAMP',
+    nullable: false,
+  })
   public createdAt: Date;
 
   @ApiProperty({
@@ -50,7 +57,12 @@ export class Reports {
     example: '2023-10-01',
     type: Date,
   })
-  @Column({ name: 'updated_at', type: 'date', nullable: true })
+  @Column({
+    name: 'updated_at',
+    type: 'date',
+    nullable: true,
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   public updatedAt: Date;
 
   @ApiProperty({
@@ -58,7 +70,7 @@ export class Reports {
     example: '2023-10-01',
     type: Date,
   })
-  @Column({ name: 'resolved_at', type: 'date', nullable: false })
+  @Column({ name: 'resolved_at', type: 'date', nullable: true })
   public resolvedAt: Date;
 
   @ApiProperty({
@@ -100,6 +112,18 @@ export class Reports {
   @Column({ name: 'id_type_report', type: 'varchar', nullable: false })
   public idTypeReport: string;
 
+  @ApiProperty({
+    description: 'ID of the type service',
+    example: '1234567890',
+    type: String,
+  })
+  @Column({ name: 'id_service', type: 'varchar', nullable: true })
+  public idService: string;
+
+  @OneToOne(() => ServiceRent, (objRent: ServiceRent) => objRent.uuid)
+  @JoinColumn({ name: 'id_service', referencedColumnName: 'uuid' })
+  public ServiceRent: ServiceRent;
+
   @ManyToOne(
     () => TypeReport,
     (objTypereport: TypeReport) => objTypereport.reportsTypeReport,
@@ -133,6 +157,7 @@ export class Reports {
     idAdmin: string,
     priority: '0' | '1' | '2' | '3',
     idTypeReport: string,
+    idService: string,
   ) {
     this.uuid = uuid;
     this.description = description;
@@ -144,5 +169,6 @@ export class Reports {
     this.idAdmin = idAdmin;
     this.priority = priority;
     this.idTypeReport = idTypeReport;
+    this.idService = idService;
   }
 }

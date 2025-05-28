@@ -1,7 +1,7 @@
 import { Report } from './report';
 
 export class TypeReport {
-  public uuid: string;
+  public uuid?: string;
   public name: string;
   public reportsTypeReport?: Report[];
   constructor(uuid: string, name: string) {

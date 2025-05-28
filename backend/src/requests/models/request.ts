@@ -90,7 +90,7 @@ export class Request {
     enum: ['pending', 'approved', 'negotiating', 'rejected'],
     example: 'negotiating',
   })
-  public status:'pending' | 'approved' | 'negotiating' | 'rejected';
+  public status: 'pending' | 'approved' | 'negotiating' | 'rejected';
 
   @ManyToOne(() => User, (objUser: User) => objUser.userRequests, {
     onUpdate: 'CASCADE',
@@ -99,12 +99,14 @@ export class Request {
   @JoinColumn([{ name: 'id_client', referencedColumnName: 'uuid' }])
   public requestUser?: User;
 
-  @ManyToOne(() => Vehicle, (objVehicle: Vehicle) => objVehicle.requestVehicle, {
-    onUpdate: 'CASCADE',
-    onDelete: 'RESTRICT',
-  })
+  @ManyToOne(
+    () => Vehicle,
+    (objVehicle: Vehicle) => objVehicle.requestVehicle,
+    {
+      onUpdate: 'CASCADE',
+      onDelete: 'RESTRICT',
+    },
+  )
   @JoinColumn([{ name: 'id_vehicle', referencedColumnName: 'uuid' }])
   public requestVehicle?: Vehicle;
-
-
 }

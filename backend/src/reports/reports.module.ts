@@ -6,6 +6,6 @@ import { TypeReportsService } from './service/type-reports.service';
 
 @Module({
   controllers: [ReportsController, TypeReportsController],
-  providers: [ReportsService, TypeReportsService]
+  providers: [ReportsService, TypeReportsService],
 })
 export class ReportsModule {}
