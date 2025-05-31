@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { URL_VEHICLE } from '../../../core/domains';
 import { HttpClient } from '@angular/common/http';
+import { Vehicle } from '../models/vehicle';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,9 @@ export class VehicleService {
   public getVehicleByUUID(uuid: string) {
     return this.http.get(this.urlVehicles + 'findOne/' + uuid);
   }
+  public getVehicleByPlate(plate: string) {
+    return this.http.get(this.urlVehicles + 'findbyPLate/' + plate);
+  }
   public getVehicleLimit(limit: number) {
     return this.http.get(this.urlVehicles + 'findWithLimit/' + limit);
   }
@@ -25,5 +29,13 @@ export class VehicleService {
   }
   public getVehicleByUser(uuid: string) {
     return this.http.get(this.urlVehicles + 'findByUser/' + uuid);
+  }
+
+  public createVehicle(vehicle: Vehicle) {
+    return this.http.post(this.urlVehicles + 'add', vehicle);
+  }
+
+  public updateVehicle(vehicle: Vehicle) {
+    return this.http.put(this.urlVehicles + 'update/' + vehicle.uuid, vehicle);
   }
 }

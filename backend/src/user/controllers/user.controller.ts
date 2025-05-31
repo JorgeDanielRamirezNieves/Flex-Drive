@@ -1,7 +1,9 @@
-import { Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Req } from '@nestjs/common';
+import { Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post, Put, Req } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { UserService } from '../service/user.service';
-import { User } from '../models/user';
+import { User, UserNewRole } from '../models/user';
+
+
 
 @Controller('user')
 @ApiTags('user')
@@ -71,6 +73,41 @@ export class UserController {
             }
         } else {
             return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @Patch('changeRole')
+    @ApiBody({
+        description: "Object User with uuid and new role",
+        type: UserNewRole,
+    })
+    private changeRoleUser(@Req() request: any): any {
+        const objUserNewRole: UserNewRole = request.body;
+        if (objUserNewRole && objUserNewRole.uuid && objUserNewRole.newRole) {
+            return this.UserService.changeRoleUser(objUserNewRole);
+        } else {
+            return new HttpException(
+                'uuid or new role of User invalid',
+                HttpStatus.BAD_REQUEST,
+            );
+        }
+    }
+
+
+    @Patch('changeStatus')
+    @ApiBody({
+        description: "Object User with uuid and new role",
+        type: UserNewRole,
+    })
+    private changeStatus(@Req() request: any): any {
+        const objUserNewStatus = request.body;
+        if (objUserNewStatus && objUserNewStatus.uuid && objUserNewStatus.status) {
+            return this.UserService.changeStatus(objUserNewStatus);
+        } else {
+            return new HttpException(
+                'uuid or new role of User invalid',
+                HttpStatus.BAD_REQUEST,
+            );
         }
     }
 

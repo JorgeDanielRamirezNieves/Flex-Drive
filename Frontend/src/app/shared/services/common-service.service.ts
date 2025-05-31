@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { URL_COUNTRY_STATE, URL_IMAGES } from '../../core/domains';
-import { API_KEY_COUNTRY_STATE } from '../../core/envirioment';
+import { API_KEY_COUNTRY_STATE, API_KEY_MOCKAROO } from '../../core/envirioment';
 import { Country } from '../models/country';
 
 @Injectable({
@@ -11,11 +11,13 @@ export class CommonServiceService {
   private urlUploadImage: string;
   private urlCountry: string;
   private readonly apiKeyCountryState: string;
+  private readonly apiKeyMockaroo: string;
 
   constructor(private http: HttpClient) {
     this.urlUploadImage = URL_IMAGES;
     this.urlCountry = URL_COUNTRY_STATE;
     this.apiKeyCountryState = API_KEY_COUNTRY_STATE;
+    this.apiKeyMockaroo = API_KEY_MOCKAROO
   }
 
   public getAllCountries() {
@@ -27,10 +29,23 @@ export class CommonServiceService {
   }
 
   public UploadedFile(formData: FormData) {
-    return this.http.post<any>(this.urlUploadImage, formData, {
-      reportProgress: true,
-      observe: 'events',
-    });
+    return this.http.post<any>(this.urlUploadImage, formData);
+  }
+
+  public getTestVehicle() {
+    return this.http.get<any>('https://my.api.mockaroo.com/vehicle.json?key=' + this.apiKeyMockaroo);
+  }
+  
+  public getTestDetailsVehicle() {
+    return this.http.get<any>('https://my.api.mockaroo.com/details.json?key=' + this.apiKeyMockaroo);
+  }
+  
+  public getTestRTM() {
+    return this.http.get<any>('https://my.api.mockaroo.com/rtm.json?key=' + this.apiKeyMockaroo);
+  }
+  
+  public getTestSoat() {
+    return this.http.get<any>('https://my.api.mockaroo.com/soat.json?key=' + this.apiKeyMockaroo);
   }
 
 }

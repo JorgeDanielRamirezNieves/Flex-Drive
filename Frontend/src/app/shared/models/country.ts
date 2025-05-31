@@ -1,13 +1,4 @@
 
-export interface prefixes {
-  id: number;
-  name: string;
-  iso2: string;
-  iso3: string;
-  phonecode: string;
-  emoji: string;
-}
-
 export class Country {
   id: number;
   name: string;

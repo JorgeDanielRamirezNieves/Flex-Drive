@@ -36,11 +36,13 @@ export class NavbarComponent implements OnInit {
     this.visible = false;
     this.notifications = [];
     this.subcription = this.tmp;
-    if (this.authService.isAuthenticated()) {
+    
+    if (localStorage.getItem('authToken')) {
       this.token = jwtDecode(localStorage.getItem('authToken') || '');
       this.userUUID = this.token.uuid;
-    }
-    this.userUUID = '';
+    } else {
+      this.userUUID = '';
+    }    
     this.complete = false;
   }
 
@@ -76,7 +78,7 @@ export class NavbarComponent implements OnInit {
         map((res: any) => {
           this.notifications = res;
         }),
-        catchError((err) => {
+        catchError((err) => {          
           throw new Error(err);
         }),
         finalize(() => {

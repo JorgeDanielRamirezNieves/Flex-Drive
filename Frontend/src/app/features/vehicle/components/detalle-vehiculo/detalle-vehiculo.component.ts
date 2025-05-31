@@ -39,7 +39,6 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
       '',
       '',
       '',
-      '',
       'in_use',
       '',
       '',

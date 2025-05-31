@@ -7,7 +7,7 @@ import { memoryStorage } from 'multer';
 // Configuración de Multer para memoria (no guardar en disco)
 const multerConfig = {
   storage: memoryStorage(), // Usar memoria en lugar de disco
-  fileFilter: (req:any, file:any, cb:any) => {
+  fileFilter: (req: any, file: any, cb: any) => {
     // Filtro para aceptar solo imágenes
     if (file.mimetype.match(/\/(jpg|jpeg|png|gif|webp)$/)) {
       cb(null, true);
@@ -22,7 +22,7 @@ const multerConfig = {
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
   getHello(): string {
@@ -54,13 +54,14 @@ export class AppController {
 
     try {
       // Subir imagen a ImgBB
-      const imgbbResponse = await this.appService.uploadImage(image);
+      const result = await this.appService.uploadImage(image, 'vehicles') as any;
 
-      // Respuesta con datos de ImgBB
+      // Guardar en BD
       const imageData = {
-        url: imgbbResponse.url,
-        display_url: imgbbResponse.display_url,
-        delete_url: imgbbResponse.delete_url,
+        cloudinary_public_id: result.public_id,
+        cloudinary_url: result.secure_url,
+        original_filename: image.originalname,
+        file_size: image.size
       };
 
       return {

@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { catchError, finalize, map, Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../../models/user';
@@ -21,8 +22,9 @@ export class ProfilesettingsComponent implements OnInit, OnDestroy {
   public preferences: Preferences | undefined;
   public complete: boolean = false;
   public cards: any[];
+  public visible: boolean = false;
 
-  constructor(private preferencesService: PreferencesService) {
+  constructor(private preferencesService: PreferencesService, private userService: UserService) {
     this.token = jwtDecode(localStorage.getItem('authToken') || '');
     this.role = this.token.rolUser.name;
     this.userUUID = this.token.uuid;
@@ -116,5 +118,28 @@ export class ProfilesettingsComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(observatorAny);
+  }
+
+  public openModal(){
+    this.visible = true;
+  }
+
+  public delete(){
+    this.subcription = this.userService
+      .changeStateUser(this.userUUID, 'inactive')
+      .pipe(
+        map((res: any) => {
+          this.visible = false;
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('role');
+          window.location.reload();
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        }),
+        finalize(() => {
+          this.complete = true;
+        })
+      ).subscribe(observatorAny);
   }
 }

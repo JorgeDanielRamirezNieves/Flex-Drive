@@ -1,18 +1,18 @@
 import { Vehicle } from "./vehicle";
 
 export class Price {
-    public uuid: string;
+    public uuid?: string;
     public price: number;
     public startDate: Date;
     public endDate: Date;
     public idVehicle: string;
     public vehicle?: Vehicle;
     constructor(
-        uuid: string,
         price: number,
         startDate: Date,
         endDate: Date,
         idVehicle: string,
+        uuid?: string
     ) {
         this.uuid = uuid;
         this.price = price;

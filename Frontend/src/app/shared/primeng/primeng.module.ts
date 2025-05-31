@@ -20,6 +20,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TooltipModule } from 'primeng/tooltip';
+import { StepsModule } from 'primeng/steps';
+import { DialogModule } from 'primeng/dialog';
 
 
 
@@ -44,7 +46,9 @@ import { TooltipModule } from 'primeng/tooltip';
     FileUploadModule,
     ProgressBarModule,
     AutoCompleteModule,
-    TooltipModule
+    TooltipModule,
+    StepsModule,
+    DialogModule
   ],
     providers: [
       MessageService,
@@ -77,7 +81,9 @@ import { TooltipModule } from 'primeng/tooltip';
       FileUploadModule,
       ProgressBarModule,
       AutoCompleteModule,
-      TooltipModule
+      TooltipModule,
+      StepsModule,
+      DialogModule
     ],
 })
 export class PrimengModule { }

@@ -23,6 +23,11 @@ export interface userImage {
   title: string;
 }
 
+export class UserNewRole {
+    uuid: string;
+    newRole: string;
+}
+
 @Entity({ schema: 'public', name: 'user' })
 export class User {
   @PrimaryGeneratedColumn('uuid')

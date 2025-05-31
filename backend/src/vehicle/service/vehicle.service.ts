@@ -1,5 +1,5 @@
+import { Tecnomecanic } from './../models/tecnomecanic';
 import { TecnicalDetails } from 'src/vehicle/models/tecnical-details';
-import { Tecnomecanic } from 'src/vehicle/models/tecnomecanic';
 import { Soat } from 'src/vehicle/models/soat';
 import { HttpException, Injectable } from '@nestjs/common';
 import { Vehicle } from '../models/vehicle';
@@ -38,6 +38,20 @@ export class VehicleService {
   public async getVehiclesByUUID(uuid: string): Promise<Vehicle | null> {
     return this.VehicleRepository.findOne({
       where: { uuid: uuid },
+      relations: [
+        'typeSaleVehicle',
+        'ownerVehicle',
+        'prices',
+        'soatVehicle',
+        'TecnomecanicVehicle',
+        'detailsVehicle',
+      ],  
+    });
+  }
+  
+  public async getVehiclesByPlate(plate: string): Promise<Vehicle | null> {
+    return this.VehicleRepository.findOne({
+      where: { plate: plate },
       relations: [
         'typeSaleVehicle',
         'ownerVehicle',
@@ -88,13 +102,42 @@ export class VehicleService {
   public async createVehicle(
     objVehicle: Vehicle,
   ): Promise<Vehicle | HttpException> {
+    const Tecnomecanics = objVehicle.TecnomecanicVehicle
+    const Prices = objVehicle.prices;
+    const Soats = objVehicle.soatVehicle;
+    const tecnicalDetails = objVehicle.detailsVehicle;
+    if (objVehicle.typeSaleVehicle) {
+      objVehicle.idTypeSale = objVehicle.typeSaleVehicle.uuid;
+    }
     return this.VehicleRepository.save(objVehicle)
-      .then((response) => {
-        return response;
+      .then(async (vehicle) => {
+        if (Tecnomecanics) {
+          for (const tecnomecanic of Tecnomecanics) {
+            tecnomecanic.idVehicle = vehicle.uuid;
+            await this.TecnomecanicRepository.save(tecnomecanic);
+          }
+        }
+        if (Prices) {
+          for (const price of Prices) {
+            price.idVehicle = vehicle.uuid;
+            await this.PricesRepository.save(price);
+          }
+        }
+        if (Soats) {
+          for (const soat of Soats) {
+            soat.idVehicle = vehicle.uuid;
+            await this.SoatRepository.save(soat);
+          }
+        }
+        if (tecnicalDetails) {
+          tecnicalDetails.idVehicle = vehicle.uuid;
+          await this.TecnicalDetailsRepository.save(tecnicalDetails);
+        }
+        return vehicle;
       })
       .catch((error) => {
         return new HttpException(`Error creating Vehicle: ${error}`, 500);
-      });
+      });  
   }
 
   public async updateVehicle(

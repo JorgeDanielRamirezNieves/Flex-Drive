@@ -39,6 +39,22 @@ export class VehicleController {
     }
   }
   
+  @Get('findbyPLate/:plate')
+  @ApiParam({
+    name: 'plate',
+    description: 'plate of the Vehicle',
+    required: true,
+    type: String,
+  })
+  private findByPLateVehicle(@Param('plate') plate: any): any {
+    const plateVehicle = plate;
+    if (plateVehicle && plateVehicle.length > 0) {
+      return this.VehicleService.getVehiclesByPlate(plateVehicle);
+    } else {
+      return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
+    }
+  }
+  
   @Get('findByUser/:uuid')
   @ApiParam({
     name: 'uuid',

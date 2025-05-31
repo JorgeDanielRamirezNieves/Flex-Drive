@@ -18,7 +18,6 @@ export class CardPequennaComponent {
       '',
       '',
       '',
-      '',
       'in_use',
       '',
       '',

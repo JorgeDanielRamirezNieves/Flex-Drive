@@ -35,7 +35,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public typesDocument: TypeDocument[] | undefined;
   public password: any;
   public urlImage: string;
-  public uploadProgress: number = 0; // Progreso de subida de imagen
   public isUploaded: boolean = false; // Indica si la imagen ha sido subida
   public isCreatingContract: boolean = false; // Indica si se está creando un contrato
   public isRegistering: boolean = false;
@@ -146,7 +145,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
             life: 3000,
           });
           this.isRegistering = false;
-          this.loginAftherRegister(); 
+          this.loginAftherRegister();
         }),
         catchError((err) => {
           console.error('Error al crear usuario:', err);
@@ -157,7 +156,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
             detail: 'No se pudo crear el usuario',
             life: 5000,
           });
-          
+
           return throwError(() => err);
         }),
         finalize(() => {
@@ -263,49 +262,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.subcription = this.commonServices
       .UploadedFile(formData)
       .pipe(
-        map((event: HttpEvent<any>) => {
-          // Manejar diferentes tipos de eventos HTTP
-          switch (event.type) {
-            case HttpEventType.UploadProgress:
-              // Calcular progreso de subida
-              if (event.total) {
-                const progress = Math.round((100 * event.loaded) / event.total);
-                console.log(`Progreso: ${progress}%`);
-                this.uploadProgress = progress; // Actualizar progreso
-              }
-              break;
-
-            case HttpEventType.Response:
-              // Respuesta completa del servidor
-              console.log('Respuesta del servidor:', event.body);
-
-              // Verificar si la respuesta es exitosa
-              if (event.body && event.body.data) {
-                this.urlImage = event.body.data.display_url; // URL de ImgBB
-
-                this.messageService.add({
-                  severity: 'success', // Cambié de 'info' a 'success'
-                  summary: 'Éxito',
-                  detail: 'Imagen cargada correctamente',
-                  life: 3000,
-                });
-
-                // Opcional: guardar más datos de ImgBB
-                const imageData = {
-                  id: event.body.data.id,
-                  url: event.body.data.url,
-                  displayUrl: event.body.data.display_url,
-                  thumbUrl: event.body.data.thumb,
-                  mediumUrl: event.body.data.medium,
-                  deleteUrl: event.body.data.delete_url,
-                  size: event.body.data.size,
-                };
-
-                this.isUploaded = true;
-                this.urlImage = imageData.displayUrl; // Guardar la URL de la imagen
-              }
-              break;
-          }
+        map((res: any) => {
+          this.urlImage = res.data.cloudinary_url; 
+          this.isUploaded = true; 
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Éxito',
+            detail: 'Imagen subida exitosamente',
+            life: 3000,
+          });
         }),
         catchError((err: HttpErrorResponse) => {
           console.error('Error al subir imagen:', err);

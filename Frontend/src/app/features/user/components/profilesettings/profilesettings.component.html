@@ -8,15 +8,64 @@
       *ngFor="let card of cards"
       [card]="card"
     ></app-card-settings>
-    <div class="flex justify-around items-center gap-8 bg-[#d9d9d9] rounded-lg shadow-md p-8 py-10 mb-20 hover:scale-105 transition-all duration-300 ease-in-out">
-      <img src="../../../../../assets/icons/preferencia.png" class="w-[10%] mx-auto" alt="">
+    <div
+      class="flex justify-around items-center gap-8 bg-[#d9d9d9] rounded-lg shadow-md p-8 py-10 mb-20 hover:scale-105 transition-all duration-300 ease-in-out"
+    >
+      <img
+        src="../../../../../assets/icons/preferencia.png"
+        class="w-[10%] mx-auto"
+        alt=""
+      />
       <span class="flex flex-col items-start">
         <h3 class="text-2xl jura font-bold">Preferencias de vehículos</h3>
-        <p class="monserrat">Aquí podrás cambiar las preferencias de vehículos que se te muestran en la aplicacion.</p>
-      </span> 
-      <app-button label="Cambiar preferencias" type="link" [redirecTo]="'/user/preferences/'"></app-button>
+        <p class="monserrat">
+          Aquí podrás cambiar las preferencias de vehículos que se te muestran
+          en la aplicacion.
+        </p>
+      </span>
+      <app-button
+        label="Cambiar preferencias"
+        type="link"
+        [redirecTo]="'/user/preferences/'"
+      ></app-button>
+    </div>
+
+    <div
+      class="flex justify-around items-center gap-8 bg-[#d9d9d9] rounded-lg shadow-md p-8 py-10 mb-20 hover:scale-105 transition-all duration-300 ease-in-out"
+    >
+      <img
+        src="../../../../../assets/icons/Borrardor.png"
+        class="w-[10%] mx-15"
+        alt=""
+      />
+      <span class="flex flex-col items-start">
+        <h3 class="text-2xl jura font-bold">Eliminar cuenta</h3>
+        <p class="monserrat">
+          No tienes que ir te aun puedes explorar mucho mas de lo que crees ;)
+        </p>
+      </span>
+      <app-button
+        label="Eliminar cuenta"
+        type="button"
+        (click)="openModal()"
+      ></app-button>
     </div>
   </div>
 </div>
+
+<p-dialog
+  header="Eliminar cuenta"
+  [modal]="true"
+  [(visible)]="visible"
+  class="jura"
+>
+  <div class="flex items-center gap-4 mb-4 p-10">
+    <p class="text-3xl">Estas segura de eliminar tu cuenta</p>
+  </div>
+  <div class="flex justify-end gap-2 pr-5">
+    <p-button label="Cancelar" severity="secondary" (click)="visible = false" class="bg-[#54A8A3] p-2 rounded-xl hover:bg-[#ADF9F6] hover:text-[#435755] transition-all duration-200 ease-in-out" />
+    <p-button label="Eliminar" (click)="delete()" class="bg-[#54A8A3] p-2 rounded-xl hover:bg-red-700  transition-all duration-200 ease-in-out" />
+  </div>
+</p-dialog>
 
 <app-footer></app-footer>

@@ -14,7 +14,7 @@ export interface Imagesvehicle {
 }
 
 export class Vehicle {
-  public uuid: string;
+  public uuid?: string;
   public plate: string;
   public licenceNumber: string;
   public description: string;
@@ -37,7 +37,7 @@ export class Vehicle {
   public rating: number;
   public homeDelivery: boolean;
   public createdAt: Date;
-  public updatedAt: Date;
+  public updatedAt: Date | null;
   public idTypeSale: string;
   public idOwner: string;
   public TecnomecanicVehicle?: Tecnomecanic[];
@@ -49,32 +49,32 @@ export class Vehicle {
   public ownerVehicle?: User;
 
     constructor(
-        uuid: string,
-        plate: string,
-        licenceNumber: string,
-        description: string,
-        status:
-        | 'available'
-        | 'booked'
-        | 'out_of_service'
-        | 'in_use'
-        | 'lost'
-        | 'inactive',
-        type: string,
-        color: string,
-        mileage: number,
-        contitions: string,
-        accesories: string[],
-        capacity: number,
-        doors: number,
-        image: Imagesvehicle[],
-        availability: string,
-        rating: number,
-        homeDelivery: boolean,
-        createdAt: Date,
-        updatedAt: Date,
-        idTypeSale: string,
-        idOwner: string
+      plate: string,
+      licenceNumber: string,
+      description: string,
+      status:
+      | 'available'
+      | 'booked'
+      | 'out_of_service'
+      | 'in_use'
+      | 'lost'
+      | 'inactive',
+      type: string,
+      color: string,
+      mileage: number,
+      contitions: string,
+      accesories: string[],
+      capacity: number,
+      doors: number,
+      image: Imagesvehicle[],
+      availability: string,
+      rating: number,
+      homeDelivery: boolean,
+      createdAt: Date,
+      updatedAt: Date | null,
+      idTypeSale: string,
+      idOwner: string,
+      uuid?: string
     ) {
         this.uuid = uuid;
         this.plate = plate;

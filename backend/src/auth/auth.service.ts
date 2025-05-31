@@ -17,8 +17,7 @@ export class AuthService {
   ) {}
 
   async login(login: Login) {
-    const existe = await this.userRepository.findBy({ email: login.email });
-
+    const existe = await this.userRepository.findBy({ email: login.email, status: 'active' });
     if (existe.length !== 0) {
       const userFromDB = existe[0];
       const Password = userFromDB.password;
@@ -69,5 +68,16 @@ export class AuthService {
     } else {
       return new HttpException('No existe el usuario', 409);
     }
+  }
+
+  public async changeEmail(
+    userId: string, email: string
+  ): Promise<void> {
+    const user = await this.userRepository.findOneBy({ uuid: userId });
+    if (!user) {
+      throw new HttpException('Usuario no encontrado', 404);
+    }
+    user.email = email;
+    await this.userRepository.save(user);
   }
 }

@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { DataSource, DeleteResult, Repository, UpdateResult } from 'typeorm';
-import { User } from '../models/user';
+import { User, UserNewRole } from '../models/user';
 import { Fines } from '../models/fines';
 import axios from 'axios';
 import * as bcrypt from 'bcryptjs'
@@ -110,7 +110,9 @@ export class UserService {
     uuid: string,
     objUser: User,
   ): Promise<{ response: UpdateResult; User: User } | HttpException> {
-    return this.UserRepository.update(uuid, objUser)
+    objUser.updatedAt = new Date();
+    objUser.rolUser = undefined; 
+    return this.UserRepository.save(objUser)
       .then((response) => {
         return new HttpException(
           JSON.stringify({ response: response, User: objUser }),
@@ -119,6 +121,26 @@ export class UserService {
       })
       .catch((error) => {
         return new HttpException(`Error updating User: ${error}`, 500);
+      });
+  }
+
+  public async changeRoleUser(obj: UserNewRole): Promise<UpdateResult | HttpException> {
+    return this.UserRepository.update(obj.uuid, { idRole: obj.newRole })
+      .then((response) => {
+        return new HttpException(JSON.stringify(response), 200);
+      })
+      .catch((error) => {
+        return new HttpException(`Error changing User status: ${error}`, 500);
+      });
+  }
+  
+  public async changeStatus(obj: {uuid: string, status: 'active' | 'inactive' | 'under_review' }): Promise<UpdateResult | HttpException> {
+    return this.UserRepository.update(obj.uuid, { status: obj.status })
+      .then((response) => {
+        return new HttpException(JSON.stringify(response), 200);
+      })
+      .catch((error) => {
+        return new HttpException(`Error changing User status: ${error}`, 500);
       });
   }
 

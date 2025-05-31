@@ -7,6 +7,7 @@ import { MyvehiclesComponent } from './components/myvehicles/myvehicles.componen
 import { VehiculosLandingComponent } from './components/vehiculos-landing/vehiculos-landing.component';
 import { SharedModule } from '../../shared/shared.module';
 import { VehicleRoutingModule } from './vehicle-routing.module';
+import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
 
 
 
@@ -15,7 +16,8 @@ import { VehicleRoutingModule } from './vehicle-routing.module';
     BusquedaComponent,
     DetalleVehiculoComponent,
     MyvehiclesComponent,
-    VehiculosLandingComponent
+    VehiculosLandingComponent,
+    VehicleFormComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 import { Vehicle } from "./vehicle";
 
 export class TecnicalDetails {
-    public idDetails: string;
+    public idDetails?: string;
     public idVehicle: string;
     public serviceType: 'private' | 'public';
     public brand: string;
@@ -14,7 +14,6 @@ export class TecnicalDetails {
     public noChassis: string;
     public vehicle?: Vehicle;
     constructor(
-        idDetails: string,
         idVehicle: string,
         serviceType: 'private' | 'public',
         brand: string,
@@ -25,6 +24,7 @@ export class TecnicalDetails {
         weight: string,
         loadCapacity: string,
         noChassis: string,
+        idDetails?: string,
     ) {
         this.idDetails = idDetails;
         this.idVehicle = idVehicle;

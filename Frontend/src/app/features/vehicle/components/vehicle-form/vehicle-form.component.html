@@ -1,0 +1,507 @@
+<main class="flex flex-col items-center justify-center h-fit jura">
+  <p-toast></p-toast>
+  <h1
+    class="text-6xl text-white bg-[#435755] w-full h-[20vh] flex justify-center items-center shadow-[0_40px_70px_10px_#435755]"
+  >
+    Añadir un vehículo
+  </h1>
+  <p-steps
+    [activeIndex]="activeIndex"
+    [model]="steps"
+    readonly="false"
+    class="pb-4 pt-20"
+    (activeIndexChange)="onActiveIndexChange($event)"
+  />
+  <form
+    action=""
+    class="flex flex-col items-center justify-center w-full h-fit"
+  >
+    <section
+      *ngIf="activeIndex === 0"
+      class="w-full h-fit flex flex-col items-center justify-center gap-5 border-[#435755] py-10"
+    >
+      <h1 class="text-4xl py-4 bg-[#54A8A3] text-white w-full text-center">
+        Información encontrada del vehículo
+      </h1>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 w-8/10 h-fit bg-[#d9d9d9] shadow-lg rounded-3xl gap-4 p-10"
+      >
+        <span
+          class="flex flex-col items-start justify-center gap-5 w-full h-fit"
+        >
+          <p><strong>Placa:</strong>&nbsp;{{ plate }}</p>
+          <p>
+            <strong>Numero de licencia:</strong>&nbsp;{{
+              newVehicle ? testData.licence_no : vehicle?.licenceNumber
+            }}
+          </p>
+          <p>
+            <strong>Tipo de vehículo:</strong>&nbsp;{{
+              newVehicle ? testData.class : vehicle?.type
+            }}
+          </p>
+          <p>
+            <strong>Color:</strong>&nbsp;{{
+              newVehicle ? testData.color : vehicle?.color
+            }}
+          </p>
+          <p>
+            <strong>Capacidad:</strong>&nbsp;{{
+              newVehicle ? testData.capacity : vehicle?.capacity
+            }}
+          </p>
+          <p>
+            <strong>Cantidad de puertas:</strong>&nbsp;{{
+              newVehicle ? testData.doors : vehicle?.doors
+            }}
+          </p>
+          <p><strong>Tipo de servicio:</strong>&nbsp;privado</p>
+          <p>
+            <strong>Numero de Chassis:</strong>&nbsp;{{
+              newVehicle
+                ? testDataDetails.no_chassis
+                : vehicle?.detailsVehicle?.noChassis
+            }}
+          </p>
+        </span>
+        <span
+          class="flex flex-col items-start justify-center gap-5 w-full h-fit"
+        >
+          <p>
+            <strong>Marca:</strong>&nbsp;{{
+              newVehicle
+                ? testDataDetails.brand
+                : vehicle?.detailsVehicle?.brand
+            }}
+          </p>
+          <p>
+            <strong>Modelo:</strong>&nbsp;{{
+              newVehicle
+                ? testDataDetails.model
+                : vehicle?.detailsVehicle?.model
+            }}
+          </p>
+          <p>
+            <strong>Año:</strong>&nbsp;{{
+              newVehicle ? testDataDetails.year : vehicle?.detailsVehicle?.year
+            }}
+          </p>
+          <p>
+            <strong>Cilindraje:</strong>&nbsp;{{
+              newVehicle
+                ? testDataDetails.cylinder_capacity
+                : vehicle?.detailsVehicle?.cylinderCapacity
+            }}
+          </p>
+          <p>
+            <strong>Tipo de combustible:</strong>&nbsp;{{
+              newVehicle
+                ? testDataDetails.fuel
+                : vehicle?.detailsVehicle?.fuelType
+            }}
+          </p>
+          <p>
+            <strong>Peso:</strong>&nbsp;{{
+              newVehicle
+                ? testDataDetails.weight
+                : vehicle?.detailsVehicle?.weight
+            }}
+          </p>
+          <p>
+            <strong>Capacidad de carga:</strong>&nbsp;{{
+              newVehicle
+                ? testDataDetails.load_capacity
+                : vehicle?.detailsVehicle?.loadCapacity
+            }}
+          </p>
+        </span>
+      </div>
+
+      <div
+        class="flex flex-col justify-center items-center w-8/10 h-fit bg-[#d9d9d9] shadow-lg rounded-3xl gap-4 p-10"
+      >
+        <h3 class="text-3xl">Soats del vehículo</h3>
+        <table class="w-full">
+          <tr class="bg-[#54A8A3] text-white">
+            <th class="rounded-tl-2xl py-5">Numero de póliza</th>
+            <th class="py-5">Status</th>
+            <th class="py-5">Fecha de expedición</th>
+            <th class="py-5">Fecha de inicio</th>
+            <th class="py-5">Fecha de fin</th>
+            <th class="rounded-tr-2xl py-5">Entidad</th>
+          </tr>
+          <ng-container *ngIf="listSoat.length !== 0; else noSoat">
+            <tr
+              *ngFor="let soat of listSoat"
+              class="odd:bg-[#ffffff90] last:rounded-b-2xl text-center"
+            >
+              <td class="py-5">{{ soat.noPolicy }}</td>
+              <td
+                class="py-5"
+                ngClass="{{ soat.status ? 'text-green-400' : 'text-red-500' }}"
+              >
+                {{ soat.status }}
+              </td>
+              <td class="py-5">
+                {{ soat.expeditionDate | date : "dd/MM/yyyy" }}
+              </td>
+              <td class="py-5">{{ soat.startDate | date : "dd/MM/yyyy" }}</td>
+              <td class="py-5">{{ soat.finishDate | date : "dd/MM/yyyy" }}</td>
+              <td class="py-5">{{ soat.entitie }}</td>
+            </tr>
+          </ng-container>
+          <ng-template #noSoat>
+            <tr>
+              <td
+                class="py-5 text-center text-xl bg-[#ffffff90] rounded-b-2xl"
+                colspan="6"
+              >
+                No se encontraron registros de SOAT
+              </td>
+            </tr>
+          </ng-template>
+        </table>
+      </div>
+
+      <div
+        class="flex flex-col justify-center items-center w-8/10 h-fit bg-[#d9d9d9] shadow-lg rounded-3xl gap-4 p-10"
+      >
+        <h3 class="text-3xl">Tecnomecanica del vehículo</h3>
+        <table class="w-full">
+          <tr class="bg-[#54A8A3] text-white">
+            <th class="rounded-tl-2xl py-5">Numero de certificado</th>
+            <th class="py-5">Status</th>
+            <th class="py-5">Fecha de expedición</th>
+            <th class="py-5">Fecha de expiración</th>
+            <th class="rounded-tr-2xl py-5">Entidad</th>
+          </tr>
+          <ng-container *ngIf="listRTM.length !== 0; else noSoat">
+            <tr
+              *ngFor="let rtm of listRTM"
+              class="odd:bg-[#ffffff90] last:rounded-b-2xl text-center"
+            >
+              <td class="py-5">{{ rtm.noCertificate }}</td>
+              <td
+                class="py-5"
+                ngClass="{{ rtm.status ? 'text-green-400' : 'text-red-500' }}"
+              >
+                {{ rtm.status }}
+              </td>
+              <td class="py-5">
+                {{ rtm.expeditionDate | date : "dd/MM/yyyy" }}
+              </td>
+              <td class="py-5">
+                {{ rtm.expirationDate | date : "dd/MM/yyyy" }}
+              </td>
+              <td class="py-5">{{ rtm.entitie }}</td>
+            </tr>
+          </ng-container>
+          <ng-template #noSoat>
+            <tr>
+              <td
+                class="py-5 text-center text-xl bg-[#ffffff90] rounded-b-2xl"
+                colspan="6"
+              >
+                No se encontraron registros de SOAT
+              </td>
+            </tr>
+          </ng-template>
+        </table>
+      </div>
+      <h3
+        class="text-xl py-4 text-center w-1/2 flex justify-center items-center gap-5"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-info-icon lucide-info w-50 text-[#54A8A3]"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" />
+        </svg>
+        <p>
+          En caso de que la información que se muestre sea incorrecta, por favor
+          comunicarse con el RUNT a traves de su linea de atención 7x24:
+          <u>018000930060</u>
+        </p>
+      </h3>
+
+      <div class="flex justify-center items-center h-fit gap-5">
+        <app-button
+          type="button"
+          label="Siguiente"
+          (click)="onNextStep()"
+        ></app-button>
+      </div>
+    </section>
+
+    <section
+      *ngIf="activeIndex === 1"
+      class="w-full h-fit flex flex-col items-center justify-center gap-5 border-[#435755] py-10"
+    >
+      <h1 class="text-4xl py-4 bg-[#54A8A3] text-white w-full text-center">
+        Información para la renta del vehículo
+      </h1>
+      <div
+        class="flex flex-wrap justify-center items-center w-8/10 h-fit bg-[#d9d9d9] shadow-lg rounded-3xl gap-4 p-10"
+      >
+        <app-input-label
+          label="Kilometraje"
+          placeholder="Ingrese el kilometraje del vehículo"
+          type="number"
+          [model]="vehicle"
+          modelProperty="mileage"
+          class="w-[48%]"
+          name="mileage"
+        ></app-input-label>
+
+        <span
+          class="flex flex-col justify-center items-start gap-3 pb-5 mb-4 w-[48%]"
+        >
+          <label for="" class="jura font-bold">Disponibilidad de renta</label>
+          <p-select
+            [options]="availables"
+            [optionValue]="'value'"
+            [(ngModel)]="vehicle!.availability"
+            optionLabel="name"
+            placeholder="Selecciona cuándo podrán rentar tu vehículo"
+            class="w-full jura"
+            name="availability"
+          >
+          </p-select>
+        </span>
+
+        <span
+          class="flex flex-col justify-center items-start gap-3 py-2 mb-4 w-full"
+        >
+          <label for="" class="jura font-bold"
+            >Tipo de venta del vehículo</label
+          >
+          <p-select
+            [options]="typeSales"
+            [(ngModel)]="vehicle!.typeSaleVehicle"
+            optionLabel="name"
+            placeholder="Selecciona el tipo de venta del vehículo"
+            class="w-full jura"
+            name="typeSale"
+          >
+          </p-select>
+        </span>
+
+        <div class="w-full flex flex-col items-start justify-center gap-3">
+          <app-input-label
+            label="Precio del vehículo"
+            type="number"
+            [model]="price"
+            modelProperty="price"
+            class="w-full"
+            name="price"
+          ></app-input-label>
+          <span class="flex flex-col items-center justify-center w-full h-fit">
+            <p>
+              Aquí te mostramos el rango de precios que puedes utilizar para tu
+              vehículo
+            </p>
+            <span
+              class="flex items-start justify-center w-full h-fit gap-2 mt-4"
+            >
+              <p>{{ minPrice }}</p>
+              <input
+                type="range"
+                [min]="minPrice"
+                [max]="maxPrice"
+                class="slider"
+                id="myRange"
+                step="1000"
+                [(ngModel)]="price!.price"
+                name="priceRange"
+              />
+              <p>{{ maxPrice }}</p>
+            </span>
+          </span>
+        </div>
+
+        <span
+          class="flex flex-col items-start justify-center w-full h-fit mb-5"
+        >
+          <label for="conditions" class="jura font-bold mb-2"
+            >Condición actual del vehículo</label
+          >
+          <textarea
+            name="conditions"
+            id="conditions"
+            rows="4"
+            placeholder="Ingrese las condiciones actuales del vehículo"
+            [(ngModel)]="vehicle!.contitions"
+            class="rounded-2xl montserrat w-full pr-10 py-2 px-3 border bg-white border-gray-300 outline-2 outline-transparent focus-within:outline-[#54A8A3] transition duration-300 ease-in-out shadow-[0_10px_15px_-5px_#00000090] resize-none"
+          ></textarea>
+        </span>
+
+        <span class="flex flex-col items-start justify-center w-full h-fit">
+          <label for="description" class="jura font-bold mb-2"
+            >Descripción del vehículo</label
+          >
+          <textarea
+            name="description"
+            id="description"
+            rows="4"
+            placeholder="Ingrese una descripción para atraer más clientes"
+            [(ngModel)]="vehicle!.description"
+            class="rounded-2xl montserrat w-full pr-10 py-2 px-3 border bg-white border-gray-300 outline-2 outline-transparent focus-within:outline-[#54A8A3] transition duration-300 ease-in-out shadow-[0_10px_15px_-5px_#00000090] resize-none"
+          ></textarea>
+        </span>
+
+        <section class="col-span-2 w-full">
+          <div class="flex justify-center items-center gap-2 w-full px-5">
+            <span class="flex flex-col justify-center items-start gap-2 w-full">
+              <label for="fuelType" class="text-xl">Accesorios</label>
+              <p-select
+                [options]="accessoriesVehicle"
+                [(ngModel)]="accessory"
+                optionLabel="name"
+                placeholder="Selecciona el tipo de venta del vehículo"
+                class="w-full jura"
+                name="typeSale"
+              >
+              </p-select>
+            </span>
+            <app-button
+              label="Añadir"
+              type="button"
+              icon="pi pi-plus"
+              iconPos="right"
+              (click)="addAccessory()"
+              class="mt-10 w-fit"
+            ></app-button>
+          </div>
+          <div
+            class="flex flex-col justify-center items-start gap-2 w-full p-5"
+            *ngIf="accessoriesVehicle.length > 0; else noAccesories"
+          >
+            <label for="accessories" class="text-xl">Accesorios añadidos</label>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let accessory of accessorieTmp; let i = index">
+                <p
+                  class="bg-[#54A8A3] text-white px-3 py-1 rounded-lg flex items-center gap-2"
+                >
+                  {{ accessory }}
+                  <i
+                    class="pi pi-times cursor-pointer"
+                    (click)="removeAccessory(accessory)"
+                  ></i>
+                </p>
+              </span>
+            </div>
+          </div>
+          <ng-template #noAccesories>
+            <div
+              class="flex flex-col justify-center items-start gap-2 w-full p-5"
+            >
+              <label for="accessories" class="text-xl"
+                >Accesorios añadidos</label
+              >
+              <p class="text-gray-500">No hay accesorios añadidos.</p>
+            </div>
+          </ng-template>
+        </section>
+
+        <span class="flex justify-center items-center gap-3 w-full">
+          <label class="checkbox-container">
+            <input
+              type="checkbox"
+              name="insurance"
+              [(ngModel)]="homeDelivery"
+            />
+            <div class="checkmark"></div>
+          </label>
+          <p class="jura text-2xl">
+            ¿Puede entregarlo en el lugar de residencia del solicitante?
+          </p>
+          <p class="text-gray-600 text-2xl">{{ homeDelivery ? "Si" : "No" }}</p>
+        </span>
+      </div>
+
+      <div class="flex justify-center items-center h-fit gap-5">
+        <app-button
+          type="button"
+          label="Anterior"
+          (click)="onPreviousStep()"
+        ></app-button>
+        <app-button
+          type="button"
+          label="Siguiente"
+          (click)="onNextStep()"
+        ></app-button>
+      </div>
+    </section>
+
+    <section
+      *ngIf="activeIndex === 2"
+      class="w-full h-fit flex flex-col items-center justify-center gap-5 border-[#435755] py-10"
+    >
+      <h1 class="text-4xl py-4 bg-[#54A8A3] text-white w-full text-center">
+        Imágenes del vehículo
+      </h1>
+      <h4 class="text-2xl text-center w-8/10">
+        Sube cuantas imagenes quieras del vehículo, recuerda que deben ser de
+        buena calidad y mostrar todos los detalles importantes.
+      </h4>
+      <div
+        class="flex flex-col items-center justify-center w-8/10 h-fit bg-[#d9d9d9] shadow-lg rounded-3xl gap-4 p-10"
+      >
+        <p-fileupload
+          id="image"
+          name="image"
+          (onSelect)="onUpload($event)"
+          [multiple]="true"
+          accept="image/*"
+          maxFileSize="1000000"
+          mode="advanced"
+          required="true"
+          class="w-full"
+          [disabled]="isUploading"
+        >
+          <ng-template #empty>
+            <div
+              class="flex flex-col items-center justify-center h-full text-8xl py-5 border-2 border-t-0 border-dashed border-[#54A8A3] rounded-lg rounded-t-none bg-white/50"
+            >
+              <i class="pi pi-image text-6xl text-gray-400"></i>
+              <p class="text-gray-500 text-lg">
+                Arrastra y suelta una imagen aquí o haz clic para seleccionar
+              </p>
+            </div>
+          </ng-template>
+        </p-fileupload>
+        <h4 class="text-2xl">Imagenes Subidas</h4>
+        <span
+          class="flex flex-wrap justify-center items-center gap-5 w-full h-fit"
+        >
+          <img
+            *ngFor="let image of images"
+            class="w-32 h-32 object-cover rounded-lg shadow-md"
+            [src]="image.itemImageSrc"
+          />
+        </span>
+      </div>
+
+      <div class="flex justify-center items-center h-fit gap-5">
+        <app-button
+          type="button"
+          label="Anterior"
+          (click)="onPreviousStep()"
+        ></app-button>
+        <app-button
+          type="submit"
+          label="Finalizar"
+          (click)="onSubmit()"
+        ></app-button>
+      </div>
+    </section>
+  </form>
+</main>

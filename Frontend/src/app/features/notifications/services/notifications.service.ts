@@ -11,7 +11,7 @@ export class NotificationsService {
     this.urlNotifications = URL_NOTIFICATIONS;
   }
 
-  public getNotificationsByUser(uuid: string) {
+  public getNotificationsByUser(uuid: string) {    
     return this.http.get(`${this.urlNotifications}findByUser/${uuid}`);
   }
 }

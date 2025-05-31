@@ -6,6 +6,7 @@ import { MyvehiclesComponent } from './components/myvehicles/myvehicles.componen
 import { BusquedaComponent } from './components/busqueda/busqueda.component';
 import { DetalleVehiculoComponent } from './components/detalle-vehiculo/detalle-vehiculo.component';
 import { authGuard } from '../auth/guards/auth.guard';
+import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,9 @@ const routes: Routes = [
    },
   { path: 'search', component: BusquedaComponent },
   { path: 'detail/:uuid', component: DetalleVehiculoComponent , 
+    canActivate: [authGuard],
+  },
+  { path: 'createVehicle/:plate', component: VehicleFormComponent , 
     canActivate: [authGuard],
   },
   { path: '', redirectTo: 'start', pathMatch: 'full' },

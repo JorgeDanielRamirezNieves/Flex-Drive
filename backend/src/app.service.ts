@@ -1,40 +1,37 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-
+import { v2 as cloudinary } from 'cloudinary';
 @Injectable()
 export class AppService {
-  private readonly apiKey: string;
-  private readonly baseUrl: string;
   constructor() {
-    this.apiKey = process.env.API_KEY_IMGBB || '';
-    this.baseUrl = 'https://api.imgbb.com/1/upload?expiration=600&key=' + this.apiKey;
   }
 
   getHello(): string {
     return 'Hello World!';
   }
 
-  public async uploadImage(file: Express.Multer.File): Promise<any> {
-    if (!this.apiKey) {
-      throw new BadRequestException('API Key de ImgBB no configurada');
-    }
+  public async uploadImage(file: Express.Multer.File, folder: string = 'vehicles') {
+    return new Promise((resolve, reject) => {
 
-    const formData = new FormData();
-    formData.append('image', file.buffer.toString('base64'));
-    try {
-      const response = await fetch(this.baseUrl, {
-        method: 'POST',
-        body: formData,
+      cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
       });
 
-      const data = await response.json();
-
-      if (!data.success) {
-        throw new BadRequestException(`Error de ImgBB: ${data.error?.message || 'Error desconocido'}`);
-      }
-
-      return data.data;
-    } catch (error) {
-      throw new BadRequestException(`Error al subir imagen: ${error.message}`);
-    }
+      cloudinary.uploader.upload_stream(
+        {
+          folder: folder,
+          resource_type: 'auto',
+          transformation: [
+            { width: 1200, height: 800, crop: 'limit' }, // Optimización automática
+            { quality: 'auto' }
+          ]
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      ).end(file.buffer);
+    });
   }
 }

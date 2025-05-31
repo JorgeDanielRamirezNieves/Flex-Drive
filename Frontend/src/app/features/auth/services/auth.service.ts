@@ -4,6 +4,7 @@ import { Observable, tap, BehaviorSubject } from 'rxjs';
 import { LoginResponse } from '../models/login';
 import { Router } from '@angular/router';
 import { URL_AUTH } from '../../../core/domains';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +55,9 @@ export class AuthService {
       );
   }
 
+  public changeEmail(uuid: string, email: string): Observable<any> {
+    return this.http.patch(URL_AUTH + 'changeEmail', { uuid: uuid, email: email });
+  }
   private setToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
   }

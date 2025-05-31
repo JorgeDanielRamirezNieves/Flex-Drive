@@ -6,6 +6,7 @@ import { VehicleService } from '../../services/vehicle.service';
 import { Vehicle } from '../../models/vehicle';
 import { observatorAny } from '../../../../core/tipo-any';
 import { jwtDecode } from 'jwt-decode';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-myvehicles',
@@ -20,18 +21,21 @@ export class MyvehiclesComponent implements OnDestroy, OnInit {
   public token: any;
   public vehicles: Vehicle[] | undefined;
   public complete: boolean = false;
+  public plate: any;
+  showForm: boolean = false;
+  showFormC: boolean = false;
 
-  formData: any = {
-    tipoTerreno: '',
-    traccion: '',
-  };
-
-  submitted: boolean = false;
-
-  constructor(private router: Router, private vehicleService: VehicleService) {
+  constructor(
+    private router: Router,
+    private vehicleService: VehicleService,
+    private messageService: MessageService
+  ) {
     this.suscribe = this.tmp;
     this.token = jwtDecode(localStorage.getItem('authToken') || '');
     this.userUUID = this.token.uuid;
+    this.plate = {
+      value: '',
+    };
   }
 
   ngOnInit(): void {
@@ -44,38 +48,8 @@ export class MyvehiclesComponent implements OnDestroy, OnInit {
     }
   }
 
-  onSubmit(form: NgForm): void {
-    this.submitted = true;
-
-    if (form.valid) {
-      console.log('Formulario válido. Redirigiendo...');
-      console.log(this.formData);
-      this.router.navigate(['/user']);
-    } else {
-      console.log('Formulario inválido');
-    }
-  }
-
-  showForm: boolean = false;
-  showFormC: boolean = false;
-
   toggleForm(): void {
     this.showForm = !this.showForm;
-  }
-
-  toggleFormC(): void {
-    this.showFormC = !this.showFormC;
-  }
-
-  showDialog = false;
-
-  onSubmitP(form: NgForm) {
-    if (form.valid) {
-      console.log('Se envió el formulario del vehículo');
-      this.showDialog = true;
-    } else {
-      console.log('Formulario inválido');
-    }
   }
 
   private getVehiclesUser() {
@@ -93,5 +67,31 @@ export class MyvehiclesComponent implements OnDestroy, OnInit {
         })
       )
       .subscribe(observatorAny);
+  }
+
+  public onPress(){
+    this.plate.value = this.plate.value.toUpperCase();
+  }
+
+  public createVehicle(form: NgForm) {
+    if (!form.valid) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Llena la placa antes de continuar',
+        life: 3000,
+      });
+    }
+    const regex = /^[A-Z]{3}[0-9]{3}$/; // Adjust regex as needed for your plate format
+    if (!regex.test(this.plate.value)) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Placa no válida, debe contener solo letras y números',
+        life: 3000,
+      });
+      return;
+    }
+    this.router.navigate(['/vehicles/createVehicle/' + this.plate.value]);
   }
 }
