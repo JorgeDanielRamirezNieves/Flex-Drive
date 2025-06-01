@@ -1,4 +1,15 @@
-import { BadRequestException, Body, Controller, Get, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Post,
+  Req,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -22,7 +33,7 @@ const multerConfig = {
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {
@@ -54,14 +65,17 @@ export class AppController {
 
     try {
       // Subir imagen a ImgBB
-      const result = await this.appService.uploadImage(image, 'vehicles') as any;
+      const result = (await this.appService.uploadImage(
+        image,
+        'vehicles',
+      )) as any;
 
       // Guardar en BD
       const imageData = {
         cloudinary_public_id: result.public_id,
         cloudinary_url: result.secure_url,
         original_filename: image.originalname,
-        file_size: image.size
+        file_size: image.size,
       };
 
       return {
@@ -69,7 +83,29 @@ export class AppController {
         data: imageData,
       };
     } catch (error) {
-      throw new BadRequestException(`Error al procesar la imagen: ${error.message}`);
+      throw new BadRequestException(
+        `Error al procesar la imagen: ${error.message}`,
+      );
+    }
+  }
+
+  @Get('generateOTP')
+  private generateOTP(): any {
+    return this.appService.generateOTP();
+  }
+
+  @Post('validateOTP')
+  @ApiBody({
+    description: 'OTP to validate',
+    type: String,
+  })
+  private validateOTP(@Req() request: any): any {
+    const otp = request.body.otp;
+    console.log('Validating OTP:', otp);
+    if (otp && otp.length > 0) {
+      return this.appService.validateOTP(otp);
+    } else {
+      return new HttpException('OTP invalid', HttpStatus.NOT_ACCEPTABLE);
     }
   }
 }

@@ -41,6 +41,7 @@
         inputId="templatedisplay"
         name="fechasDeViaje"
         (onSelect)="checkStatus()"
+        [minDate]="minDate"
         placeholder="DD/MM/YYYY - DD/MM/YYYY"
         ><ng-template #inputicon let-clickCallBack="clickCallBack">
           <svg

@@ -451,6 +451,50 @@
   box-shadow: 0 0 15px -5px #00000090;
 }
 
+:host ::ng-deep .p-datepicker-time-picker {
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 10px;
+  box-shadow: 0 0 15px -5px #00000090;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 1rem;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+:host ::ng-deep .p-datepicker-hour-picker,
+:host ::ng-deep .p-datepicker-minute-picker,
+:host ::ng-deep .p-datepicker-ampm-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+:host ::ng-deep .p-datepicker-hour-picker  span,
+:host ::ng-deep .p-datepicker-minute-picker span,
+:host ::ng-deep .p-datepicker-ampm-picker span {
+  font-size: 1.2rem;
+  font-weight: bolder;
+  color: #435755;
+}
+
+:host ::ng-deep .p-datepicker-increment-button {
+  color: #000000;
+  border-radius: 10px;
+  padding: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-datepicker-increment-button:hover {
+  background-color: #54a8a3;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
 
 :host ::ng-deep .p-inputotp-input{
   border: 1px solid transparent;

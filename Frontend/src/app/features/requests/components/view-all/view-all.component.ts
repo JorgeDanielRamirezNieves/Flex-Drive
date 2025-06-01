@@ -1,9 +1,15 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { Request } from '../../models/request';
 import { RequestsService } from '../../services/requests.service';
-import { catchError, finalize, map, Subscription } from 'rxjs';
+import { catchError, finalize, map, Subscription, throwError } from 'rxjs';
 import { observatorAny } from '../../../../core/tipo-any';
 import { jwtDecode } from 'jwt-decode';
+import { ServiceRentService } from '../../../services-rent/services/service-rent.service';
+import { Service } from '../../../services-rent/models/service';
+import { ContractsService } from '../../../contracts/services/contracts.service';
+import { MessageService } from 'primeng/api';
+import { Contract } from '../../../contracts/models/contract';
 
 @Component({
   selector: 'app-view-all',
@@ -16,18 +22,36 @@ export class ViewAllComponent {
   public tmp: any;
   public requestsClient: Request[] | undefined;
   public requestsOwner: Request[] | undefined;
-  public selectedRequest: any | null = null;
   public loadingRequests: boolean;
   public userUUID: string;
   public role: string;
   public token: any;
+  public isCreatingContract: boolean; // Variable para controlar el estado de creación del contrato
+  public contractService: Contract;
 
-  constructor(private requestService: RequestsService) {
+  constructor(
+    private requestService: RequestsService,
+    private servicerRentService: ServiceRentService,
+    private contractsService: ContractsService,
+    private router: Router,
+    private messageService: MessageService
+  ) {
     this.loadingRequests = true;
     this.suscribe = this.tmp;
     this.token = jwtDecode(localStorage.getItem('authToken') || '');
     this.role = this.token.rolUser.name;
     this.userUUID = this.token.uuid;
+    this.isCreatingContract = false;
+    this.contractService = {
+      accordants: [],
+      status: true,
+      createdAt: new Date(),
+      updatedAt: null,
+      idService: '',
+      idContractType: 'f2b0a1c4-3d8e-4f5b-9a6c-7d0e5f1a2b8d',
+      idContractTypeLegal: '67e4ac9b-9e59-4549-887a-45d0dcb8c479',
+      info: {},
+    };
   }
 
   ngOnInit(): void {
@@ -72,6 +96,108 @@ export class ViewAllComponent {
         }),
         finalize(() => {
           this.loadingRequests = false;
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  public approveRequest(uuid: string) {
+    this.suscribe = this.requestService
+      .changeStatus(uuid, 'approved')
+      .pipe(
+        map((res: any) => {
+          console.log(res);
+          this.createService(uuid);
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  public rejectRequest(uuid: string) {
+    this.suscribe = this.requestService
+      .changeStatus(uuid, 'rejected')
+      .pipe(
+        map((res: any) => {
+          this.getRequestsByOwner();
+          this.getRequestsByClient();
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  public negotiateRequest(uuid: string) {
+    this.suscribe = this.requestService
+      .changeStatus(uuid, 'negotiating')
+      .pipe(
+        map((res: any) => {
+          this.getRequestsByOwner();
+          this.getRequestsByClient();
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  public createService(uuidRequest: string) {
+    const service: Service = {
+      idRequest: uuidRequest,
+      status: 'for_take',
+      createdAt: new Date(),
+      updatedAt: null,
+    };
+    this.suscribe = this.servicerRentService
+      .createServiceRent(service)
+      .pipe(
+        map((res: any) => {
+          console.log(res);
+          const request = this.requestsOwner?.find(
+            (req) => req.uuid === uuidRequest
+          );
+          this.createContract(request?.idClient || '', res.uuid);
+          this.router.navigate(['/services/details/' + res.uuid]);
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        })
+      )
+      .subscribe(observatorAny);
+  }
+  public createContract(uuidOwner: string, uuidService: string) {
+    this.isCreatingContract = true; // Indica que se está creando un contrato
+    this.contractService.accordants = [this.userUUID, uuidOwner];
+    this.contractService.idService = uuidService;
+    this.suscribe = this.contractsService
+      .createContract(this.contractService)
+      .pipe(
+        map((res: any) => {
+          this.isCreatingContract = false; // Restablece el estado al finalizar
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Éxito',
+            detail: 'Has aceptado los términos y condiciones de manera exitosa',
+            life: 3000,
+          });
+        }),
+        catchError((err) => {
+          this.isCreatingContract = false; // Restablece el estado en caso de error
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'No se pudo crear el contrato',
+            life: 5000,
+          });
+          return throwError(() => err);
+        }),
+        finalize(() => {
+          this.isCreatingContract = false;
         })
       )
       .subscribe(observatorAny);

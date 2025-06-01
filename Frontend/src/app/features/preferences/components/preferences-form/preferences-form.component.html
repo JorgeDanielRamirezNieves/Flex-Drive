@@ -1,7 +1,7 @@
 <main
   class="flex flex-col justify-center items-center gap-4 jura py-10 background"
 >
-<p-toast></p-toast>
+  <p-toast></p-toast>
   <app-button
     label="Volver"
     icon="pi pi-arrow-left"
@@ -239,14 +239,15 @@
       <div class="flex justify-center items-center gap-2 w-full px-5">
         <span class="flex flex-col justify-center items-start gap-2 w-full">
           <label for="fuelType" class="text-xl">Accesorios</label>
-          <input
-            type="text"
-            class="montserrat pr-10 py-2.5 px-3 border-2 w-full border-[#54A8A3] rounded-[0.5rem] bg-white outline-2 outline-transparent focus-within:outline-transparent transition duration-300 ease-in-out shadow-[2px_4px_10px_0px_#000000bf]"
-            placeholder="Escribe los accesorios que te gustaría ver"
-            name="accessories"
-            [(ngModel)]="accessorieVehicle"
-            required
-          />
+          <p-select
+            [options]="accessoriesVehicle"
+            [(ngModel)]="accessory"
+            optionLabel="name"
+            placeholder="Selecciona el tipo de venta del vehículo"
+            class="w-full jura"
+            name="typeSale"
+          >
+          </p-select>
         </span>
         <app-button
           label="Añadir"
@@ -254,7 +255,7 @@
           icon="pi pi-plus"
           iconPos="right"
           (click)="addAccessory()"
-          class="mt-10 w-fit"
+          class="mt-14 w-fit"
         ></app-button>
       </div>
       <div
@@ -263,7 +264,7 @@
       >
         <label for="accessories" class="text-xl">Accesorios añadidos</label>
         <div class="flex flex-wrap gap-2">
-          <span *ngFor="let accessory of accessoriesVehicle; let i = index">
+          <span *ngFor="let accessory of preferences.parameters.accessories; let i = index">
             <p
               class="bg-[#54A8A3] text-white px-3 py-1 rounded-lg flex items-center gap-2"
             >

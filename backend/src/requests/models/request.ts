@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { ServiceRent } from 'src/services-rent/models/serviceRent';
 import { User } from 'src/user/models/user';
 import { Vehicle } from 'src/vehicle/models/vehicle';
 import {
@@ -6,6 +7,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -23,7 +25,7 @@ export class Request {
   })
   public sendDate: Date;
 
-  @Column({ name: 'answer_date', type: 'date', nullable: false })
+  @Column({ name: 'answer_date', type: 'date', nullable: true })
   @ApiProperty({
     name: 'answerDate',
     description: 'Date when the request was answered',
@@ -109,4 +111,7 @@ export class Request {
   )
   @JoinColumn([{ name: 'id_vehicle', referencedColumnName: 'uuid' }])
   public requestVehicle?: Vehicle;
+
+   @OneToOne(() => ServiceRent, (objServiceRent: ServiceRent) => objServiceRent.request)
+    public service?: ServiceRent;
 }

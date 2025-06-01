@@ -120,10 +120,6 @@ export class ProfilesettingsComponent implements OnInit, OnDestroy {
       .subscribe(observatorAny);
   }
 
-  public openModal(){
-    this.visible = true;
-  }
-
   public delete(){
     this.subcription = this.userService
       .changeStateUser(this.userUUID, 'inactive')

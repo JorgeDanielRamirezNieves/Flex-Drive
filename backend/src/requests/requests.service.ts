@@ -28,35 +28,42 @@ export class RequestsService {
     uuidClient: string,
   ): Promise<Request[] | null> {
     return await this.RequestRepository.createQueryBuilder('r')
-    .leftJoinAndSelect('r.requestVehicle', 'v') // Asumiendo que tienes la relación configurada
-    .leftJoinAndSelect('v.ownerVehicle', 'owner')
-    .leftJoinAndSelect('v.detailsVehicle', 'details')
-    .leftJoinAndSelect('v.prices', 'prices')
-    .leftJoinAndSelect('v.typeSaleVehicle', 'typeSale')
-    .leftJoinAndSelect('r.requestUser', 'client') // Asumiendo que tienes la relación configurada
-    .leftJoinAndSelect('client.typeDocumentUser', 'typeDoc')
-    .where('client.uuid = :uuidClient', { uuidClient })
-    .getMany();
+      .leftJoinAndSelect('r.requestVehicle', 'v') // Asumiendo que tienes la relación configurada
+      .leftJoinAndSelect('v.ownerVehicle', 'owner')
+      .leftJoinAndSelect('v.detailsVehicle', 'details')
+      .leftJoinAndSelect('v.prices', 'prices')
+      .leftJoinAndSelect('v.typeSaleVehicle', 'typeSale')
+      .leftJoinAndSelect('r.requestUser', 'client') // Asumiendo que tienes la relación configurada
+      .leftJoinAndSelect('client.typeDocumentUser', 'typeDoc')
+      .leftJoinAndSelect('owner.typeDocumentUser', 'typeDocOwner')
+      .leftJoinAndSelect('r.service', 'serviceRent')
+      .where('client.uuid = :uuidClient', { uuidClient })
+      .andWhere('r.status != :status', { status: 'rejected' }) // Excluir solicitudes rechazadas
+      .getMany();
   }
-  
+
   public async getRequestByOwnerUUID(
     uuidOwner: string,
   ): Promise<Request[] | null> {
     return await this.RequestRepository.createQueryBuilder('r')
-    .leftJoinAndSelect('r.requestVehicle', 'v') // Asumiendo que tienes la relación configurada
-    .leftJoinAndSelect('v.ownerVehicle', 'owner')
-    .leftJoinAndSelect('v.detailsVehicle', 'details')
-    .leftJoinAndSelect('v.prices', 'prices')
-    .leftJoinAndSelect('v.typeSaleVehicle', 'typeSale')
-    .leftJoinAndSelect('r.requestUser', 'client') // Asumiendo que tienes la relación configurada
-    .leftJoinAndSelect('client.typeDocumentUser', 'typeDoc')
-    .where('owner.uuid = :uuidOwner', { uuidOwner })
-    .getMany();
+      .leftJoinAndSelect('r.requestVehicle', 'v') // Asumiendo que tienes la relación configurada
+      .leftJoinAndSelect('v.ownerVehicle', 'owner')
+      .leftJoinAndSelect('v.detailsVehicle', 'details')
+      .leftJoinAndSelect('v.prices', 'prices')
+      .leftJoinAndSelect('v.typeSaleVehicle', 'typeSale')
+      .leftJoinAndSelect('r.requestUser', 'client') // Asumiendo que tienes la relación configurada
+      .leftJoinAndSelect('client.typeDocumentUser', 'typeDoc')
+      .leftJoinAndSelect('owner.typeDocumentUser', 'typeDocOwner')
+      .leftJoinAndSelect('r.service', 'serviceRent')
+      .where('owner.uuid = :uuidOwner', { uuidOwner })
+      .andWhere('r.status != :status', { status: 'rejected' }) // Excluir solicitudes rechazadas
+      .getMany();
   }
 
   public async createRequest(
     objRequest: Request,
   ): Promise<Request | HttpException> {
+    console.log('Creating request:', objRequest);
     return this.RequestRepository.save(objRequest)
       .then((response) => {
         return response;
@@ -79,6 +86,19 @@ export class RequestsService {
       })
       .catch((error) => {
         return new HttpException(`Error updating Requests: ${error}`, 500);
+      });
+  }
+
+  public async changeStatusRequest(obj: {
+    uuid: string;
+    status: 'pending' | 'approved' | 'negotiating' | 'rejected';
+  }): Promise<UpdateResult | HttpException> {
+    return this.RequestRepository.update(obj.uuid, { status: obj.status, answerDate: new Date() })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return new HttpException(`Error changing status: ${error}`, 500);
       });
   }
 

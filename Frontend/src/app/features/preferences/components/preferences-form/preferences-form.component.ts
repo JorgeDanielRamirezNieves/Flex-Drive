@@ -47,8 +47,8 @@ export class PreferencesFormComponent implements OnDestroy, OnInit {
   public yearVehicle: string[];
   public filteredYearsVehicle: string[];
 
-  public accessoriesVehicle: string[];
-  public accessorieVehicle: string;
+  public accessoriesVehicle: any[];
+  public accessory: any;
 
   public mileageVehicle: number;
   public capacityVehicle: number;
@@ -399,8 +399,39 @@ export class PreferencesFormComponent implements OnDestroy, OnInit {
     this.yearVehicle = [];
     this.filteredYearsVehicle = [];
 
-    this.accessoriesVehicle = [];
-    this.accessorieVehicle = '';
+    this.accessoriesVehicle = [
+      {
+        name: 'portaequipajes',
+      },
+      {
+        name: 'fundas de asiento',
+      },
+      {
+        name: 'soporte para teléfono',
+      },
+      {
+        name: 'cargador de coche',
+      },
+      {
+        name: 'alfombrillas',
+      },
+      {
+        name: 'altavoz bluetooth',
+      },
+      {
+        name: 'botiquín de primeros auxilios',
+      },
+      {
+        name: 'kit de emergencia',
+      },
+      {
+        name: 'kit de herramientas',
+      },
+      {
+        name: 'funda para coche',
+      }
+    ];
+    this.accessory = '';
 
     this.mileageVehicle = 0;
     this.capacityVehicle = 0;
@@ -535,11 +566,11 @@ export class PreferencesFormComponent implements OnDestroy, OnInit {
 
   public addAccessory() {
     if (
-      this.accessorieVehicle &&
-      !this.accessoriesVehicle.includes(this.accessorieVehicle)
+      this.accessory &&
+      !this.preferences.parameters.accessories.includes(this.accessory.name)
     ) {
-      this.accessoriesVehicle.push(this.accessorieVehicle);
-      this.accessorieVehicle = '';
+      this.preferences.parameters.accessories.push(this.accessory.name);
+      this.accessory = {};
     }
   }
 

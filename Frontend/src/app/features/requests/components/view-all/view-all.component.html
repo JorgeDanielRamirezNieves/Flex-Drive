@@ -50,10 +50,33 @@
             </svg>
             }
           </ng-template>
-          <h3 class="text-xl font-bold">Solicitud a {{request.requestVehicle?.ownerVehicle?.firstName}} {{request.requestVehicle?.ownerVehicle?.lastName}}</h3>
+          <h3 class="text-xl font-bold">
+            Solicitud a {{ request.requestVehicle?.ownerVehicle?.firstName }}
+            {{ request.requestVehicle?.ownerVehicle?.lastName }}
+          </h3>
         </p-accordionheader>
         <p-accordioncontent>
           <app-details [request]="request" class="w-full"></app-details>
+          <span
+            class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura"
+            *ngIf="request?.status === 'approved'"
+          >
+            <app-button
+              label="Ir al Servicio"
+              type="link"
+              redirecTo="/services/details/{{ request.service?.uuid }}"
+            ></app-button>
+          </span>
+          <span
+            class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura"
+            *ngIf="request?.status === 'negotiating'"
+          >
+            <app-button
+              label="Ir al chat"
+              type="link"
+              redirecTo="/user/activechats"
+            ></app-button>
+          </span>
         </p-accordioncontent>
       </p-accordionpanel>
       } } @else {
@@ -147,9 +170,11 @@
             </ng-template>
             <h3 class="text-xl font-bold">
               Solicitud de
-              {{request.requestUser?.firstName +
-              " " +
-              request.requestUser?.lastName}}
+              {{
+                request.requestUser?.firstName +
+                  " " +
+                  request.requestUser?.lastName
+              }}
             </h3>
           </p-accordionheader>
           <p-accordioncontent>
@@ -158,6 +183,46 @@
               [isOwner]="true"
               class="w-full"
             ></app-details>
+            <span
+              class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura"
+              *ngIf="request?.status === 'pending'"
+            >
+              <app-button
+                label="Aceptar"
+                type="button"
+                (click)="approveRequest(request?.uuid || '')"
+              ></app-button>
+              <app-button
+                label="Negociar"
+                type="button"
+                (click)="negotiateRequest(request?.uuid || '')"
+              ></app-button>
+              <app-button
+                label="Negar"
+                type="button"
+                (click)="rejectRequest(request?.uuid || '')"
+              ></app-button>
+            </span>
+            <span
+              class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura"
+              *ngIf="request?.status === 'approved'"
+            >
+              <app-button
+                label="Ir al Servicio"
+                type="link"
+                redirecTo="/services/details/{{ request.service?.uuid }}"
+              ></app-button>
+            </span>
+            <span
+              class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura"
+              *ngIf="request?.status === 'negotiating'"
+            >
+              <app-button
+                label="Ir al chat"
+                type="link"
+                redirecTo="/user/activechats"
+              ></app-button>
+            </span>
           </p-accordioncontent>
         </p-accordionpanel>
         } } @else {

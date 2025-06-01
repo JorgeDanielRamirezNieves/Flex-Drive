@@ -11,7 +11,7 @@
       <div class="flex flex-col justify-center items-center gap-3 mr-5">
         <h2 class="text-3xl jura text-center">
           {{
-            isOwner ? "Solicitante del servicio" : "Propietario del vehículo"
+            isOwner ? "Propietario del vehículo" : "Solicitante del servicio"
           }}
         </h2>
         <div
@@ -58,10 +58,10 @@
                 {{
                   isOwner
                     ? service?.request?.requestUser?.city +
-                      " ," +
+                      ", " +
                       service?.request?.requestUser?.country
                     : service?.request?.requestVehicle?.ownerVehicle?.city +
-                      " ," +
+                      ", " +
                       service?.request?.requestVehicle?.ownerVehicle?.country
                 }}
               </li>
@@ -125,7 +125,8 @@
                 <ng-container *ngIf="!isOwner">
                   <tr
                     *ngFor="
-                      let fine of service?.request?.requestVehicle?.ownerVehicle?.userFines
+                      let fine of service?.request?.requestVehicle?.ownerVehicle
+                        ?.userFines
                     "
                     class="text-center text-lg py-3"
                   >
@@ -143,6 +144,7 @@
         </p-tabpanels>
       </p-tabs>
     </section>
+    <!-- Seccion de vehiculos -->
     <section class="w-full flex justify-center items-center gap-5 px-10 py-5">
       <div class="flex flex-col justify-center items-center gap-3 mr-5">
         <h2 class="text-3xl jura text-center">Vehículo rentado</h2>
@@ -319,6 +321,7 @@
         </p-tabpanels>
       </p-tabs>
     </section>
+    <!-- Sección de inicio del viaje -->
     <section
       class="bg-[#d9d9d9] w-4/5 h-fit p-10 rounded-lg border-2 border-gray-400 jura grid grid-cols-2 place-items-center"
       *ngIf="service?.status === 'for_take'"
@@ -344,9 +347,14 @@
           >Ingresa el código generado por el propietario</label
         >
         <p-inputotp [(ngModel)]="codOTP" [length]="6" name="codOTP" />
-        <app-button label="Verificar" type="submit"></app-button>
+        <app-button
+          label="Verificar"
+          type="submit"
+          (click)="validateOTP('on_travel')"
+        ></app-button>
       </form>
     </section>
+    <!-- Sección de fin del viaje -->
     <section
       class="bg-[#d9d9d9] w-4/5 h-fit p-10 rounded-lg border-2 border-gray-400 jura grid grid-cols-2 place-items-center"
       *ngIf="service?.status === 'for_recive'"
@@ -371,10 +379,19 @@
         <label for="" class="text-2xl px-5 text-center"
           >Ingresa el código generado por el propietario</label
         >
-        <p-inputotp [(ngModel)]="codOTP" [length]="6" name="codOTP" />
-        <app-button label="Verificar" type="submit"></app-button>
+        <p-inputotp
+          [(ngModel)]="codOTP"
+          [length]="6"
+          name="codOTP"
+        />
+        <app-button
+          label="Verificar"
+          type="submit"
+          (click)="validateOTP('finished')"
+        ></app-button>
       </form>
     </section>
+    <!-- Fechas -->
     <section class="w-full flex justify-center items-center gap-5 px-10 py-5">
       <span class="flex flex-col justify-center items-center gap-3 grow">
         <h2 class="text-4xl jura">Fecha de salida</h2>
@@ -386,6 +403,8 @@
           disabled="true"
           inputId="icondisplay"
           [(ngModel)]="deliveryDate"
+          [showTime]="true"
+          hourFormat="12"
         ></p-datepicker>
       </span>
       <span class="flex flex-col justify-center items-center gap-3 grow">
@@ -398,9 +417,12 @@
           disabled="true"
           inputId="icondisplay"
           [(ngModel)]="returnDate"
+          [showTime]="true"
+          hourFormat="12"
         ></p-datepicker>
       </span>
     </section>
+    <!-- Botones de acciones -->
     <span class="flex justify-center items-center gap-3 w-full px-10 py-5">
       <app-button
         label="Descargar Contrato"
@@ -422,6 +444,7 @@
         icon="pi pi-check"
         type="button"
         iconPos="right"
+        (click)="deliverService()"
       ></app-button>
       <app-button
         *ngIf="service?.status !== 'for_take'"
@@ -440,14 +463,15 @@
     <p class="text-center">
       Este código es único y solo puede ser utilizado una vez.
     </p>
-    <span class="flex justify-center items-center gap-3">
+    <span class="flex flex-col justify-center items-center gap-3">
       <p-inputotp
         [(ngModel)]="codOTPgenerated"
         class="grow"
         [length]="6"
         name="codOTP"
+        [disabled]="true"
       />
-      <p class="text-3xl">{{ remainingTime }}</p>
+      <app-button label="Generar" type="button" (click)="getOTP()"></app-button>
     </span>
   </div>
 </ng-template>

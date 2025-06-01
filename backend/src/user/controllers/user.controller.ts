@@ -1,7 +1,7 @@
 import { Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post, Put, Req } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { UserService } from '../service/user.service';
-import { User, UserNewRole } from '../models/user';
+import { User } from '../models/user';
 
 
 
@@ -79,11 +79,11 @@ export class UserController {
     @Patch('changeRole')
     @ApiBody({
         description: "Object User with uuid and new role",
-        type: UserNewRole,
+        type: Object,
     })
     private changeRoleUser(@Req() request: any): any {
-        const objUserNewRole: UserNewRole = request.body;
-        if (objUserNewRole && objUserNewRole.uuid && objUserNewRole.newRole) {
+        const objUserNewRole = request.body;
+        if (objUserNewRole && objUserNewRole.uuid && objUserNewRole.role) {
             return this.UserService.changeRoleUser(objUserNewRole);
         } else {
             return new HttpException(
@@ -97,7 +97,7 @@ export class UserController {
     @Patch('changeStatus')
     @ApiBody({
         description: "Object User with uuid and new role",
-        type: UserNewRole,
+        type: Object,
     })
     private changeStatus(@Req() request: any): any {
         const objUserNewStatus = request.body;

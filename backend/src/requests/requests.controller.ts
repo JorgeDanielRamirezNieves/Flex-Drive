@@ -8,6 +8,7 @@ import {
   Req,
   Put,
   Delete,
+  Patch,
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { RequestsService } from './requests.service';
@@ -88,31 +89,20 @@ export class RequestsController {
     }
   }
 
-  @Put('update/:uuid')
-  @ApiParam({
-    name: 'uuid',
-    description: 'UUID of the Request',
-    required: true,
-    type: String,
-  })
+  @Patch('changeStatus')
   @ApiBody({
     description: 'Object Request',
-    type: Request,
+    type: Object,
   })
-  private updateRequest(@Param('uuid') uuid: any, @Req() request: any): any {
-    const uuidRequest = uuid;
-    const objRequest: Request = request.body;
-    if (uuidRequest && uuidRequest.length > 0) {
-      if (objRequest) {
-        return this.RequestService.updateRequest(uuidRequest, objRequest);
-      } else {
-        return new HttpException(
-          'name of Request invalid',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
+  private changeRequestStatus(@Req() request: any): any {
+    const obj = request.body;
+    if (obj) {
+      return this.RequestService.changeStatusRequest(obj);
     } else {
-      return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
+      return new HttpException(
+        'name of Request invalid',
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 

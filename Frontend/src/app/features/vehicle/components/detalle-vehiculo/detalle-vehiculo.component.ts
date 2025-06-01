@@ -1,5 +1,6 @@
+import { RequestsService } from './../../../requests/services/requests.service';
 import { MessageService } from 'primeng/api';
-import { Component, model, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleService } from '../../services/vehicle.service';
 import { Vehicle } from '../../models/vehicle';
@@ -8,6 +9,8 @@ import { catchError, finalize, map, Subscription } from 'rxjs';
 import { observatorAny } from '../../../../core/tipo-any';
 import { Soat } from '../../models/soat';
 import { Tecnomecanic } from '../../models/tecnomecanic';
+import { jwtDecode } from 'jwt-decode';
+import { Request } from '../../../requests/models/request';
 
 @Component({
   selector: 'app-detalle-vehiculo',
@@ -20,20 +23,29 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
   public price: Price | undefined;
   public soat: Soat | undefined;
   public tecnomecanic: Tecnomecanic | undefined;
-  public suscribeVehicles: Subscription;
+  public suscribe: Subscription;
   public tmp: any;
   public complete: boolean;
   public userUUID: string;
+  public token: any;
   public isOwner: boolean;
+  public visibleDelete: boolean;
+  public visibleRequest: boolean;
+  public requests: Request;
+  public minDate: Date = new Date();
+  public deliveryDate: Date | null = null;
+  public returnDate: Date | null = null;
 
   constructor(
     private messageService: MessageService,
     private router: Router,
     private activeRouter: ActivatedRoute,
-    private vehicleService: VehicleService
+    private vehicleService: VehicleService,
+    private requestsService: RequestsService
   ) {
-    this.suscribeVehicles = this.tmp;
-    this.userUUID = localStorage.getItem('userUUID') || '';
+    this.suscribe = this.tmp;
+    this.token = jwtDecode(localStorage.getItem('authToken') || '');
+    this.userUUID = this.token.uuid;
     this.isOwner = false;
     this.vehicle = new Vehicle(
       '',
@@ -56,14 +68,24 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
       '',
       ''
     );
-
-
     this.complete = false;
+    this.visibleDelete = false;
+    this.visibleRequest = false;
+    this.requests = new Request(
+      new Date(),
+      null,
+      new Date(),
+      new Date(),
+      '',
+      this.userUUID,
+      this.activeRouter.snapshot.params['uuid'],
+      'pending'
+    );
   }
 
   ngOnDestroy(): void {
-    if (this.suscribeVehicles) {
-      this.suscribeVehicles.unsubscribe();
+    if (this.suscribe) {
+      this.suscribe.unsubscribe();
     }
   }
 
@@ -71,22 +93,63 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
     this.getVehicle();
   }
 
+
   public sendRequest() {
-    /* Aqui va la logica que tengamos con el back */
-    console.log('Se ha enviado la solicitud al propietario del vehiculo');
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Mensaje enviado',
-      detail: 'se envió el mensaje al propietario',
-      life: 5000,
-    });
-    setTimeout(() => {
-      this.router.navigate(['/requests']);
-    }, 1000);
+    
+    if (!this.deliveryDate || !this.returnDate) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Campos incompletos',
+        detail: 'Por favor, complete todos los campos requeridos.',
+      });
+      return;
+    }
+
+    if (this.deliveryDate < this.minDate || this.returnDate < this.minDate || this.deliveryDate > this.returnDate) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Fecha inválida',
+        detail: 'La fecha de entrega y devolución no puede ser anterior a hoy.',
+      });
+      return;
+    }
+
+    if (this.requests.description.trim() === '') {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Descripción requerida',
+        detail: 'Por favor, ingrese una descripción para la solicitud.',
+      });
+      return;
+    }
+    this.requests.deliveryDate = this.deliveryDate;
+    this.requests.returnDate = this.returnDate;
+    this.suscribe = this.requestsService
+      .createRequest(this.requests)
+      .pipe(
+        map((res: any) => {
+          console.log('Solicitud enviada', res);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Solicitud enviada',
+            detail: 'La solicitud se ha enviado correctamente.',
+          });
+          this.router.navigate(['/requests']);
+        }),
+        catchError((err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error al enviar la solicitud',
+            detail: err.error.message || 'Error desconocido',
+          });
+          throw new Error(err);
+        })
+      )
+      .subscribe(observatorAny);
   }
 
   private getVehicle() {
-    this.suscribeVehicles = this.vehicleService
+    this.suscribe = this.vehicleService
       .getVehicleByUUID(this.activeRouter.snapshot.params['uuid'])
       .pipe(
         map((res: any) => {
@@ -104,11 +167,15 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
               ? prev
               : current;
           }, this.vehicle.soatVehicle[0]);
-          this.tecnomecanic = this.vehicle.TecnomecanicVehicle?.reduce((prev, current) => {
-            return new Date(prev.expirationDate) > new Date(current.expirationDate)
-              ? prev
-              : current;
-          }, this.vehicle.TecnomecanicVehicle[0]);
+          this.tecnomecanic = this.vehicle.TecnomecanicVehicle?.reduce(
+            (prev, current) => {
+              return new Date(prev.expirationDate) >
+                new Date(current.expirationDate)
+                ? prev
+                : current;
+            },
+            this.vehicle.TecnomecanicVehicle[0]
+          );
         }),
         catchError((err) => {
           throw new Error(err);
@@ -119,4 +186,21 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
       )
       .subscribe(observatorAny);
   }
+
+  public deleteVehicle() {
+    this.suscribe = this.vehicleService
+      .changeStatusVehicle(this.vehicle.uuid || '', 'inactive')
+      .pipe(
+        map((res: any) => {
+          setTimeout(() => {
+            this.router.navigate(['/vehicles/myvehicles']);
+          }, 1000);
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
 }

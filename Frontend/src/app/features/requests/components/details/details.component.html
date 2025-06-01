@@ -102,40 +102,5 @@
       </ul>
     </div>
   </span>
-  <span
-    class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura"
-    *ngIf="request?.status === 'pending'"
-  >
-    <app-button
-      label="Aceptar"
-      type="button"
-      [callback]="createService"
-    ></app-button>
-    <app-button
-      label="Negociar"
-      type="link"
-      redirecTo="/user/activechats"
-    ></app-button>
-    <app-button label="Negar" type="button" [disabled]="true"></app-button>
-  </span>
-  <span
-    class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura"
-    *ngIf="request?.status === 'approved'"
-  >
-    <app-button
-      label="Ir al Servicio"
-      type="link"
-      redirecTo="/services/details"
-    ></app-button>
-  </span>
-  <span
-    class="flex justify-center items-center gap-10 border-2 border-t-0 border-gray-400 rounded-b-lg py-5 px-10 bg-[#d9d9d9] w-2/3 jura"
-    *ngIf="request?.status === 'negotiating'"
-  >
-    <app-button
-      label="Ir al chat"
-      type="link"
-      redirecTo="/user/activechats"
-    ></app-button>
-  </span>
+  
 </div>

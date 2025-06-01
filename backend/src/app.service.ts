@@ -1,10 +1,11 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
 import { v2 as cloudinary } from 'cloudinary';
 @Injectable()
 export class AppService {
+  private otp: string;
   constructor() {
   }
-
+  
   getHello(): string {
     return 'Hello World!';
   }
@@ -33,5 +34,24 @@ export class AppService {
         }
       ).end(file.buffer);
     });
+  }
+
+  public async generateOTP(): Promise<string> {
+    const characters = '0123456789';
+    let otp = '';
+    for (let i = 0; i < 6; i++) {
+      otp += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    this.otp = otp; 
+    return otp;
+  }
+
+  public async validateOTP(otp: string): Promise<HttpException> {
+    if (this.otp === otp) {
+      this.otp = ''; 
+      return new HttpException('OTP is valid', 200);
+    } else {
+      throw new HttpException('Invalid OTP', 400);
+    }
   }
 }

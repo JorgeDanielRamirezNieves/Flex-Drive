@@ -11,6 +11,7 @@ import { Component, Input } from '@angular/core';
 })
 export class CardRentalVehiclesComponent {
   @Input() service: Service | undefined;
+  @Input() isOwner: boolean = false;  
   public image: Imagesvehicle | undefined;
   public price: number;
   constructor() {

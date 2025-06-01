@@ -1,3 +1,4 @@
+import { CommonServiceService } from './../../../../shared/services/common-service.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Service } from '../../models/service';
 import { catchError, finalize, map, Subscription } from 'rxjs';
@@ -17,9 +18,8 @@ import { Tecnomecanic } from '../../../vehicle/models/tecnomecanic';
 })
 export class DetailsServiceComponent implements OnInit, OnDestroy {
   public service: Service | undefined;
-  public codOTP: string;
   public codOTPgenerated: string;
-  public remainingTime: number;
+  public codOTP: string;
   private suscribe: Subscription;
   public tmp: any;
   public userUUID: string;
@@ -29,17 +29,17 @@ export class DetailsServiceComponent implements OnInit, OnDestroy {
   public price: Price | undefined;
   public soat: Soat | undefined;
   public tecnomecanic: Tecnomecanic | undefined;
-  public deliveryDate: Date
-  public returnDate: Date
+  public deliveryDate: Date;
+  public returnDate: Date;
   public isOwner: boolean;
 
   constructor(
     private serviceRentService: ServiceRentService,
-    private activeRouter: ActivatedRoute
+    private activeRouter: ActivatedRoute,
+    private commonService: CommonServiceService
   ) {
+    this.codOTPgenerated = '';
     this.codOTP = '';
-    this.remainingTime = 30;
-    this.codOTPgenerated = this.simulateOTP();
     this.suscribe = this.tmp;
     this.token = jwtDecode(localStorage.getItem('authToken') || '');
     this.userUUID = this.token.uuid;
@@ -57,31 +57,44 @@ export class DetailsServiceComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getService();
-    this.countDownOTP();
-    if (this.userUUID === this.service?.request?.requestVehicle?.ownerVehicle?.uuid) {
-      this.isOwner = true;
-    }
   }
 
-  public simulateOTP() {
-    // Simulate OTP generation
-    const generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-    this.codOTPgenerated = generatedOTP;
-    return generatedOTP;
+  public getOTP() {
+    this.suscribe = this.commonService
+      .generateOTP()
+      .pipe(
+        map((res: any) => {
+          this.codOTPgenerated = res;
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        })
+      )
+      .subscribe(observatorAny);
   }
 
-  public countDownOTP() {
-    let remainingTime = this.remainingTime;
-
-    setInterval(() => {
-      if (remainingTime <= 1) {
-        remainingTime = 30;
-        this.codOTPgenerated = this.simulateOTP();
-      } else {
-        remainingTime--;
-        this.remainingTime = remainingTime;
-      }
-    }, 1000);
+  public validateOTP(status: string) {
+    this.suscribe = this.commonService
+      .validateOTP(this.codOTP)
+      .pipe(
+        map((res: any) => {
+          if (res.status === 200) {
+            this.serviceRentService
+              .changeServiceRentStatus(
+                this.activeRouter.snapshot.params['uuid'],
+                status
+              )
+              .subscribe(observatorAny);
+            window.location.reload();
+          } else {
+            throw new Error('Invalid OTP');
+          }
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        })
+      )
+      .subscribe(observatorAny);
   }
 
   private getService() {
@@ -90,6 +103,12 @@ export class DetailsServiceComponent implements OnInit, OnDestroy {
       .pipe(
         map((res: any) => {
           this.service = res;
+          if (
+            this.userUUID ===
+            this.service?.request?.requestVehicle?.ownerVehicle?.uuid
+          ) {
+            this.isOwner = true;
+          }
           this.price = this.service?.request?.requestVehicle?.prices?.reduce(
             (prev, current) => {
               return new Date(prev.endDate) > new Date(current.endDate)
@@ -117,14 +136,35 @@ export class DetailsServiceComponent implements OnInit, OnDestroy {
               },
               this.service?.request?.requestVehicle?.TecnomecanicVehicle[0]
             );
-          this.deliveryDate = this.service?.request?.deliveryDate ? new Date(this.service.request.deliveryDate) : new Date();
-          this.returnDate = this.service?.request?.returnDate ? new Date(this.service.request.returnDate) : new Date();
+          this.deliveryDate = this.service?.request?.deliveryDate
+            ? new Date(this.service.request.deliveryDate)
+            : new Date();
+          this.returnDate = this.service?.request?.returnDate
+            ? new Date(this.service.request.returnDate)
+            : new Date();
         }),
         catchError((err) => {
           throw new Error(err);
         }),
         finalize(() => {
           this.complete = true;
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  public deliverService() {
+    this.suscribe = this.serviceRentService
+      .changeServiceRentStatus(
+        this.activeRouter.snapshot.params['uuid'],
+        'for_recive'
+      )
+      .pipe(
+        map((res: any) => {
+          window.location.reload();
+        }),
+        catchError((err) => {
+          throw new Error(err);
         })
       )
       .subscribe(observatorAny);

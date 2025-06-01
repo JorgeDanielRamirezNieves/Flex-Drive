@@ -30,4 +30,11 @@ export class UserService {
       status: state,
     });
   }
+  
+  public changeRoleUser(uuid: string, idRole: string) {
+    return this.http.patch<any>(this.userUrl + 'changeRole', {
+      uuid: uuid,
+      role: idRole,
+    });
+  }
 }

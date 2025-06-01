@@ -1,5 +1,13 @@
 <main class="flex flex-col items-center justify-center h-fit jura">
   <p-toast></p-toast>
+    <app-button
+    type="button"
+    icon="pi pi-arrow-left"
+    iconPos="left"
+    label="Volver"
+    class="absolute left-5 top-13"
+    (click)="goBack()"
+  ></app-button>
   <h1
     class="text-6xl text-white bg-[#435755] w-full h-[20vh] flex justify-center items-center shadow-[0_40px_70px_10px_#435755]"
   >
@@ -267,7 +275,7 @@
           <label for="" class="jura font-bold">Disponibilidad de renta</label>
           <p-select
             [options]="availables"
-            [optionValue]="'value'"
+            [optionValue]="'name'"
             [(ngModel)]="vehicle!.availability"
             optionLabel="name"
             placeholder="Selecciona cuándo podrán rentar tu vehículo"
@@ -285,7 +293,8 @@
           >
           <p-select
             [options]="typeSales"
-            [(ngModel)]="vehicle!.typeSaleVehicle"
+            [optionValue]="'uuid'"
+            [(ngModel)]="vehicle!.idTypeSale"
             optionLabel="name"
             placeholder="Selecciona el tipo de venta del vehículo"
             class="w-full jura"
@@ -377,7 +386,7 @@
               icon="pi pi-plus"
               iconPos="right"
               (click)="addAccessory()"
-              class="mt-10 w-fit"
+              class="mt-14 w-fit"
             ></app-button>
           </div>
           <div
@@ -386,7 +395,7 @@
           >
             <label for="accessories" class="text-xl">Accesorios añadidos</label>
             <div class="flex flex-wrap gap-2">
-              <span *ngFor="let accessory of accessorieTmp; let i = index">
+              <span *ngFor="let accessory of vehicle?.accesories; let i = index">
                 <p
                   class="bg-[#54A8A3] text-white px-3 py-1 rounded-lg flex items-center gap-2"
                 >
@@ -482,11 +491,26 @@
         <span
           class="flex flex-wrap justify-center items-center gap-5 w-full h-fit"
         >
-          <img
-            *ngFor="let image of images"
-            class="w-32 h-32 object-cover rounded-lg shadow-md"
-            [src]="image.itemImageSrc"
-          />
+          <ng-container *ngFor="let image of images">
+            <div class="relative inline-block group">
+              <img
+                class="w-70 h-70 object-cover rounded-lg shadow-md"
+                [src]="image.itemImageSrc"
+              />
+
+              <div
+                class="absolute inset-0 bg-[#031617]/55 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg flex items-center justify-center text-7xl"
+              >
+                <i
+                  class="pi pi-times  text-white cursor-pointer hover:text-red-400 transition-colors"
+                  (click)="removeImage(image)"
+                ></i>
+              </div>
+            </div>
+          </ng-container>
+          <span *ngIf="images.length === 0" class="text-gray-500 text-lg">
+            No hay imágenes subidas
+          </span>
         </span>
       </div>
 

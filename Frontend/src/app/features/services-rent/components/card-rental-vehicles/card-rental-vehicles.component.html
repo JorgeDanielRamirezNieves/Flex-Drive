@@ -21,8 +21,15 @@
           }}
         </h2>
         <p class="font-bold">
-          {{ service?.request?.requestVehicle?.ownerVehicle?.firstName }}
-          {{ service?.request?.requestVehicle?.ownerVehicle?.lastName }}
+          @if (isOwner){
+            {{ service?.request?.requestUser?.firstName }}&nbsp;{{
+              service?.request?.requestUser?.lastName
+            }}
+          } @else {
+            {{ service?.request?.requestVehicle?.ownerVehicle?.firstName }}&nbsp;{{
+              service?.request?.requestVehicle?.ownerVehicle?.lastName
+            }}
+          }
         </p>
       </div>
       <div class="justify-between jura w-full flex gap-5 my-5">

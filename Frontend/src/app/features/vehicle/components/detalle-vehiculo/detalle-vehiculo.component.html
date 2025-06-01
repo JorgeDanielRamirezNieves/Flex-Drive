@@ -23,16 +23,15 @@
     [disabled]="true"
   ></p-rating>
   <div
-    class="grid grid-cols-2 divide-black divide-x-1 py-10 jura bg-[#d9d9d9] mx-20 rounded-2xl border-1 shadow-md shadow-black"
+    class="grid grid-cols-2 divide-black divide-x-1 py-10 jura w-9/11 bg-[#d9d9d9] mx-20 rounded-2xl border-1 shadow-md shadow-black"
   >
     <div class="flex flex-col justify-center items-start px-20 gap-5">
       <span class="flex flex-col justify-center items-start">
         <h2 class="font-bold text-2xl">Precio</h2>
         <p class="text-lg">
-          @if (vehicle.typeSaleVehicle?.name == 'exclusive') { $ {{
-            price?.price | currency : "COP"
-          }}
-          } @else { $ {{ price?.price | currency : "COP" }}/{{
+          @if (vehicle.typeSaleVehicle?.name == 'exclusive') { $
+          {{ price?.price | currency : "COP" }} } @else { $
+          {{ price?.price | currency : "COP" }}/{{
             vehicle.typeSaleVehicle?.name
           }}
           }
@@ -40,7 +39,10 @@
       </span>
       <span class="flex flex-col justify-center items-start">
         <h2 class="font-bold text-2xl">Propietario</h2>
-        <p class="text-lg">{{vehicle.ownerVehicle?.firstName}} {{vehicle.ownerVehicle?.lastName}}</p>
+        <p class="text-lg">
+          {{ vehicle.ownerVehicle?.firstName }}
+          {{ vehicle.ownerVehicle?.lastName }}
+        </p>
       </span>
       <span class="flex flex-col justify-center items-start">
         <h2 class="font-bold text-2xl">Descripción</h2>
@@ -50,63 +52,64 @@
       </span>
       <span class="flex flex-col justify-center items-start">
         <h2 class="font-bold text-2xl">Disponibilidad</h2>
-        <p class="text-lg">{{vehicle.availability}}</p>
+        <p class="text-lg">{{ vehicle.availability }}</p>
       </span>
-      <p-accordion class="w-full" id="accordion-solicitud">
-        <p-accordion-panel value="0" class="rounded-b-lg w-full" [disabled]="isOwner">
-          <p-accordion-header class="w-full"
-            ><app-button label="Solicitar" type="button"></app-button
-          ></p-accordion-header>
-          <p-accordion-content
-            class="flex flex-col justify-center items-start gap-5 w-full"
-          >
-            <p-datepicker
-              placeholder="Fecha de salida"
-              class="absolute placeholder:text-gray-500"
-              [iconDisplay]="'input'"
-              [showIcon]="true"
-              inputId="icondisplay"
-            ></p-datepicker>
-            <p-datepicker
-              placeholder="Fecha de entrega"
-              [iconDisplay]="'input'"
-              [showIcon]="true"
-              inputId="icondisplay"
-              class="absolute left-1/4 placeholder:text-gray-500"
-            ></p-datepicker>
-            <textarea
-              name="mensaje"
-              id=""
-              rows="5"
-              class="bg-white mt-15 w-full p-2 rounded-lg resize-none placeholder:text-gray-500"
-              placeholder="Enviale un mensaje al propietario..."
-            ></textarea>
-            <app-button
-              label="Enviar"
-              type="button"
-              [callback]="sendRequest"
-            ></app-button>
-          </p-accordion-content>
-        </p-accordion-panel>
-      </p-accordion>
+      <app-button
+        label="Solicitar"
+        type="button"
+        *ngIf="!isOwner"
+        (click)="visibleRequest = true"
+      ></app-button>
+      <div class="flex gap-2" *ngIf="isOwner">
+        <p-button
+          icon="pi pi-pen-to-square"
+          class="bg-[#54A8A3] w-fit flex text-white py-2 px-4 gap-2 rounded border-2 border-transparent hover:bg-transparent hover:cursor-pointer hover:border-2 hover:border-[#54A8A3] hover:text-[#54A8A3] focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out jura"
+          *ngIf="isOwner"
+          [routerLink]="['/vehicles/createVehicle/' + vehicle.plate]"
+          routerLinkActive="router-link-active"
+        ></p-button>
+        <p-button
+          icon="pi pi-trash"
+          class="bg-[#54A8A3] w-fit flex text-white py-2 px-4 gap-2 rounded border-2 border-transparent hover:bg-red-700 hover:cursor-pointer hover:border-2 focus:outline-none focus:ring-2 focus:ring-[#ADF9F6] focus:ring-offset-2 transition duration-300 ease-in-out jura"
+          *ngIf="isOwner"
+          type="button"
+          (click)="visibleDelete = true"
+        ></p-button>
+      </div>
     </div>
     <div class="flex flex-col justify-center items-start px-20 gap-5">
-      <p class="text-lg"><strong>Marca: </strong>{{vehicle.detailsVehicle?.brand}}</p>
-      <p class="text-lg"><strong>Modelo: </strong>{{vehicle.detailsVehicle?.model}}</p>
-      <p class="text-lg"><strong>Año: </strong>{{vehicle.detailsVehicle?.year}}</p>
-      <p class="text-lg"><strong>Peso: </strong>{{vehicle.detailsVehicle?.weight}}</p>
-      <p class="text-lg"><strong>Combustible: </strong>{{vehicle.detailsVehicle?.fuelType}}</p>
-      <p class="text-lg"><strong>Kilometraje: </strong>{{vehicle.mileage}}</p>
-      <p class="text-lg"><strong>Tipo: </strong>{{vehicle.type}}</p>
-      <p class="text-lg"><strong>Placa terminada en: </strong>{{vehicle.plate[vehicle.plate.length-1]}}</p>
-      <p class="text-lg"><strong>SOAT: </strong>{{soat?.status}}</p>
-      <p class="text-lg"><strong>RTM (Revisión tecnomecanica): </strong>{{tecnomecanic?.status}}</p>
+      <p class="text-lg">
+        <strong>Marca: </strong>{{ vehicle.detailsVehicle?.brand }}
+      </p>
+      <p class="text-lg">
+        <strong>Modelo: </strong>{{ vehicle.detailsVehicle?.model }}
+      </p>
+      <p class="text-lg">
+        <strong>Año: </strong>{{ vehicle.detailsVehicle?.year }}
+      </p>
+      <p class="text-lg">
+        <strong>Peso: </strong>{{ vehicle.detailsVehicle?.weight }}
+      </p>
+      <p class="text-lg">
+        <strong>Combustible: </strong>{{ vehicle.detailsVehicle?.fuelType }}
+      </p>
+      <p class="text-lg"><strong>Kilometraje: </strong>{{ vehicle.mileage }}</p>
+      <p class="text-lg"><strong>Tipo: </strong>{{ vehicle.type }}</p>
+      <p class="text-lg">
+        <strong>Placa terminada en: </strong
+        >{{ vehicle.plate[vehicle.plate.length - 1] }}
+      </p>
+      <p class="text-lg"><strong>SOAT: </strong>{{ soat?.status }}</p>
+      <p class="text-lg">
+        <strong>RTM (Revisión tecnomecanica): </strong
+        >{{ tecnomecanic?.status }}
+      </p>
       <p-accordion class="w-full" id="accordion-accesorios">
         <p-accordion-panel value="0">
           <p-accordion-header><strong>Accesorios</strong></p-accordion-header>
           <p-accordion-content>
             <ul class="grid grid-cols-3 place-items-center gap-5">
-              <li *ngFor="let item of vehicle.accesories">{{item}}</li>
+              <li *ngFor="let item of vehicle.accesories">{{ item }}</li>
             </ul>
           </p-accordion-content>
         </p-accordion-panel>
@@ -114,4 +117,85 @@
     </div>
   </div>
 </section>
+<p-dialog
+  header="Eliminar Vehículo"
+  [modal]="true"
+  [(visible)]="visibleDelete"
+  class="jura"
+  #deleteDialog
+>
+  <div class="flex items-center gap-4 mb-4 p-10">
+    <p class="text-3xl">Estas seguro de eliminar este vehículo</p>
+  </div>
+  <div class="flex justify-end gap-2 pr-5">
+    <p-button
+      label="Cancelar"
+      severity="secondary"
+      (click)="visibleDelete = false"
+      class="bg-[#54A8A3] p-2 rounded-xl hover:bg-[#ADF9F6] hover:text-[#435755] transition-all duration-200 ease-in-out"
+    />
+    <p-button
+      label="Eliminar"
+      (click)="deleteVehicle()"
+      class="bg-[#54A8A3] p-2 rounded-xl hover:bg-red-700 transition-all duration-200 ease-in-out"
+    />
+  </div>
+</p-dialog>
+<p-dialog
+  header="Solicitar Vehículo"
+  [modal]="true"
+  [(visible)]="visibleRequest"
+  class="jura"
+  #requestDialog
+>
+  <p class="px-10 pb-2 text-2xl text-wrap text-center">
+    Para solicitar el vehículo proporciona los datos de viaje para que sea
+    revisado por el propietario
+  </p>
+  <form class="flex flex-wrap justify-center items-center gap-4 mb-4 p-5" #frmRequest="ngForm">
+    <span class="flex flex-col items-start w-[48%]">
+      <label for="" class="text-lg">Fecha de salida</label>
+      <p-datepicker
+        name="deliveryDate"
+        [(ngModel)]="deliveryDate"
+        placeholder="Fecha de salida"
+        class="placeholder:text-gray-50 w-full"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        inputId="icondisplay"
+        [minDate]="minDate"
+        [showTime]="true"
+        hourFormat="12"
+      ></p-datepicker>
+    </span>
+    <span class="flex flex-col items-start w-[48%]">
+      <label for="" class="text-lg">Fecha de entrega</label>
+      <p-datepicker
+        name="returnDate"
+        [(ngModel)]="returnDate"
+        placeholder="Fecha de entrega"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        inputId="icondisplay"
+        class="placeholder:text-gray-500 w-full"
+        [minDate]="deliveryDate"
+        [showTime]="true"
+        hourFormat="12"
+      ></p-datepicker>
+    </span>
+    <textarea
+      name="mensaje"
+      id=""
+      rows="5"
+      class="bg-white text-black w-full p-2 rounded-lg resize-none placeholder:text-gray-500"
+      placeholder="Enviale un mensaje al propietario..."
+      [(ngModel)]="requests.description"
+    ></textarea>
+    <app-button
+      label="Enviar"
+      type="button"
+      (click)="sendRequest()"
+    ></app-button>
+  </form>
+</p-dialog>
 <app-footer></app-footer>

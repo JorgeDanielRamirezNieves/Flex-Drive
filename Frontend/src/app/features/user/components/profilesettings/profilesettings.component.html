@@ -47,7 +47,7 @@
       <app-button
         label="Eliminar cuenta"
         type="button"
-        (click)="openModal()"
+        (click)="visible = true"
       ></app-button>
     </div>
   </div>
@@ -60,11 +60,20 @@
   class="jura"
 >
   <div class="flex items-center gap-4 mb-4 p-10">
-    <p class="text-3xl">Estas segura de eliminar tu cuenta</p>
+    <p class="text-3xl">Estas seguro de eliminar tu cuenta</p>
   </div>
   <div class="flex justify-end gap-2 pr-5">
-    <p-button label="Cancelar" severity="secondary" (click)="visible = false" class="bg-[#54A8A3] p-2 rounded-xl hover:bg-[#ADF9F6] hover:text-[#435755] transition-all duration-200 ease-in-out" />
-    <p-button label="Eliminar" (click)="delete()" class="bg-[#54A8A3] p-2 rounded-xl hover:bg-red-700  transition-all duration-200 ease-in-out" />
+    <p-button
+      label="Cancelar"
+      severity="secondary"
+      (click)="visible = false"
+      class="bg-[#54A8A3] p-2 rounded-xl hover:bg-[#ADF9F6] hover:text-[#435755] transition-all duration-200 ease-in-out"
+    />
+    <p-button
+      label="Eliminar"
+      (click)="delete()"
+      class="bg-[#54A8A3] p-2 rounded-xl hover:bg-red-700 transition-all duration-200 ease-in-out"
+    />
   </div>
 </p-dialog>
 

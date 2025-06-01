@@ -1,3 +1,4 @@
+import { URL_GENERATE_OTP, URL_VALIDATE_OTP } from './../../core/domains';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { URL_COUNTRY_STATE, URL_IMAGES } from '../../core/domains';
@@ -12,12 +13,17 @@ export class CommonServiceService {
   private urlCountry: string;
   private readonly apiKeyCountryState: string;
   private readonly apiKeyMockaroo: string;
+  private readonly urlGenearteOTP: string;
+  private readonly urlValidateOTP: string;
+
 
   constructor(private http: HttpClient) {
     this.urlUploadImage = URL_IMAGES;
     this.urlCountry = URL_COUNTRY_STATE;
     this.apiKeyCountryState = API_KEY_COUNTRY_STATE;
     this.apiKeyMockaroo = API_KEY_MOCKAROO
+    this.urlGenearteOTP = URL_GENERATE_OTP;
+    this.urlValidateOTP = URL_VALIDATE_OTP;
   }
 
   public getAllCountries() {
@@ -48,4 +54,11 @@ export class CommonServiceService {
     return this.http.get<any>('https://my.api.mockaroo.com/soat.json?key=' + this.apiKeyMockaroo);
   }
 
+  public generateOTP() {
+    return this.http.get<any>( this.urlGenearteOTP);
+  }
+
+  public validateOTP(otp: string) {
+    return this.http.post<any>(this.urlValidateOTP, { otp: otp });
+  }
 }

@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { DataSource, DeleteResult, Repository, UpdateResult } from 'typeorm';
-import { User, UserNewRole } from '../models/user';
+import { User } from '../models/user';
 import { Fines } from '../models/fines';
 import axios from 'axios';
 import * as bcrypt from 'bcryptjs'
@@ -124,8 +124,8 @@ export class UserService {
       });
   }
 
-  public async changeRoleUser(obj: UserNewRole): Promise<UpdateResult | HttpException> {
-    return this.UserRepository.update(obj.uuid, { idRole: obj.newRole })
+  public async changeRoleUser(obj: {uuid: string, role: string}): Promise<UpdateResult | HttpException> {
+    return this.UserRepository.update(obj.uuid, { idRole: obj.role })
       .then((response) => {
         return new HttpException(JSON.stringify(response), 200);
       })

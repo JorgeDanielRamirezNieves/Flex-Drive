@@ -21,6 +21,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   public vehicles: Vehicle[];
   public suscribeVehicles: Subscription;
   public tmp: any;
+  public minDate: Date = new Date();
 
   constructor(private router: Router, private vehicleService: VehicleService) {
     this.ciudades = ['Bogota', 'Medellin', 'Cali', 'Barranquilla', 'Cartagena'];

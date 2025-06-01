@@ -51,6 +51,7 @@ export class ServicesRentService {
       .leftJoinAndSelect('client.typeDocumentUser', 'typeDoc')
       .leftJoinAndSelect('owner.typeDocumentUser', 'typeDocOwner')
       .where('r.requestUser = :uuid', { uuid: uuid })
+      .orWhere('v.idOwner = :uuid', { uuid: uuid })
       .getMany();
   }
 
@@ -66,16 +67,18 @@ export class ServicesRentService {
       });
   }
 
-  public async updateServiceRent(
-    uuid: string,
-    objServiceRent: ServiceRent,
-  ): Promise<
+  public async changeSatusServiceRent(objStatus: {
+    uuid: string;
+    status: 'for_take' | 'on_travel' | 'reported' | 'for_recive' | 'finished';
+  }): Promise<
     { response: UpdateResult; ServiceRent: ServiceRent } | HttpException
   > {
-    return this.ServiceRentRepository.update(uuid, objServiceRent)
+    return this.ServiceRentRepository.update(objStatus.uuid, {
+      status: objStatus.status,
+    })
       .then((response) => {
         return new HttpException(
-          JSON.stringify({ response: response, ServiceRent: objServiceRent }),
+          JSON.stringify({ response: response, ServiceRent: objStatus }),
           200,
         );
       })
@@ -87,4 +90,6 @@ export class ServicesRentService {
   public async deleteServiceRent(uuid: string): Promise<DeleteResult> {
     return this.ServiceRentRepository.delete(uuid);
   }
+
+  
 }

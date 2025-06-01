@@ -15,7 +15,6 @@
   border: 0;
 }
 
-
 :host ::ng-deep #accordion-solicitud .p-accordion {
   border: 0;
 }
@@ -38,7 +37,7 @@
   width: 100%;
 }
 
-:host ::ng-deep .p-toast-message{
+:host ::ng-deep .p-toast-message {
   border: 1px solid #54a8a3;
   background: #ffffff;
   border-radius: 10px;
@@ -65,12 +64,11 @@
   color: #54a8a3;
   font-size: 1.5rem;
   transition: all 0.3s ease-in-out;
-} 
+}
 
 :host ::ng-deep .p-toast-close-button:hover {
   transform: scale(1.2);
-} 
-
+}
 
 :host ::ng-deep .p-rating {
   gap: 10px;
@@ -105,7 +103,6 @@
   width: 100%;
   height: 100%;
 }
-
 
 :host ::ng-deep .p-galleria-item-wrapper {
   position: relative;
@@ -254,17 +251,23 @@
   background-color: #007ad9;
 }
 
+:host ::ng-deep .p-datepicker {
+  width: 100%;
+}
+
 :host ::ng-deep .p-datepicker-input {
   border: 1px solid transparent;
+  background-color: #ffffff;
+  color: #000000;
   border-radius: 10px;
   padding: 10px;
   gap: 10px;
   display: flex;
-  justify-items: center;
+  justify-items: start;
   align-items: center;
   box-shadow: 0 1px 15px -5px #00000090;
   transition: all 0.3s ease-in-out;
-  width: 25%;
+  width: 100%;
 }
 
 :host ::ng-deep .p-datepicker-input:hover {
@@ -295,6 +298,7 @@
 :host ::ng-deep .p-datepicker-calendar {
   box-shadow: 0 0 15px -5px #00000090;
   background-color: #ffffff;
+  color: #000000;
   border-radius: 10px;
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -430,6 +434,7 @@
   margin-block: 5px;
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
+  color: #000000;
 }
 
 :host
@@ -463,6 +468,7 @@
   margin-block: 5px;
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
+  color: #000000;
 }
 
 :host
@@ -477,4 +483,90 @@
   background-color: #adf9f6;
   color: #000000;
   box-shadow: 0 0 15px -5px #00000090;
+}
+
+:host ::ng-deep .p-datepicker-time-picker {
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 10px;
+  box-shadow: 0 0 15px -5px #00000090;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 1rem;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+:host ::ng-deep .p-datepicker-hour-picker,
+:host ::ng-deep .p-datepicker-minute-picker,
+:host ::ng-deep .p-datepicker-ampm-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+:host ::ng-deep .p-datepicker-hour-picker  span,
+:host ::ng-deep .p-datepicker-minute-picker span,
+:host ::ng-deep .p-datepicker-ampm-picker span {
+  font-size: 1.2rem;
+  font-weight: bolder;
+  color: #435755;
+}
+
+:host ::ng-deep .p-datepicker-increment-button {
+  color: #000000;
+  border-radius: 10px;
+  padding: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-datepicker-increment-button:hover {
+  background-color: #54a8a3;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-dialog {
+  background: #031617;
+  color: #fff;
+  border-radius: 8px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  height: fit-content;
+  max-width: 50%;
+}
+
+:host ::ng-deep .p-dialog-content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 200px);
+  overflow-y: visible;
+  height: auto;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #435755;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+:host ::ng-deep .p-dialog-close-button {
+  color: #fff;
+  scale: 1.5;
+  background: #54a8a3;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+:host ::ng-deep .p-dialog-close-button:not(:disabled):hover {
+  color: #435755;
+  background: #adf9f6;
+  font-size: 1.5rem;
 }

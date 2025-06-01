@@ -2,6 +2,9 @@ export const URL_BASE = 'http://localhost:3450/'; // CAMBIAR ANTES DE HACER EL D
 export const URL_COUNTRY_STATE = 'https://api.countrystatecity.in/v1/'
 
 export const URL_IMAGES = URL_BASE + 'upload';
+export const URL_GENERATE_OTP = URL_BASE + 'generateOTP'; 
+export const URL_VALIDATE_OTP = URL_BASE + 'validateOTP'; 
+
 
 export const URL_AUTH = URL_BASE + 'auth/';
 export const URL_CHAT = URL_BASE + 'chat/';

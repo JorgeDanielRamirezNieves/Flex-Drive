@@ -26,7 +26,7 @@ import { VehiculoCardComponent } from './components/vehiculo-card/vehiculo-card.
     MenuColumnComponent,
     SuspenseComponent,
     ToggleButtonComponent,
-    VehiculoCardComponent
+    VehiculoCardComponent,
   ],
   imports: [
     CommonModule,

@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { Vehicle } from '../models/vehicle';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VehicleService {
-  private urlVehicles: string
-  constructor( private http: HttpClient) { 
+  private urlVehicles: string;
+  constructor(private http: HttpClient) {
     this.urlVehicles = URL_VEHICLE;
   }
 
@@ -36,6 +36,13 @@ export class VehicleService {
   }
 
   public updateVehicle(vehicle: Vehicle) {
-    return this.http.put(this.urlVehicles + 'update/' + vehicle.uuid, vehicle);
+    return this.http.put(this.urlVehicles + 'update', vehicle);
+  }
+
+  public changeStatusVehicle(uuid: string, status: string) {
+    return this.http.patch(this.urlVehicles + 'changeStatus', {
+      uuid: uuid,
+      status: status,
+    });
   }
 }

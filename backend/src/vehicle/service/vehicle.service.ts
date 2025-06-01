@@ -3,7 +3,7 @@ import { TecnicalDetails } from 'src/vehicle/models/tecnical-details';
 import { Soat } from 'src/vehicle/models/soat';
 import { HttpException, Injectable } from '@nestjs/common';
 import { Vehicle } from '../models/vehicle';
-import { DataSource, DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DataSource, DeleteResult, Not, Repository, UpdateResult } from 'typeorm';
 import { Price } from 'src/prices/models/price';
 
 @Injectable()
@@ -18,9 +18,8 @@ export class VehicleService {
     this.PricesRepository = poolConexion.getRepository(Price);
     this.SoatRepository = poolConexion.getRepository(Soat);
     this.TecnomecanicRepository = poolConexion.getRepository(Tecnomecanic);
-    this.TecnicalDetailsRepository = poolConexion.getRepository(
-      TecnicalDetails,
-    );
+    this.TecnicalDetailsRepository =
+      poolConexion.getRepository(TecnicalDetails);
   }
 
   // Métodos privados
@@ -45,10 +44,10 @@ export class VehicleService {
         'soatVehicle',
         'TecnomecanicVehicle',
         'detailsVehicle',
-      ],  
+      ],
     });
   }
-  
+
   public async getVehiclesByPlate(plate: string): Promise<Vehicle | null> {
     return this.VehicleRepository.findOne({
       where: { plate: plate },
@@ -59,10 +58,10 @@ export class VehicleService {
         'soatVehicle',
         'TecnomecanicVehicle',
         'detailsVehicle',
-      ],  
+      ],
     });
   }
-  
+
   public async getVehiclesLimit(limit: number): Promise<Vehicle[] | null> {
     return this.VehicleRepository.find({
       relations: [
@@ -74,22 +73,23 @@ export class VehicleService {
       take: limit,
     });
   }
-  public async getVehiclesMostRequest(limit: number): Promise<Vehicle[] | null> {
-    return await this.VehicleRepository
-    .createQueryBuilder('v')
-    .leftJoinAndSelect('v.typeSaleVehicle', 'ts')
-    .leftJoinAndSelect('v.detailsVehicle', 'd')
-    .leftJoinAndSelect('v.prices', 'p')
-    .leftJoin('requests', 'r', 'r.idVehicle = v.uuid')
-    .groupBy('v.uuid, ts.uuid, d.id_details, p.uuid') 
-    .orderBy('COUNT(r.uuid)', 'DESC')
-    .limit(limit)
-    .getMany();
+  public async getVehiclesMostRequest(
+    limit: number,
+  ): Promise<Vehicle[] | null> {
+    return await this.VehicleRepository.createQueryBuilder('v')
+      .leftJoinAndSelect('v.typeSaleVehicle', 'ts')
+      .leftJoinAndSelect('v.detailsVehicle', 'd')
+      .leftJoinAndSelect('v.prices', 'p')
+      .leftJoin('requests', 'r', 'r.idVehicle = v.uuid')
+      .groupBy('v.uuid, ts.uuid, d.id_details, p.uuid')
+      .orderBy('COUNT(r.uuid)', 'DESC')
+      .limit(limit)
+      .getMany();
   }
 
   public async getVehiclesByUser(uuid: string): Promise<Vehicle[] | null> {
     return this.VehicleRepository.find({
-      where: { ownerVehicle: { uuid: uuid } },
+      where: { ownerVehicle: { uuid: uuid }, status: Not('inactive') },
       relations: [
         'typeSaleVehicle',
         'ownerVehicle',
@@ -102,7 +102,7 @@ export class VehicleService {
   public async createVehicle(
     objVehicle: Vehicle,
   ): Promise<Vehicle | HttpException> {
-    const Tecnomecanics = objVehicle.TecnomecanicVehicle
+    const Tecnomecanics = objVehicle.TecnomecanicVehicle;
     const Prices = objVehicle.prices;
     const Soats = objVehicle.soatVehicle;
     const tecnicalDetails = objVehicle.detailsVehicle;
@@ -137,14 +137,20 @@ export class VehicleService {
       })
       .catch((error) => {
         return new HttpException(`Error creating Vehicle: ${error}`, 500);
-      });  
+      });
   }
 
   public async updateVehicle(
-    uuid: string,
     objVehicle: Vehicle,
   ): Promise<{ response: UpdateResult; Vehicle: Vehicle } | HttpException> {
-    return this.VehicleRepository.update(uuid, objVehicle)
+    const newPrice = objVehicle.prices && objVehicle.prices[0];
+    objVehicle.typeSaleVehicle = undefined; // Avoid circular reference
+    if (newPrice) {
+      newPrice.idVehicle = objVehicle.uuid;
+      await this.PricesRepository.save(newPrice);
+    }
+    objVehicle.updatedAt = new Date();
+    return this.VehicleRepository.save(objVehicle)
       .then((response) => {
         return new HttpException(
           JSON.stringify({ response: response, Vehicle: objVehicle }),
@@ -153,6 +159,16 @@ export class VehicleService {
       })
       .catch((error) => {
         return new HttpException(`Error updating Vehicle: ${error}`, 500);
+      });
+  }
+
+  public async changeStatusVehicle(obj: {uuid: string, status: "available" | "booked" | "out_of_service" | "in_use" | "lost" | "inactive"}): Promise<UpdateResult | HttpException> {
+     return this.VehicleRepository.update(obj.uuid, { status: obj.status })
+      .then((response) => {
+        return new HttpException(JSON.stringify(response), 200);
+      })
+      .catch((error) => {
+        return new HttpException(`Error changing User status: ${error}`, 500);
       });
   }
 

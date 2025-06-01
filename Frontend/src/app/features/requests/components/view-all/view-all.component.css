@@ -126,4 +126,8 @@
 :host ::ng-deep .p-accordioncontent-content {
   border-style: none;
   border-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

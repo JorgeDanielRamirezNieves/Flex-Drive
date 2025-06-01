@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus,
   Param,
+  Patch,
   Post,
   Put,
   Req,
@@ -38,7 +39,7 @@ export class VehicleController {
       return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
     }
   }
-  
+
   @Get('findbyPLate/:plate')
   @ApiParam({
     name: 'plate',
@@ -54,7 +55,7 @@ export class VehicleController {
       return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
     }
   }
-  
+
   @Get('findByUser/:uuid')
   @ApiParam({
     name: 'uuid',
@@ -70,7 +71,7 @@ export class VehicleController {
       return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
     }
   }
-  
+
   @Get('findWithLimit/:limit')
   @ApiParam({
     name: 'limit',
@@ -83,10 +84,13 @@ export class VehicleController {
     if (limitVehicle && limitVehicle > 0) {
       return this.VehicleService.getVehiclesLimit(limitVehicle);
     } else {
-      return new HttpException('the limit must be at least 1', HttpStatus.NOT_ACCEPTABLE);
+      return new HttpException(
+        'the limit must be at least 1',
+        HttpStatus.NOT_ACCEPTABLE,
+      );
     }
   }
-  
+
   @Get('findMostRequested/:limit')
   @ApiParam({
     name: 'limit',
@@ -99,7 +103,10 @@ export class VehicleController {
     if (limitVehicle && limitVehicle > 0) {
       return this.VehicleService.getVehiclesMostRequest(limitVehicle);
     } else {
-      return new HttpException('the limit must be at least 1', HttpStatus.NOT_ACCEPTABLE);
+      return new HttpException(
+        'the limit must be at least 1',
+        HttpStatus.NOT_ACCEPTABLE,
+      );
     }
   }
 
@@ -120,13 +127,7 @@ export class VehicleController {
     }
   }
 
-  @Put('update/:uuid')
-  @ApiParam({
-    name: 'uuid',
-    description: 'UUID of the Vehicle',
-    required: true,
-    type: String,
-  })
+  @Put('update')
   @ApiBody({
     description: 'Object Vehicle',
     type: Vehicle,
@@ -134,17 +135,30 @@ export class VehicleController {
   private updateVehicle(@Param('uuid') uuid: any, @Req() request: any): any {
     const uuidVehicle = uuid;
     const objVehicle: Vehicle = request.body;
-    if (uuidVehicle && uuidVehicle.length > 0) {
-      if (objVehicle) {
-        return this.VehicleService.updateVehicle(uuidVehicle, objVehicle);
-      } else {
-        return new HttpException(
-          'Object of Vehicle invalid',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
+    if (objVehicle) {
+      return this.VehicleService.updateVehicle(objVehicle);
     } else {
-      return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
+      return new HttpException(
+        'Object of Vehicle invalid',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  @Patch('changeStatus')
+  @ApiBody({
+    description: 'Object User with uuid and new role',
+    type: Object,
+  })
+  private changeStatus(@Req() request: any): any {
+    const objStatus = request.body;
+    if (objStatus && objStatus.uuid && objStatus.status) {
+      return this.VehicleService.changeStatusVehicle(objStatus);
+    } else {
+      return new HttpException(
+        'uuid or new role of Vehicle invalid',
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 
