@@ -14,6 +14,7 @@ export class Token {
         firstName: respuesta.firstName,
         lastName: respuesta.lastName,
         uuid: respuesta.uuid,
+        email: respuesta.email,
       },
       String(process.env.SECRET_PASSWORD),
       { expiresIn: '8h' },

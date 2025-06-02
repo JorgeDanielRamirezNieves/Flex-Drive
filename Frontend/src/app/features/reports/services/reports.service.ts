@@ -17,7 +17,7 @@ export class ReportsService {
   postReport(
     idTypeReport: string,
     description: string,
-    idService: string,
+    idService: string | null,
     idUser: string
   ): Observable<Report> {
     return this.http.post<Report>(`${this.baseUrl}/add`, {

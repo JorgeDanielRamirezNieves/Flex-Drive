@@ -12,7 +12,13 @@
         <div class="w-full">
           <div
             *ngFor="
-              let tipo of ['claims', 'complaint', 'petition', 'suggestion']
+              let tipo of [
+                'service',
+                'claims',
+                'complaint',
+                'petition',
+                'suggestion'
+              ]
             "
             class="bg-[#D9D9D9] p-4 rounded shadow mb-15 w-dvh hover:cursor-pointer duration-300 ease-in-out hover:shadow-sm hover:scale-[1.02]"
             (click)="toggleTipo(tipo)"

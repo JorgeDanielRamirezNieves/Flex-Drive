@@ -44,6 +44,7 @@ export class AdminPqrsComponent implements OnInit {
     this.visibleResponseBox[pqrs.id] = false;
   }
   tiposMap: { [key: string]: string } = {
+    service: 'Servicios',
     claims: 'Reclamos',
     complaint: 'Quejas',
     petition: 'Peticiones',

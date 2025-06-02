@@ -117,8 +117,13 @@ export class Reports {
     example: '1234567890',
     type: String,
   })
-  @Column({ name: 'id_service', type: 'varchar', nullable: true })
-  public idService: string;
+  @Column({
+    name: 'id_service',
+    type: 'varchar',
+    nullable: true,
+    default: null,
+  })
+  public idService?: string;
 
   @OneToOne(() => ServiceRent, (objRent: ServiceRent) => objRent.uuid)
   @JoinColumn({ name: 'id_service', referencedColumnName: 'uuid' })
@@ -157,7 +162,7 @@ export class Reports {
     idAdmin: string,
     priority: '0' | '1' | '2' | '3',
     idTypeReport: string,
-    idService: string,
+    idService?: string,
   ) {
     this.uuid = uuid;
     this.description = description;

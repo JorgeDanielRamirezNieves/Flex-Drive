@@ -31,19 +31,29 @@
             {
               value: 'd07dcae8-4e4b-4620-8478-9bea31db8fe6',
               label: 'Contacto'
+            },
+            {
+              value: '8361b4b6-2390-44fb-8f56-f3f6fba3705e',
+              label: 'Servicio'
             }
           ]"
           [submitted]="submitted"
         ></app-input-label>
 
-        <app-input-label
-          label="Código de servicio"
-          placeholder="1232412"
-          type="text"
-          name="idService"
-          [model]="formData"
-          modelProperty="idService"
-        ></app-input-label>
+        <ng-container
+          *ngIf="
+            formData.idTypeReport === '8361b4b6-2390-44fb-8f56-f3f6fba3705e'
+          "
+        >
+          <app-input-label
+            label="Código de servicio"
+            placeholder="1232412"
+            type="text"
+            name="idService"
+            [model]="formData"
+            modelProperty="idService"
+          ></app-input-label>
+        </ng-container>
 
         <span class="jura"> Mensaje de reporte </span>
 
@@ -67,8 +77,31 @@
           </button>
         </div>
       </form>
+      <div
+        *ngIf="showDialog"
+        class="fixed inset-0 flex items-center justify-center z-50"
+        style="background-color: rgba(211, 211, 211, 0.6)"
+      >
+        <div
+          class="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full text-center"
+        >
+          <img
+            [src]="errorIMg || '../../../../assets/F5.png'"
+            alt=""
+            class="w-1/4 mx-auto my-2"
+          />
+          <h2 class="text-lg my-9 w-[80%] mx-auto">
+            {{ errorMsg || confirmationDialog }}
+          </h2>
+          <button
+            class="bg-[#54A8A3] text-white px-4 py-2 rounded hover:bg-[#3e807c] transition w-[60%]"
+            (click)="closeDialog(loginForm)"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
 <app-footer></app-footer>

@@ -1,58 +1,62 @@
 <div
-  class="flex flex-col justify-center items-center gap-4 bg-[#d9d9d9] rounded-lg shadow-md m-10 py-4 px-5 hover:scale-105 transition-all duration-300 ease-in-out"
+  class="flex flex-col justify-center items-center gap-4 bg-[#d9d9d9] rounded-lg shadow-md m-10 py-4 px-5 hover:scale-105 transition-all duration-300 ease-in-out h-[500px] max-w-[350px] min-w-[300px]"
 >
   <img
     [src]="Vehicle.image[0].itemImageSrc"
     alt="carro.png"
-    class="w-1/2 h-1/2 mx-auto"
+    class="h-40 w-auto object-containmx-auto"
   />
-  <h2 class="text-2xl jura font-bold text-center">{{Vehicle.detailsVehicle?.brand}} {{Vehicle.detailsVehicle?.model}}</h2>
-  <div class="flex justify-between items-center gap-10 ">
+  <h2 class="text-2xl jura font-bold text-center">
+    {{ Vehicle.detailsVehicle?.brand }} {{ Vehicle.detailsVehicle?.model }}
+  </h2>
+  <div class="flex justify-between items-center gap-10">
     <span class="flex justify-center items-center gap-2">
       <img
         src="../../../../assets/icons/passanger.png"
         alt="passanger.png"
-        class="w-1/2 h-1/2"
+        class="h-6 w-auto object-contain"
       />
-      <p>{{Vehicle.capacity}}</p>
+      <p>{{ Vehicle.capacity }}</p>
     </span>
     <span class="flex justify-center items-center gap-2">
       <img
         src="../../../../assets/icons/bag.png"
         alt="passanger.png"
-        class="w-1/2 h-1/2"
+        class="h-5 w-auto object-contain"
       />
-      <p>{{Vehicle.detailsVehicle?.loadCapacity}}</p>
+      <p>{{ Vehicle.detailsVehicle?.loadCapacity }}</p>
     </span>
     <span class="flex justify-center items-center gap-2">
       <img
         src="../../../../assets/icons/car-door.png"
         alt="passanger.png"
-        class="w-1/2 h-1/2"
+        class="h-6 w-auto object-contain"
       />
-      <p>{{Vehicle.doors}}</p>
+      <p>{{ Vehicle.doors }}</p>
     </span>
     <span class="flex justify-center items-center gap-2">
       <img
         src="../../../../assets/icons/plate.png"
         alt="passanger.png"
-        class="w-1/2 h-1/2"
+        class="h-4 w-auto object-contain"
       />
-      <p>{{Vehicle.plate[Vehicle.plate.length-1]}}</p>
+      <p>{{ Vehicle.plate[Vehicle.plate.length - 1] }}</p>
     </span>
   </div>
-  <h3 class="text-xl text-center montserrat">{{Vehicle.contitions}}</h3>
+  <h3 class="text-xl text-center montserrat">{{ Vehicle.contitions }}</h3>
   <h3 class="text-xl montserrat font-bold">
-    @if (Vehicle.typeSaleVehicle?.name == 'exclusive') {
-      ${{price?.price| currency: 'COP' }}
-    } @else {
-      ${{price?.price| currency: 'COP' }}/{{Vehicle.typeSaleVehicle?.name}}
+    @if (Vehicle.typeSaleVehicle?.name == 'exclusive') { ${{
+      price?.price | currency : "COP"
+    }}
+    } @else { ${{ price?.price | currency : "COP" }}/{{
+      Vehicle.typeSaleVehicle?.name
+    }}
     }
   </h3>
   <app-button
     label="Ver más"
     icon="pi pi-arrow-right"
     iconPos="right"
-    redirecTo="/vehicles/detail/{{Vehicle.uuid}}"
+    redirecTo="/vehicles/detail/{{ Vehicle.uuid }}"
   ></app-button>
 </div>
