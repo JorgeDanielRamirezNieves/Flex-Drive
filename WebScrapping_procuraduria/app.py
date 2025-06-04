@@ -40,8 +40,9 @@ def home():
 # Ruta "/ask" para recibir las preguntas desde el frontend
 @app.route("/antecedentes", methods=["POST"])
 def antecedentes():
-    
+    driver = None
     try:
+        driver = webdriver.Chrome()
         documento = request.json.get("documento")
         if not documento:
             return Response("No se recibió ningún documento.", status=400)
@@ -127,7 +128,10 @@ def antecedentes():
         print("Error:", e)
         return Response("Error al procesar la solicitud.", status=500)
     finally:
-        driver.quit()
+    
+        if driver is not None:
+            driver.quit()
+# ...existing code...
     
 
 @app.route("/reset", methods=["POST"])

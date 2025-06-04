@@ -3,8 +3,15 @@ import { TecnicalDetails } from 'src/vehicle/models/tecnical-details';
 import { Soat } from 'src/vehicle/models/soat';
 import { HttpException, Injectable } from '@nestjs/common';
 import { Vehicle } from '../models/vehicle';
-import { DataSource, DeleteResult, Not, Repository, UpdateResult } from 'typeorm';
+import {
+  DataSource,
+  DeleteResult,
+  Not,
+  Repository,
+  UpdateResult,
+} from 'typeorm';
 import { Price } from 'src/prices/models/price';
+import { Parameters } from 'src/user/models/preferences';
 
 @Injectable()
 export class VehicleService {
@@ -63,15 +70,14 @@ export class VehicleService {
   }
 
   public async getVehiclesLimit(limit: number): Promise<Vehicle[] | null> {
-    return this.VehicleRepository.find({
-      relations: [
-        'typeSaleVehicle',
-        'ownerVehicle',
-        'prices',
-        'detailsVehicle',
-      ],
-      take: limit,
-    });
+    return this.VehicleRepository.createQueryBuilder('vehicle')
+      .leftJoinAndSelect('vehicle.typeSaleVehicle', 'typeSaleVehicle')
+      .leftJoinAndSelect('vehicle.ownerVehicle', 'ownerVehicle')
+      .leftJoinAndSelect('vehicle.prices', 'prices')
+      .leftJoinAndSelect('vehicle.detailsVehicle', 'detailsVehicle')
+      .orderBy('RANDOM()')
+      .limit(limit)
+      .getMany();
   }
   public async getVehiclesMostRequest(
     limit: number,
@@ -99,9 +105,48 @@ export class VehicleService {
     });
   }
 
+  public async getVehiclesPreferedByUser(
+    objParametros: Parameters,
+  ): Promise<Vehicle[] | null> {
+    let tags = '';
+    (Object.keys(objParametros) as Array<keyof Parameters>).forEach((key) => {
+      const value = objParametros[key];
+      if (Array.isArray(value) && value.length > 0) {
+        tags += `${value.map((item) => `${item} ,`)}`;
+      }
+    });
+    tags = tags.slice(0, -1); // Eliminar la última coma
+    const vehicles = await fetch('http://localhost:8000/buscar', {
+      method: 'POST',
+      body: JSON.stringify({
+        tags: tags,
+        k: 8,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => response.json());
+    if (vehicles.error) {
+      throw new HttpException(vehicles.error, 500);
+    }
+    const vehiclesFound: Vehicle[] = [];
+    for (const vehicle of vehicles.resultados) {
+      const vehicleFound = await this.getVehiclesByUUID(vehicle.uuid);
+      if (vehicleFound) {
+        vehiclesFound.push(vehicleFound);
+      }
+    }
+    console.log('vehiclesFound', vehiclesFound);
+    
+    if (vehiclesFound.length > 0) {
+      return vehiclesFound;
+    }
+    return Promise.resolve(null);
+  }
+
   public async getBrands(limit: number): Promise<string[] | null> {
     return this.VehicleRepository.query(
-    ` 
+      ` 
     SELECT brand 
     FROM (
           SELECT DISTINCT tecnical_details.brand
@@ -109,10 +154,10 @@ export class VehicleService {
     ) AS distinct_brands
     ORDER BY RANDOM()
     LIMIT ${limit};
-    `
+    `,
     ).then((result) => {
       return result;
-    })
+    });
   }
 
   public async createVehicle(
@@ -178,8 +223,17 @@ export class VehicleService {
       });
   }
 
-  public async changeStatusVehicle(obj: {uuid: string, status: "available" | "booked" | "out_of_service" | "in_use" | "lost" | "inactive"}): Promise<UpdateResult | HttpException> {
-     return this.VehicleRepository.update(obj.uuid, { status: obj.status })
+  public async changeStatusVehicle(obj: {
+    uuid: string;
+    status:
+      | 'available'
+      | 'booked'
+      | 'out_of_service'
+      | 'in_use'
+      | 'lost'
+      | 'inactive';
+  }): Promise<UpdateResult | HttpException> {
+    return this.VehicleRepository.update(obj.uuid, { status: obj.status })
       .then((response) => {
         return new HttpException(JSON.stringify(response), 200);
       })

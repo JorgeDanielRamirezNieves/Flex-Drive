@@ -1,0 +1,203 @@
+uuid,type,color,mileage,accesories,capacity,rating,brand,model,year,fuel_type,weight
+866ba8c2-438f-4c8f-b653-df1f5c21c185,sedan,Teal,12543,"[""portaequipajes"",""soporte para teléfono"",""kit de emergencia""]",9,3,Ford,Explorer,1997,biofuel,3371.95
+1c7dd80d-bdf7-4943-9cbc-bcdce1596f12,minivan,Violet,23034,"[""portaequipajes"",""fundas de asiento"",""cargador de coche"",""kit de herramientas""]",9,3,Buick,Roadmaster,1991,diesel,2749.62
+f9fe51ae-c0c1-4dd0-b14f-233fd3c30387,pickup truck,Maroon,30537,"[""phone holder"",""roof rack"",""car charger"",""bluetooth""]",5,4,Lotus,Esprit,2000,electric,2658.37
+7ce81b86-3743-497e-8ee3-d74915946ab1,luxury,Green,2139,"[""floor mats""]",4,4,Rolls-Royce,Phantom,2008,hybrid,1539.34
+d8ed2fce-04d1-4205-9cc3-156c5c1b9e05,pickup truck,Maroon,30744,"[""seat covers"",""bluetooth""]",7,4,Acura,Vigor,1994,diesel,3732.2
+cd107cdd-b494-46ce-8c89-3eb7c78246b5,pickup truck,Purple,30598,"[""floor mats"",""roof rack"",""bluetooth"",""seat covers"",""phone holder""]",8,4,Buick,LeSabre,1985,electric,4354.68
+2868cd64-9070-40de-88da-0e84c4d20bd5,minivan,Maroon,16860,"[""car charger"",""bluetooth"",""phone holder"",""seat covers"",""roof rack"",""floor mats""]",5,4,Pontiac,Grand Am,1987,hybrid,2477.67
+880d853f-07db-4d9b-80cc-55be61e1d996,pickup truck,Turquoise,49058,"[""floor mats"",""bluetooth"",""car charger"",""phone holder"",""roof rack"",""seat covers""]",7,4,Chevrolet,3500,1996,gasoline,2183.04
+8def24db-8e8f-4be0-94f9-55c8d6663403,SUV,Mauv,5698,"[""floor mats"",""bluetooth"",""roof rack"",""car charger""]",6,4,Lexus,LX,1996,diesel,3831.3
+45d03691-dac3-4778-a757-50cc08f9a14a,sedan,Green,16347,"[""seat covers"",""phone holder"",""car charger"",""roof rack"",""bluetooth""]",9,4,Mitsubishi,Chariot,1995,gasoline,1394.19
+7b7e8b2b-2b79-4e50-9b73-e43643718183,pickup truck,Red,49782,"[""floor mats"",""bluetooth"",""phone holder"",""seat covers""]",5,4,GMC,Sierra 3500HD,2006,electric,1074.63
+e2264183-1cd4-45f3-bbae-90b96bb3817c,hatchback,Puce,11727,"[""phone holder"",""seat covers"",""floor mats"",""roof rack"",""car charger"",""bluetooth""]",4,4,Isuzu,Ascender,2005,electric,3307.68
+1821f681-ad5b-4fb8-8df2-aa2ca0208682,hatchback,Aquamarine,48082,"[""car charger"",""seat covers""]",5,4,Ford,Econoline E350,1997,gasoline,2769.13
+6b3d812d-8a22-4db0-8e5c-8fb9d5903fa8,hatchback,Violet,45042,"[""car charger"",""floor mats"",""bluetooth"",""roof rack"",""seat covers"",""phone holder""]",6,4,Lincoln,Continental,1997,hybrid,2968.78
+0f53d4c7-8785-4b5d-8cb5-03ba04fb1b18,minivan,Pink,33585,"[""phone holder"",""car charger"",""seat covers"",""floor mats"",""bluetooth"",""roof rack""]",1,4,GMC,Envoy,2004,electric,1352.52
+0ab5b458-a702-4a6f-9d65-a02ae784f723,minivan,Aquamarine,5453,"[""seat covers"",""floor mats""]",4,4,Pontiac,Bonneville,1999,biofuel,1958.04
+000eec4d-5c04-49e4-9b1a-c2bfe381223c,luxury,Purple,27459,"[""roof rack"",""bluetooth"",""phone holder"",""seat covers""]",5,4,Dodge,Intrepid,2000,hybrid,3512.16
+a5399e30-0faa-4c0a-ad49-5c8d2c5ec1a0,hatchback,Aquamarine,643,"[""roof rack"",""phone holder"",""car charger"",""seat covers"",""bluetooth""]",3,4,Lexus,LS Hybrid,2011,gasoline,4079.06
+3afbd062-ba82-4405-907a-74d693691d72,convertible,Violet,42247,"[""roof rack"",""car charger"",""bluetooth"",""floor mats"",""phone holder"",""seat covers""]",4,4,Dodge,Dakota Club,2004,gasoline,2077.31
+ce75ad16-4dd0-48dd-ae1a-38dd2b776ec5,hatchback,Teal,1080,"[""car charger"",""bluetooth"",""roof rack"",""phone holder"",""seat covers"",""floor mats""]",3,4,Jaguar,XJ Series,1993,hybrid,4527.21
+54ceb62f-816d-46bb-a5c7-4ee1c1e8d536,hatchback,Fuscia,8071,"[""phone holder"",""bluetooth"",""seat covers"",""car charger""]",7,4,Audi,100,1991,gasoline,1285.49
+00ca55cb-580e-44f4-8291-f4239a5fff1f,sedan,Pink,32577,"[""car charger""]",1,4,GMC,Safari,2001,biofuel,3252.13
+3e641b50-e09b-42c0-b296-bb47f58b67dc,hatchback,Red,8869,"[""floor mats"",""car charger"",""seat covers"",""roof rack"",""phone holder""]",9,4,Dodge,Ram 1500 Club,2000,gasoline,1979.73
+7e86cbb2-9252-418b-b321-e86c4b8f5fc3,hatchback,Puce,13447,"[""car charger"",""phone holder""]",4,4,Land Rover,Freelander,2009,gasoline,2795.6
+f1d808f1-057a-444f-bb08-75a8629a3fdf,pickup truck,Purple,5432,"[""car charger"",""seat covers"",""floor mats"",""phone holder"",""roof rack""]",6,4,BMW,6 Series,2007,hybrid,3458.03
+c453cdcf-fbbb-42a2-ab84-72001610945d,minivan,Red,40916,"[""phone holder"",""car charger"",""floor mats""]",1,4,Dodge,Ram 50,1992,hybrid,1003.37
+dcd96a94-4ec5-4763-b182-a0842cf5d742,pickup truck,Fuscia,37031,"[""bluetooth"",""seat covers"",""roof rack"",""phone holder"",""car charger"",""floor mats""]",10,4,Jaguar,XK Series,2004,diesel,2305.29
+14aa91a1-f58c-4f05-b665-0e1b8b463147,minivan,Mauv,49679,"[""phone holder""]",9,4,Nissan,Maxima,1993,hybrid,2072.42
+af0136f5-9beb-4fa5-b746-e06c3807560f,sedan,Yellow,27191,"[""car charger"",""roof rack"",""phone holder"",""floor mats"",""seat covers"",""bluetooth""]",1,4,Ford,Explorer Sport,2002,gasoline,1103.98
+f10a723e-bdb0-4607-9bd0-d1ed11e9c686,pickup truck,Turquoise,4712,"[""car charger"",""phone holder"",""floor mats"",""roof rack""]",8,4,Toyota,Echo,2001,electric,2275.96
+534615e6-3ee3-4385-8669-03f39ed33c92,sedan,Maroon,25053,"[""floor mats""]",9,4,Lexus,IS-F,2009,biofuel,1825.94
+1bb6898c-3af4-4f95-94f6-192189122431,pickup truck,Violet,15298,"[""phone holder"",""seat covers"",""bluetooth"",""roof rack"",""car charger"",""floor mats""]",9,4,Subaru,XT,1987,electric,4957.67
+327a72e2-2185-4ee1-99fd-b4770dc2588d,sedan,Indigo,39964,"[""roof rack"",""seat covers"",""car charger"",""floor mats"",""phone holder"",""bluetooth""]",5,4,Subaru,Impreza WRX,2011,biofuel,1122.86
+e01bb4c6-75a8-48d7-bc5f-365b6dcdb45b,minivan,Blue,47450,"[""phone holder"",""seat covers""]",2,4,Toyota,4Runner,2001,hybrid,2987.47
+cce49a91-202c-4c0d-925e-8a9359047a89,minivan,Turquoise,19009,"[""roof rack"",""floor mats"",""seat covers"",""car charger"",""bluetooth""]",1,4,Pontiac,Fiero,1984,hybrid,1273.44
+c89aaab7-e587-42cd-8dbf-215ba71d794a,hatchback,Red,47342,"[""car charger"",""seat covers"",""roof rack""]",7,4,Volkswagen,Jetta,2008,hybrid,4516.22
+7363f242-9d1e-41b2-84d4-0a1c657c6ce4,sedan,Fuscia,32604,"[""phone holder"",""bluetooth"",""roof rack"",""floor mats"",""seat covers""]",7,4,GMC,1500,1997,diesel,4256.93
+eae99e5f-0e0e-4f8c-a6b7-9d21bd67df30,SUV,Fuscia,22076,"[""bluetooth"",""car charger"",""floor mats"",""seat covers""]",8,4,Pontiac,Bonneville,1985,electric,1496.17
+97e79d81-78ee-4525-9f23-c9991b1036e8,convertible,Indigo,12968,"[""car charger""]",1,4,Land Rover,Range Rover,2008,electric,2415.66
+62d0c699-c4f8-486e-b186-7ae6d99d6a54,sedan,Mauv,718,"[""phone holder"",""seat covers"",""car charger"",""floor mats""]",10,4,Saturn,Astra,2008,gasoline,2627.09
+8f0a3523-20b6-4046-9163-df49e6d706e8,hatchback,Goldenrod,2957,"[""phone holder"",""car charger""]",8,4,Ford,F250,2007,gasoline,2967.34
+195982c6-3a35-4c2f-89d2-d542ee01ef2d,pickup truck,Blue,19937,"[""roof rack"",""phone holder"",""car charger"",""bluetooth"",""seat covers"",""floor mats""]",4,4,Infiniti,G37,2011,electric,3507.88
+56cacf5a-14df-4f57-a2e8-be909f2df9c8,minivan,Blue,5245,"[""seat covers"",""roof rack""]",1,4,Aston Martin,DBS,2009,gasoline,1087.68
+6085ff92-2537-4c1e-b6b6-ecf04e7d47ba,convertible,Indigo,19816,"[""roof rack"",""phone holder"",""bluetooth""]",10,4,Honda,Fit,2009,diesel,1612.49
+2b4c44fb-4899-4e4c-8f30-d6983ac3b551,SUV,Mauv,4828,"[""car charger"",""phone holder""]",2,4,Toyota,Land Cruiser,2002,gasoline,4758.25
+f8937abb-1d6f-4efe-87ac-0976d3f2f433,hatchback,Mauv,27079,"[""car charger"",""roof rack"",""phone holder"",""bluetooth"",""seat covers""]",1,4,Chevrolet,G-Series 1500,1996,biofuel,1161.5
+41ee359b-29b6-47e0-bb9c-e3cee5613734,sedan,Blue,34657,"[""seat covers"",""phone holder"",""car charger"",""roof rack""]",1,4,Ford,Fusion,2008,hybrid,4796.74
+68b2c207-634f-4075-847e-ba11a29a3aa1,sedan,Red,46544,"[""car charger"",""roof rack"",""floor mats"",""phone holder"",""seat covers""]",4,4,GMC,Sierra 3500,2009,hybrid,4450.92
+7202b0e2-04ac-41b4-86d1-cc403770e57d,sedan,Puce,14431,"[""car charger"",""floor mats"",""seat covers"",""roof rack"",""bluetooth""]",8,4,Dodge,Ram Van 1500,1995,electric,1844.91
+5b13062e-7c48-4d7b-b6e6-96276e3ac585,SUV,Indigo,15326,"[""phone holder"",""floor mats"",""roof rack""]",4,4,Lamborghini,Murciélago,2002,hybrid,4641.93
+6e81a72e-9126-4438-89b3-d0e3b56ee5b1,sedan,Green,28290,"[""floor mats"",""phone holder"",""roof rack"",""seat covers"",""car charger""]",5,4,Chevrolet,Avalanche,2010,hybrid,2987.88
+88ac9387-f6ea-46fa-b3a6-825a3a51f8a9,SUV,Fuscia,10439,"[""bluetooth"",""roof rack"",""car charger""]",2,4,GMC,Yukon,1994,hybrid,2911.01
+ef29525b-d846-42be-af37-8d361080214e,SUV,Aquamarine,16458,"[""car charger"",""phone holder"",""bluetooth"",""seat covers"",""floor mats"",""roof rack""]",7,4,Suzuki,Swift,2000,diesel,1121.15
+a3894f19-107f-4145-a375-d2c9d5c269b9,minivan,Green,18094,"[""bluetooth"",""floor mats"",""car charger"",""seat covers""]",1,4,Lincoln,MKS,2011,diesel,1745.95
+ab6d8b8b-7623-4075-8f38-718ceb5f4879,pickup truck,Blue,6410,"[""phone holder"",""car charger"",""seat covers"",""floor mats""]",5,4,Chevrolet,TrailBlazer,2005,diesel,3233.81
+0a238f91-9a50-419d-98d4-e633deb298e9,sedan,Crimson,8082,"[""roof rack"",""floor mats"",""phone holder"",""seat covers"",""bluetooth""]",2,4,BMW,X6,2012,gasoline,2381.47
+02280f7f-096a-4a72-a67e-c6c89d7e8dcd,hatchback,Puce,2097,"[""roof rack"",""seat covers""]",6,4,Chevrolet,Corsica,1992,electric,4221.04
+ecfc6f8a-6497-4a0c-9447-b37b3c115847,sedan,Purple,32234,"[""roof rack""]",8,4,Mitsubishi,RVR,1994,gasoline,3535.66
+06cbea8c-824b-4573-ab46-9a37b9cd4373,sedan,Yellow,40868,"[""seat covers"",""car charger"",""bluetooth"",""roof rack""]",1,4,Mercedes-Benz,SL-Class,1985,diesel,4519.96
+5337957c-99cb-4bfd-bc8a-698c4d7ba892,sedan,Yellow,8576,"[""bluetooth""]",9,4,Volvo,S80,2011,hybrid,3063.69
+e8cc4b80-c650-4ca5-adff-df93163a2422,SUV,Turquoise,39024,"[""seat covers"",""roof rack"",""floor mats"",""phone holder"",""bluetooth"",""car charger""]",5,4,Buick,LeSabre,1991,electric,4890.05
+198fd393-134c-4f3a-b579-7c331200204b,sedan,Turquoise,13512,"[""seat covers"",""car charger"",""phone holder"",""bluetooth""]",5,4,Acura,RSX,2002,diesel,4878.26
+f44c08d2-3a36-45ff-85be-cea427bdcf0b,minivan,Indigo,23003,"[""floor mats"",""car charger"",""seat covers"",""phone holder"",""roof rack"",""bluetooth""]",2,4,Geo,Prizm,1992,diesel,3211.71
+cf1a6ae9-a373-43d3-9bcf-41fccf5940cf,SUV,Violet,33420,"[""seat covers"",""roof rack"",""floor mats""]",2,4,Hyundai,Sonata,1995,gasoline,4419.92
+42a2ff5d-84e1-4730-83de-26331d347299,hatchback,Orange,27773,"[""roof rack"",""floor mats"",""car charger"",""seat covers"",""bluetooth""]",10,4,Chevrolet,Astro,2005,hybrid,4105.44
+86c28f47-fa6c-4556-9596-e6da74c103e0,SUV,Purple,26285,"[""roof rack"",""seat covers"",""bluetooth"",""phone holder"",""car charger"",""floor mats""]",4,4,Audi,R8,2012,hybrid,4520.98
+57d052c1-65f3-45fa-8ae6-3f9e5f872161,hatchback,Crimson,39268,"[""seat covers"",""floor mats"",""car charger""]",9,4,Bentley,Mulsanne,2011,diesel,3334.45
+ea167be9-6e25-48e7-a08e-fff01d4725ae,sedan,Fuscia,19061,"[""seat covers"",""car charger"",""bluetooth"",""roof rack"",""floor mats""]",7,4,Ford,Expedition EL,2011,hybrid,3460.07
+9d9ebbc0-fe06-42d8-bc9c-830e35cc855a,sedan,Khaki,17428,"[""bluetooth"",""phone holder"",""car charger"",""floor mats"",""roof rack""]",5,4,Mitsubishi,Galant,1996,gasoline,4383.49
+8fb92116-9402-4bf0-b670-f3732b4c6c7c,sedan,Teal,2256,"[""car charger"",""seat covers""]",10,4,Jaguar,X-Type,2002,diesel,3090.84
+a7ad57b7-50b6-402e-bfc9-dc7af5906941,convertible,Pink,46533,"[""roof rack"",""seat covers"",""floor mats"",""car charger""]",7,4,Cadillac,CTS,2003,hybrid,4850.94
+e68a71b8-5beb-41d7-ac36-a52a51bf183d,pickup truck,Teal,32843,"[""car charger"",""bluetooth"",""phone holder"",""seat covers"",""roof rack"",""floor mats""]",10,4,Mazda,Mazda5,2009,diesel,2196.01
+eab5fce7-09b5-4aa6-b0f3-7a2b524721ee,sedan,Green,28064,"[""bluetooth"",""floor mats""]",5,4,BMW,X5 M,2010,gasoline,4088.14
+7277aa9b-da5f-402e-978c-b22daae4df54,SUV,Yellow,43932,"[""car charger"",""seat covers"",""bluetooth""]",2,4,Cadillac,Seville,1995,biofuel,4605.74
+af0738be-eb5d-4842-9c4e-79755e612486,sedan,Crimson,24047,"[""phone holder"",""roof rack""]",7,4,Mercedes-Benz,GL-Class,2007,electric,1595.3
+c87a0b29-5d7e-49bf-882e-38454af1254c,minivan,Teal,38776,"[""roof rack"",""bluetooth"",""floor mats""]",5,4,Lexus,RX,2005,electric,2781.11
+8eb61cc8-45b9-4976-9f77-675bc10ea583,minivan,Green,45802,"[""car charger"",""roof rack"",""floor mats"",""bluetooth""]",4,4,Pontiac,Firebird,1999,electric,4250.79
+ef0b6a32-bc5c-43ad-9a46-835019ccdd68,pickup truck,Blue,27887,"[""car charger"",""floor mats""]",10,4,Ford,Festiva,1989,diesel,4793.3
+c0f7ad99-5aa7-4607-ad74-7aeb791fcda9,sedan,Khaki,14169,"[""seat covers"",""floor mats"",""phone holder""]",1,4,GMC,Rally Wagon 2500,1994,gasoline,2323.85
+52c0774e-15c4-4ada-b2ff-c2273955191a,hatchback,Turquoise,26958,"[""seat covers"",""roof rack"",""bluetooth"",""floor mats""]",9,4,Audi,TT,2011,biofuel,2339.84
+1efb028e-d570-4367-833f-ce21b98eb510,pickup truck,Orange,26619,"[""seat covers"",""roof rack"",""phone holder"",""car charger"",""floor mats"",""bluetooth""]",10,4,Acura,ZDX,2012,electric,3283.87
+c400bd28-e601-40f1-80de-8063bd2b9cba,hatchback,Yellow,40862,"[""seat covers"",""phone holder""]",10,4,Volkswagen,Passat,2012,gasoline,4659.59
+ff3d3c27-9cd1-44c6-83a1-6ccacbda7b5c,minivan,Mauv,18932,"[""car charger"",""seat covers"",""roof rack"",""bluetooth"",""floor mats""]",5,4,Buick,LaCrosse,2008,electric,2806.0
+f27bbac3-ec62-4d44-b869-56d7f1cf4e51,hatchback,Aquamarine,43667,"[""bluetooth"",""phone holder""]",6,4,Lexus,LS,2008,gasoline,3011.08
+baa24998-62fb-427d-887b-90535a83c955,minivan,Puce,7704,"[""roof rack"",""floor mats"",""phone holder"",""car charger""]",1,4,Mitsubishi,RVR,1995,hybrid,2549.04
+9b78a8fb-d295-4a7d-ac8d-9a91a08e5b7a,hatchback,Mauv,42319,"[""seat covers"",""floor mats"",""roof rack"",""phone holder"",""car charger""]",9,4,Infiniti,M,2006,biofuel,4062.94
+97ac4856-ac14-4ebe-8f4d-6b23a8a4a790,sedan,Turquoise,25130,"[""roof rack"",""floor mats"",""phone holder""]",10,4,Dodge,Ram 2500,2005,biofuel,4214.08
+2245d467-77e6-4f58-ab80-1201329c2fdf,luxury,Puce,48999,"[""car charger"",""roof rack"",""floor mats"",""bluetooth"",""seat covers""]",7,4,Chevrolet,Venture,2003,biofuel,1479.39
+bb58c2a3-b15d-4d47-9710-ce1f44c56abc,hatchback,Orange,39057,"[""roof rack"",""floor mats""]",4,4,Volkswagen,GTI,2008,biofuel,1860.54
+a33c4e7b-f6ac-48ab-bd4c-9fdefaa3ea72,luxury,Goldenrod,9837,"[""roof rack"",""floor mats""]",3,4,Mercury,Cougar,1988,biofuel,4252.77
+1f3f9c40-768d-4f38-9cfb-639fd9237935,sedan,Puce,42584,"[""phone holder"",""car charger"",""floor mats"",""roof rack""]",9,4,Jaguar,X-Type,2006,biofuel,4942.78
+f184cc34-5e45-4cb9-8e6e-6c5dc117dacf,sedan,Puce,5409,"[""bluetooth"",""car charger"",""phone holder"",""roof rack""]",6,4,Lexus,LX,2008,electric,3771.5
+dcf7a454-baff-457c-b8c9-b061ee1b3c86,pickup truck,Khaki,22707,"[""car charger"",""roof rack"",""seat covers""]",10,4,Dodge,Stratus,1995,biofuel,4160.22
+a958f1a4-18a9-4c10-a9e4-9402c71e16cc,minivan,Goldenrod,49909,"[""roof rack"",""bluetooth"",""car charger"",""seat covers"",""floor mats""]",8,4,Nissan,Quest,2008,electric,2411.66
+49d0a098-de8f-433b-a4fc-0d3a55266bae,pickup truck,Red,33500,"[""roof rack""]",5,4,Ford,E350,2009,biofuel,2758.09
+ae7ccb4b-050a-4d8c-a58b-03b9b589b288,pickup truck,Crimson,20290,"[""phone holder"",""floor mats"",""seat covers"",""roof rack"",""bluetooth"",""car charger""]",6,4,Buick,Park Avenue,2001,biofuel,4380.84
+a532bca2-dd38-4b5e-9ae6-42bdd949ee1d,pickup truck,Purple,4930,"[""floor mats"",""roof rack"",""bluetooth""]",10,4,Dodge,Stratus,1995,biofuel,1886.24
+ad86a7dd-a261-4778-a82b-5d3cfc1144e6,minivan,Puce,22569,"[""bluetooth"",""phone holder"",""car charger""]",1,4,Mercedes-Benz,G-Class,2006,hybrid,3463.73
+2d57be23-1bbc-416a-90b1-6f65e8cc2b11,hatchback,Blue,36549,"[""roof rack"",""phone holder"",""car charger"",""floor mats"",""seat covers""]",2,4,Ford,Transit Connect,2010,diesel,4032.07
+f2cc5ba1-c8e9-4c0a-9c12-6a78e57bbc65,minivan,Goldenrod,48844,"[""bluetooth"",""phone holder"",""seat covers"",""floor mats""]",9,4,Nissan,Altima,2000,electric,1550.2
+bf8278a2-d677-4200-a628-b557268b672f,hatchback,Orange,17146,"[""phone holder"",""floor mats"",""bluetooth"",""car charger"",""seat covers"",""roof rack""]",3,4,Saab,9-5,2006,gasoline,4648.32
+d0c2a330-e960-462b-a606-29c0f5b91f2d,SUV,Purple,27980,"[""car charger"",""seat covers"",""floor mats""]",2,4,Dodge,Grand Caravan,1994,electric,1227.98
+76a40b2a-ee17-4584-93d5-0b895de6cbd2,minivan,Fuscia,43572,"[""seat covers"",""roof rack"",""bluetooth""]",6,4,Saturn,VUE,2007,hybrid,1325.82
+b31a0a21-41c2-4eca-b527-f0c2d4f41b5f,SUV,Khaki,40761,"[""phone holder"",""roof rack""]",10,4,Mitsubishi,Montero,2002,hybrid,1462.57
+ba40906a-3bd9-4e18-a33f-68ebb26ee50e,pickup truck,Purple,17338,"[""bluetooth"",""phone holder"",""seat covers"",""roof rack"",""car charger""]",5,4,Ford,Crown Victoria,1997,diesel,3620.93
+9b517893-8232-44be-8ce0-b990854dfc9e,pickup truck,Turquoise,29522,"[""seat covers"",""phone holder"",""bluetooth"",""roof rack""]",7,4,BMW,6 Series,1989,diesel,3401.26
+03c2c68e-5529-46f5-9e10-e1cb00eaa586,minivan,Fuscia,18698,"[""roof rack"",""car charger"",""floor mats"",""phone holder"",""seat covers"",""bluetooth""]",9,4,Cadillac,Escalade ESV,2005,gasoline,1977.77
+3c310dfa-d435-43a6-aeb0-5f18c9d4c1e3,luxury,Khaki,12325,"[""roof rack"",""car charger"",""seat covers"",""phone holder"",""floor mats"",""bluetooth""]",6,4,Audi,S6,2009,electric,3263.14
+2178ea38-c26a-4154-a2d9-03cddb55a11d,SUV,Red,47406,"[""roof rack"",""phone holder""]",4,4,Honda,Passport,2002,biofuel,3636.89
+7fdd7cbd-310f-40fd-ad54-dbe8b55dbbf7,minivan,Green,26862,"[""roof rack"",""car charger"",""floor mats"",""seat covers"",""phone holder""]",4,4,Mercedes-Benz,G-Class,2004,diesel,2413.62
+1d989d4c-3720-4467-8b43-509b3c83df3f,pickup truck,Crimson,49183,"[""seat covers"",""car charger""]",10,4,Mazda,MX-5,2008,diesel,3289.93
+f1d370a0-166c-4ce3-ae88-18c47f9d82d1,sedan,Green,47924,"[""car charger"",""seat covers"",""phone holder""]",9,4,Kia,Spectra,2002,hybrid,4639.32
+9b62cbae-9d23-4ae2-b2c3-94380891bf0a,pickup truck,Crimson,15006,"[""floor mats"",""seat covers"",""roof rack""]",8,4,Toyota,Celica,2004,biofuel,3755.39
+ca629ecb-a235-474f-97e4-88ca40d3d745,pickup truck,Violet,3089,"[""roof rack"",""floor mats""]",5,4,Pontiac,Safari,1986,electric,3718.04
+b12c1a99-5948-45d5-8c42-95c0a497dc07,hatchback,Fuscia,35742,"[""phone holder"",""roof rack"",""floor mats""]",6,4,Volkswagen,Passat,1991,biofuel,2753.28
+8021e149-a3f1-4a63-88ff-dff1738f248d,minivan,Fuscia,28661,"[""phone holder""]",6,4,Toyota,Land Cruiser,1995,biofuel,2190.09
+3e822907-3d91-40d1-8ce8-7a090e899ea5,hatchback,Teal,30791,"[""car charger"",""bluetooth"",""seat covers""]",5,4,Kia,Sephia,1997,hybrid,2003.24
+a67965b2-1e55-4f97-b77a-87473cf285ef,SUV,Puce,4043,"[""bluetooth"",""phone holder"",""car charger"",""floor mats"",""roof rack""]",5,4,Audi,A4,2006,gasoline,1784.84
+1ed281eb-8a5a-4c26-8fe3-b41628509247,pickup truck,Violet,10872,"[""roof rack"",""car charger"",""phone holder"",""bluetooth"",""floor mats""]",7,4,Saturn,Ion,2006,hybrid,1186.43
+bde54c8e-7bef-410e-b524-bb201a0fb024,pickup truck,Maroon,38129,"[""floor mats""]",8,4,Ford,Transit Connect,2013,diesel,2234.32
+b52d82fc-78d5-4a1e-b160-182849f60e13,hatchback,Yellow,45982,"[""seat covers"",""car charger"",""bluetooth"",""phone holder"",""floor mats"",""roof rack""]",9,4,Toyota,Land Cruiser,2011,gasoline,2811.95
+815139ec-1486-4b41-b192-21b712b4e42f,hatchback,Fuscia,38894,"[""roof rack""]",7,4,Ford,Aerostar,1991,gasoline,3034.46
+ad746239-fcf8-42f0-b163-8846fc432562,hatchback,Maroon,14417,"[""bluetooth"",""seat covers"",""car charger""]",5,4,Pontiac,G6,2006,hybrid,4069.73
+444accad-5156-4251-89cf-de6d71fc7920,convertible,Goldenrod,33694,"[""car charger"",""seat covers"",""roof rack"",""phone holder""]",5,4,GMC,Savana,2006,diesel,2324.19
+94e37075-9a89-426b-9a09-2efbc9fd5fd9,hatchback,Purple,4710,"[""seat covers"",""floor mats"",""car charger"",""bluetooth"",""roof rack""]",5,4,Dodge,Neon,1997,electric,2764.43
+bb87eb18-8b45-4d70-ae89-abd9aabb7214,sedan,Mauv,15661,"[""roof rack""]",9,4,Buick,Regal,2004,diesel,2340.82
+1cdf877b-5a75-4810-b5e5-1b78db4aaa5f,sedan,Teal,13906,"[""floor mats"",""bluetooth"",""car charger""]",8,4,Maybach,57,2009,electric,2006.77
+176147e6-f4ea-492f-b662-9477ff673b75,luxury,Aquamarine,47837,"[""phone holder"",""seat covers"",""bluetooth""]",1,4,Mazda,MX-6,1990,electric,2191.32
+6dcab130-4d14-4fcf-aa1e-b5ffccba9f92,SUV,Goldenrod,49046,"[""seat covers"",""car charger""]",7,4,Land Rover,LR2,2008,electric,1833.82
+b24965cf-0693-4fe0-9c1d-7f4b6ac1490c,pickup truck,Pink,25738,"[""phone holder"",""seat covers"",""floor mats""]",10,4,Ford,Escort,1996,electric,4358.31
+b6cb3f76-dce1-4a1d-b168-95e05bb2e1ef,SUV,Orange,21594,"[""floor mats"",""seat covers"",""roof rack"",""car charger""]",4,4,Toyota,Avalon,2005,diesel,4495.44
+bdb99dc4-2973-4e42-b507-1d7d7e85c6ed,minivan,Blue,9643,"[""seat covers"",""phone holder"",""bluetooth"",""car charger"",""floor mats""]",10,4,Ford,E-Series,2007,biofuel,2547.56
+2126245d-e59c-45b3-a6b2-531124eb47bb,pickup truck,Turquoise,49058,"[""roof rack"",""seat covers"",""bluetooth"",""phone holder"",""floor mats""]",3,4,Cadillac,Escalade ESV,2006,gasoline,3704.94
+3c2fc966-2ecf-4932-bdec-b967dfed2acc,sedan,Maroon,28778,"[""seat covers"",""bluetooth"",""car charger"",""floor mats"",""phone holder""]",6,4,Mazda,MPV,2006,gasoline,3355.7
+c1849a12-6292-4080-97a8-fa2a4c52602b,hatchback,Purple,40562,"[""phone holder"",""roof rack""]",2,4,Lexus,LX,2003,gasoline,3844.51
+a805fecf-c200-4e70-be1e-2712161c8fa0,minivan,Goldenrod,11299,"[""car charger"",""bluetooth"",""seat covers"",""floor mats""]",3,4,Mitsubishi,Galant,1994,electric,2973.28
+7f7bef5c-11d1-4a5d-a92b-2041bcb93dbc,hatchback,Goldenrod,37797,"[""bluetooth"",""roof rack""]",8,4,Pontiac,Vibe,2008,diesel,3150.45
+7aebe915-842f-4751-a5fe-1be3bac96bf0,hatchback,Turquoise,21179,"[""floor mats"",""phone holder""]",8,4,Subaru,Impreza,2000,electric,4363.36
+b2549454-f6d5-4409-8107-9c6fefeecb87,sedan,Maroon,34554,"[""bluetooth"",""floor mats"",""phone holder""]",2,4,Chevrolet,Corvette,2002,electric,4196.35
+a5cb8376-9219-475c-9d51-9d44cf62f174,pickup truck,Indigo,26535,"[""seat covers"",""floor mats""]",5,4,Mazda,Mazda5,2010,gasoline,2602.99
+e0d8ceaf-bc98-454e-bac2-2425d8067f24,sedan,Crimson,47370,"[""car charger"",""floor mats"",""roof rack"",""phone holder"",""seat covers""]",9,4,Lexus,GS,1994,gasoline,4845.72
+818498ad-85ed-49a1-b080-d949d4da8759,SUV,Green,24479,"[""floor mats"",""phone holder"",""roof rack""]",4,4,Toyota,Celica,1999,biofuel,3418.37
+01542430-1009-4aed-a003-7105eb3a7c0d,minivan,Yellow,1718,"[""floor mats""]",5,4,BMW,X5,2011,diesel,4622.68
+b8a95516-e13a-4dae-b769-ab198dcb24a3,hatchback,Purple,47792,"[""seat covers"",""bluetooth"",""phone holder"",""floor mats"",""car charger"",""roof rack""]",4,4,Volvo,S40,2009,biofuel,4918.6
+3caa9385-7891-402a-8329-338524d0e427,hatchback,Green,25825,"[""floor mats""]",5,4,Acura,TL,2002,biofuel,2493.77
+ff5ad329-cdc6-4bba-9eb3-35ee6b5960ad,convertible,Indigo,16975,"[""roof rack""]",5,4,Nissan,Pathfinder,1995,diesel,2454.24
+aede561f-ae92-4ca2-9d08-250fa9b847f2,minivan,Purple,49440,"[""bluetooth"",""phone holder"",""seat covers"",""car charger"",""roof rack""]",9,4,Land Rover,Range Rover Sport,2007,hybrid,3915.83
+8e8c40ae-6f99-43f6-959b-36038e910765,SUV,Goldenrod,1329,"[""floor mats"",""roof rack"",""seat covers"",""bluetooth""]",9,4,Jeep,Cherokee,1998,biofuel,2807.77
+51a2762e-891e-4b68-ad3f-a910b472e21d,sedan,Mauv,43964,"[""bluetooth"",""car charger""]",5,4,Suzuki,Sidekick,1997,diesel,2955.02
+716e66bd-953a-4cf7-80c8-cc2468ef91ac,SUV,Orange,7136,"[""floor mats"",""roof rack""]",9,4,Chevrolet,Avalanche 1500,2002,biofuel,4404.59
+ff96226d-792d-4c99-bfd4-b8a6fcf10f82,minivan,Aquamarine,49539,"[""seat covers"",""bluetooth"",""roof rack"",""floor mats"",""phone holder""]",5,4,Land Rover,Discovery Series II,1999,hybrid,1217.8
+2973ee1b-d9b0-43eb-9246-c4757486ba5d,hatchback,Pink,6790,"[""seat covers"",""phone holder"",""roof rack"",""car charger"",""floor mats"",""bluetooth""]",2,4,Land Rover,Freelander,2009,electric,3724.12
+210728e7-d295-4eab-a8db-df3acc5813d8,convertible,Turquoise,5664,"[""seat covers"",""phone holder"",""bluetooth""]",2,4,Volkswagen,Type 2,1987,electric,4098.21
+ac6c2a4a-dd87-43b4-b55d-2bec82da88cf,sedan,Fuscia,35991,"[""phone holder"",""floor mats"",""car charger"",""seat covers"",""bluetooth""]",5,4,Mazda,929,1992,biofuel,2401.28
+d096d0f1-52cd-4868-8b8d-4d072e75c0d5,SUV,Fuscia,30374,"[""car charger"",""floor mats"",""seat covers"",""phone holder"",""roof rack""]",9,4,Hyundai,Sonata,2002,biofuel,4479.33
+785cede6-dd28-4f8b-91a5-784f738fe750,pickup truck,Yellow,23644,"[""bluetooth"",""roof rack""]",1,4,Hyundai,Entourage,2009,electric,3833.72
+14eab3d6-b5ae-4308-9c9a-ad3677129d60,sedan,Blue,24173,"[""car charger"",""roof rack"",""phone holder"",""floor mats"",""bluetooth"",""seat covers""]",10,4,Pontiac,Grand Prix,1973,electric,1960.89
+99bb8ae0-b5cb-46ed-be40-d5864afdf56d,sedan,Khaki,22706,"[""floor mats"",""roof rack"",""car charger"",""phone holder"",""seat covers"",""bluetooth""]",3,4,GMC,Jimmy,1995,hybrid,3394.14
+61ec13d1-1f8c-487d-980d-073b15748faa,hatchback,Orange,15359,"[""bluetooth""]",8,4,Volkswagen,GTI,1993,hybrid,4237.85
+a8ca9ebc-8d5a-4c73-8101-a1abc3e6fe73,pickup truck,Mauv,39433,"[""roof rack""]",2,4,Kia,Forte,2011,electric,2149.81
+0cef5752-62a8-4c04-980e-0996bd7a6e14,sedan,Fuscia,39477,"[""roof rack"",""bluetooth""]",3,4,Volkswagen,GTI,2006,hybrid,4765.19
+4b5afaec-b68f-4ca1-a5a1-6232efd63612,SUV,Turquoise,13780,"[""phone holder"",""bluetooth"",""car charger"",""seat covers"",""roof rack""]",8,4,BMW,X5,2007,biofuel,3299.79
+45e3c262-dfff-494b-b60b-e0e4981283d9,pickup truck,Puce,41908,"[""car charger"",""bluetooth"",""roof rack""]",8,4,Toyota,4Runner,2001,biofuel,1250.8
+fca59e89-35b1-443f-b9d9-5426e60b106a,SUV,Purple,18294,"[""car charger"",""phone holder"",""bluetooth""]",1,4,Volkswagen,GTI,1998,biofuel,1633.11
+1759fae6-535c-466d-8d1b-41ced9fd12c2,hatchback,Puce,9509,"[""roof rack""]",2,4,Toyota,Corolla,2006,biofuel,4816.38
+6beaf100-c25a-4ed9-9c33-b4048244fc12,sedan,Violet,25401,"[""seat covers"",""roof rack""]",4,4,Nissan,Maxima,2011,hybrid,2594.05
+46ac52a3-e6a1-4baf-88c2-1b5a50110daf,SUV,Yellow,40167,"[""roof rack"",""seat covers""]",4,4,Acura,NSX,1995,electric,3217.29
+9b9427c1-333f-49c3-b2be-2c759e448e8d,SUV,Red,28455,"[""seat covers"",""bluetooth"",""phone holder"",""floor mats"",""car charger""]",1,4,Pontiac,LeMans,1968,biofuel,2561.0
+2ecd19ed-1148-4708-9c61-66cd61b55a36,pickup truck,Maroon,45007,"[""phone holder"",""car charger""]",3,4,Mercury,Cougar,2000,diesel,3298.68
+1a095147-2e5e-4175-8101-b6114c7a2f5f,hatchback,Purple,8412,"[""car charger"",""roof rack""]",5,4,Acura,RL,2002,biofuel,4113.21
+d77065fc-5c3a-4b42-8871-40b19def1a12,sedan,Pink,34695,"[""roof rack"",""phone holder"",""seat covers""]",7,4,Chevrolet,Blazer,2000,diesel,3524.44
+f4be287b-29b9-425a-a03f-5c163a787b3a,sedan,Goldenrod,28173,"[""seat covers"",""phone holder"",""floor mats"",""roof rack"",""bluetooth""]",3,4,BMW,5 Series,1992,hybrid,4397.76
+0e74b5a0-9358-4340-a2ed-d98d3a393b38,sedan,Green,35422,"[""seat covers"",""roof rack"",""bluetooth"",""floor mats"",""car charger""]",4,4,Porsche,911,2005,gasoline,2733.84
+85f9df62-43ed-4034-9b0c-a1a4633f66ec,SUV,Aquamarine,12790,"[""car charger"",""bluetooth"",""phone holder"",""roof rack""]",6,4,Land Rover,Discovery,2010,hybrid,3287.16
+df9335cf-1551-4bd8-8e47-caed7d6e5c32,SUV,Goldenrod,46757,"[""bluetooth"",""seat covers"",""phone holder"",""floor mats"",""car charger""]",9,4,Lincoln,Mark VIII,1993,diesel,1383.69
+c888d1d6-1ab0-4e78-ae24-4954ffb24051,hatchback,Fuscia,43621,"[""seat covers"",""bluetooth"",""phone holder""]",5,4,Chevrolet,Corsica,1992,hybrid,3830.51
+24a2cbb8-78d8-411a-bb2e-740d5ee4df22,hatchback,Yellow,38425,"[""bluetooth"",""car charger"",""seat covers"",""floor mats"",""roof rack"",""phone holder""]",2,4,Dodge,Intrepid,2001,hybrid,2981.49
+50a60127-051b-4a24-9fb6-e418e32464cf,hatchback,Orange,45326,"[""car charger"",""bluetooth"",""phone holder"",""roof rack"",""floor mats"",""seat covers""]",1,4,Chevrolet,Aveo,2005,hybrid,3225.24
+ba6398da-3adf-4110-a897-f55b534f2c93,hatchback,Aquamarine,22605,"[""car charger"",""bluetooth"",""seat covers"",""phone holder"",""floor mats""]",8,4,Mercury,Cougar,1997,gasoline,1894.51
+27eb0eb3-20fe-458e-9b58-123ce0ad71bb,pickup truck,Goldenrod,44986,"[""roof rack""]",7,4,Jeep,Cherokee,1996,diesel,4354.14
+87c94b9d-6926-4cc5-812d-a6d0104c54d7,minivan,Pink,26935,"[""roof rack"",""seat covers"",""phone holder""]",5,4,Chevrolet,Monte Carlo,2006,hybrid,1599.55
+2410f5b7-c9fd-40e8-9d6d-4b67e39d749d,hatchback,Blue,37471,"[""floor mats"",""roof rack"",""seat covers"",""car charger"",""bluetooth""]",6,4,Ford,Mustang,1967,gasoline,2165.44
+c56d9a7c-741e-4774-81a4-16cf772c1889,pickup truck,Blue,27458,"[""roof rack"",""car charger"",""seat covers"",""bluetooth"",""phone holder"",""floor mats""]",3,4,Toyota,Tundra,2012,gasoline,3512.33
+f1c75f2a-e273-4d24-9097-26541bc3d0fb,sedan,Goldenrod,27000,"[""roof rack"",""floor mats""]",10,4,Mercedes-Benz,SL-Class,1984,diesel,3482.01
+ef1d9f2f-179a-481b-b391-19970a3bbeef,convertible,Mauv,12399,"[""roof rack"",""seat covers"",""car charger"",""phone holder"",""bluetooth"",""floor mats""]",5,4,Ford,Fusion,2008,biofuel,1230.45
+1be3d082-71ac-4291-8db1-caa1a6df7d19,minivan,Aquamarine,1563,"[""bluetooth"",""roof rack"",""floor mats"",""car charger""]",3,4,Toyota,Sienna,2005,diesel,4641.16
+19fa9beb-ae6b-408b-aeab-e9ac976f06a3,pickup truck,Purple,35720,"[""seat covers"",""car charger"",""roof rack"",""bluetooth"",""phone holder""]",6,4,Honda,Crosstour,2012,biofuel,1292.12
+860c76eb-5bb0-4d41-b50d-2d830f2c3dd0,hatchback,Yellow,7724,"[""seat covers"",""bluetooth"",""phone holder"",""roof rack"",""floor mats"",""car charger""]",6,4,BMW,8 Series,1994,biofuel,4531.38
+b7051f60-41e2-4c08-a5bb-41c5832bc49c,SUV,Pink,33093,"[""car charger""]",9,4,Pontiac,Grand Prix Turbo,1990,biofuel,4573.2
+9c14ce86-7dc7-4b2f-95b0-795ee2bb6000,minivan,Orange,42771,"[""floor mats"",""seat covers"",""phone holder"",""bluetooth"",""car charger"",""roof rack""]",4,4,Porsche,911,1990,hybrid,2664.85
+e89a7883-79c8-4d91-a3e8-6eee3b96bf5a,hatchback,Orange,18929,"[""seat covers"",""bluetooth"",""phone holder""]",4,4,Chrysler,Concorde,2002,hybrid,4469.59
+00b362e2-4164-440c-865a-906912960dbe,hatchback,Fuscia,16575,"[""car charger"",""bluetooth"",""roof rack"",""phone holder""]",8,4,Nissan,Cube,2011,hybrid,3669.6
+6a32fdcf-a863-4f57-99ab-1d24bbd85b01,hatchback,Mauv,23252,"[""car charger"",""floor mats""]",7,4,Suzuki,Vitara,2004,biofuel,2152.1
+7a0cc4f4-caed-4bab-ae81-6467ee109c00,sedan,Khaki,1817,"[""phone holder""]",1,4,Hyundai,Elantra,2012,electric,1755.53
+765c5fd7-2259-4e7c-a031-66888f87b378,pickup truck,Mauv,43101,"[""floor mats"",""bluetooth"",""seat covers"",""phone holder"",""car charger""]",10,4,Dodge,Stealth,1992,biofuel,4626.94
+42ba5e25-c2d5-45c8-a327-2aa637e61b8f,SUV,Purple,47687,"[""seat covers"",""roof rack"",""bluetooth""]",6,4,Chrysler,LHS,1996,electric,3119.17
+31715b1e-77c1-4e60-99ed-76e73c4f2ed2,SUV,Indigo,40966,"[""car charger""]",8,4,Ford,Escape,2011,gasoline,2182.83
+55c7e8ad-a248-4b07-bdf5-c22931bbb6ed,sedan,Violet,7099,"[""seat covers"",""phone holder"",""floor mats"",""car charger""]",10,4,Audi,Cabriolet,1996,hybrid,4870.67
+3d618aac-8fa5-4a35-9ea0-41be6730e871,hatchback,Khaki,39434,"[""seat covers"",""bluetooth"",""floor mats"",""car charger""]",10,4,Porsche,944,1983,diesel,4638.85
+6f4b517f-1ec9-4c54-a800-0160eb2b3655,pickup truck,Khaki,16700,"[""seat covers"",""bluetooth"",""car charger""]",4,4,Lotus,Esprit,2002,gasoline,3283.06
+23a6250a-d9a7-4219-9ac5-519fac2a2229,pickup truck,Teal,43275,"[""bluetooth"",""phone holder"",""seat covers"",""floor mats"",""car charger""]",2,4,Cadillac,Seville,1994,electric,4162.42
+44079754-3130-4866-8824-ff17a89aa8a7,sedan,Maroon,17737,"[""bluetooth"",""seat covers"",""roof rack""]",4,4,Saab,900,1993,biofuel,4205.74

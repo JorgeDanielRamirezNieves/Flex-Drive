@@ -13,6 +13,8 @@ import {
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { VehicleService } from '../service/vehicle.service';
 import { Vehicle } from '../models/vehicle';
+import { Parameters } from 'src/user/models/preferences';
+
 
 @ApiTags('vehicle')
 @Controller('vehicle')
@@ -106,6 +108,23 @@ export class VehicleController {
       return new HttpException(
         'the limit must be at least 1',
         HttpStatus.NOT_ACCEPTABLE,
+      );
+    }
+  }
+  
+  @Post('findPreferedByUser')
+  @ApiBody({
+    description: 'object parameters',
+    type: Object,
+  })
+  private findPreferedByUser(@Req() request: any): any {
+    const objParameters: Parameters = request.body;
+    if (objParameters ) {
+      return this.VehicleService.getVehiclesPreferedByUser(objParameters);
+    } else {
+      return new HttpException(
+        'Object of parameters invalid',
+        HttpStatus.BAD_REQUEST,
       );
     }
   }

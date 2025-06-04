@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { URL_VEHICLE } from '../../../core/domains';
 import { HttpClient } from '@angular/common/http';
 import { Vehicle } from '../models/vehicle';
+import { Parameters } from '../../preferences/models/preferences';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,12 @@ export class VehicleService {
   public getVehicleByUser(uuid: string) {
     return this.http.get(this.urlVehicles + 'findByUser/' + uuid);
   }
+  
+  public getVehicleByPreferences(objParams: Parameters) {
+    return this.http.post(this.urlVehicles + 'findPreferedByUser', objParams);
+  }
+
+  
 
   public createVehicle(vehicle: Vehicle) {
     return this.http.post(this.urlVehicles + 'add', vehicle);

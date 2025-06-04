@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { Vehicle } from '../../models/vehicle';
 import { catchError, finalize, map, Subscription } from 'rxjs';
 import { observatorAny } from '../../../../core/tipo-any';
+import { PreferencesService } from '../../../preferences/services/preferences.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-vehiculos-landing',
@@ -16,6 +18,7 @@ export class VehiculosLandingComponent implements OnInit, OnDestroy {
   public tiposBusqueda: string[];
   public tipoBusquedaSeleccionado: string;
   public vehicles: Vehicle[];
+  public vehiclesPrefered: Vehicle[];
   public busqueda: string;
   public searching: boolean;
   public suscribeVehicles: Subscription;
@@ -23,7 +26,11 @@ export class VehiculosLandingComponent implements OnInit, OnDestroy {
   public complete: boolean;
   public brands: any[];
 
-  constructor(private router: Router, private VehicleService: VehicleService) {
+  constructor(
+    private router: Router,
+    private VehicleService: VehicleService,
+    private preferencesService: PreferencesService
+  ) {
     this.busqueda = '';
     this.suscribeVehicles = this.tmp;
     this.complete = false;
@@ -38,6 +45,7 @@ export class VehiculosLandingComponent implements OnInit, OnDestroy {
       'Por kilometraje',
     ];
     this.vehicles = [];
+    this.vehiclesPrefered = [];
     this.tipoBusquedaSeleccionado = this.tiposBusqueda[0];
   }
   ngOnDestroy(): void {
@@ -49,6 +57,7 @@ export class VehiculosLandingComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getVehiclesMostRequested();
     this.getBrands();
+    this.getVehiculesByPreferences();
   }
 
   public search(form: NgForm) {
@@ -104,6 +113,50 @@ export class VehiculosLandingComponent implements OnInit, OnDestroy {
         }),
         finalize(() => {
           this.complete = true;
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  public getVehiculesByPreferences() {
+    if (localStorage.getItem('authToken') === null) {
+      this.suscribeVehicles = this.VehicleService
+      .getVehicleLimit(8)
+      .pipe(
+        map((res: any) => {
+          this.vehiclesPrefered = res;
+          this.searching = false;
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        })
+      )
+      .subscribe(observatorAny);
+      return;
+    }
+    const token = jwtDecode(localStorage.getItem('authToken') || '') as any;
+    const uuidUser = token.uuid;
+
+    this.suscribeVehicles = this.preferencesService
+      .getPreferencesUser(uuidUser)
+      .pipe(
+        map((res: any) => {
+          if (res) {
+            this.VehicleService.getVehicleByPreferences(res.parameters)
+              .pipe(
+                map((vehicles: any) => {
+                  this.vehiclesPrefered = vehicles;
+                  this.searching = false;
+                }),
+                catchError((err) => {
+                  throw new Error(err);
+                })
+              )
+              .subscribe(observatorAny);
+          }
+        }),
+        catchError((err) => {
+          throw new Error(err);
         })
       )
       .subscribe(observatorAny);
