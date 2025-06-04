@@ -13,7 +13,9 @@ export class AdminPqrsComponent implements OnInit {
   pqrsList: Report[] = [];
   visibleResponseBox: { [uuid: string]: boolean } = {};
   tipoExpandido: string | null = null;
-  constructor(private reportsService: ReportsService) {}
+  constructor(private reportsService: ReportsService) {
+    window.scrollTo(0, 0)
+  }
 
   ngOnInit(): void {
     this.reportsService.getAllReports().subscribe({

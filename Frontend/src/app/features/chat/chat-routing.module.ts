@@ -5,8 +5,12 @@ import { ActivechatsComponent } from './components/activechats/activechats.compo
 
 const routes: Routes = [
   {
+    path: ':uuid',
+    component: ActivechatsComponent,  
+  },
+  {
     path: '',
-    component: ActivechatsComponent,
+    component: ActivechatsComponent
   }
 ]
 

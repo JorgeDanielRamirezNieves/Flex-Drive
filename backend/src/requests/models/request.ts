@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Chat } from 'src/chat/models/chat';
 import { ServiceRent } from 'src/services-rent/models/serviceRent';
 import { User } from 'src/user/models/user';
 import { Vehicle } from 'src/vehicle/models/vehicle';
@@ -112,6 +113,15 @@ export class Request {
   @JoinColumn([{ name: 'id_vehicle', referencedColumnName: 'uuid' }])
   public requestVehicle?: Vehicle;
 
-   @OneToOne(() => ServiceRent, (objServiceRent: ServiceRent) => objServiceRent.request)
-    public service?: ServiceRent;
+  @OneToOne(
+    () => ServiceRent,
+    (objServiceRent: ServiceRent) => objServiceRent.request,
+  )
+  public service?: ServiceRent;
+  
+  @OneToOne(
+    () => Chat,
+    (objChat: Chat) => objChat.request,
+  )
+  public chat?: ServiceRent;
 }

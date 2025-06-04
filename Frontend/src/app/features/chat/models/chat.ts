@@ -2,7 +2,7 @@ import { Request } from '../../requests/models/request';
 import { Message } from './message';
 
 export class Chat {
-  public uuid: string;
+  public uuid?: string;
   public createdAt: Date;
   public idrequest: string;
   public status: boolean;
@@ -10,10 +10,10 @@ export class Chat {
   public chatMessage?: Message[];
 
   constructor(
-    uuid: string,
     createdAt: Date,
     idrequest: string,
     status: boolean,
+    uuid?: string,
   ) {
     this.uuid = uuid;
     this.createdAt = createdAt;

@@ -1,3 +1,4 @@
+import { ChatsService } from './../../../chat/services/chats.service';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { Request } from '../../models/request';
@@ -28,14 +29,17 @@ export class ViewAllComponent {
   public token: any;
   public isCreatingContract: boolean; // Variable para controlar el estado de creación del contrato
   public contractService: Contract;
+  public newChat: string = '';
 
   constructor(
     private requestService: RequestsService,
     private servicerRentService: ServiceRentService,
     private contractsService: ContractsService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private chatsService: ChatsService
   ) {
+    window.scrollTo(0, 0);
     this.loadingRequests = true;
     this.suscribe = this.tmp;
     this.token = jwtDecode(localStorage.getItem('authToken') || '');
@@ -107,6 +111,7 @@ export class ViewAllComponent {
       .pipe(
         map((res: any) => {
           console.log(res);
+          this.createChat(uuid);
           this.createService(uuid);
         }),
         catchError((err) => {
@@ -136,8 +141,9 @@ export class ViewAllComponent {
       .changeStatus(uuid, 'negotiating')
       .pipe(
         map((res: any) => {
-          this.getRequestsByOwner();
-          this.getRequestsByClient();
+          console.log(res);
+          this.createChat(uuid);
+          this.router.navigate(['/user/activechats/' + this.newChat]);  
         }),
         catchError((err) => {
           throw new Error(err);
@@ -198,6 +204,24 @@ export class ViewAllComponent {
         }),
         finalize(() => {
           this.isCreatingContract = false;
+        })
+      )
+      .subscribe(observatorAny);
+  }
+  public createChat(uuidRequest: string) {
+    this.suscribe = this.chatsService
+      .createChat({
+        createdAt: new Date(),
+        idrequest: uuidRequest,
+        status: true,
+      })
+      .pipe(
+        map((res: any) => {
+          console.log(res);
+          this.newChat = res.uuid;
+        }),
+        catchError((err) => {
+          throw new Error(err);
         })
       )
       .subscribe(observatorAny);

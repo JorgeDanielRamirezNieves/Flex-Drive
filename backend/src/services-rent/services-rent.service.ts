@@ -29,6 +29,7 @@ export class ServicesRentService {
       .leftJoinAndSelect('v.soatVehicle', 'soat')
       .leftJoinAndSelect('v.TecnomecanicVehicle', 'tecnomecanic')
       .leftJoinAndSelect('r.requestUser', 'client') // Asumiendo que tienes la relación configurada
+      .leftJoinAndSelect('r.chat', 'chat')
       .leftJoinAndSelect('client.typeDocumentUser', 'typeDoc')
       .leftJoinAndSelect('client.userFines', 'fines')
       .leftJoinAndSelect('owner.typeDocumentUser', 'typeDocOwner')
@@ -48,6 +49,7 @@ export class ServicesRentService {
       .leftJoinAndSelect('v.prices', 'prices')
       .leftJoinAndSelect('v.typeSaleVehicle', 'typeSale')
       .leftJoinAndSelect('r.requestUser', 'client') // Asumiendo que tienes la relación configurada
+      .leftJoinAndSelect('r.chat', 'chat')
       .leftJoinAndSelect('client.typeDocumentUser', 'typeDoc')
       .leftJoinAndSelect('owner.typeDocumentUser', 'typeDocOwner')
       .where('r.requestUser = :uuid', { uuid: uuid })

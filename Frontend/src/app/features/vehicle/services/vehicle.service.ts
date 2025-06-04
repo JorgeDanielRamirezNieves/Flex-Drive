@@ -35,6 +35,10 @@ export class VehicleService {
     return this.http.post(this.urlVehicles + 'add', vehicle);
   }
 
+  public getBrands() {
+    return this.http.get(this.urlVehicles + 'findBrands/5');
+  }
+
   public updateVehicle(vehicle: Vehicle) {
     return this.http.put(this.urlVehicles + 'update', vehicle);
   }

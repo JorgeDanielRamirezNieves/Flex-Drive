@@ -73,6 +73,7 @@ export class PreferencesFormComponent implements OnDestroy, OnInit {
     private messageService: MessageService,
     private preferencesService: PreferencesService
   ) {
+    window.scrollTo(0, 0)
     this.termsAndConditions = new Contract(
       {
         terms: 'Terms and conditions of the contract',

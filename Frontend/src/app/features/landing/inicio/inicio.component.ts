@@ -24,6 +24,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   public minDate: Date = new Date();
 
   constructor(private router: Router, private vehicleService: VehicleService) {
+    window.scrollTo(0, 0)
     this.ciudades = ['Bogota', 'Medellin', 'Cali', 'Barranquilla', 'Cartagena'];
     this.ciudadSeleccionada = '';
     this.fechasSeleccionadas = [];

@@ -110,6 +110,25 @@ export class VehicleController {
     }
   }
 
+  @Get('findBrands/:limit')
+  @ApiParam({
+    name: 'limit',
+    description: 'Limit of Brands to return',
+    required: true,
+    type: Number,
+  })
+  private findBrands(@Param('limit') limit: any): any {
+    const limitVehicle = limit;
+    if (limitVehicle && limitVehicle > 0) {
+      return this.VehicleService.getBrands(limitVehicle);
+    } else {
+      return new HttpException(
+        'the limit must be at least 1',
+        HttpStatus.NOT_ACCEPTABLE,
+      );
+    }
+  }
+
   @Post('add')
   @ApiBody({
     description: 'Object Vehicle',

@@ -508,3 +508,34 @@
   box-shadow: 0 1px 15px -5px #00000090;
   transition: all 0.3s ease-in-out;
 }
+
+:host ::ng-deep .p-dialog {
+  background: #031617;
+  color: #fff;
+  border-radius: 8px;
+  padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #435755;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+:host ::ng-deep .p-dialog-close-button {
+  color: #fff;
+  scale: 1.5;
+  background: #54A8A3;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+:host ::ng-deep .p-dialog-close-button:not(:disabled):hover {
+  color: #435755;
+  background: #ADF9F6;
+  font-size: 1.5rem;
+}

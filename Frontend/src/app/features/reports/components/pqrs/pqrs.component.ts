@@ -23,6 +23,7 @@ export class PqrsComponent {
     this.token = jwtDecode<any>(localStorage.getItem('authToken') || '');
 
     this.email = this.token.email;
+    window.scrollTo(0, 0)
     this.idUser = this.token.uuid;
   }
   submitted: boolean = false;

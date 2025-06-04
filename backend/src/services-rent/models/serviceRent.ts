@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Contract } from 'src/contract/models/contract';
 import { Request } from 'src/requests/models/request';
 import {
   Column,
@@ -58,6 +59,9 @@ export class ServiceRent {
   @OneToOne(() => Request, (objRequests) => objRequests.uuid)
   @JoinColumn({ name: 'id_request', referencedColumnName: 'uuid' })
   public request?: Request;
+
+  @OneToOne(() => Contract, (objContract: Contract) => objContract.ServiceRent)
+  public ContractService: Contract;
 
   constructor(
     uuid: string,

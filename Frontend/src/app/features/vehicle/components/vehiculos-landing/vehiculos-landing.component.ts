@@ -21,15 +21,14 @@ export class VehiculosLandingComponent implements OnInit, OnDestroy {
   public suscribeVehicles: Subscription;
   public tmp: any;
   public complete: boolean;
+  public brands: any[];
 
-  constructor(
-    private router: Router,
-    private VehicleService: VehicleService,
-  ) {
+  constructor(private router: Router, private VehicleService: VehicleService) {
     this.busqueda = '';
     this.suscribeVehicles = this.tmp;
     this.complete = false;
     this.searching = false;
+    this.brands = [];
     this.tiposBusqueda = [
       'Por nombre',
       'Por marca',
@@ -49,6 +48,7 @@ export class VehiculosLandingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getVehiclesMostRequested();
+    this.getBrands();
   }
 
   public search(form: NgForm) {
@@ -64,11 +64,40 @@ export class VehiculosLandingComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
+  public searchBrand(brand: string) {
+    this.searching = true;
+    setTimeout(() => {
+      this.searching = false;
+      this.router.navigate(['/vehicles/search'], {
+        queryParams: {
+          tipo: 'Por marca',
+          busqueda: brand,
+        },
+      });
+    }, 1000);
+  }
+
   private getVehiclesMostRequested() {
     this.suscribeVehicles = this.VehicleService.getVehicleMostRequested(8)
       .pipe(
         map((res: any) => {
           this.vehicles = res;
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        }),
+        finalize(() => {
+          this.complete = true;
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  private getBrands() {
+    this.suscribeVehicles = this.VehicleService.getBrands()
+      .pipe(
+        map((res: any) => {
+          this.brands = res;
         }),
         catchError((err) => {
           throw new Error(err);

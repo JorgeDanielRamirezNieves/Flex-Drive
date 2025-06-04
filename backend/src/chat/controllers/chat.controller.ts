@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus,
   Param,
+  Patch,
   Post,
   Put,
   Req,
@@ -38,7 +39,7 @@ export class ChatController {
       return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
     }
   }
-  
+
   @Get('findByUserUUID/:uuidUser')
   @ApiParam({
     name: 'uuidUser',
@@ -49,7 +50,7 @@ export class ChatController {
   private findByUserUUID(@Param('uuidUser') UserUUID: any): any {
     const uuidUser = UserUUID;
     console.log('uuidUser', uuidUser);
-    
+
     if (uuidUser && uuidUser.length > 0) {
       return this.ChatService.getChatsByuserUUID(uuidUser);
     } else {
@@ -74,31 +75,20 @@ export class ChatController {
     }
   }
 
-  @Put('update/:uuid')
-  @ApiParam({
-    name: 'uuid',
-    description: 'UUID of the Chat',
-    required: true,
-    type: String,
-  })
+  @Patch('changeStatus')
   @ApiBody({
-    description: 'Object Chat',
-    type: Chat,
+    description: 'Object for change status of Chat',
+    type: Object,
   })
-  private updateChat(@Param('uuid') uuid: any, @Req() request: any): any {
-    const uuidChat = uuid;
-    const objChat: Chat = request.body;
-    if (uuidChat && uuidChat.length > 0) {
-      if (objChat) {
-        return this.ChatService.updateChat(uuidChat, objChat);
-      } else {
-        return new HttpException(
-          'Object of Chat invalid',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
+  private changeStatusChat(@Req() request: any): any {
+    const obj = request.body;
+    if (obj) {
+      return this.ChatService.changeStatusChat(obj);
     } else {
-      return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
+      return new HttpException(
+        'Object of Chat invalid',
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 

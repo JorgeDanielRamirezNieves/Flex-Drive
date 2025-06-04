@@ -37,6 +37,7 @@ export class RequestsService {
       .leftJoinAndSelect('client.typeDocumentUser', 'typeDoc')
       .leftJoinAndSelect('owner.typeDocumentUser', 'typeDocOwner')
       .leftJoinAndSelect('r.service', 'serviceRent')
+      .leftJoinAndSelect('r.chat', 'chat')
       .where('client.uuid = :uuidClient', { uuidClient })
       .andWhere('r.status != :status', { status: 'rejected' }) // Excluir solicitudes rechazadas
       .getMany();
@@ -55,6 +56,7 @@ export class RequestsService {
       .leftJoinAndSelect('client.typeDocumentUser', 'typeDoc')
       .leftJoinAndSelect('owner.typeDocumentUser', 'typeDocOwner')
       .leftJoinAndSelect('r.service', 'serviceRent')
+      .leftJoinAndSelect('r.chat', 'chat')
       .where('owner.uuid = :uuidOwner', { uuidOwner })
       .andWhere('r.status != :status', { status: 'rejected' }) // Excluir solicitudes rechazadas
       .getMany();

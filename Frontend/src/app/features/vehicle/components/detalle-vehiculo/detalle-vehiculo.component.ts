@@ -122,6 +122,7 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
       });
       return;
     }
+    
     this.requests.deliveryDate = this.deliveryDate;
     this.requests.returnDate = this.returnDate;
     this.suscribe = this.requestsService

@@ -1,3 +1,4 @@
+import { Chat } from "../../chat/models/chat";
 import { Service } from "../../services-rent/models/service";
 import { User } from "../../user/models/user";
 import { Vehicle } from "../../vehicle/models/vehicle";
@@ -15,6 +16,7 @@ export class Request {
   public requestUser?: User;
   public requestVehicle?: Vehicle;
   public service?: Service;
+  public chat?: Chat; 
   constructor(
     sendDate: Date,
     answerDate: Date | null,

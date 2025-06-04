@@ -1,1 +1,6 @@
+:host ::ng-deep .p-contextmenu-root-list {
+  background: #435755;
+  color: #ffffff;
+  border-radius: 10px;
+}
 

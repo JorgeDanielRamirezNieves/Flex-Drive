@@ -99,6 +99,22 @@ export class VehicleService {
     });
   }
 
+  public async getBrands(limit: number): Promise<string[] | null> {
+    return this.VehicleRepository.query(
+    ` 
+    SELECT brand 
+    FROM (
+          SELECT DISTINCT tecnical_details.brand
+          FROM tecnical_details
+    ) AS distinct_brands
+    ORDER BY RANDOM()
+    LIMIT ${limit};
+    `
+    ).then((result) => {
+      return result;
+    })
+  }
+
   public async createVehicle(
     objVehicle: Vehicle,
   ): Promise<Vehicle | HttpException> {

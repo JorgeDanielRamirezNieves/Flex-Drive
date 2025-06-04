@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './about-us.component.css'
 })
 export class AboutUsComponent {
-
+  constructor() {
+    window.scrollTo(0, 0);
+  }
 }

@@ -9,6 +9,7 @@ import { observatorAny } from '../../../../core/tipo-any';
 import { Price } from '../../../vehicle/models/price';
 import { Soat } from '../../../vehicle/models/soat';
 import { Tecnomecanic } from '../../../vehicle/models/tecnomecanic';
+import { ChatsService } from '../../../chat/services/chats.service';
 
 @Component({
   selector: 'app-details-service',
@@ -32,11 +33,13 @@ export class DetailsServiceComponent implements OnInit, OnDestroy {
   public deliveryDate: Date;
   public returnDate: Date;
   public isOwner: boolean;
+  public visible: boolean = false;
 
   constructor(
     private serviceRentService: ServiceRentService,
     private activeRouter: ActivatedRoute,
-    private commonService: CommonServiceService
+    private commonService: CommonServiceService,
+    private chatService: ChatsService
   ) {
     this.codOTPgenerated = '';
     this.codOTP = '';
@@ -85,6 +88,10 @@ export class DetailsServiceComponent implements OnInit, OnDestroy {
                 status
               )
               .subscribe(observatorAny);
+            if (status === 'finished') {
+              this.softDeleteChat();
+            }
+
             window.location.reload();
           } else {
             throw new Error('Invalid OTP');
@@ -103,9 +110,10 @@ export class DetailsServiceComponent implements OnInit, OnDestroy {
       .pipe(
         map((res: any) => {
           this.service = res;
+          
           if (
             this.userUUID ===
-            this.service?.request?.requestVehicle?.ownerVehicle?.uuid
+            this.service?.request?.requestVehicle?.idOwner
           ) {
             this.isOwner = true;
           }
@@ -162,6 +170,20 @@ export class DetailsServiceComponent implements OnInit, OnDestroy {
       .pipe(
         map((res: any) => {
           window.location.reload();
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  private softDeleteChat() {
+    this.suscribe = this.chatService
+      .changeStatusChat(this.service?.request?.chat?.uuid || '', false)
+      .pipe(
+        map((res: any) => {
+          console.log('Chat status changed successfully');
         }),
         catchError((err) => {
           throw new Error(err);

@@ -7,25 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './activechats.component.css',
 })
 export class ActivechatsComponent {
-  activeSection: string = 'Recientes';
-  menuItems = [
-    {
-      title: 'Recientes',
-      section: 'recientes',
-      icon: 'edit.png',
-      iconActive: 'editSelect.png',
-    },
-    {
-      title: 'Servicios en proceso',
-      section: 'en-proceso',
-      icon: 'myvehicles.png',
-      iconActive: 'selectedMyVehicles.png',
-    },
-    {
-      title: 'Todos los servicios',
-      section: 'todos',
-      icon: 'rentalvehicles.png',
-      iconActive: 'selectedRentalvehicles.png',
-    },
-  ];
+  constructor() {
+    window.scrollTo(0, 0)
+  }
 }

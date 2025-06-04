@@ -16,7 +16,9 @@ export class LoginComponent {
     email: '',
   };
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) {
+    window.scrollTo(0, 0)
+  }
 
   submitted = false;
 

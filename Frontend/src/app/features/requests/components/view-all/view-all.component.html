@@ -74,7 +74,7 @@
             <app-button
               label="Ir al chat"
               type="link"
-              redirecTo="/user/activechats"
+              redirecTo="/user/activechats/{{ request?.chat?.uuid }}"
             ></app-button>
           </span>
         </p-accordioncontent>
@@ -220,7 +220,7 @@
               <app-button
                 label="Ir al chat"
                 type="link"
-                redirecTo="/user/activechats"
+                redirecTo="/user/activechats/{{ request?.chat?.uuid }}"
               ></app-button>
             </span>
           </p-accordioncontent>

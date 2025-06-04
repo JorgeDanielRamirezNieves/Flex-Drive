@@ -11,7 +11,7 @@
       <div class="flex flex-col justify-center items-center gap-3 mr-5">
         <h2 class="text-3xl jura text-center">
           {{
-            isOwner ? "Propietario del vehículo" : "Solicitante del servicio"
+            isOwner ? "Solicitante del servicio" : "Propietario del vehículo"
           }}
         </h2>
         <div
@@ -341,7 +341,7 @@
       <form
         action=""
         class="flex flex-col justify-center items-center gap-4"
-        *ngIf="isOwner; else codigoOTP"
+        *ngIf="!isOwner; else codigoOTP"
       >
         <label for="" class="text-2xl px-5 text-center"
           >Ingresa el código generado por el propietario</label
@@ -374,16 +374,12 @@
       <form
         action=""
         class="flex flex-col justify-center items-center gap-4"
-        *ngIf="isOwner; else codigoOTP"
+        *ngIf="!isOwner; else codigoOTP"
       >
         <label for="" class="text-2xl px-5 text-center"
           >Ingresa el código generado por el propietario</label
         >
-        <p-inputotp
-          [(ngModel)]="codOTP"
-          [length]="6"
-          name="codOTP"
-        />
+        <p-inputotp [(ngModel)]="codOTP" [length]="6" name="codOTP" />
         <app-button
           label="Verificar"
           type="submit"
@@ -438,13 +434,14 @@
         iconPos="right"
         redirecTo="/user/activechats"
       ></app-button>
+
       <app-button
         *ngIf="service?.status === 'on_travel'"
         label="Finalizar servicio"
         icon="pi pi-check"
         type="button"
         iconPos="right"
-        (click)="deliverService()"
+        (click)="visible = true"
       ></app-button>
       <app-button
         *ngIf="service?.status !== 'for_take'"
@@ -476,3 +473,26 @@
   </div>
 </ng-template>
 <app-footer></app-footer>
+<p-dialog
+  header="Finalizar viaje"
+  [modal]="true"
+  [(visible)]="visible"
+  class="jura"
+>
+  <div class="flex items-center gap-4 mb-4 p-10">
+    <p class="text-3xl">Estas seguro de Finalizar el viaje</p>
+  </div>
+  <div class="flex justify-end gap-2 pr-5">
+    <p-button
+      label="Cancelar"
+      severity="secondary"
+      (click)="visible = false"
+      class="bg-[#54A8A3] p-2 rounded-xl hover:bg-[#ADF9F6] hover:text-[#435755] transition-all duration-200 ease-in-out"
+    />
+    <p-button
+      label="Finalizar"
+      (click)="deliverService()"
+      class="bg-[#54A8A3] p-2 rounded-xl hover:bg-green-700 hover:text-white transition-all duration-200 ease-in-out"
+    />
+  </div>
+</p-dialog>

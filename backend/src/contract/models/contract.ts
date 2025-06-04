@@ -1,9 +1,17 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { TypeContract } from './type-contract';
 import { TypeContractLegal } from './type-contract-legal';
 import { ApiProperty } from '@nestjs/swagger';
+import { ServiceRent } from 'src/services-rent/models/serviceRent';
 
-export interface ContractInfo { }
+export interface ContractInfo {}
 @Entity({ schema: 'public', name: 'contract' })
 export class Contract {
   @PrimaryGeneratedColumn('uuid')
@@ -22,7 +30,7 @@ export class Contract {
       expirationDate: '2024-01-01',
       content: 'Terms and conditions for use Flex Drive',
       url: 'https://example.com/contract',
-    }
+    },
   })
   public info: ContractInfo;
 
@@ -74,7 +82,7 @@ export class Contract {
   @Column({ name: 'id_service', type: 'varchar', nullable: true })
   @ApiProperty({
     name: 'idService',
-    description: "Service to which the contract is related",
+    description: 'Service to which the contract is related',
     required: false,
     example: null,
   })
@@ -85,7 +93,7 @@ export class Contract {
     description: 'List of users who have accepted the contract',
     name: 'accordants',
     required: true,
-    example: ["Flex Drive", "testing"]
+    example: ['Flex Drive', 'testing'],
   })
   public accordants: string[];
 
@@ -102,12 +110,19 @@ export class Contract {
 
   @ManyToOne(
     () => TypeContractLegal,
-    (objTypeContractLegal: TypeContractLegal) => objTypeContractLegal.contractsByTypeLegal,
+    (objTypeContractLegal: TypeContractLegal) =>
+      objTypeContractLegal.contractsByTypeLegal,
     {
       onUpdate: 'CASCADE',
       onDelete: 'RESTRICT',
     },
   )
-  @JoinColumn([{ name: 'id_contract_type_legal', referencedColumnName: 'uuid' }])
+  @JoinColumn([
+    { name: 'id_contract_type_legal', referencedColumnName: 'uuid' },
+  ])
   public typeContractLegalByContract?: TypeContract;
+
+  @OneToOne(() => ServiceRent, (objRent: ServiceRent) => objRent.uuid)
+  @JoinColumn({ name: 'id_service', referencedColumnName: 'uuid' })
+  public ServiceRent: ServiceRent;
 }

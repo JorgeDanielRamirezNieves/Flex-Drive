@@ -22,7 +22,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TooltipModule } from 'primeng/tooltip';
 import { StepsModule } from 'primeng/steps';
 import { DialogModule } from 'primeng/dialog';
-
+import { ChipModule } from 'primeng/chip';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
 
 @NgModule({
@@ -48,7 +49,9 @@ import { DialogModule } from 'primeng/dialog';
     AutoCompleteModule,
     TooltipModule,
     StepsModule,
-    DialogModule
+    DialogModule,
+    ChipModule,
+    ContextMenuModule
   ],
     providers: [
       MessageService,
@@ -83,7 +86,9 @@ import { DialogModule } from 'primeng/dialog';
       AutoCompleteModule,
       TooltipModule,
       StepsModule,
-      DialogModule
+      DialogModule,
+      ChipModule,
+      ContextMenuModule
     ],
 })
 export class PrimengModule { }

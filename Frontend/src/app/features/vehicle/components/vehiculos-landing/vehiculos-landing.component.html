@@ -64,7 +64,10 @@
           class="w-full"
         >
           <ng-template let-vehicle #item>
-            <app-card-pequenna class="m-10" [Vehicle]="vehicle"></app-card-pequenna>
+            <app-card-pequenna
+              class="m-10"
+              [Vehicle]="vehicle"
+            ></app-card-pequenna>
           </ng-template>
         </p-carousel>
       </span>
@@ -91,7 +94,23 @@
     <section
       class="flex flex-col items-center justify-center w-full h-screen p-5 relative jura section3"
     >
-      <h1>Rutas por visitar</h1>
+      <h1 class="text-6xl text-white">Marcas Preferidas</h1>
+      <div
+        class="flex flex-wrap items-center justify-center w-full h-4/6 gap-10 mt-10"
+      >
+        <span
+          class="flex flex-col items-center justify-center w-1/6 h-full p-5 bg-white rounded-2xl hover:scale-105 transition-all duration-200 ease-in-out cursor-pointer"
+          *ngFor="let brand of brands"
+          (click)="searchBrand(brand.brand)"
+        >
+          <h2 class="text-2xl pb-20">{{ brand.brand }}</h2>
+          <img
+            [src]="'../../../../../assets/logos/' + brand.brand + '.png'"
+            alt="{{ brand.brand }}"
+            class="w-full h-32 object-contain mb-5"
+          />
+        </span>
+      </div>
     </section>
     <section
       class="flex flex-col items-center justify-center w-full h-screen p-5 relative jura"
@@ -128,7 +147,10 @@
           class="w-full"
         >
           <ng-template let-product #item>
-            <app-card-pequenna class="m-10" [Vehicle]="product"></app-card-pequenna>
+            <app-card-pequenna
+              class="m-10"
+              [Vehicle]="product"
+            ></app-card-pequenna>
           </ng-template>
         </p-carousel>
       </span>

@@ -24,8 +24,13 @@ export class ChatService {
       .leftJoinAndSelect('c.chatMessage', 'm')
       .leftJoinAndSelect('r.requestVehicle', 'v') // Asumiendo que tienes la relación configurada
       .leftJoinAndSelect('v.ownerVehicle', 'owner')
+      .leftJoinAndSelect('v.detailsVehicle', 'details')
       .leftJoinAndSelect('r.requestUser', 'u') // Asumiendo que tienes la relación configurada
-      .where('m.idSender = :useruuid', { useruuid: useruuid })
+      .where('r.idClient = :useruuid', { useruuid: useruuid })
+      .orWhere('v.idOwner = :useruuid', { useruuid: useruuid })
+      .groupBy('c.uuid, r.uuid, m.uuid, v.uuid, owner.uuid, details.id_details, u.uuid')
+      .having('c.status = :status', { status: true }) 
+      .orderBy('m.sendDate', 'ASC')
       .getMany();
   }
 
@@ -39,16 +44,12 @@ export class ChatService {
       });
   }
 
-  public async updateChat(
-    uuid: string,
-    objChat: Chat,
-  ): Promise<{ response: UpdateResult; Chat: Chat } | HttpException> {
-    return this.ChatRepository.update(uuid, objChat)
+  public async changeStatusChat(
+    obj: { uuid: string; status: boolean },
+  ): Promise<UpdateResult | HttpException> {
+    return this.ChatRepository.update(obj.uuid, { status: obj.status })
       .then((response) => {
-        return new HttpException(
-          JSON.stringify({ response: response, Chat: objChat }),
-          200,
-        );
+        return response;
       })
       .catch((error) => {
         return new HttpException(`Error updating Chat: ${error}`, 500);

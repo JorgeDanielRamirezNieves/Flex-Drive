@@ -1,5 +1,6 @@
 <div class="flex w-full h-full">
   <div class="flex flex-col w-64 bg-[#031617] text-white">
+    <!-- Barra lateral de chats -->
     <div
       *ngFor="let item of menuItems"
       (click)="setSection(item.section)"
@@ -13,55 +14,77 @@
         {{ item.title }}
       </span>
 
-      <div *ngIf="item.users && activeSection === item.section" class="mt-2">
+      <div *ngIf="item.chats && activeSection === item.section" class="mt-2">
         <span
-          *ngFor="let u of item.users"
-          (click)="selectUser(u); $event.stopPropagation()"
+          *ngFor="let ch of item.chats"
+          (click)="ch.uuid && selectChat(ch.uuid); $event.stopPropagation()"
           class="hover:bg-[#031617] hover:text-white montserrat font-extralight text-[13px] block border-t border-white px-4 py-1 transition-all duration-500"
         >
-          {{ u.names }} {{ u.lastName }}
+          {{ ch.request?.requestVehicle?.plate }}
         </span>
       </div>
     </div>
   </div>
 
   <div class="flex-grow p-6 bg-gray-100 overflow-y-auto">
-    <div *ngIf="selectedUser">
+    <div *ngIf="selectedChat">
       <div class="flex items-center gap-4 mb-4">
         <button
-          (click)="selectedUser = null"
+          (click)="unselectChat()"
           class="text-[#031617] border-2 border-transparent hover:border-black hover:cursor-pointer rounded-full p-2 font-semibold transitions-all duration-200"
         >
           ← Volver
         </button>
         <h2 class="text-xl font-bold">
-          Conversación con {{ selectedUser.names }} {{ selectedUser.lastName }}
+          Conversación por el servicio del vehículo
+          {{ selectedChat.request?.requestVehicle?.plate }}
         </h2>
       </div>
 
       <div class="flex flex-col gap-2 overflow-y-auto flex-grow mb-4 h-[70vh]">
         <div
-          *ngFor="let msg of selectedUser.messages"
+          *ngFor="let msg of selectedChat.chatMessage"
           [ngClass]="{
-            'justify-end': msg.sender === 'yo',
-            'justify-start': msg.sender !== 'yo'
+            'justify-end': msg.idSender === userUUID,
+            'justify-start': msg.idSender !== userUUID
           }"
           class="flex"
         >
           <div
             [ngClass]="
-              msg.sender === 'yo'
+              msg.idSender === userUUID
                 ? 'bg-[#54A8A3] text-white'
                 : 'bg-gray-200 text-black'
             "
             class="p-3 rounded-lg max-w-[70%]"
+            (contextmenu)="msg.uuid && msg.idSender === userUUID ? onContextMenu($event, msg.uuid) : null"
           >
-            <p class="text-sm">{{ msg.text }}</p>
+            <img
+              [src]="msg.image"
+              alt=""
+              *ngIf="msg.image && msg.status"
+              class="max-w-[25vw] mb-2"
+            />
+            <p
+              class="text-sm max-w-[25vw] text-wrap"
+              ngClass="{{ msg.status ? '' : 'text-gray-500' }}"
+            >
+              {{ msg.status ? msg.description : "El mensaje fue eliminado" }}
+            </p>
+            <p class="text-xs text-gray-500 mt-1">
+              {{ msg.sendDate | date : "short" }}
+            </p>
           </div>
         </div>
       </div>
 
       <div class="sticky bottom-1 w-full flex items-center gap-2 p-2">
+        <span
+          class="w-50 h-fit p-5 bg-[#d9d9d9] rounded-2xl flex items-center justify-center absolute bottom-20"
+          ngClass="{{ !urlImage ? 'hidden' : '' }}"
+        >
+          <img [src]="urlImage" />
+        </span>
         <input
           type="text"
           [(ngModel)]="newMessage"
@@ -90,11 +113,11 @@
       </div>
     </div>
 
-    <div *ngIf="!selectedUser">
+    <div *ngIf="!selectedChat">
       <h2 class="text-xl font-bold mb-4">
         <ng-container [ngSwitch]="activeSection">
-          <ng-container *ngSwitchCase="'recientes'"
-            >Servicios en recientes</ng-container
+          <ng-container *ngSwitchCase="'negociacion'"
+            >Servicios en negociación</ng-container
           >
           <ng-container *ngSwitchCase="'en-proceso'"
             >Servicios en proceso</ng-container
@@ -115,11 +138,37 @@
       <div *ngFor="let user of getFilteredUsers()">
         <div
           class="cursor-pointer p-5 border-b-1 hover:bg-[#54A8A3] hover:rounded-4xl transition-all duration-500"
-          (click)="selectedUser = user"
+          (click)="user.uuid && selectChat(user.uuid)"
         >
-          {{ user.names }} {{ user.lastName }}
+          <div class="flex items-center gap-4">
+            <img
+              [src]="user.request?.requestVehicle?.image?.at(0)?.itemImageSrc"
+              alt="Vehicle Image"
+              class="w-12 h-12 rounded-full"
+            />
+            <div>
+              <h3 class="text-lg font-semibold">
+                {{ user.request?.requestVehicle?.plate }}
+              </h3>
+              <p class="text-sm text-gray-600">
+                {{ user.request?.requestVehicle?.detailsVehicle?.brand }} -
+                {{ user.request?.requestVehicle?.detailsVehicle?.model }}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<p-contextmenu #cm [model]="items" (onHide)="onHide()">
+  <ng-template #item let-item>
+    <button
+      (click)="item.command()"
+      class="w-full text-left px-4 py-2 hover:bg-[#54A8A3] hover:text-white transition-colors duration-200"
+    >
+      <span [class]="item.icon"></span>
+      {{ item.label }}
+    </button>
+  </ng-template>
+</p-contextmenu>
