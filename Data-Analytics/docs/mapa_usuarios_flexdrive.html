@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f51943961cede0437fe7d5165478fed6 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_f51943961cede0437fe7d5165478fed6" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f51943961cede0437fe7d5165478fed6 = L.map(
+                "map_f51943961cede0437fe7d5165478fed6",
+                {
+                    center: [5.0, -73.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 6,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_9a495b0a653c3d4e5cdfdcfb90654ada = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_9a495b0a653c3d4e5cdfdcfb90654ada.addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+            var circle_marker_428a70dfeb5d7dd33ba9adb729b9f379 = L.circleMarker(
+                [5.5324313, -73.3616014],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.038404810405297, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_63654c91559811bd3feb00e671f29a8a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_008a79a35bffec325a4524e2864adbff = $(`<div id="html_008a79a35bffec325a4524e2864adbff" style="width: 100.0%; height: 100.0%;">Tunja (Boyacá): 170</div>`)[0];
+                popup_63654c91559811bd3feb00e671f29a8a.setContent(html_008a79a35bffec325a4524e2864adbff);
+            
+        
+
+        circle_marker_428a70dfeb5d7dd33ba9adb729b9f379.bindPopup(popup_63654c91559811bd3feb00e671f29a8a)
+        ;
+
+        
+    
+    
+            var circle_marker_13a22c8dbe680cf21aa407985ccb707a = L.circleMarker(
+                [5.8973422, -73.0691371],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.071067811865476, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_78edc2b40b99e43e7c330c6a2e17ca1c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9fb59b869cd1aa026cb995478b67f3b6 = $(`<div id="html_9fb59b869cd1aa026cb995478b67f3b6" style="width: 100.0%; height: 100.0%;">Duitama (Boyacá): 50</div>`)[0];
+                popup_78edc2b40b99e43e7c330c6a2e17ca1c.setContent(html_9fb59b869cd1aa026cb995478b67f3b6);
+            
+        
+
+        circle_marker_13a22c8dbe680cf21aa407985ccb707a.bindPopup(popup_78edc2b40b99e43e7c330c6a2e17ca1c)
+        ;
+
+        
+    
+    
+            var circle_marker_abbbf354b771df9126c36f6a892c6a09 = L.circleMarker(
+                [4.2834715, -74.1753606],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.782329983125269, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_c1602edd5a915726b4d2d4b4f52a3d0d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_86f450f570531252c2723ae92ede33d2 = $(`<div id="html_86f450f570531252c2723ae92ede33d2" style="width: 100.0%; height: 100.0%;">Bogotá D.C.: 46</div>`)[0];
+                popup_c1602edd5a915726b4d2d4b4f52a3d0d.setContent(html_86f450f570531252c2723ae92ede33d2);
+            
+        
+
+        circle_marker_abbbf354b771df9126c36f6a892c6a09.bindPopup(popup_c1602edd5a915726b4d2d4b4f52a3d0d)
+        ;
+
+        
+    
+    
+            var circle_marker_a2de6fd870de2b463a43f4afbb7e2b9c = L.circleMarker(
+                [5.7148307, -72.9279328],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.898979485566356, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_f4724a00ae7eb0a17b9a270fca8c8e83 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_26e2655190de1c109cd9ab8c751ebb7e = $(`<div id="html_26e2655190de1c109cd9ab8c751ebb7e" style="width: 100.0%; height: 100.0%;">Sogamoso (Boyacá): 24</div>`)[0];
+                popup_f4724a00ae7eb0a17b9a270fca8c8e83.setContent(html_26e2655190de1c109cd9ab8c751ebb7e);
+            
+        
+
+        circle_marker_a2de6fd870de2b463a43f4afbb7e2b9c.bindPopup(popup_f4724a00ae7eb0a17b9a270fca8c8e83)
+        ;
+
+        
+    
+    
+            var circle_marker_e99cdbab4d0bb033af696d3da6ff2e8b = L.circleMarker(
+                [5.3356662, -72.3936931],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.58257569495584, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_58545b3de35fa975cc34f169e0f27762 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_1501b4ee82304fb16e00f87e275f5d0c = $(`<div id="html_1501b4ee82304fb16e00f87e275f5d0c" style="width: 100.0%; height: 100.0%;">Yopal (Casanare): 21</div>`)[0];
+                popup_58545b3de35fa975cc34f169e0f27762.setContent(html_1501b4ee82304fb16e00f87e275f5d0c);
+            
+        
+
+        circle_marker_e99cdbab4d0bb033af696d3da6ff2e8b.bindPopup(popup_58545b3de35fa975cc34f169e0f27762)
+        ;
+
+        
+    
+    
+            var circle_marker_f0419fa3c1c8c1ea7f4211c1dc43685e = L.circleMarker(
+                [5.3666155, -73.5216361],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.23606797749979, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_2bf80c8397143add7de5b0d23cd507ee = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2ded7c326d49331cabbe1a606c976647 = $(`<div id="html_2ded7c326d49331cabbe1a606c976647" style="width: 100.0%; height: 100.0%;">Ventaquemada (Boyacá): 5</div>`)[0];
+                popup_2bf80c8397143add7de5b0d23cd507ee.setContent(html_2ded7c326d49331cabbe1a606c976647);
+            
+        
+
+        circle_marker_f0419fa3c1c8c1ea7f4211c1dc43685e.bindPopup(popup_2bf80c8397143add7de5b0d23cd507ee)
+        ;
+
+        
+    
+    
+            var circle_marker_83c3aefd0029cb121dded258d2190e3d = L.circleMarker(
+                [6.0268293, -72.7631496],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.23606797749979, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_774c717d55625de1301c54384641eab6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_308f089d222ffdfd5a9ecbe1bc66f302 = $(`<div id="html_308f089d222ffdfd5a9ecbe1bc66f302" style="width: 100.0%; height: 100.0%;">Paz De Río (Boyacá): 5</div>`)[0];
+                popup_774c717d55625de1301c54384641eab6.setContent(html_308f089d222ffdfd5a9ecbe1bc66f302);
+            
+        
+
+        circle_marker_83c3aefd0029cb121dded258d2190e3d.bindPopup(popup_774c717d55625de1301c54384641eab6)
+        ;
+
+        
+    
+    
+            var circle_marker_44cf3913a21b323ea02590b453c72704 = L.circleMarker(
+                [7.1669842, -73.1047294],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.732050807568877, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_333e0ec7d05008a151593c69fa3c33d8 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_df072e2f35a35ca1e95e35e9fbc44807 = $(`<div id="html_df072e2f35a35ca1e95e35e9fbc44807" style="width: 100.0%; height: 100.0%;">Bucaramanga (Santander): 3</div>`)[0];
+                popup_333e0ec7d05008a151593c69fa3c33d8.setContent(html_df072e2f35a35ca1e95e35e9fbc44807);
+            
+        
+
+        circle_marker_44cf3913a21b323ea02590b453c72704.bindPopup(popup_333e0ec7d05008a151593c69fa3c33d8)
+        ;
+
+        
+    
+    
+            var circle_marker_85147433fa12c64069a8295a057b79d9 = L.circleMarker(
+                [6.2697324, -75.6025597],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.732050807568877, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_9cf37825f5b3e989901372d35d67c888 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_40038a4938e6e92566ce0acb8c0d6a16 = $(`<div id="html_40038a4938e6e92566ce0acb8c0d6a16" style="width: 100.0%; height: 100.0%;">Medellín (Antioquia): 3</div>`)[0];
+                popup_9cf37825f5b3e989901372d35d67c888.setContent(html_40038a4938e6e92566ce0acb8c0d6a16);
+            
+        
+
+        circle_marker_85147433fa12c64069a8295a057b79d9.bindPopup(popup_9cf37825f5b3e989901372d35d67c888)
+        ;
+
+        
+    
+    
+            var circle_marker_998e505f47c1f8fef8cc97859aef266b = L.circleMarker(
+                [5.6916168, -73.309147],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.732050807568877, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_f591e431e14e4675de852c19825645b5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8b734adbfeb994d2ec5de96668f9f30f = $(`<div id="html_8b734adbfeb994d2ec5de96668f9f30f" style="width: 100.0%; height: 100.0%;">Cómbita (Boyacá): 3</div>`)[0];
+                popup_f591e431e14e4675de852c19825645b5.setContent(html_8b734adbfeb994d2ec5de96668f9f30f);
+            
+        
+
+        circle_marker_998e505f47c1f8fef8cc97859aef266b.bindPopup(popup_f591e431e14e4675de852c19825645b5)
+        ;
+
+        
+    
+    
+            var circle_marker_8a987d6e775ea78ef838aed8a65d9afb = L.circleMarker(
+                [64.6863136, 97.7453061],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.732050807568877, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_d3af0afff42b7821fd507890882063ff = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6da70d74177f94cbe6d46c37ad991104 = $(`<div id="html_6da70d74177f94cbe6d46c37ad991104" style="width: 100.0%; height: 100.0%;">Rusia: 3</div>`)[0];
+                popup_d3af0afff42b7821fd507890882063ff.setContent(html_6da70d74177f94cbe6d46c37ad991104);
+            
+        
+
+        circle_marker_8a987d6e775ea78ef838aed8a65d9afb.bindPopup(popup_d3af0afff42b7821fd507890882063ff)
+        ;
+
+        
+    
+    
+            var circle_marker_e2b94cff37cc0f346d0444344585eadd = L.circleMarker(
+                [5.9326035, -73.6124368],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.732050807568877, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_7b3e09d65ae8019009b265984d99f2f1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7bdbb650eefdb973edd4fe6e979b7201 = $(`<div id="html_7bdbb650eefdb973edd4fe6e979b7201" style="width: 100.0%; height: 100.0%;">Barbosa (Santander): 3</div>`)[0];
+                popup_7b3e09d65ae8019009b265984d99f2f1.setContent(html_7bdbb650eefdb973edd4fe6e979b7201);
+            
+        
+
+        circle_marker_e2b94cff37cc0f346d0444344585eadd.bindPopup(popup_7b3e09d65ae8019009b265984d99f2f1)
+        ;
+
+        
+    
+    
+            var circle_marker_2640e672e91a8ee7ee38bb653594b38b = L.circleMarker(
+                [5.8744825, -72.9823638],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.732050807568877, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_90d1a408fcdcad165bd9b9c0260da988 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_077687c8bf6767f997a6e866a9a50edb = $(`<div id="html_077687c8bf6767f997a6e866a9a50edb" style="width: 100.0%; height: 100.0%;">Santa Rosa De Viterbo (Boyacá): 3</div>`)[0];
+                popup_90d1a408fcdcad165bd9b9c0260da988.setContent(html_077687c8bf6767f997a6e866a9a50edb);
+            
+        
+
+        circle_marker_2640e672e91a8ee7ee38bb653594b38b.bindPopup(popup_90d1a408fcdcad165bd9b9c0260da988)
+        ;
+
+        
+    
+    
+            var circle_marker_5ee525b5acaa7843a33e6365643ab5df = L.circleMarker(
+                [8.0776187, -72.4689002],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.414213562373095, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_87473abca5ea9d7ec742d08ecbe99c35 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_04f0f631e861b94487cd7d20c7f41e9e = $(`<div id="html_04f0f631e861b94487cd7d20c7f41e9e" style="width: 100.0%; height: 100.0%;">Cúcuta (Norte De Santander): 2</div>`)[0];
+                popup_87473abca5ea9d7ec742d08ecbe99c35.setContent(html_04f0f631e861b94487cd7d20c7f41e9e);
+            
+        
+
+        circle_marker_5ee525b5acaa7843a33e6365643ab5df.bindPopup(popup_87473abca5ea9d7ec742d08ecbe99c35)
+        ;
+
+        
+    
+    
+            var circle_marker_e81dbdcc2e105d34a29ea0b2e6fa45ea = L.circleMarker(
+                [5.7480813, -73.0127908],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.414213562373095, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_984e9ea4633629f0e8c7b8462cf009d6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_16297c238cd51c67dc095408be2b6118 = $(`<div id="html_16297c238cd51c67dc095408be2b6118" style="width: 100.0%; height: 100.0%;">Tibasosa (Boyacá): 2</div>`)[0];
+                popup_984e9ea4633629f0e8c7b8462cf009d6.setContent(html_16297c238cd51c67dc095408be2b6118);
+            
+        
+
+        circle_marker_e81dbdcc2e105d34a29ea0b2e6fa45ea.bindPopup(popup_984e9ea4633629f0e8c7b8462cf009d6)
+        ;
+
+        
+    
+    
+            var circle_marker_3fa55b83838090da1d1170f78c584953 = L.circleMarker(
+                [5.8983538, -72.7578745],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.414213562373095, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_508368bbe8d970bf1793ad5a8382d13e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_678473fb55dc2c77eb423ed48c3ef4f8 = $(`<div id="html_678473fb55dc2c77eb423ed48c3ef4f8" style="width: 100.0%; height: 100.0%;">Tasco (Boyacá): 2</div>`)[0];
+                popup_508368bbe8d970bf1793ad5a8382d13e.setContent(html_678473fb55dc2c77eb423ed48c3ef4f8);
+            
+        
+
+        circle_marker_3fa55b83838090da1d1170f78c584953.bindPopup(popup_508368bbe8d970bf1793ad5a8382d13e)
+        ;
+
+        
+    
+    
+            var circle_marker_733f2595753727406d6fd72b47e0d1b2 = L.circleMarker(
+                [7.0625677, -73.0859086],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.414213562373095, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_7a84ac86e055c9d4c8c67a4508e53d57 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_463420ab57d98498ac1a165855f6bd9f = $(`<div id="html_463420ab57d98498ac1a165855f6bd9f" style="width: 100.0%; height: 100.0%;">Floridablanca (Santander): 2</div>`)[0];
+                popup_7a84ac86e055c9d4c8c67a4508e53d57.setContent(html_463420ab57d98498ac1a165855f6bd9f);
+            
+        
+
+        circle_marker_733f2595753727406d6fd72b47e0d1b2.bindPopup(popup_7a84ac86e055c9d4c8c67a4508e53d57)
+        ;
+
+        
+    
+    
+            var circle_marker_33d086107fef40eaf50aa4a6cc68804e = L.circleMarker(
+                [5.997488, -72.6911515],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.414213562373095, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_73278b4849b3a4d7820244dfcd1d57cb = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6f81c232889b6611816942f7f9bbb399 = $(`<div id="html_6f81c232889b6611816942f7f9bbb399" style="width: 100.0%; height: 100.0%;">Socha (Boyacá): 2</div>`)[0];
+                popup_73278b4849b3a4d7820244dfcd1d57cb.setContent(html_6f81c232889b6611816942f7f9bbb399);
+            
+        
+
+        circle_marker_33d086107fef40eaf50aa4a6cc68804e.bindPopup(popup_73278b4849b3a4d7820244dfcd1d57cb)
+        ;
+
+        
+    
+    
+            var circle_marker_e984600cdebbab0a3d77aca254e163c7 = L.circleMarker(
+                [5.4917892, -73.48529],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.414213562373095, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_a12ba9def89966091a522b3b6fcc8b45 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8fd333000691b45b693e802cef06b627 = $(`<div id="html_8fd333000691b45b693e802cef06b627" style="width: 100.0%; height: 100.0%;">Samacá (Boyacá): 2</div>`)[0];
+                popup_a12ba9def89966091a522b3b6fcc8b45.setContent(html_8fd333000691b45b693e802cef06b627);
+            
+        
+
+        circle_marker_e984600cdebbab0a3d77aca254e163c7.bindPopup(popup_a12ba9def89966091a522b3b6fcc8b45)
+        ;
+
+        
+    
+    
+            var circle_marker_40bcc72c8e1ca22c84367cd0fdb21f20 = L.circleMarker(
+                [11.0101922, -74.8231794],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.414213562373095, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_e90cb960f682a914440fa1e0aa5706b6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_dd5bf5442577a8bf1ba6f603675c8317 = $(`<div id="html_dd5bf5442577a8bf1ba6f603675c8317" style="width: 100.0%; height: 100.0%;">Barranquilla (Atlántico): 2</div>`)[0];
+                popup_e90cb960f682a914440fa1e0aa5706b6.setContent(html_dd5bf5442577a8bf1ba6f603675c8317);
+            
+        
+
+        circle_marker_40bcc72c8e1ca22c84367cd0fdb21f20.bindPopup(popup_e90cb960f682a914440fa1e0aa5706b6)
+        ;
+
+        
+    
+    
+            var circle_marker_b1193e0d65e7e16ad23e19e70756de62 = L.circleMarker(
+                [5.4428193, -73.3745224],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.414213562373095, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_96de3623f1eb52d738f13f476bf3e1dc = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_bfbfb2ad1bddec2f62c9e306f048e661 = $(`<div id="html_bfbfb2ad1bddec2f62c9e306f048e661" style="width: 100.0%; height: 100.0%;">Boyacá (Boyacá): 2</div>`)[0];
+                popup_96de3623f1eb52d738f13f476bf3e1dc.setContent(html_bfbfb2ad1bddec2f62c9e306f048e661);
+            
+        
+
+        circle_marker_b1193e0d65e7e16ad23e19e70756de62.bindPopup(popup_96de3623f1eb52d738f13f476bf3e1dc)
+        ;
+
+        
+    
+    
+            var circle_marker_ecbbcf2f7f2fe7b82234239ffebf8b7f = L.circleMarker(
+                [7.0673313, -73.8525627],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.414213562373095, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_61b1dbb89d049b5bbe8a5c9bafdcd75e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_656ffbb38fad7e707efd715cd1bf44a6 = $(`<div id="html_656ffbb38fad7e707efd715cd1bf44a6" style="width: 100.0%; height: 100.0%;">Barrancabermeja (Santander): 2</div>`)[0];
+                popup_61b1dbb89d049b5bbe8a5c9bafdcd75e.setContent(html_656ffbb38fad7e707efd715cd1bf44a6);
+            
+        
+
+        circle_marker_ecbbcf2f7f2fe7b82234239ffebf8b7f.bindPopup(popup_61b1dbb89d049b5bbe8a5c9bafdcd75e)
+        ;
+
+        
+    
+    
+            var circle_marker_52361ba8839ed72dca394603e5307aa0 = L.circleMarker(
+                [5.7812701, -73.1176532],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.414213562373095, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_c20b1455a965cf03ac97de830ad4a382 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3d3f544c44a0a70d2e8f62dae888f1a7 = $(`<div id="html_3d3f544c44a0a70d2e8f62dae888f1a7" style="width: 100.0%; height: 100.0%;">Paipa (Boyacá): 2</div>`)[0];
+                popup_c20b1455a965cf03ac97de830ad4a382.setContent(html_3d3f544c44a0a70d2e8f62dae888f1a7);
+            
+        
+
+        circle_marker_52361ba8839ed72dca394603e5307aa0.bindPopup(popup_c20b1455a965cf03ac97de830ad4a382)
+        ;
+
+        
+    
+    
+            var circle_marker_261b1865062113146d55f349445def03 = L.circleMarker(
+                [4.4919761, -75.7413509],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_e3a2547b7d524332e29bba0f4faaa773 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_12131fb1711d50e1e60242e011aebc3e = $(`<div id="html_12131fb1711d50e1e60242e011aebc3e" style="width: 100.0%; height: 100.0%;">Armenia (Quindío): 1</div>`)[0];
+                popup_e3a2547b7d524332e29bba0f4faaa773.setContent(html_12131fb1711d50e1e60242e011aebc3e);
+            
+        
+
+        circle_marker_261b1865062113146d55f349445def03.bindPopup(popup_e3a2547b7d524332e29bba0f4faaa773)
+        ;
+
+        
+    
+    
+            var circle_marker_6c5c3d3f951e7f391b8e104bab311a20 = L.circleMarker(
+                [4.7177471, -74.2031547],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_39deebcef1dce01e49602e5c3d2a1970 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_45f04051ccc636fcbc26529c2643d4af = $(`<div id="html_45f04051ccc636fcbc26529c2643d4af" style="width: 100.0%; height: 100.0%;">Funza (Cundinamarca): 1</div>`)[0];
+                popup_39deebcef1dce01e49602e5c3d2a1970.setContent(html_45f04051ccc636fcbc26529c2643d4af);
+            
+        
+
+        circle_marker_6c5c3d3f951e7f391b8e104bab311a20.bindPopup(popup_39deebcef1dce01e49602e5c3d2a1970)
+        ;
+
+        
+    
+    
+            var circle_marker_09859da5757967e9dd77fbb24cb7ed7d = L.circleMarker(
+                [5.9756376, -74.5882837],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_a8cbf5c76d01926fb52135530e8f85e1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_aac4ddde73be34bdf28b92947f75a7d5 = $(`<div id="html_aac4ddde73be34bdf28b92947f75a7d5" style="width: 100.0%; height: 100.0%;">Puerto Boyacá (Boyacá): 1</div>`)[0];
+                popup_a8cbf5c76d01926fb52135530e8f85e1.setContent(html_aac4ddde73be34bdf28b92947f75a7d5);
+            
+        
+
+        circle_marker_09859da5757967e9dd77fbb24cb7ed7d.bindPopup(popup_a8cbf5c76d01926fb52135530e8f85e1)
+        ;
+
+        
+    
+    
+            var circle_marker_ade23f3c66d95180348778da7a8fc791 = L.circleMarker(
+                [5.1111878, -73.4566653],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_1330a89cf9f9f42e6c34d6abcad20678 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e476568738e8b3b18ae3319be4b9d766 = $(`<div id="html_e476568738e8b3b18ae3319be4b9d766" style="width: 100.0%; height: 100.0%;">La Capilla (Boyacá): 1</div>`)[0];
+                popup_1330a89cf9f9f42e6c34d6abcad20678.setContent(html_e476568738e8b3b18ae3319be4b9d766);
+            
+        
+
+        circle_marker_ade23f3c66d95180348778da7a8fc791.bindPopup(popup_1330a89cf9f9f42e6c34d6abcad20678)
+        ;
+
+        
+    
+    
+            var circle_marker_ed13f0cac281afc861510b5c8f1dfb00 = L.circleMarker(
+                [5.0226102, -73.4919902],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_461e5683ff27e9418b24e8344d121341 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9638106cababb1e1418054c105312b67 = $(`<div id="html_9638106cababb1e1418054c105312b67" style="width: 100.0%; height: 100.0%;">Guateque (Boyacá): 1</div>`)[0];
+                popup_461e5683ff27e9418b24e8344d121341.setContent(html_9638106cababb1e1418054c105312b67);
+            
+        
+
+        circle_marker_ed13f0cac281afc861510b5c8f1dfb00.bindPopup(popup_461e5683ff27e9418b24e8344d121341)
+        ;
+
+        
+    
+    
+            var circle_marker_053ef28c79c25d1825cd2a8ebf28d89f = L.circleMarker(
+                [5.7705609, -72.9397458],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_c9ce11c149bf84e3e88b6d3549d3a155 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6464d0799c3a6752c2b9d530ef77a36d = $(`<div id="html_6464d0799c3a6752c2b9d530ef77a36d" style="width: 100.0%; height: 100.0%;">Nobsa (Boyacá): 1</div>`)[0];
+                popup_c9ce11c149bf84e3e88b6d3549d3a155.setContent(html_6464d0799c3a6752c2b9d530ef77a36d);
+            
+        
+
+        circle_marker_053ef28c79c25d1825cd2a8ebf28d89f.bindPopup(popup_c9ce11c149bf84e3e88b6d3549d3a155)
+        ;
+
+        
+    
+    
+            var circle_marker_827813c7d5ea694334d09e2eb75240dd = L.circleMarker(
+                [5.8253862, -73.0238895],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_defbfa958c3884426bf79a268d3f8307 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5a6855f80c8f89871df3c08d95c55ca4 = $(`<div id="html_5a6855f80c8f89871df3c08d95c55ca4" style="width: 100.0%; height: 100.0%;">San Juan Bosco (Boyacá): 1</div>`)[0];
+                popup_defbfa958c3884426bf79a268d3f8307.setContent(html_5a6855f80c8f89871df3c08d95c55ca4);
+            
+        
+
+        circle_marker_827813c7d5ea694334d09e2eb75240dd.bindPopup(popup_defbfa958c3884426bf79a268d3f8307)
+        ;
+
+        
+    
+    
+            var circle_marker_9485d4046be9d84eaf2fa738881342bb = L.circleMarker(
+                [4.8660334, -74.0306281],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_bd72954d612615b957f3127d71d29188 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7816d8b743d4141598124d396ad5311d = $(`<div id="html_7816d8b743d4141598124d396ad5311d" style="width: 100.0%; height: 100.0%;">Chía (Cundinamarca): 1</div>`)[0];
+                popup_bd72954d612615b957f3127d71d29188.setContent(html_7816d8b743d4141598124d396ad5311d);
+            
+        
+
+        circle_marker_9485d4046be9d84eaf2fa738881342bb.bindPopup(popup_bd72954d612615b957f3127d71d29188)
+        ;
+
+        
+    
+    
+            var circle_marker_609376405fc11197ae5ebff3a4b42de1 = L.circleMarker(
+                [4.9360114, -74.0321163],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_893e27acc1afa552a5a89d01bfa8a57d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7a33e70c0df55e62be9d9e1e6307f756 = $(`<div id="html_7a33e70c0df55e62be9d9e1e6307f756" style="width: 100.0%; height: 100.0%;">Cajicá (Cundinamarca): 1</div>`)[0];
+                popup_893e27acc1afa552a5a89d01bfa8a57d.setContent(html_7a33e70c0df55e62be9d9e1e6307f756);
+            
+        
+
+        circle_marker_609376405fc11197ae5ebff3a4b42de1.bindPopup(popup_893e27acc1afa552a5a89d01bfa8a57d)
+        ;
+
+        
+    
+    
+            var circle_marker_5c033354059ca02dfff5ee3af657fb7e = L.circleMarker(
+                [4.8112491, -74.3403761],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_0f69f35e5fcf22c23537d2c7f83fc4d5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4321dc36db127e4d4f03a9cfc8b5a382 = $(`<div id="html_4321dc36db127e4d4f03a9cfc8b5a382" style="width: 100.0%; height: 100.0%;">Facatativá (Cundinamarca): 1</div>`)[0];
+                popup_0f69f35e5fcf22c23537d2c7f83fc4d5.setContent(html_4321dc36db127e4d4f03a9cfc8b5a382);
+            
+        
+
+        circle_marker_5c033354059ca02dfff5ee3af657fb7e.bindPopup(popup_0f69f35e5fcf22c23537d2c7f83fc4d5)
+        ;
+
+        
+    
+    
+            var circle_marker_ade51631840d0654fd8eba2dd8dc1ef9 = L.circleMarker(
+                [4.6148734, -72.9252395],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_e1352af3476de6a7604179656a5880fe = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_86fb75890b8a131a979657ad9fe26c7c = $(`<div id="html_86fb75890b8a131a979657ad9fe26c7c" style="width: 100.0%; height: 100.0%;">Villanueva (Casanare): 1</div>`)[0];
+                popup_e1352af3476de6a7604179656a5880fe.setContent(html_86fb75890b8a131a979657ad9fe26c7c);
+            
+        
+
+        circle_marker_ade51631840d0654fd8eba2dd8dc1ef9.bindPopup(popup_e1352af3476de6a7604179656a5880fe)
+        ;
+
+        
+    
+    
+            var circle_marker_3744f7576be6b3eb2c5c71742cf01907 = L.circleMarker(
+                [-28.0023731, 153.4145987],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_ace3a3ccdc9379da94d764d0e93b1bff = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d090f9470c26bd341871ed0a5c693d0d = $(`<div id="html_d090f9470c26bd341871ed0a5c693d0d" style="width: 100.0%; height: 100.0%;">Gold Coast (Australia): 1</div>`)[0];
+                popup_ace3a3ccdc9379da94d764d0e93b1bff.setContent(html_d090f9470c26bd341871ed0a5c693d0d);
+            
+        
+
+        circle_marker_3744f7576be6b3eb2c5c71742cf01907.bindPopup(popup_ace3a3ccdc9379da94d764d0e93b1bff)
+        ;
+
+        
+    
+    
+            var circle_marker_db9d32cc0ab87bbb6ace096e803a2a7d = L.circleMarker(
+                [55.7823547, 49.1242266],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_57a02523aa6f883ff42fd2a9927048be = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_01e4703e838da8a77c97d1a87ad12924 = $(`<div id="html_01e4703e838da8a77c97d1a87ad12924" style="width: 100.0%; height: 100.0%;">Kazan (Rusia): 1</div>`)[0];
+                popup_57a02523aa6f883ff42fd2a9927048be.setContent(html_01e4703e838da8a77c97d1a87ad12924);
+            
+        
+
+        circle_marker_db9d32cc0ab87bbb6ace096e803a2a7d.bindPopup(popup_57a02523aa6f883ff42fd2a9927048be)
+        ;
+
+        
+    
+    
+            var circle_marker_c64fcabfadc1f411547cb535c4720f44 = L.circleMarker(
+                [20.9876996, -101.0],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_0e1369b8952e2616e377910f3aa78a81 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9193eba10af77a1e7a678ed059676dc7 = $(`<div id="html_9193eba10af77a1e7a678ed059676dc7" style="width: 100.0%; height: 100.0%;">Guanajuato (México): 1</div>`)[0];
+                popup_0e1369b8952e2616e377910f3aa78a81.setContent(html_9193eba10af77a1e7a678ed059676dc7);
+            
+        
+
+        circle_marker_c64fcabfadc1f411547cb535c4720f44.bindPopup(popup_0e1369b8952e2616e377910f3aa78a81)
+        ;
+
+        
+    
+    
+            var circle_marker_4126445a64b23e07d458610722906870 = L.circleMarker(
+                [4.8274537, -74.1529851],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_34424fdc21e8322d16ff9209a70d10d7 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ca6ac3851901ef8ae1c949e4f20a8346 = $(`<div id="html_ca6ac3851901ef8ae1c949e4f20a8346" style="width: 100.0%; height: 100.0%;">Tenjo (Cundinamarca): 1</div>`)[0];
+                popup_34424fdc21e8322d16ff9209a70d10d7.setContent(html_ca6ac3851901ef8ae1c949e4f20a8346);
+            
+        
+
+        circle_marker_4126445a64b23e07d458610722906870.bindPopup(popup_34424fdc21e8322d16ff9209a70d10d7)
+        ;
+
+        
+    
+    
+            var circle_marker_f0df95e01b390896f894ad88478b0403 = L.circleMarker(
+                [14.8483829, -85.8935619],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_69c544dd853652bc97011c2423647afe = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d7c25acc9544ef272f896a9404b30050 = $(`<div id="html_d7c25acc9544ef272f896a9404b30050" style="width: 100.0%; height: 100.0%;">Catacamas (Honduras): 1</div>`)[0];
+                popup_69c544dd853652bc97011c2423647afe.setContent(html_d7c25acc9544ef272f896a9404b30050);
+            
+        
+
+        circle_marker_f0df95e01b390896f894ad88478b0403.bindPopup(popup_69c544dd853652bc97011c2423647afe)
+        ;
+
+        
+    
+    
+            var circle_marker_7e40199a625affd50ed037319c3664c6 = L.circleMarker(
+                [14.6416142, -90.5132836],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_1b25d58d29ea2194860c1cf5bc29b4e5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8a708e7900ec4cf7df54f764a9249d76 = $(`<div id="html_8a708e7900ec4cf7df54f764a9249d76" style="width: 100.0%; height: 100.0%;">Ciudad de Guatemala (Guatemala): 1</div>`)[0];
+                popup_1b25d58d29ea2194860c1cf5bc29b4e5.setContent(html_8a708e7900ec4cf7df54f764a9249d76);
+            
+        
+
+        circle_marker_7e40199a625affd50ed037319c3664c6.bindPopup(popup_1b25d58d29ea2194860c1cf5bc29b4e5)
+        ;
+
+        
+    
+    
+            var circle_marker_ad37d4eb8c167d0a7f7922c53a212a19 = L.circleMarker(
+                [8.5108096, -73.4468071],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_2bfdfa6408f0b1b20132aacb81b48bf7 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3d6f8334253409f75a6d5697626daafd = $(`<div id="html_3d6f8334253409f75a6d5697626daafd" style="width: 100.0%; height: 100.0%;">El Carmen (Norte De Santander): 1</div>`)[0];
+                popup_2bfdfa6408f0b1b20132aacb81b48bf7.setContent(html_3d6f8334253409f75a6d5697626daafd);
+            
+        
+
+        circle_marker_ad37d4eb8c167d0a7f7922c53a212a19.bindPopup(popup_2bfdfa6408f0b1b20132aacb81b48bf7)
+        ;
+
+        
+    
+    
+            var circle_marker_44bc9cb35b57384423489b5d79fbea08 = L.circleMarker(
+                [-1.6732765, -78.6482479],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_36bf8546ab8cebe6ff24d6e9f9ae0201 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ee01706312b8377a4b94922e1116543f = $(`<div id="html_ee01706312b8377a4b94922e1116543f" style="width: 100.0%; height: 100.0%;">Riobamba (Ecuador): 1</div>`)[0];
+                popup_36bf8546ab8cebe6ff24d6e9f9ae0201.setContent(html_ee01706312b8377a4b94922e1116543f);
+            
+        
+
+        circle_marker_44bc9cb35b57384423489b5d79fbea08.bindPopup(popup_36bf8546ab8cebe6ff24d6e9f9ae0201)
+        ;
+
+        
+    
+    
+            var circle_marker_6713d372f606bb1193fa7878aac4bb5c = L.circleMarker(
+                [4.3452451, -74.3619667],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_f12e514210f206f944f4cee7c4b0c9f1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0475625c9fb5da6cb70ff0b27eb8eb1f = $(`<div id="html_0475625c9fb5da6cb70ff0b27eb8eb1f" style="width: 100.0%; height: 100.0%;">Fusagasuga (Cundinamarca): 1</div>`)[0];
+                popup_f12e514210f206f944f4cee7c4b0c9f1.setContent(html_0475625c9fb5da6cb70ff0b27eb8eb1f);
+            
+        
+
+        circle_marker_6713d372f606bb1193fa7878aac4bb5c.bindPopup(popup_f12e514210f206f944f4cee7c4b0c9f1)
+        ;
+
+        
+    
+    
+            var circle_marker_019bdf1d559a693367d3129e20ffe78f = L.circleMarker(
+                [4.1114594, -73.4967836],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_18c4d1cada5058cecf5464e0f9dd9dee = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ce3df1068148e5197983fac4b134fdc7 = $(`<div id="html_ce3df1068148e5197983fac4b134fdc7" style="width: 100.0%; height: 100.0%;">Villavicencio (Meta): 1</div>`)[0];
+                popup_18c4d1cada5058cecf5464e0f9dd9dee.setContent(html_ce3df1068148e5197983fac4b134fdc7);
+            
+        
+
+        circle_marker_019bdf1d559a693367d3129e20ffe78f.bindPopup(popup_18c4d1cada5058cecf5464e0f9dd9dee)
+        ;
+
+        
+    
+    
+            var circle_marker_aefb6e5d939155e75687d482f5b61a78 = L.circleMarker(
+                [8.6145368, -73.0330358],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.0, "stroke": true, "weight": 3}
+            ).addTo(map_f51943961cede0437fe7d5165478fed6);
+        
+    
+        var popup_74238a706e163ffb9734f099748c7fb2 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_34a6a5b5c4a9dea728735b30bd066466 = $(`<div id="html_34a6a5b5c4a9dea728735b30bd066466" style="width: 100.0%; height: 100.0%;">El Tarra (Norte De Santander): 1</div>`)[0];
+                popup_74238a706e163ffb9734f099748c7fb2.setContent(html_34a6a5b5c4a9dea728735b30bd066466);
+            
+        
+
+        circle_marker_aefb6e5d939155e75687d482f5b61a78.bindPopup(popup_74238a706e163ffb9734f099748c7fb2)
+        ;
+
+        
+    
+</script>
+</html>
