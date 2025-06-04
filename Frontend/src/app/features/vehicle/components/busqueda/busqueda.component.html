@@ -43,15 +43,7 @@
     </span>
   </section>
   <section>
-    <app-vehiculo-card></app-vehiculo-card>
-    <app-vehiculo-card></app-vehiculo-card>
-    <app-vehiculo-card></app-vehiculo-card>
-    <app-vehiculo-card></app-vehiculo-card>
-    <app-vehiculo-card></app-vehiculo-card>
-    <app-vehiculo-card></app-vehiculo-card>
-    <app-vehiculo-card></app-vehiculo-card>
-    <app-vehiculo-card></app-vehiculo-card>
-    <app-vehiculo-card></app-vehiculo-card>
+   <app-vehiculo-card class="w-4xl" [vehicle]="vehicle" *ngFor="let vehicle of vehicles"></app-vehiculo-card>
     <p-drawer [(visible)]="drawerVisible" #drawerRef>
       <ng-template #headless>
         <div

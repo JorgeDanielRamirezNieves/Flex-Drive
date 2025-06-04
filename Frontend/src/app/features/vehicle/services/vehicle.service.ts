@@ -35,7 +35,12 @@ export class VehicleService {
   public getVehicleByPreferences(objParams: Parameters) {
     return this.http.post(this.urlVehicles + 'findPreferedByUser', objParams);
   }
+  
+  public searchVehicles(objParams: Parameters, newTags: string) {
+    return this.http.post(this.urlVehicles + 'search', {parameters: objParams, tags: newTags});
+  }
 
+  
   
 
   public createVehicle(vehicle: Vehicle) {

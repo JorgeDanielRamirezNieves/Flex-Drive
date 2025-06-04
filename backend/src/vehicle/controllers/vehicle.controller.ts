@@ -128,6 +128,23 @@ export class VehicleController {
       );
     }
   }
+  
+  @Post('search')
+  @ApiBody({
+    description: 'object parameters',
+    type: Object,
+  })
+  private searchVehicles(@Req() request: any): any {
+    const objParameters = request.body;
+    if (objParameters ) {
+      return this.VehicleService.searchVehicles(objParameters.parameters, objParameters.tags);
+    } else {
+      return new HttpException(
+        'Object of parameters invalid',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
 
   @Get('findBrands/:limit')
   @ApiParam({

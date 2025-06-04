@@ -143,6 +143,46 @@ export class VehicleService {
     }
     return Promise.resolve(null);
   }
+  
+  public async searchVehicles(
+    objParametros: Parameters,
+    newTags: string = ''
+  ): Promise<Vehicle[] | null> {
+    let tags = '';
+    (Object.keys(objParametros) as Array<keyof Parameters>).forEach((key) => {
+      const value = objParametros[key];
+      if (Array.isArray(value) && value.length > 0) {
+        tags += `${value.map((item) => `${item} ,`)}`;
+      }
+    });
+    tags = tags + newTags; 
+    const vehicles = await fetch('http://localhost:8000/buscar', {
+      method: 'POST',
+      body: JSON.stringify({
+        tags: tags,
+        k: 10,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => response.json());
+    if (vehicles.error) {
+      throw new HttpException(vehicles.error, 500);
+    }
+    const vehiclesFound: Vehicle[] = [];
+    for (const vehicle of vehicles.resultados) {
+      const vehicleFound = await this.getVehiclesByUUID(vehicle.uuid);
+      if (vehicleFound) {
+        vehiclesFound.push(vehicleFound);
+      }
+    }
+    console.log('vehiclesFound', vehiclesFound);
+    
+    if (vehiclesFound.length > 0) {
+      return vehiclesFound;
+    }
+    return Promise.resolve(null);
+  }
 
   public async getBrands(limit: number): Promise<string[] | null> {
     return this.VehicleRepository.query(

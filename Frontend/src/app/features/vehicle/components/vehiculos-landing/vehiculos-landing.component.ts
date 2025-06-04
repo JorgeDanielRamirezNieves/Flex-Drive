@@ -62,6 +62,12 @@ export class VehiculosLandingComponent implements OnInit, OnDestroy {
 
   public search(form: NgForm) {
     this.searching = true;
+    this.busqueda = this.busqueda.trim();
+    if (this.busqueda === '') {
+      this.searching = false;
+      return;
+    }
+    this.busqueda = this.busqueda.toLowerCase().replaceAll(' ', '-');
     setTimeout(() => {
       this.searching = false;
       this.router.navigate(['/vehicles/search'], {
