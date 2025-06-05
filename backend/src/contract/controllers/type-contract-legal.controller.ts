@@ -8,10 +8,12 @@ import {
   Post,
   Put,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { TypeContractLegalService } from '../service/type-contract-legal.service';
 import { TypeContractLegal } from '../models/type-contract-legal';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('type-contract-legal')
 @ApiTags('type-contract-legal')
@@ -21,6 +23,7 @@ export class TypeContractLegalController {
   ) {}
 
   @Get('findAll')
+    @UseGuards(AuthGuard)
   private findAllTypeContractLegals(): any {
     return this.TypeContractLegalService.listTypeContractLegals();
   }
@@ -32,6 +35,7 @@ export class TypeContractLegalController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneTypeContractLegal(@Param('uuid') uuid: any): any {
     const uuidTypeContractLegal = uuid;
     if (uuidTypeContractLegal && uuidTypeContractLegal.length > 0) {
@@ -48,6 +52,7 @@ export class TypeContractLegalController {
     description: 'Object type contract legal',
     type: TypeContractLegal,
   })
+  @UseGuards(AuthGuard)
   private addTypeContractLegal(@Req() request: any): any {
     const objTypeContractLegal: TypeContractLegal = request.body;
     if (
@@ -77,6 +82,7 @@ export class TypeContractLegalController {
     description: 'Object type contract legal',
     type: TypeContractLegal,
   })
+  @UseGuards(AuthGuard)
   private updateTypeContractLegal(
     @Param('uuid') uuid: any,
     @Req() request: any,
@@ -111,6 +117,7 @@ export class TypeContractLegalController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteTypeContractLegal(@Param('uuid') uuid: any): any {
     const uuidTypeContractLegal = uuid;
     if (uuidTypeContractLegal && uuidTypeContractLegal.length > 0) {

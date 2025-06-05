@@ -9,10 +9,12 @@ import {
   Post,
   Put,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { ChatService } from '../service/chat.service';
 import { Chat } from '../models/chat';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('chat')
 @Controller('chat')
@@ -20,11 +22,13 @@ export class ChatController {
   constructor(private readonly ChatService: ChatService) {}
 
   @Get('findAll')
+  @UseGuards(AuthGuard)
   private findAllChats(): any {
     return this.ChatService.listChats();
   }
 
   @Get('findOne/:uuid')
+  @UseGuards(AuthGuard)
   @ApiParam({
     name: 'uuid',
     description: 'UUID of the Chat',
@@ -41,6 +45,7 @@ export class ChatController {
   }
 
   @Get('findByUserUUID/:uuidUser')
+  @UseGuards(AuthGuard)
   @ApiParam({
     name: 'uuidUser',
     description: 'UUID of the User',
@@ -59,6 +64,7 @@ export class ChatController {
   }
 
   @Post('add')
+  @UseGuards(AuthGuard)
   @ApiBody({
     description: 'Object Chat',
     type: Chat,
@@ -76,6 +82,7 @@ export class ChatController {
   }
 
   @Patch('changeStatus')
+  @UseGuards(AuthGuard)
   @ApiBody({
     description: 'Object for change status of Chat',
     type: Object,
@@ -93,6 +100,7 @@ export class ChatController {
   }
 
   @Delete('delete/:uuid')
+  @UseGuards(AuthGuard)
   @ApiParam({
     name: 'uuid',
     description: 'UUID of the Chat',

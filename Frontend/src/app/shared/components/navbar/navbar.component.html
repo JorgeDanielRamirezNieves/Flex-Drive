@@ -101,6 +101,8 @@
                       *ngIf="!notification.sendDate"
                     ></i>
                   </span>
+                  <a class="text-lg text-start w-full underline underline-offset-2 hover:text-[#ADF9F6] cursor-pointer"
+                    >Ir al servicio</a>
                 </span>
               </li>
               <li
@@ -128,6 +130,11 @@
                       *ngIf="!notification.sendDate"
                     ></i>
                   </span>
+                  <a
+                    class="text-lg text-start w-full underline underline-offset-2 hover:text-[#ADF9F6] cursor-pointer"
+                    [routerLink]="['/user/activechats/' + notification.idRelated]"
+                    >Ir al chat</a
+                  >
                 </span>
               </li>
               <li

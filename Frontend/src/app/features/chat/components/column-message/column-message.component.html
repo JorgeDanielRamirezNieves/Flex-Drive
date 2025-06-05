@@ -57,7 +57,11 @@
                 : 'bg-gray-200 text-black'
             "
             class="p-3 rounded-lg max-w-[70%]"
-            (contextmenu)="msg.uuid && msg.idSender === userUUID ? onContextMenu($event, msg.uuid) : null"
+            (contextmenu)="
+              msg.uuid && msg.idSender === userUUID
+                ? onContextMenu($event, msg.uuid)
+                : null
+            "
           >
             <img
               [src]="msg.image"
@@ -110,9 +114,15 @@
         >
           <i class="pi pi-send text-lg"></i>
         </button>
+        <button
+          *ngIf="selectedChat.request?.status === 'negotiating' && userUUID === selectedChat.request?.requestVehicle?.idOwner"
+          (click)="modalVisible = true"
+          class="bg-[#54A8A3] text-white rounded-2xl px-4 py-2 hover:bg-[#ADF9F6] transition-colors duration-200 cursor-pointer"
+        >
+          Finalizar negociación
+        </button>
       </div>
     </div>
-
     <div *ngIf="!selectedChat">
       <h2 class="text-xl font-bold mb-4">
         <ng-container [ngSwitch]="activeSection">
@@ -161,7 +171,7 @@
     </div>
   </div>
 </div>
-<p-contextmenu #cm [model]="items" (onHide)="onHide()">
+<p-contextmenu #cm [model]="items">
   <ng-template #item let-item>
     <button
       (click)="item.command()"
@@ -172,3 +182,87 @@
     </button>
   </ng-template>
 </p-contextmenu>
+<p-drawer
+  #drawerRef
+  [(visible)]="visible"
+  position="bottom"
+  [style]="{ width: '100%' }"
+>
+  <ng-template #headless>
+    <form
+      action=""
+      #editForm
+      class="bg-[#031617] text-white p-6 w-full flex justify-center items-center flex-col gap-5"
+    >
+      <span class="flex flex-col items-start justify-center text-center w-full"
+        ><h2 class="text-xl font-bold mb-4">Editar Mensaje</h2>
+        <p class="">Escribe el nuevo mensaje:</p></span
+      >
+      <textarea
+        name="editMessage"
+        id=""
+        class="resize-none bg-white w-full rounded-2xl text-black p-4"
+        [(ngModel)]="newMessage"
+        rows="3"
+      ></textarea>
+      <button
+        class="bg-[#54A8A3] text-white rounded-2xl px-4 py-2 hover:bg-[#ADF9F6] transition-colors duration-200 cursor-pointer"
+        type="button"
+        (click)="
+          changeDescriptionMessage(selectedMessageUUID || '', newMessage)
+        "
+      >
+        Cambiar
+      </button>
+    </form>
+  </ng-template>
+</p-drawer>
+<p-dialog
+  header="Finalizar negociación"
+  [modal]="true"
+  [(visible)]="modalVisible"
+>
+  <span class="p-text-secondary block mb-8"
+    >Actualiza la fecha y hora según lo hayan dialogado</span
+  >
+  <form
+    class="flex flex-wrap justify-center items-center gap-4 mb-4 p-5"
+    #frmRequest="ngForm"
+  >
+    <span class="flex flex-col items-start w-[48%]">
+      <label for="" class="text-lg">Fecha de salida</label>
+      <p-datepicker
+        name="deliveryDate"
+        [(ngModel)]="deliveryDate"
+        placeholder="Fecha de salida"
+        class="placeholder:text-gray-50 w-full"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        inputId="icondisplay"
+        [minDate]="minDate"
+        [showTime]="true"
+        hourFormat="12"
+      ></p-datepicker>
+    </span>
+    <span class="flex flex-col items-start w-[48%]">
+      <label for="" class="text-lg">Fecha de entrega</label>
+      <p-datepicker
+        name="returnDate"
+        [(ngModel)]="returnDate"
+        placeholder="Fecha de entrega"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        inputId="icondisplay"
+        class="placeholder:text-gray-500 w-full"
+        [minDate]="deliveryDate"
+        [showTime]="true"
+        hourFormat="12"
+      ></p-datepicker>
+    </span>
+    <app-button
+      label="Enviar"
+      type="button"
+      (click)="finalizeNegotition(selectedChat?.request?.uuid || '')"
+    ></app-button>
+  </form>
+</p-dialog>

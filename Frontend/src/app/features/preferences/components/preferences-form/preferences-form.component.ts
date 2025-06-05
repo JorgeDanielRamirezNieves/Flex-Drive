@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService, TooltipOptions } from 'primeng/api';
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
@@ -71,7 +71,8 @@ export class PreferencesFormComponent implements OnDestroy, OnInit {
   constructor(
     private contractService: ContractsService,
     private messageService: MessageService,
-    private preferencesService: PreferencesService
+    private preferencesService: PreferencesService,
+    private route: Router
   ) {
     window.scrollTo(0, 0)
     this.termsAndConditions = new Contract(
@@ -589,12 +590,7 @@ export class PreferencesFormComponent implements OnDestroy, OnInit {
       .pipe(
         map((res: any) => {
           this.isCreatingContract = false; // Restablece el estado al finalizar
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Éxito',
-            detail: 'Has aceptado los términos y condiciones de manera exitosa',
-            life: 3000,
-          });
+          this.route.navigate(['/user']);
         }),
         catchError((err) => {
           this.isCreatingContract = false; // Restablece el estado en caso de error

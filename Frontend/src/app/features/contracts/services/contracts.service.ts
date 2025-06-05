@@ -8,11 +8,17 @@ import { Contract } from '../models/contract';
 })
 export class ContractsService {
   private urlContract:string;
+  private token: any;
   constructor(private http: HttpClient) { 
     this.urlContract = URL_CONTRACT
+    if (localStorage.getItem('authToken')) {
+      this.token = localStorage.getItem('authToken');
+    }
   }
 
   public createContract(objContract: Contract) {
-    return this.http.post<any>(this.urlContract + 'add', objContract);
+    return this.http.post<any>(this.urlContract + 'add', objContract, {
+      headers: { Authorization: `Bearer ${this.token}` }
+    });
   }
 }

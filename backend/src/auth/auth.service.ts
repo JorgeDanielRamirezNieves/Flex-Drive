@@ -6,6 +6,7 @@ import { Login } from './models/login';
 import { User } from 'src/user/models/user';
 import { compareSync } from 'bcryptjs';
 import { Token } from 'src/core/tokes';
+import * as bcrypt from 'bcryptjs'
 
 @Injectable()
 export class AuthService {
@@ -22,7 +23,6 @@ export class AuthService {
       const userFromDB = existe[0];
       const Password = userFromDB.password;
       const Email = userFromDB.email;
-
       if (compareSync(login.password, Password)) {
         try {
           const datosUsuario: any = (await this.userRepository.findOne({
@@ -80,4 +80,6 @@ export class AuthService {
     user.email = email;
     await this.userRepository.save(user);
   }
+
+  
 }

@@ -8,16 +8,19 @@ import {
   Post,
   Put,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { ReportsService } from '../service/reports.service';
 import { Reports } from '../models/reports';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('reports')
 @Controller('reports')
 export class ReportsController {
   constructor(private readonly ReportsService: ReportsService) {}
   @Get('findAll')
+  @UseGuards(AuthGuard)
   private findAllReports(): any {
     return this.ReportsService.listReports();
   }
@@ -29,6 +32,7 @@ export class ReportsController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneReports(@Param('uuid') uuid: any): any {
     const uuidReports = uuid;
     if (uuidReports && uuidReports.length > 0) {
@@ -66,6 +70,7 @@ export class ReportsController {
     description: 'Object Reports',
     type: Reports,
   })
+  @UseGuards(AuthGuard)
   private updateReports(@Param('uuid') uuid: any, @Req() request: any): any {
     const uuidReports = uuid;
     const objReports: Reports = request.body;
@@ -90,6 +95,7 @@ export class ReportsController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteReports(@Param('uuid') uuid: any): any {
     const uuidReports = uuid;
     if (uuidReports && uuidReports.length > 0) {

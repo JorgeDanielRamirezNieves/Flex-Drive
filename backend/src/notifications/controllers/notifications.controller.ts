@@ -8,10 +8,12 @@ import {
   Post,
   Put,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { NotificationsService } from '../service/notifications.service';
 import { Notification } from '../models/notification';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('notification')
 @Controller('notifications')
@@ -19,6 +21,7 @@ export class NotificationsController {
   constructor(private readonly NotificationService: NotificationsService) {}
 
   @Get('findAll')
+  @UseGuards(AuthGuard)
   private findAllNotifications(): any {
     return this.NotificationService.listNotifications();
   }
@@ -30,6 +33,7 @@ export class NotificationsController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneNotification(@Param('uuid') uuid: any): any {
     const uuidNotification = uuid;
     if (uuidNotification && uuidNotification.length > 0) {
@@ -46,6 +50,7 @@ export class NotificationsController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private async findNotificationsByUser(@Param('uuid') uuid: any) {
     const uuidUser = uuid;
     if (uuidUser && uuidUser.length > 0) {
@@ -55,7 +60,7 @@ export class NotificationsController {
         notifications?.filter(
           (notification) =>
             notification.typeNotification?.name !== 'email' &&
-            notification.typeNotification?.name !== 'sms'
+            notification.typeNotification?.name !== 'sms',
         ) || []
       );
     } else {
@@ -68,6 +73,7 @@ export class NotificationsController {
     description: 'Object Notification',
     type: Notification,
   })
+  @UseGuards(AuthGuard)
   private addNotification(@Req() request: any): any {
     const objNotification: Notification = request.body;
     if (objNotification) {
@@ -91,6 +97,7 @@ export class NotificationsController {
     description: 'Object Notification',
     type: Notification,
   })
+  @UseGuards(AuthGuard)
   private updateNotification(
     @Param('uuid') uuid: any,
     @Req() request: any,
@@ -121,6 +128,7 @@ export class NotificationsController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteNotification(@Param('uuid') uuid: any): any {
     const uuidNotification = uuid;
     if (uuidNotification && uuidNotification.length > 0) {

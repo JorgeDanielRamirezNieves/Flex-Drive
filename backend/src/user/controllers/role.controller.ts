@@ -8,10 +8,12 @@ import {
   Post,
   Put,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { RoleService } from '../service/role.service';
 import { Role } from '../models/role';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('role')
 @Controller('role')
@@ -19,6 +21,7 @@ export class RoleController {
   constructor(private readonly RoleService: RoleService) {}
 
   @Get('findAll')
+  @UseGuards(AuthGuard)
   private findAllRoles(): any {
     return this.RoleService.listRoles();
   }
@@ -30,6 +33,7 @@ export class RoleController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneRole(@Param('uuid') uuid: any): any {
     const uuidRole = uuid;
     if (uuidRole && uuidRole.length > 0) {
@@ -44,6 +48,7 @@ export class RoleController {
     description: 'Object role',
     type: Role,
   })
+  @UseGuards(AuthGuard)
   private addRole(@Req() request: any): any {
     const objRole: Role = request.body;
     if (objRole && objRole.name && objRole.name.length > 0) {
@@ -64,6 +69,7 @@ export class RoleController {
     description: 'Object role',
     type: Role,
   })
+  @UseGuards(AuthGuard)
   private updateRole(@Param('uuid') uuid: any, @Req() request: any): any {
     const uuidRole = uuid;
     const objRole: Role = request.body;
@@ -88,6 +94,7 @@ export class RoleController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteRole(@Param('uuid') uuid: any): any {
     const uuidRole = uuid;
     if (uuidRole && uuidRole.length > 0) {

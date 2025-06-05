@@ -10,10 +10,12 @@ import {
   Post,
   Put,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { MessageService } from '../service/message.service';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { Message } from '../models/message';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('message')
 @ApiTags('message')
@@ -21,6 +23,7 @@ export class MessageController {
   constructor(private readonly MessagesService: MessageService) {}
 
   @Get('findAll')
+  @UseGuards(AuthGuard)
   private findAllMessages(): any {
     return this.MessagesService.listMessages();
   }
@@ -32,6 +35,7 @@ export class MessageController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneMessage(@Param('uuid') uuid: any): any {
     const uuidMessages = uuid;
     if (uuidMessages) {
@@ -46,6 +50,7 @@ export class MessageController {
     description: 'Object message',
     type: Message,
   })
+  @UseGuards(AuthGuard)
   private addMessage(@Req() request: any): any {
     const objMessages: Message = request.body;
     if (objMessages) {
@@ -63,6 +68,7 @@ export class MessageController {
     description: 'Object with uuid and status',
     type: Object,
   })
+  @UseGuards(AuthGuard)
   private changeStatus(@Req() request: any): any {
     const objMessages = request.body;
     if (objMessages) {
@@ -74,12 +80,13 @@ export class MessageController {
       );
     }
   }
-  
+
   @Patch('changeDescription')
   @ApiBody({
     description: 'Object with uuid and description',
     type: Object,
   })
+  @UseGuards(AuthGuard)
   private changeDescription(@Req() request: any): any {
     const objMessages = request.body;
     if (objMessages) {
@@ -99,6 +106,7 @@ export class MessageController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteMessage(@Param('uuid') uuid: any): any {
     const uuidMessages = uuid;
     if (uuidMessages && uuidMessages.length > 0) {

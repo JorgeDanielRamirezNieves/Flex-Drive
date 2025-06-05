@@ -8,11 +8,17 @@ import { TypeSale } from '../models/type-sale';
 })
 export class TypeSalesService {
   public urlTypeSales: string;
+  public token: any;
   constructor(private http: HttpClient) { 
     this.urlTypeSales = URL_TYPE_SALE;
+    if (localStorage.getItem('authToken')) {
+      this.token = localStorage.getItem('authToken');
+    }
   }
 
   public getTypeSales() {
-    return this.http.get<TypeSale[]>(this.urlTypeSales + 'findAll');
+    return this.http.get<TypeSale[]>(this.urlTypeSales + 'findAll', {
+      headers: { Authorization: `Bearer ${this.token}` }
+    });
   }
 }

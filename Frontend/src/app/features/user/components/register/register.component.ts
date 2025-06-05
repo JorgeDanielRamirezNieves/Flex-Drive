@@ -18,6 +18,7 @@ import {
 } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 import { jwtDecode } from 'jwt-decode';
+import bcrypt from "bcryptjs";
 @Component({
   selector: 'app-register',
   standalone: false,
@@ -120,7 +121,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.isRegistering = false;
         return;
       } else {
-        this.user.password = this.password.value;
+        this.user.password = bcrypt.hashSync(this.password.value, 10);
         this.user.phone = this.prefix.value + ' ' + this.user.phone;
         this.user.noDocument = this.user.noDocument.replace(/\s/g, '');
         this.user.country = this.country?.name || '';

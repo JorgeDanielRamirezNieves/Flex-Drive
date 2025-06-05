@@ -4,27 +4,35 @@ import { HttpClient } from '@angular/common/http';
 import { Preferences } from '../models/preferences';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PreferencesService {
-  public urlPreferences: string
+  public urlPreferences: string;
   constructor(private http: HttpClient) {
-    this.urlPreferences = URL_PREFERENCE
-   }
+    this.urlPreferences = URL_PREFERENCE;
+  }
 
   public getPreferencesUser(uuidUser: string) {
-    return this.http.get(this.urlPreferences + 'findByUser/' + uuidUser);
+    return this.http.get(this.urlPreferences + 'findByUser/' + uuidUser, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
+    });
   }
 
   public updatePreferencesUser(uuidUser: string, preferences: Preferences) {
-    return this.http.put(this.urlPreferences + 'update/' + uuidUser, preferences);
+    return this.http.put(
+      this.urlPreferences + 'update/' + uuidUser,
+      preferences,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      }
+    );
   }
 
   public createPreferencesUser(preferences: Preferences) {
-    return this.http.post(this.urlPreferences + 'add/', preferences);
-  }
-   
-  public updatePreferences(preferences: Preferences, uuid: string) {
-    return this.http.put(this.urlPreferences + 'update/' + uuid, preferences);
+    return this.http.post(this.urlPreferences + 'add/', preferences, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
+    });
   }
 }

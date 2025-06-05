@@ -185,12 +185,6 @@ export class ViewAllComponent {
       .pipe(
         map((res: any) => {
           this.isCreatingContract = false; // Restablece el estado al finalizar
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Éxito',
-            detail: 'Has aceptado los términos y condiciones de manera exitosa',
-            life: 3000,
-          });
         }),
         catchError((err) => {
           this.isCreatingContract = false; // Restablece el estado en caso de error

@@ -9,10 +9,12 @@ import {
   Put,
   Delete,
   Patch,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { RequestsService } from './requests.service';
 import { Request } from './models/request';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('requests')
 @Controller('requests')
@@ -20,6 +22,7 @@ export class RequestsController {
   constructor(private readonly RequestService: RequestsService) {}
 
   @Get('findAll')
+  @UseGuards(AuthGuard)
   private findAllRequests(): any {
     return this.RequestService.listRequests();
   }
@@ -31,6 +34,7 @@ export class RequestsController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneRequest(@Param('uuid') uuid: any): any {
     const uuidRequest = uuid;
     if (uuidRequest && uuidRequest.length > 0) {
@@ -47,6 +51,7 @@ export class RequestsController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneRequestByClient(@Param('uuidClient') uuid: any): any {
     const uuidRequest = uuid;
     if (uuidRequest && uuidRequest.length > 0) {
@@ -63,6 +68,7 @@ export class RequestsController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneRequestByOwner(@Param('uuidOwner') uuid: any): any {
     const uuidRequest = uuid;
     if (uuidRequest && uuidRequest.length > 0) {
@@ -77,6 +83,7 @@ export class RequestsController {
     description: 'Object Request',
     type: Request,
   })
+  @UseGuards(AuthGuard)
   private addRequest(@Req() request: any): any {
     const objRequest: Request = request.body;
     if (objRequest) {
@@ -89,11 +96,41 @@ export class RequestsController {
     }
   }
 
+
+  @Put('update/:uuid')
+  @ApiParam({
+    name: 'uuid',
+    description: 'UUID of the Request',
+    required: true,
+    type: String,
+  })
+  @ApiBody({
+    description: 'Object Request',
+    type: Request,
+  })
+  @UseGuards(AuthGuard)
+  private updateRequest(
+    @Param('uuid') uuid: any,
+    @Req() request: any,
+  ): any {
+    const uuidRequest = uuid;
+    const objRequest: Request = request.body;
+    if (uuidRequest && uuidRequest.length > 0 && objRequest) {
+      return this.RequestService.updateRequest(uuidRequest, objRequest);
+    } else {
+      return new HttpException(
+        'name of Request or UUID invalid',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
   @Patch('changeStatus')
   @ApiBody({
     description: 'Object Request',
     type: Object,
   })
+  @UseGuards(AuthGuard)
   private changeRequestStatus(@Req() request: any): any {
     const obj = request.body;
     if (obj) {
@@ -113,6 +150,7 @@ export class RequestsController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteRequest(@Param('uuid') uuid: any): any {
     const uuidRequest = uuid;
     if (uuidRequest && uuidRequest.length > 0) {

@@ -3,7 +3,7 @@ import { DataSource, DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { User } from '../models/user';
 import { Fines } from '../models/fines';
 import axios from 'axios';
-import * as bcrypt from 'bcryptjs'
+
 @Injectable()
 export class UserService {
   public UserRepository: Repository<User>;
@@ -62,12 +62,8 @@ export class UserService {
         objUser.status = 'active';
       } else {
         objUser.status = 'under_review';
-      }     */  
-      
-      console.log('Creando usuario:', objUser);
-      const hashedPassword = await bcrypt.hash(objUser.password, 10);
-      objUser.password = hashedPassword;
-      
+      } */       
+            
       const savedUser = await this.UserRepository.save(objUser);
 /* 
       const response = await axios.post('http://127.0.0.1:5000/api/multas', {

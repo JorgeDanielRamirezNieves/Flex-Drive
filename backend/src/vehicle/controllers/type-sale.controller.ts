@@ -8,10 +8,12 @@ import {
   Post,
   Put,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { TypeSaleService } from '../service/type-sale.service';
 import { TypeSale } from '../models/type_sale';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('type-sale')
 @ApiTags('type-sale')
@@ -19,6 +21,7 @@ export class TypeSaleController {
   constructor(private readonly typeSaleService: TypeSaleService) {}
 
   @Get('findAll')
+  @UseGuards(AuthGuard)
   private findAllTypeSales(): any {
     return this.typeSaleService.listTypeSales();
   }
@@ -30,6 +33,7 @@ export class TypeSaleController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneTypeSales(@Param('uuid') uuid: any): any {
     const uuidTypeSale = uuid;
     if (uuidTypeSale && uuidTypeSale.length > 0) {
@@ -44,6 +48,7 @@ export class TypeSaleController {
     description: 'Object type sale',
     type: TypeSale,
   })
+  @UseGuards(AuthGuard)
   private addTypeSale(@Req() peticion: any): any {
     const objTypeSale: TypeSale = peticion.body;
     if (objTypeSale && objTypeSale.name && objTypeSale.name.length > 0) {
@@ -67,6 +72,7 @@ export class TypeSaleController {
     description: 'Object type sale',
     type: TypeSale,
   })
+  @UseGuards(AuthGuard)
   private updateTypeSale(@Param('uuid') uuid: any, @Req() request: any): any {
     const uuidTypeSale = uuid;
     const objTypeSale: TypeSale = request.body;
@@ -91,6 +97,7 @@ export class TypeSaleController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteTypeSale(@Param('uuid') uuid: any): any {
     const uuidTypeSale = uuid;
     if (uuidTypeSale && uuidTypeSale.length > 0) {

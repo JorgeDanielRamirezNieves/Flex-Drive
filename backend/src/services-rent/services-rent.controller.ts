@@ -9,10 +9,12 @@ import {
   Post,
   Put,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { ServicesRentService } from './services-rent.service';
 import { ServiceRent } from './models/serviceRent';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('services-rent')
 @Controller('services-rent')
@@ -20,6 +22,7 @@ export class ServicesRentController {
   constructor(private readonly ServiceRentService: ServicesRentService) {}
 
   @Get('findAll')
+  @UseGuards(AuthGuard)
   private findAllServiceRents(): any {
     return this.ServiceRentService.listServiceRents();
   }
@@ -31,6 +34,7 @@ export class ServicesRentController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneServiceRent(@Param('uuid') uuid: any): any {
     const uuidServiceRent = uuid;
     if (uuidServiceRent && uuidServiceRent.length > 0) {
@@ -46,6 +50,7 @@ export class ServicesRentController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findByClientServiceRent(@Param('uuid') uuid: any): any {
     const uuidClient = uuid;
     if (uuidClient && uuidClient.length > 0) {
@@ -60,6 +65,7 @@ export class ServicesRentController {
     description: 'Object service',
     type: ServiceRent,
   })
+  @UseGuards(AuthGuard)
   private addServiceRent(@Req() request: any): any {
     const objServiceRent: ServiceRent = request.body;
     if (objServiceRent) {
@@ -77,6 +83,7 @@ export class ServicesRentController {
     description: 'Object ServiceRent',
     type: Object,
   })
+  @UseGuards(AuthGuard)
   private changeStatusServiceRent(@Req() obj: any): any {
     if (obj.body) {
       return this.ServiceRentService.changeSatusServiceRent(obj.body);
@@ -95,6 +102,7 @@ export class ServicesRentController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteServiceRent(@Param('uuid') uuid: any): any {
     const uuidServiceRent = uuid;
     if (uuidServiceRent && uuidServiceRent.length > 0) {
@@ -103,6 +111,4 @@ export class ServicesRentController {
       return new HttpException('uuid invalid', HttpStatus.NOT_ACCEPTABLE);
     }
   }
-
-  
 }

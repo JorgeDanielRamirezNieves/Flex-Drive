@@ -35,7 +35,7 @@ export class Notification {
     type: Date,
     example: '2023-10-01',
   })
-  @Column({ name: 'updated_at', type: 'date', nullable: false })
+  @Column({ name: 'updated_at', type: 'date', nullable: true })
   public updatedAt: Date;
 
   @ApiProperty({
@@ -51,7 +51,7 @@ export class Notification {
     type: Date,
     example: '2023-10-01',
   })
-  @Column({ name: 'seen_date', type: 'date', nullable: false })
+  @Column({ name: 'seen_date', type: 'date', nullable: true })
   public seenDate: Date;
 
   @ApiProperty({

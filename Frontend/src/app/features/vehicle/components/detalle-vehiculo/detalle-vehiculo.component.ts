@@ -5,12 +5,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleService } from '../../services/vehicle.service';
 import { Vehicle } from '../../models/vehicle';
 import { Price } from '../../models/price';
-import { catchError, finalize, map, Subscription } from 'rxjs';
+import { catchError, finalize, map, Subscription, throwError } from 'rxjs';
 import { observatorAny } from '../../../../core/tipo-any';
 import { Soat } from '../../models/soat';
 import { Tecnomecanic } from '../../models/tecnomecanic';
 import { jwtDecode } from 'jwt-decode';
 import { Request } from '../../../requests/models/request';
+import { NotificationsService } from '../../../notifications/services/notifications.service';
+import { Notification } from '../../../notifications/models/notification';
 
 @Component({
   selector: 'app-detalle-vehiculo',
@@ -35,13 +37,15 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
   public minDate: Date = new Date();
   public deliveryDate: Date | null = null;
   public returnDate: Date | null = null;
+  public notification: Notification;
 
   constructor(
     private messageService: MessageService,
     private router: Router,
     private activeRouter: ActivatedRoute,
     private vehicleService: VehicleService,
-    private requestsService: RequestsService
+    private requestsService: RequestsService,
+    private notificationsService: NotificationsService
   ) {
     this.suscribe = this.tmp;
     this.token = jwtDecode(localStorage.getItem('authToken') || '');
@@ -81,6 +85,16 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
       this.activeRouter.snapshot.params['uuid'],
       'pending'
     );
+    this.notification = new Notification(
+      '',
+      new Date(),
+      null,
+      new Date(),
+      null,
+      true,
+      'c0f2a1b4-3d8e-4f5b-9a6c-7d0e5f1a2b8d',
+      ''
+    );
   }
 
   ngOnDestroy(): void {
@@ -93,9 +107,7 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
     this.getVehicle();
   }
 
-
   public sendRequest() {
-    
     if (!this.deliveryDate || !this.returnDate) {
       this.messageService.add({
         severity: 'warn',
@@ -105,7 +117,11 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.deliveryDate < this.minDate || this.returnDate < this.minDate || this.deliveryDate > this.returnDate) {
+    if (
+      this.deliveryDate < this.minDate ||
+      this.returnDate < this.minDate ||
+      this.deliveryDate > this.returnDate
+    ) {
       this.messageService.add({
         severity: 'warn',
         summary: 'Fecha inválida',
@@ -122,7 +138,7 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
       });
       return;
     }
-    
+
     this.requests.deliveryDate = this.deliveryDate;
     this.requests.returnDate = this.returnDate;
     this.suscribe = this.requestsService
@@ -135,6 +151,7 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
             summary: 'Solicitud enviada',
             detail: 'La solicitud se ha enviado correctamente.',
           });
+          this.createNotification(res.uuid);
           this.router.navigate(['/requests']);
         }),
         catchError((err) => {
@@ -204,4 +221,20 @@ export class DetalleVehiculoComponent implements OnInit, OnDestroy {
       .subscribe(observatorAny);
   }
 
+  public createNotification(uuidRequest: string) {
+    this.notification.idUser = this.vehicle.idOwner;
+    this.notification.description = `Nueva solicitud de alquiler para el vehículo ${this.vehicle.detailsVehicle?.brand} ${this.vehicle.detailsVehicle?.model}`;
+    this.notification.idRelated = uuidRequest;
+    this.suscribe = this.notificationsService
+      .createNotifications(this.notification)
+      .pipe(
+        map((res: any) => {
+          console.log('Notificación creada:', res);
+        }),
+        catchError((err) => {
+          return throwError(() => err);
+        })
+      )
+      .subscribe(observatorAny);
+  }
 }

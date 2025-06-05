@@ -9,11 +9,13 @@ import {
   Post,
   Put,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { VehicleService } from '../service/vehicle.service';
 import { Vehicle } from '../models/vehicle';
 import { Parameters } from 'src/user/models/preferences';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 
 @ApiTags('vehicle')
@@ -33,6 +35,7 @@ export class VehicleController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneVehicle(@Param('uuid') uuid: any): any {
     const uuidVehicle = uuid;
     if (uuidVehicle && uuidVehicle.length > 0) {
@@ -49,6 +52,7 @@ export class VehicleController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findByPLateVehicle(@Param('plate') plate: any): any {
     const plateVehicle = plate;
     if (plateVehicle && plateVehicle.length > 0) {
@@ -65,6 +69,7 @@ export class VehicleController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneByOwner(@Param('uuid') uuid: any): any {
     const uuidVehicle = uuid;
     if (uuidVehicle && uuidVehicle.length > 0) {
@@ -117,6 +122,7 @@ export class VehicleController {
     description: 'object parameters',
     type: Object,
   })
+  @UseGuards(AuthGuard)
   private findPreferedByUser(@Req() request: any): any {
     const objParameters: Parameters = request.body;
     if (objParameters ) {
@@ -134,6 +140,7 @@ export class VehicleController {
     description: 'object parameters',
     type: Object,
   })
+  @UseGuards(AuthGuard)
   private searchVehicles(@Req() request: any): any {
     const objParameters = request.body;
     if (objParameters ) {
@@ -170,6 +177,7 @@ export class VehicleController {
     description: 'Object Vehicle',
     type: Vehicle,
   })
+  @UseGuards(AuthGuard)
   private addVehicle(@Req() request: any): any {
     const objVehicle: Vehicle = request.body;
     if (objVehicle) {
@@ -187,6 +195,7 @@ export class VehicleController {
     description: 'Object Vehicle',
     type: Vehicle,
   })
+  @UseGuards(AuthGuard)
   private updateVehicle(@Param('uuid') uuid: any, @Req() request: any): any {
     const uuidVehicle = uuid;
     const objVehicle: Vehicle = request.body;
@@ -205,6 +214,7 @@ export class VehicleController {
     description: 'Object User with uuid and new role',
     type: Object,
   })
+  @UseGuards(AuthGuard)
   private changeStatus(@Req() request: any): any {
     const objStatus = request.body;
     if (objStatus && objStatus.uuid && objStatus.status) {
@@ -224,6 +234,7 @@ export class VehicleController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteVehicle(@Param('uuid') uuid: any): any {
     const uuidVehicle = uuid;
     if (uuidVehicle && uuidVehicle.length > 0) {

@@ -1,4 +1,4 @@
-import { sign } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 import { User } from 'src/user/models/user';
 
 export class Token {
@@ -21,5 +21,17 @@ export class Token {
     );
 
     return token;
+  }
+
+  public static verifyToken(token: string): any {
+    if (!token || token.trim() === '') {
+      throw new Error('Token inválido');
+    }
+    try {
+      const decoded = verify(token, String(process.env.SECRET_PASSWORD));
+      return decoded;
+    } catch (error) {
+      throw new Error('Token inválido o expirado');
+    }
   }
 }

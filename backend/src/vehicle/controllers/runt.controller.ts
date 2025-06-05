@@ -8,12 +8,14 @@ import {
   Post,
   Put,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { RuntService } from '../service/runt.service';
 import { TecnicalDetails } from '../models/tecnical-details';
 import { Tecnomecanic } from '../models/tecnomecanic';
 import { Soat } from '../models/soat';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('runt')
 @ApiTags('runt')
@@ -21,16 +23,19 @@ export class RuntController {
   constructor(private readonly RuntService: RuntService) {}
 
   @Get('soats/findAll')
+  @UseGuards(AuthGuard)
   private findAllSoats(): any {
     return this.RuntService.listSoats();
   }
 
   @Get('tecnomecanics/findAll')
+  @UseGuards(AuthGuard)
   private findAllTecnomecanics(): any {
     return this.RuntService.listTecnomecanics();
   }
 
   @Get('tecnicalDetails/findAll')
+  @UseGuards(AuthGuard)
   private findAlltecnicalDetails(): any {
     return this.RuntService.listTecnicalDetailss();
   }
@@ -42,6 +47,7 @@ export class RuntController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneTecnicalDetails(@Param('uuid') uuid: any): any {
     const uuidTecnicalDetails = uuid;
     if (uuidTecnicalDetails && uuidTecnicalDetails.length > 0) {
@@ -58,6 +64,7 @@ export class RuntController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneTecnomecanics(
     @Param('noCertificate') noCertificate: any,
   ): any {
@@ -76,6 +83,7 @@ export class RuntController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private findOneSoat(@Param('noPolicy') noPolicy: any): any {
     const uuidSoat = noPolicy;
     if (uuidSoat && uuidSoat.length > 0) {
@@ -90,6 +98,7 @@ export class RuntController {
     description: 'Object tecnicalDetails',
     type: Soat,
   })
+  @UseGuards(AuthGuard)
   private addSoat(@Req() request: any): any {
     const objSoat: Soat = request.body;
     if (objSoat) {
@@ -107,6 +116,7 @@ export class RuntController {
     description: 'Object Tecnomecanics',
     type: Tecnomecanic,
   })
+  @UseGuards(AuthGuard)
   private addTecnomecanic(@Req() request: any): any {
     const objTecnomecanic: Tecnomecanic = request.body;
     if (objTecnomecanic) {
@@ -124,6 +134,7 @@ export class RuntController {
     description: 'Object tecnicalDetails',
     type: TecnicalDetails,
   })
+  @UseGuards(AuthGuard)
   private addTecnicalDetails(@Req() request: any): any {
     const objTecnicalDetails: TecnicalDetails = request.body;
     if (TecnicalDetails) {
@@ -147,6 +158,7 @@ export class RuntController {
     description: 'Object Soat',
     type: Soat,
   })
+  @UseGuards(AuthGuard)
   private updateSoat(
     @Param('noPolicy') noPolicy: any,
     @Req() request: any,
@@ -178,6 +190,7 @@ export class RuntController {
     description: 'Object tecnicalDetails',
     type: TecnicalDetails,
   })
+  @UseGuards(AuthGuard)
   private updateTecnicalDetails(
     @Param('uuid') uuid: any,
     @Req() request: any,
@@ -212,6 +225,7 @@ export class RuntController {
     description: 'Object Tecnomecanics',
     type: Tecnomecanic,
   })
+  @UseGuards(AuthGuard)
   private updateTecnomecanic(
     @Param('noCertificate') noCertificate: any,
     @Req() request: any,
@@ -239,6 +253,7 @@ export class RuntController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteSoat(@Param('noPolicy') noPolicy: any): any {
     const uuidSoat = noPolicy;
     if (uuidSoat && uuidSoat.length > 0) {
@@ -255,6 +270,7 @@ export class RuntController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteTecnicalDetails(@Param('uuid') uuid: any): any {
     const uuidTecnicalDetails = uuid;
     if (uuidTecnicalDetails && uuidTecnicalDetails.length > 0) {
@@ -271,6 +287,7 @@ export class RuntController {
     required: true,
     type: String,
   })
+  @UseGuards(AuthGuard)
   private deleteTecnomecanic(@Param('noCertificate') noCertificate: any): any {
     const uuidTecnomecanic = noCertificate;
     if (uuidTecnomecanic && uuidTecnomecanic.length > 0) {

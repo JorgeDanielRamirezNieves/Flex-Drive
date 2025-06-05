@@ -1,3 +1,6 @@
+import { NotificationsService } from './../../../notifications/services/notifications.service';
+import { Notification } from './../../../notifications/models/notification';
+import { RequestsService } from './../../../requests/services/requests.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, finalize, map, Subscription, throwError } from 'rxjs';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -11,6 +14,11 @@ import { MessageService as primeMessages } from 'primeng/api';
 import { CommonServiceService } from '../../../../shared/services/common-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ContextMenu } from 'primeng/contextmenu';
+import { Drawer } from 'primeng/drawer';
+import { ServiceRentService } from '../../../services-rent/services/service-rent.service';
+import { ContractsService } from '../../../contracts/services/contracts.service';
+import { Contract } from '../../../contracts/models/contract';
+import { Service } from '../../../services-rent/models/service';
 
 interface ChatMessage {
   sender: string;
@@ -61,6 +69,7 @@ export class ColumnMessageComponent implements OnInit, OnDestroy {
   public uuidChat: string;
   public image: File | null = null;
   public urlImage: string = '';
+  public contractService: Contract;
   public isUploaded: boolean = false;
   public isLoading: boolean = false;
   public items: any[] = [
@@ -68,11 +77,9 @@ export class ColumnMessageComponent implements OnInit, OnDestroy {
       label: 'Edit',
       icon: 'pi pi-pencil',
       command: () => {
-        // Aquí puedes agregar la lógica para editar el mensaje
-        console.log('Editar mensaje con UUID:', this.selectedMessageUUID);
         this.isLoading = !this.isLoading;
         if (this.isLoading) {
-          
+          this.openDrawer();
         }
       },
       class: 'rounded-t-2',
@@ -90,13 +97,26 @@ export class ColumnMessageComponent implements OnInit, OnDestroy {
     },
   ];
   @ViewChild('cm') cm!: ContextMenu;
+  @ViewChild('drawerRef') drawerRef!: Drawer;
+
   public selectedMessageUUID: string | undefined;
+  public visible: boolean = false;
+  public modalVisible: boolean = false;
+  public minDate: Date = new Date();
+  public deliveryDate: Date | undefined;
+  public returnDate: Date | undefined;
+  public isCreatingContract: boolean = false;
+  public notification: Notification;
 
   constructor(
     private chatsService: ChatsService,
     private messageService: MessageService,
+    private RequestsService: RequestsService,
+    private servicerRentService: ServiceRentService,
+    private contractsService: ContractsService,
     private primeMessages: primeMessages,
     private commonServices: CommonServiceService,
+    private notificationsService: NotificationsService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
@@ -104,6 +124,26 @@ export class ColumnMessageComponent implements OnInit, OnDestroy {
     this.token = jwtDecode(localStorage.getItem('authToken') || '');
     this.userUUID = this.token.uuid;
     this.uuidChat = '';
+    this.contractService = {
+      accordants: [],
+      status: true,
+      createdAt: new Date(),
+      updatedAt: null,
+      idService: '',
+      idContractType: 'f2b0a1c4-3d8e-4f5b-9a6c-7d0e5f1a2b8d',
+      idContractTypeLegal: '67e4ac9b-9e59-4549-887a-45d0dcb8c479',
+      info: {},
+    };
+    this.notification = {
+      idUser: '',
+      description: '',
+      idTypeNotification: '2e2a1d92-5774-4521-8f1f-c0a5ff6f5a71',
+      status: true,
+      createdAt: new Date(),
+      updatedAt: null,
+      sendDate: new Date(),
+      seenDate: null,
+    };
   }
 
   ngOnDestroy() {
@@ -118,6 +158,15 @@ export class ColumnMessageComponent implements OnInit, OnDestroy {
       this.uuidChat = this.activatedRoute.snapshot.params['uuid'];
       this.selectChat(this.uuidChat);
     }
+  }
+
+  openDrawer() {
+    this.visible = true;
+    console.log(this.selectedMessageUUID);
+  }
+
+  closeCallback(e: any): void {
+    this.drawerRef.close(e);
   }
 
   public getChats() {
@@ -254,6 +303,19 @@ export class ColumnMessageComponent implements OnInit, OnDestroy {
           ? this.selectedChat.request?.idClient || ''
           : this.selectedChat.request?.requestVehicle?.idOwner || '',
       };
+      this.notification.idUser = isOwner
+        ? this.selectedChat.request?.idClient || ''
+        : this.selectedChat.request?.requestVehicle?.idOwner || '';
+      this.notification.description = `${
+        isOwner
+          ? this.selectedChat.request?.requestVehicle?.ownerVehicle?.firstName +
+            ' ' +
+            this.selectedChat.request?.requestVehicle?.ownerVehicle?.lastName
+          : this.selectedChat.request?.requestUser?.firstName +
+            ' ' +
+            this.selectedChat.request?.requestUser?.lastName
+      } te ha enviado un mensaje` ;
+      this.notification.idRelated = this.selectedChat.uuid;
       this.subscription = this.messageService
         .createMessage(message)
         .pipe(
@@ -270,6 +332,7 @@ export class ColumnMessageComponent implements OnInit, OnDestroy {
                   this.selectedChat?.uuid,
                 ]);
               });
+              this.createNotification();
           }),
           catchError((error) => {
             console.error('Error al enviar el mensaje:', error);
@@ -307,10 +370,6 @@ export class ColumnMessageComponent implements OnInit, OnDestroy {
     this.selectedMessageUUID = messageUUID;
   }
 
-  onHide() {
-    this.selectedMessageUUID = undefined;
-  }
-
   public changeStatusMessage(uuid: string, status: boolean) {
     this.subscription = this.messageService
       .changeStatusMessage(uuid, status)
@@ -341,22 +400,24 @@ export class ColumnMessageComponent implements OnInit, OnDestroy {
   }
 
   public changeDescriptionMessage(uuid: string, description: string) {
+    console.log('UUID del mensaje:', uuid);
     this.subscription = this.messageService
       .changeDescriptionMessage(uuid, description)
       .pipe(
         map((res: any) => {
           console.log('Descripción del mensaje actualizada:', res);
           this.getChats();
-            this.router
-              .navigateByUrl(`/user/activechats/${this.selectedChat?.uuid}`, {
-                skipLocationChange: true,
-              })
-              .then(() => {
-                this.router.navigate([
-                  '/user/activechats/',
-                  this.selectedChat?.uuid,
-                ]);
-              });
+          this.router
+            .navigateByUrl(`/user/activechats/${this.selectedChat?.uuid}`, {
+              skipLocationChange: true,
+            })
+            .then(() => {
+              this.router.navigate([
+                '/user/activechats/',
+                this.selectedChat?.uuid,
+              ]);
+            });
+          this.visible = false;
         }),
         catchError((error) => {
           console.error('Error al cambiar la descripción del mensaje:', error);
@@ -364,6 +425,134 @@ export class ColumnMessageComponent implements OnInit, OnDestroy {
         }),
         finalize(() => {
           this.isLoading = false;
+        })
+      )
+      .subscribe(observatorAny);
+    this.newMessage = '';
+  }
+
+  public finalizeNegotition(uuidRequest: string) {
+    if (
+      !this.deliveryDate ||
+      !this.returnDate ||
+      this.deliveryDate > this.returnDate
+    ) {
+      this.primeMessages.add({
+        severity: 'warn',
+        summary: 'Advertencia',
+        detail:
+          'Por favor, seleccione las fechas de entrega y devolución, y asegúrese de que la fecha de entrega sea anterior a la fecha de devolución.',
+        life: 3000,
+      });
+      return;
+    }
+
+    this.subscription = this.RequestsService.updateRequest({
+      uuid: uuidRequest,
+      status: 'approved',
+      deliveryDate: this.deliveryDate,
+      returnDate: this.returnDate,
+      idClient: this.selectedChat?.request?.idClient || '',
+      idVehicle: this.selectedChat?.request?.idVehicle || '',
+      description: this.selectedChat?.request?.description || '',
+      answerDate: this.selectedChat?.request?.answerDate || new Date(),
+      sendDate: this.selectedChat?.request?.sendDate || new Date(),
+    })
+      .pipe(
+        map((res: any) => {
+          console.log('Negociación finalizada:', res);
+          this.getChats();
+          this.primeMessages.add({
+            severity: 'success',
+            summary: 'Éxito',
+            detail: 'Negociación finalizada exitosamente',
+            life: 3000,
+          });
+          this.createService(uuidRequest);
+        }),
+        catchError((error) => {
+          console.error('Error al finalizar la negociación:', error);
+          this.primeMessages.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'No se pudo finalizar la negociación',
+            life: 5000,
+          });
+          return [];
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  public createService(uuidRequest: string) {
+    const service: Service = {
+      idRequest: uuidRequest,
+      status: 'for_take',
+      createdAt: new Date(),
+      updatedAt: null,
+    };
+    this.subscription = this.servicerRentService
+      .createServiceRent(service)
+      .pipe(
+        map((res: any) => {
+          console.log(res);
+          const request = this.selectedChat?.request;
+          this.createContract(request?.idClient || '', res.uuid);
+          this.router.navigate(['/services/details/' + res.uuid]);
+        }),
+        catchError((err) => {
+          throw new Error(err);
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  public createContract(uuidOwner: string, uuidService: string) {
+    this.isCreatingContract = true; // Indica que se está creando un contrato
+    this.contractService.accordants = [this.userUUID, uuidOwner];
+    this.contractService.idService = uuidService;
+    this.subscription = this.contractsService
+      .createContract(this.contractService)
+      .pipe(
+        map((res: any) => {
+          this.isCreatingContract = false; // Restablece el estado al finalizar
+          this.primeMessages.add({
+            severity: 'success',
+            summary: 'Éxito',
+            detail: 'Has aceptado los términos y condiciones de manera exitosa',
+            life: 3000,
+          });
+        }),
+        catchError((err) => {
+          this.isCreatingContract = false; // Restablece el estado en caso de error
+          this.primeMessages.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'No se pudo crear el contrato',
+            life: 5000,
+          });
+          return throwError(() => err);
+        }),
+        finalize(() => {
+          this.isCreatingContract = false;
+        })
+      )
+      .subscribe(observatorAny);
+  }
+
+  public createNotification() {
+    this.subscription = this.notificationsService
+      .createNotifications(this.notification)
+      .pipe(
+        map((res: any) => {
+          console.log('Notificación creada:', res);
+        }),
+        catchError((err) => {
+          this.isCreatingContract = false; // Restablece el estado en caso de error
+          return throwError(() => err);
+        }),
+        finalize(() => {
+          this.isCreatingContract = false;
         })
       )
       .subscribe(observatorAny);
